@@ -63,10 +63,13 @@ const handlers = {
     },
 
     getUserProfileInfo: async (req, res) => {
-
+        // console.log(userId)
+        const { userId } = req.params 
+        const user = await User.findOne({ where: {userId: userId}
+        })
+        console.log(user)
+        res.json(user)
     },
-
-
 
 }
 
