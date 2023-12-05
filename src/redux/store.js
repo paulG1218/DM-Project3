@@ -1,8 +1,8 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { reducer } from './reducer.js'
+import { loginReducer } from './reducer.js'
 
 export default configureStore({
     reducer: {
-        reducer
+        loginReducer
     }
 })
