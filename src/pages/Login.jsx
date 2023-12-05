@@ -1,4 +1,4 @@
-import LoginForm from '../components/LoginForm'
+import LoginForm from '../components/LoginForm.jsx'
 import {useNavigate} from 'react-router-dom'
 import axios from 'axios'
 import { useDispatch } from 'react-redux'
@@ -11,8 +11,8 @@ const Login = () => {
         e.preventDefault()
         await axios 
             .post("/api/login", formData)
-            .then((response) => {
-                if(response.data.status !== 200) {
+            .then((res) => {
+                if(res.data.status !== 200) {
                     console.log('login failed')
                 } else {
                     dispatch({

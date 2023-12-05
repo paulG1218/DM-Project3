@@ -99,42 +99,46 @@ const repeat2 = await Repeat.create({
 })
 
 // I want task1 to belong to list1
-list1.addTask(task1)
+await list1.addTask(task1)
 
 // I want task2 to belong to list2
-list2.addTask(task2)
+await list2.addTask(task2)
 
 // I want user1 to belong to group1
-group1.addUser(user1)
+// group1.addUser(user1)
 
 //i want list1 to belong to user1
-user1.addList(list1)
+await user1.addList(list1)
 
 //i want list2 to belong to user2
-user2.addList(list2)
+await user2.addList(list2)
 
 //i want grouplist1 to belong to group1
-group1.addGroupList(groupList1)
+await group1.addGroupList(groupList1)
 
 // i want task 3 to belong to groupList1
-groupList1.addTask(task3)
+await groupList1.addTask(task3)
 
 //i want list to belong to reapet 1
-repeat1.addList(list1)
+await repeat1.addList(list1)
 
 //i want grouplist1 to belong to repeat 2
-repeat2.addGroupList(groupList1)
+await repeat2.addGroupList(groupList1)
 
 //i want groupMember1 to belong to user group1
-group1.addGroupMember(groupMember1)
+await group1.addGroupMember(groupMember1)
 
 //i want groupMember1 to belong to a user3
-group3.addGroupMember(user3)
+// groupMember1.addGroupMember(user3)
 
 // const user5 = await User.createList({
 //     listName: "clean kitchen",
 //     isGroupList: false,
 //     dueDate: new Date('2023-12-17T03:24:00'),
 // })
+console.log("Finished seeding DB!")
+
+await db.close()
+
 
 

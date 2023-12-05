@@ -2,7 +2,7 @@ import express from "express";
 import session from "express-session";
 import ViteExpress from "vite-express";
 import morgan from "morgan";
-import handlers from "./handlers.js";
+import handlers from "./handlers.js"
 
 const app = express();
 const port = "8000";
@@ -16,12 +16,12 @@ app.use(
 );
 
 // Authentication Routes
-app.post('/login', handlers.login)
-app.get('/logout', handlers.logout)
+app.post('/api/login', handlers.login)
+app.get('/api/logout', handlers.logout)
 
 // User Routes
-app.post('/registerUser', handlers.registerNewUser)
-app.get('/getUser/:userId', handlers.getUserProfileInfo)
+app.post('/api/registerUser', handlers.registerNewUser)
+app.get('/api/getUser/:userId', handlers.getUserProfileInfo)
 
 
 ViteExpress.listen(app, port, () =>

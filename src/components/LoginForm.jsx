@@ -10,13 +10,13 @@ const LoginForm = ({onLogin}) => {
             <input 
                 placeholder="Username or email"
                 value={usernameOrEmail}
-                onChange={setUsernameOrEmail(e.target.value)}
+                onChange={(e) => setUsernameOrEmail(e.target.value)}
             />
         <label>Password:</label>
             <input 
                 placeholder="Password"
                 value={password}
-                onChange={setPassword(e.target.value)}
+                onChange={(e) => setPassword(e.target.value)}
             />
         <button type='submit'>Login</button>
     </form>
