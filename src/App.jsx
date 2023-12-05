@@ -15,6 +15,11 @@ const router = createBrowserRouter(
         index
         element={<Home />}
       />
+
+      <Route 
+        path='/login'
+        element={<Login />}
+      />
     </Route>
   )
 )

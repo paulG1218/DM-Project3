@@ -12,8 +12,8 @@ const handlers = {
 
         const user = await User.findOne({
             where: {
-                username: username,
-                email: email
+                // might need to change this if it does not work
+                [Op.or]: [{ username }, { email }]
             }
         })
 
