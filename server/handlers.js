@@ -48,7 +48,18 @@ const handlers = {
     },
 
     registerNewUser: async (req, res) => {
-        
+        const { username, email, password } = req.body
+
+        const newUser = await User.create({
+            username: username,
+            email: email,
+            password: password
+        })
+
+        res.json({
+            message: 'New user created',
+            userId: newUser.userId
+        })
     },
 
     getUserProfileInfo: async (req, res) => {
