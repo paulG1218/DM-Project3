@@ -89,6 +89,8 @@ user1.addList(list1)
 //i want list2 to belong to user2
 user2.addList(list2)
 
+//i want grouplist1 to belong to group1
+
 
 
 
