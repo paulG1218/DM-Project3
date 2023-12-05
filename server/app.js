@@ -20,9 +20,8 @@ app.post('/login', handlers.login)
 app.get('/logout', handlers.logout)
 
 // User Routes
-app.post('/registerNewUser', handlers.registerNewUser)
-app.get('/getUserProfileInfo/:userId', handlers.getUserProfileInfo)
-app.put('/editUserProfileInfo/:userId', handlers.editUserProfileInfo)
+app.post('/registerUser', handlers.registerNewUser)
+app.get('/getUser/:userId', handlers.getUserProfileInfo)
 
 
 ViteExpress.listen(app, port, () =>
