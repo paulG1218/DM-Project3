@@ -15,6 +15,14 @@ app.use(
   session({ secret: "ssshhhhh", saveUninitialized: true, resave: false })
 );
 
+// Authentication Routes
+app.post('/login', handlers.login)
+app.get('/logout', handlers.logout)
+
+// User Routes
+app.post('/registerNewUser', handlers.registerNewUser)
+
+
 
 ViteExpress.listen(app, port, () =>
   console.log(`Server is listening on http://localhost:${port}`)
