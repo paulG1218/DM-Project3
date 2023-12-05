@@ -1,5 +1,5 @@
 import LoginForm from '../components/LoginForm.jsx'
-import {useNavigate} from 'react-router-dom'
+import {NavLink, useNavigate} from 'react-router-dom'
 import axios from 'axios'
 import { useDispatch } from 'react-redux'
 
@@ -26,6 +26,12 @@ const Login = () => {
 
   return (
     <div>
+        <div>
+            Not registered yet?{" "}
+                <NavLink to="/registerNewUser">
+                    Sign Up
+                </NavLink>
+        </div>
         <LoginForm onLogin={onLogin}/>
     </div>
   )

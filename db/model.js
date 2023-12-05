@@ -95,6 +95,7 @@ User.init(
     isAdmin: {
         type: DataTypes.BOOLEAN,
         allowNull: false,
+        defaultValue: false
     },
     password: {
         type: DataTypes.STRING,
@@ -103,6 +104,7 @@ User.init(
     score: {
         type: DataTypes.INTEGER,
         allowNull: false,
+        defaultValue: 0
     },
     email: {
         type: DataTypes.STRING,
