@@ -13,6 +13,7 @@ const RegisterNewUser = () => {
  
   return (
     <div>
+        <h1>Register Today</h1>
         <div>
             Already registered? {" "}
                 <NavLink to='/login'>
