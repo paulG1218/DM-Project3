@@ -1,8 +1,9 @@
-import React from 'react'
 
-const LoginForm = () => {
+const LoginForm = ({onLogin}) => {
   return (
-    <div>LoginForm</div>
+    <form onSubmit={(e) => onLogin(e, {usernameOrEmail: usernameOrEmail, password: password})}>
+        
+    </form>
   )
 }
 
