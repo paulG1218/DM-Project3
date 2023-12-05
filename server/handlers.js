@@ -48,7 +48,7 @@ const handlers = {
     },
 
     registerNewUser: async (req, res) => {
-
+        
     },
 
     getUserProfileInfo: async (req, res) => {
