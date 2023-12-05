@@ -1,19 +1,19 @@
 import { Group, GroupList, GroupMember, User, List, Repeat, Task} from '../db/model.js'
+import {Op} from "sequelize"
 
 const handlers = {
 
     login: async (req, res) => {
-        const { username, email, password } = req.body 
+        const { usernameOrEmail, password } = req.body 
 
-        console.log(username)
-        console.log(email)
+        console.log(usernameOrEmail)
         console.log(password)
         console.log("session data", req.session)
 
         const user = await User.findOne({
             where: {
                 // might need to change this if it does not work
-                [Op.or]: [{ username }, { email }]
+                [Op.or]: [{ username: usernameOrEmail}, { email: usernameOrEmail }]
             }
         })
 
@@ -30,7 +30,7 @@ const handlers = {
             res.json({
                 message: "Login successful",
                 status: 200,
-                userId: user.userId
+                user: user
             })
             return
         }

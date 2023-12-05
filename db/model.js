@@ -44,14 +44,7 @@ GroupList.init(
     groupListName: {
         type: DataTypes.STRING,
         allowNull: false,
-    },
-    groupId: {
-        type: DataTypes.INTEGER,
-        references: {
-            model: Group,
-            key: 'groupId'
-        }
-    },
+    }
 },
 {
     modelName: 'groupList',
@@ -74,14 +67,7 @@ GroupMember.init(
     score: {
         type: DataTypes.INTEGER,
         allowNull: false,
-    },
-    groupId: {
-        type: DataTypes.INTEGER,
-        references: {
-            model: Group,
-            key: 'groupId',
-        }
-    },
+    }
 },
 {
     modelName:'groupMember',
@@ -102,7 +88,7 @@ User.init(
         autoIncrement: true,
         primaryKey: true,    
     },
-    userName: {
+    username: {
         type: DataTypes.STRING,
         allowNull: false,
     },
@@ -146,7 +132,7 @@ Task.init(
         type: DataTypes.STRING,
         allowNull: false,
     },
-    description: {
+    desc: {
         type: DataTypes.TEXT,
         allowNull: false,
     },
@@ -156,18 +142,10 @@ Task.init(
     },
     image: {
         type: DataTypes.STRING,
-        allowNull: false,
     },
     checked: {
         type: DataTypes.BOOLEAN,
         allowNull: false,
-    },
-    groupListId: {
-        type: DataTypes.INTEGER,
-        references: {
-            model: GroupList,
-            key: 'groupListId',
-        }
     }
 },
 {
@@ -200,13 +178,6 @@ List.init(
     dueDate: {
         type: DataTypes.DATE,
         allowNull: false,
-    },
-    userId: {
-        type: DataTypes.INTEGER,
-        references: {
-            model: User,
-            key: 'userId',
-        }
     }
 },
 {
