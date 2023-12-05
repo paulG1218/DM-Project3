@@ -1,9 +1,19 @@
-import React from 'react'
+import { useLoaderData } from "react-router-dom";
 
 const Profile = () => {
-  return (
-    <div>Profile</div>
-  )
-}
+  const { user } = useLoaderData();
 
-export default Profile
+  return (
+    <>
+      <h1>Profile Page</h1>
+      <form>
+        <p>Username: {user.username}</p>
+        <p>Email: {user.email}</p>
+        <p>Password: {user.password}</p>
+        <button>Edit</button>
+      </form>
+    </>
+  );
+};
+
+export default Profile;
