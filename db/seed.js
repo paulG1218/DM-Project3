@@ -34,6 +34,13 @@ const user2 = await User.create({
     score: 25,
     email: "gabe@coolville"
 })
+const user3 = await User.create({
+    username: "jacob",
+    isAdmin: false,
+    password: "asdf",
+    score: 25,
+    email: "jacob@oldville"
+})
 //seed a new List
 const list1 = await List.create({
     listName: "clean garadge",
@@ -62,6 +69,14 @@ const task2 = await Task.create({
     img: "https://media.istockphoto.com/id/178594527/photo/clean-garage.jpg?s=612x612&w=0&k=20&c=0pMNJ53-lcC2kiMgNJSyqsUZVThnDRksbHd751mzoUk=",
     checked: true,
 })
+const task3 = await Task.create({
+    title: "group task",
+    desc: "the group needs to move construct the site",
+    difficulty: 3,
+    img: "https://media.istockphoto.com/id/178594527/photo/clean-garage.jpg?s=612x612&w=0&k=20&c=0pMNJ53-lcC2kiMgNJSyqsUZVThnDRksbHd751mzoUk=",
+    checked: true,
+})
+
 
 //seeding the repeat list
 const repeat1 = await Repeat.create({
@@ -70,6 +85,15 @@ const repeat1 = await Repeat.create({
     wednesday: false,
     thursday: false, 
     friday: true,
+    saturday: false,
+    sunday: false,
+})
+const repeat2 = await Repeat.create({
+    monday: true,
+    tuesday: false,
+    wednesday: false,
+    thursday: false, 
+    friday: false,
     saturday: false,
     sunday: false,
 })
@@ -90,9 +114,22 @@ user1.addList(list1)
 user2.addList(list2)
 
 //i want grouplist1 to belong to group1
+group1.addGroupList(groupList1)
 
+// i want task 3 to belong to groupList1
+groupList1.addTask(task3)
 
+//i want list to belong to reapet 1
+repeat1.addList(list1)
 
+//i want grouplist1 to belong to repeat 2
+repeat2.addGroupList(groupList1)
+
+//i want groupMember1 to belong to user group1
+group1.addGroupMember(groupMember1)
+
+//i want groupMember1 to belong to a user3
+group3.addGroupMember(user3)
 
 // const user5 = await User.createList({
 //     listName: "clean kitchen",
