@@ -20,20 +20,6 @@ Group.init(
         groupName: {
             type: DataTypes.STRING,
             allowNull: false,
-        },
-        groupMemberId: {
-            type: DataTypes.INTEGER,
-            references: {
-                model: GroupMember,
-                key: 'groupMemberId',
-            }
-        },
-        userId: {
-            type: DataTypes.INTEGER,
-            references: {
-                model: User,
-                key: 'userId'
-            }
         }
     },
     {
@@ -58,13 +44,6 @@ GroupList.init(
     groupListName: {
         type: DataTypes.STRING,
         allowNull: false,
-    },
-    repeatId: {
-        type: DataTypes.INTEGER,
-        references: {
-            model: Repeat,
-            key: 'repeatId',
-        }
     },
     groupId: {
         type: DataTypes.INTEGER,
@@ -95,13 +74,6 @@ GroupMember.init(
     score: {
         type: DataTypes.INTEGER,
         allowNull: false,
-    },
-    userId: {
-        type: DataTypes.INTEGER,
-        references: {
-            model: User,
-            key: 'userId'
-        }
     },
     groupId: {
         type: DataTypes.INTEGER,
@@ -190,13 +162,6 @@ Task.init(
         type: DataTypes.BOOLEAN,
         allowNull: false,
     },
-    listId: {
-        type: DataTypes.INTEGER,
-        references: {
-            model: List,
-            key: 'listId',
-        }
-    },
     groupListId: {
         type: DataTypes.INTEGER,
         references: {
@@ -242,14 +207,7 @@ List.init(
             model: User,
             key: 'userId',
         }
-    },
-    repeatId: {
-        type: DataTypes.INTEGER,
-        references: {
-            model: Repeat,
-            key: 'repeatId',
-        }
-    },
+    }
 },
 {
     modelName: 'list',
