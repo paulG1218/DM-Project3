@@ -5,6 +5,8 @@
     min-height: 58px;
   }
 
+  
+
   /* Style the links inside the navigation bar */
   .topnav a {
     color: #f2f2f2;
@@ -33,7 +35,7 @@
     left: 0;
     background-color: #111; 
     overflow-x: hidden; 
-    padding-top: 60px; 
+    padding-top: 20px;
     transition: 0.5s;
   }
   
@@ -54,14 +56,9 @@
   
   /* Position and style the close button (top right corner) */
   .sidebar .closebtn {
-    display: inline;
     font-size: 36px;
     padding: 0px;
   }
-  
-.logo {
-    width: 10px;
-}
 
   /* The button used to open the sidebar */
   .openbtn {
@@ -77,10 +74,20 @@
   .openbtn:hover {
     background-color: #444;
   }
+
+  div.sidebarHead {
+    display: flex;
+  }
   
   /* Style page content - use this if you want to push the page content to the right when you open the side navigation */
   #icon {
     transition: margin-left .5s;
+  }
+
+  a.logo {
+    padding-right: 40px;
+    padding-left: 100px;
+    padding-top: 11px;
   }
   
   /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */

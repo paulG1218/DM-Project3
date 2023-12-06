@@ -1,7 +1,21 @@
 import { Group, GroupList, GroupMember, User, List, Repeat, Task} from '../db/model.js'
-import {Op} from "sequelize"
+import {Op} from "sequelize";
+import session from 'express-session';
 
 const handlers = {
+
+    sessionCheck: async (req, res) => {
+        if (req.session.user) {
+            console.log(req.session.user.userId);
+            res.json({
+              userId: req.session.user.userId,
+              isAdmin: req.session.user.isAdmin,
+              username: req.session.user.username,
+            });
+          } else {
+            res.json("no user logged in");
+          }
+    },
 
     login: async (req, res) => {
         const { usernameOrEmail, password } = req.body 
@@ -26,6 +40,8 @@ const handlers = {
             return
         } else if (user && user.password === password) {
             req.session.user = user
+
+            console.log(req.session.user.userId)
 
             res.json({
                 message: "Login successful",
@@ -85,6 +101,10 @@ const handlers = {
         })
 
         res.send('User is now has admin status')
+    },
+  
+    getLists: async (req, res) => {
+
     }
 
 }

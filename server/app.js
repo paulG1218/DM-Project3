@@ -16,6 +16,7 @@ app.use(
 );
 
 // Authentication Routes
+app.get('/api/sessionCheck', handlers.sessionCheck)
 app.post('/api/login', handlers.login)
 app.get('/api/logout', handlers.logout)
 
@@ -23,6 +24,9 @@ app.get('/api/logout', handlers.logout)
 app.post('/api/registerUser', handlers.registerNewUser)
 app.get('/api/getUser/:userId', handlers.getUserProfileInfo)
 app.put('/api/addAdmin', handlers.addAdmin)
+
+//Home routes
+app.get('/api/getLists', handlers.getLists)
 
 ViteExpress.listen(app, port, () =>
   console.log(`Server is listening on http://localhost:${port}`)

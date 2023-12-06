@@ -3,6 +3,6 @@ import { loginReducer } from './reducer.js'
 
 export default configureStore({
     reducer: {
-        loginReducer
+        login: loginReducer
     }
 })
