@@ -18,9 +18,20 @@ import axios from "axios";
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<Root />}>
+
       //every other route goes here
-      <Route index element={<Home />} />
+      <Route 
+      index 
+      element={<Home />} 
+      loader={async () => {
+        const lists = await axios.get('/api/getLists')
+        const tasks = await axios.get(`/api/getTasks`)
+        return({lists: lists.data, tasks: tasks.data})
+      }}
+      />
+
       <Route path="/login" element={<Login />} />
+
       <Route
         path="/profile/:userId"
         element={<Profile />}

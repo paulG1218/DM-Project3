@@ -28,6 +28,7 @@ app.delete('/api/deleteUser', handlers.deleteUser)
 app.put('/api/addAdmin', handlers.addAdmin)
 //Home routes
 app.get('/api/getLists', handlers.getLists)
+app.get('/api/getTasks', handlers.getTasks)
 
 ViteExpress.listen(app, port, () =>
   console.log(`Server is listening on http://localhost:${port}`)
