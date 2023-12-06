@@ -24,8 +24,10 @@ const NavBar = () => {
     </div>
 
     <div id="mySidebar" className="sidebar">
-      <a href='/' className='logo'>LOGO</a>
-      <a href="javascript:void(0)" className="closebtn" onClick={() => closeNav()}>&times;</a>
+      <div className='sidebarHead'>
+        <a href='/' className='logo'>LOGO</a>
+        <a href="javascript:void(0)" className="closebtn" onClick={() => closeNav()}>&times;</a>
+      </div>
       <a href="/login">Login</a>
       <a href="#">Services</a>
       <a href="#">Clients</a>
