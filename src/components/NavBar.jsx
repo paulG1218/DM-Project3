@@ -1,17 +1,19 @@
 import React from 'react'
 import '../css/NavBar.css'
+import { useSelector } from 'react-redux';
 import { IoMdMenu } from "react-icons/io";
 
 const NavBar = () => {
 
+  const userId = useSelector((state) => state.login.userId);
+  const username = useSelector((state) => state.login.username)
+
   function openNav() {
     document.getElementById("mySidebar").style.width = "250px";
-    document.getElementById("main").style.marginLeft = "250px";
   }
   
   function closeNav() {
     document.getElementById("mySidebar").style.width = "0";
-    document.getElementById("main").style.marginLeft = "0";
   }
 
   return (
@@ -28,7 +30,10 @@ const NavBar = () => {
         <a href='/' className='logo'>LOGO</a>
         <a href="javascript:void(0)" className="closebtn" onClick={() => closeNav()}>&times;</a>
       </div>
-      <a href="/login">Login</a>
+      {userId ?
+      <a href={`/profile/${userId}`}>{username}</a>
+      : <a href="/login">Login</a>
+      }
       <a href="#">Services</a>
       <a href="#">Clients</a>
       <a href="#">Contact</a>
