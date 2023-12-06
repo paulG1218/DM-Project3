@@ -10,6 +10,8 @@ const Profile = () => {
     const trueAdmin = await axios.put('/api/addAdmin', newAdmin)
   }
 
+  
+
   return (
     <>
       <h1>Profile Page</h1>
@@ -20,13 +22,16 @@ const Profile = () => {
         <button>Edit</button>
       </form>
 
-      <input 
-        placeholder="Add an admin"
-        type='text'
-        value={newAdmin}
-        onChange={(e) => setNewAdmin(e.target.value)}
-      />
-      <button onClick={handleNewAdmin}>Add</button>
+      <form onSubmit={handleNewAdmin}>
+        <label>Add an admin:</label>
+        <input 
+          placeholder="Add an admin"
+          type='text'
+          value={newAdmin}
+          onChange={(e) => setNewAdmin(e.target.value)}
+        />
+        <button type='submit'>Add</button>
+      </form>
     </>
   );
 };

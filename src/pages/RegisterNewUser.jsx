@@ -9,6 +9,9 @@ const RegisterNewUser = () => {
         e.preventDefault()
         await axios
             .post("/api/registerUser", registerFormData)
+            .then((res) => {
+                navigate("/")
+            })
     }
  
   return (
