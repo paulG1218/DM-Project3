@@ -25,7 +25,8 @@ const router = createBrowserRouter(
       element={<Home />} 
       loader={async () => {
         const lists = await axios.get('/api/getLists')
-        return({lists: lists.data})
+        const tasks = await axios.get(`/api/getTasks`)
+        return({lists: lists.data, tasks: tasks.data})
       }}
       />
 

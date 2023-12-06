@@ -1,5 +1,6 @@
 const initialState = {
     userId: null,
+    lists: [],
     isAdmin: false,
     username: null,
     email: null
@@ -11,6 +12,7 @@ export const loginReducer = (state = initialState, action) => {
             return {
                 ...state,
                 userId: action.payload.userId,
+                lists: action.payload.lists,
                 isAdmin: action.payload.isAdmin,
                 username: action.payload.username,
                 email: action.payload.email

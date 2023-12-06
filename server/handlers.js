@@ -11,6 +11,8 @@ const handlers = {
               userId: req.session.user.userId,
               isAdmin: req.session.user.isAdmin,
               username: req.session.user.username,
+              lists: req.session.user.lists,
+              email: req.session.user.email
             });
           } else {
             res.json("no user logged in");
@@ -26,9 +28,19 @@ const handlers = {
 
         const user = await User.findOne({
             where: {
-                // might need to change this if it does not work
                 [Op.or]: [{ username: usernameOrEmail}, { email: usernameOrEmail }]
-            }
+            },
+            include: [
+                {
+                    model: List, 
+                    include: [
+                        {
+                            model: Task,
+                        }
+                    ]
+                }
+            ]
+            
         })
 
         if(!user){
@@ -81,7 +93,10 @@ const handlers = {
     getUserProfileInfo: async (req, res) => {
         // console.log(userId)
         const { userId } = req.params 
-        const user = await User.findOne({ where: {userId: userId}
+        const user = await User.findOne({ 
+            where: {
+                userId: userId
+            }
         })
         console.log(user)
         res.json(user)
@@ -115,6 +130,11 @@ const handlers = {
         } else {
             res.json('no user logged in')
         }
+    },
+    getTasks: async (req, res) => {
+        const tasks = await Task.findAll()
+
+        res.json(tasks)
     }
 
 }

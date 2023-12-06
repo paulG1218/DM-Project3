@@ -6,17 +6,26 @@ import List from "../components/List.jsx"
 
 const Home = () => {
 
-  const {lists} = useLoaderData()
-
-  const listDisplay = lists.map((list) => {
-    return <List key={list.listId} list={list}/>
-  })
+  const userId = useSelector((state) => state.login.userId)
+  const lists = useSelector((state) => state.login.lists)
 
   console.log(lists)
-  return (
-    <div>
-      {listDisplay}
-    </div>
+
+  if (!userId) {
+    return (<p>TODO if no user logged in</p>)
+  }
+    
+    const listDisplay = lists.map( (list) => {
+      console.log(list.tasks)
+      return <List key={list.listId} tasks={list.tasks}/>
+    })
+    
+    console.log(listDisplay)
+
+    return (
+      <div>
+        {listDisplay}
+      </div>
   )
 }
 

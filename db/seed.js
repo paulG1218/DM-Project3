@@ -101,7 +101,7 @@ const repeat2 = await Repeat.create({
 await list1.addTask(task1)
 
 // I want task2 to belong to list2
-await list2.addTask(task2)
+await list1.addTask(task2)
 
 // I want user1 to belong to group1
 // group1.addUser(user1)
