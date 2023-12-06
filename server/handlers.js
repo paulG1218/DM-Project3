@@ -60,6 +60,7 @@ const handlers = {
     },
 
     logout: async (req, res) => {
+        req.session.destroy()
 
     },
 
