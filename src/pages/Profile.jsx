@@ -1,10 +1,13 @@
 import { useLoaderData } from "react-router-dom";
+import { useState } from "react";
 
 const Profile = () => {
   const { user } = useLoaderData();
 
-  const changeAdminStatus = async () => {
-    const trueAdmin = await axios.put('/api/addAdmin', username)
+  const [newAdmin, setNewAdmin] = useState('')
+
+  const handleNewAdmin = async () => {
+    const trueAdmin = await axios.put('/api/addAdmin', newAdmin)
   }
 
   return (
@@ -20,10 +23,10 @@ const Profile = () => {
       <input 
         placeholder="Add an admin"
         type='text'
-        value={username}
-        onChange={(e) => changeAdminStatus(e.target.value)}
+        value={newAdmin}
+        onChange={(e) => setNewAdmin(e.target.value)}
       />
-      <button onClick={changeAdminStatus}>Add</button>
+      <button onClick={handleNewAdmin}>Add</button>
     </>
   );
 };
