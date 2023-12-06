@@ -23,7 +23,8 @@ app.get('/api/logout', handlers.logout)
 // User Routes
 app.post('/api/registerUser', handlers.registerNewUser)
 app.get('/api/getUser/:userId', handlers.getUserProfileInfo)
-
+app.put('/api/editUser/:userId', handlers.editUserInfo)
+app.delete('/api/deleteUser', handlers.deleteUser)
 //Home routes
 app.get('/api/getLists', handlers.getLists)
 
