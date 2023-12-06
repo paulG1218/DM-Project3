@@ -26,11 +26,10 @@ const LoginForm = ({onLogin}) => {
                     type={showPassword ? 'text' : 'password'}
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
-
                 />
-                <button onClick={togglePasswordVisibility}>
+                <span onClick={togglePasswordVisibility}>
                     {showPassword ? <FaRegEyeSlash /> : <FaRegEye />}
-                </button>
+                </span>
             </div>
         <button type='submit'>Login</button>
     </form>
