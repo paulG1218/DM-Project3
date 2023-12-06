@@ -5,8 +5,10 @@ import { useDispatch, useSelector } from "react-redux";
 
 const Profile = () => {
   const dispatch = useDispatch();
+
   const { user } = useLoaderData();
-  const [isEditing, setIsEditing] = useState();
+
+  const [isEditing, setIsEditing] = useState(false);
   const [userInfo, setUserInfo] = useState({
     username: user.username,
     email: user.email,
@@ -14,13 +16,6 @@ const Profile = () => {
   });
 
   const navigate = useNavigate();
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setUserInfo((prev) => {
-      return { ...prev, [name]: value };
-    });
-  };
 
   const handleSave = async (e) => {
     e.preventDefault();
@@ -58,58 +53,41 @@ const Profile = () => {
   return (
     <div>
       <h1>Profile Page</h1>
-      {isEditing ? (
-        <form className="editingUser">
-          <input
-            onChange={(e) =>
-              setUserInfo({ ...userInfo, username: e.target.value })
-            }
-            disabled={false}
-            readOnly={false}
-            value={userInfo.username}
-          />
-          <input
-            onChange={(e) =>
-              setUserInfo({ ...userInfo, email: e.target.value })
-            }
-            disabled={false}
-            readOnly={false}
-            value={userInfo.email}
-          />
-          <input
-            onChange={(e) => {
-              setUserInfo({ ...userInfo, password: e.target.value });
-              console.log(userInfo);
-            }}
-            disabled={false}
-            readOnly={false}
-            value={userInfo.password}
-          />
-          <button
-            disabled={false}
-            readOnly={false}
-            onClick={(e) => handleSave(e)}
-          >
-            Save
-          </button>
-          <button
-            onClick={(e) => {
-              handleDelete(e);
-            }}
-          >
-            Delete
-          </button>
-        </form>
-      ) : (
-        <form className="notEdited">
-          <input disabled={true} readOnly={true} value={userInfo.username} />
-          <input disabled={true} readOnly={true} value={userInfo.email} />
-          <input
-            disabled={true}
-            readOnly={true}
-            type="password"
-            value={userInfo.password}
-          />
+      <form className="editingUser">
+        <input
+          onChange={(e) =>
+            setUserInfo({ ...userInfo, username: e.target.value })
+          }
+          disabled={!isEditing}
+          readOnly={!isEditing}
+          value={userInfo.username}
+        />
+        <input
+          onChange={(e) => setUserInfo({ ...userInfo, email: e.target.value })}
+          disabled={!isEditing}
+          readOnly={!isEditing}
+          value={userInfo.email}
+        />
+        <input
+          onChange={(e) => {
+            setUserInfo({ ...userInfo, password: e.target.value });
+          }}
+          disabled={!isEditing}
+          readOnly={!isEditing}
+          value={userInfo.password}
+        />
+        {isEditing ? (
+          <>
+            <button onClick={(e) => handleSave(e)}>Save</button>
+            <button
+              onClick={(e) => {
+                handleDelete(e);
+              }}
+            >
+              Delete
+            </button>
+          </>
+        ) : (
           <button
             onClick={(e) => {
               e.preventDefault();
@@ -118,8 +96,8 @@ const Profile = () => {
           >
             Edit
           </button>
-        </form>
-      )}
+        )}
+      </form>
     </div>
   );
 };
