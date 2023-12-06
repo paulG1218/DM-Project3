@@ -20,6 +20,7 @@ const NavBar = () => {
           payload: res.data,
         });
         console.log(res.data.userId);
+        console.log(res.data.isAdmin);
       } else {
         console.log(res.data);
       }
