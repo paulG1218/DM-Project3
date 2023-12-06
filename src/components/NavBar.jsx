@@ -1,12 +1,32 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import '../css/NavBar.css'
 import { useSelector } from 'react-redux';
 import { IoMdMenu } from "react-icons/io";
+import axios from 'axios';
+import { useDispatch } from 'react-redux';
 
 const NavBar = () => {
 
+  const dispatch = useDispatch()
+
   const userId = useSelector((state) => state.login.userId);
   const username = useSelector((state) => state.login.username)
+
+  const sessionCheck = async () => {
+    await axios.get("/api/sessionCheck").then((res) => {
+      if (res.data.userId) {
+        dispatch({
+          type: "authenticated",
+          payload: res.data,
+        });
+        console.log(res.data.userId);
+      } else {
+        console.log(res.data);
+      }
+    });
+  };
+
+  useEffect(() => sessionCheck, [userId]);
 
   function openNav() {
     document.getElementById("mySidebar").style.width = "250px";
