@@ -105,7 +105,36 @@ const handlers = {
   
     getLists: async (req, res) => {
 
-    }
+    },
+    editUserInfo: async (req, res) => {
+        const {userId} = req.params
+        console.log(req.body)
+        const { username, email, password } = req.body
+        try{
+            const user = await User.findByPk(userId)
+            console.log(user)
+            if(user) {
+              await  user.update({
+                    username: username,
+                    email: email,
+                    password: password,
+                })
+                res.json({user})
+            }
+        }catch (error) {
+            console.log("Error")
+            res.status(500).json({ success: false, error: "Internal Server Error Editing User"})
+        }
+        // console.log(req.body)
+    },
+    deleteUser: async (req, res) => {
+        const userId = req.session.user.userId
+
+        await User.destroy({where: {userId: userId}})
+
+        req.session.destroy()
+        res.json("success")
+    },
 
 }
 
