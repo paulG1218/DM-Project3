@@ -87,6 +87,22 @@ const handlers = {
         res.json(user)
     },
 
+    addAdmin: async (req, res) => {
+        const { newAdmin } = req.body
+
+        const admin = await User.findOne({
+            where: {
+                username: newAdmin
+            }
+        })
+        
+        await admin.update({
+            isAdmin: true
+        })
+
+        res.send('User is now has admin status')
+    },
+  
     getLists: async (req, res) => {
 
     },

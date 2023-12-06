@@ -1,9 +1,13 @@
+
 import { useLoaderData, useNavigate } from "react-router-dom";
 import React, { useState } from "react";
 import axios from "axios";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux"
+
 
 const Profile = () => {
+  const dispatch = useDispatch()
+
   const { user } = useLoaderData();
 
   const [isEditing, setIsEditing] = useState();
@@ -91,7 +95,7 @@ const Profile = () => {
         </form>
       )}
     </div>
-  );
-};
+)
+}
 
 export default Profile;

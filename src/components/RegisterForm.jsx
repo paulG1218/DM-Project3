@@ -27,18 +27,17 @@ const RegisterForm = ({onRegisterUser}) => {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
-      <div>
-        <label>Password:</label>
-          <input 
-            placeholder='Password'
-            type={showPassword ? 'text' : 'password'}
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-          <button onClick={togglePasswordVisibility}>
-            {showPassword ? <FaRegEyeSlash /> : <FaRegEye />}
-          </button>
-      </div>
+      <label>Password:</label>
+        <input 
+          placeholder='Password'
+          type={showPassword ? 'text' : 'password'}
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+
+        <span onClick={togglePasswordVisibility}>
+          {showPassword ? <FaRegEyeSlash /> : <FaRegEye />}
+        </span>
       <label>Confirm Password:</label>
         <input 
           placeholder='Confirm password'
