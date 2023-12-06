@@ -88,11 +88,11 @@ const handlers = {
     },
 
     addAdmin: async (req, res) => {
-        const { username } = req.body
+        const { newAdmin } = req.body
 
         const admin = await User.findOne({
             where: {
-                username: username
+                username: newAdmin
             }
         })
         
