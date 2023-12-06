@@ -104,7 +104,17 @@ const handlers = {
     },
   
     getLists: async (req, res) => {
-
+        if (req.session.user) {
+            const userId = req.session.user.userId
+            const lists = await List.findAll({
+                where: {
+                    userId: userId
+                }
+            })
+            res.json(lists)
+        } else {
+            res.json('no user logged in')
+        }
     }
 
 }

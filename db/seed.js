@@ -46,7 +46,6 @@ const list1 = await List.create({
     listName: "clean garadge",
     isGroupList: false,
     dueDate: new Date('2023-12-17T03:24:00'),
-    // userId: user1.userId
 })
 const list2 = await List.create({
     listName: "house cleaning",
