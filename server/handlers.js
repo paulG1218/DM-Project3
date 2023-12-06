@@ -72,6 +72,7 @@ const handlers = {
     },
 
     logout: async (req, res) => {
+        req.session.destroy()
 
     },
 
@@ -118,25 +119,35 @@ const handlers = {
         res.send('User is now has admin status')
     },
   
-    getLists: async (req, res) => {
-        if (req.session.user) {
-            const userId = req.session.user.userId
-            const lists = await List.findAll({
-                where: {
-                    userId: userId
-                }
-            })
-            res.json(lists)
-        } else {
-            res.json('no user logged in')
+    editUserInfo: async (req, res) => {
+        const {userId} = req.params
+        console.log(req.body)
+        const { username, email, password } = req.body
+        try{
+            const user = await User.findByPk(userId)
+            console.log(user)
+            if(user) {
+              await  user.update({
+                    username: username,
+                    email: email,
+                    password: password,
+                })
+                res.json({user})
+            }
+        }catch (error) {
+            console.log("Error")
+            res.status(500).json({ success: false, error: "Internal Server Error Editing User"})
         }
+        // console.log(req.body)
     },
-    getTasks: async (req, res) => {
-        const tasks = await Task.findAll()
+    deleteUser: async (req, res) => {
+        const userId = req.session.user.userId
 
-        res.json(tasks)
-    }
+        await User.destroy({where: {userId: userId}})
 
+        req.session.destroy()
+        res.json("success")
+    },
 }
 
 export default handlers

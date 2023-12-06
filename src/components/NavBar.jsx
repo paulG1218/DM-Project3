@@ -4,10 +4,14 @@ import { useSelector } from 'react-redux';
 import { IoMdMenu } from "react-icons/io";
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+
+
 
 const NavBar = () => {
 
   const dispatch = useDispatch()
+  const navigate = useNavigate()
 
   const userId = useSelector((state) => state.login.userId);
   const username = useSelector((state) => state.login.username)
@@ -20,11 +24,21 @@ const NavBar = () => {
           payload: res.data,
         });
         console.log(res.data.userId);
+        console.log(res.data.isAdmin);
       } else {
         console.log(res.data);
       }
     });
   };
+
+  const handleLogout  =  async () => {
+await axios.get("/logout")
+    dispatch({ 
+      type: "logout", 
+    })
+    navigate("/")
+
+  }
 
   useEffect(() => sessionCheck, [userId]);
 
@@ -57,6 +71,8 @@ const NavBar = () => {
       <a href="#">Services</a>
       <a href="#">Clients</a>
       <a href="#">Contact</a>
+
+      <button onClick={handleLogout}>Logout</button>
     </div>
     </>
   )
