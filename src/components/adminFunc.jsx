@@ -1,4 +1,3 @@
-// const dispatch = useDispatch()
 // const isAdmin = useSelector((state) => state.login.isAdmin)
 // console.log("Profile.jsx isAdmin: " + isAdmin)
 
