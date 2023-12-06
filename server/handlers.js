@@ -71,6 +71,22 @@ const handlers = {
         res.json(user)
     },
 
+    addAdmin: async (req, res) => {
+        const { username } = req.body
+
+        const admin = await User.findOne({
+            where: {
+                username: username
+            }
+        })
+        
+        await admin.update({
+            isAdmin: true
+        })
+
+        res.send('User is now has admin status')
+    }
+
 }
 
 export default handlers

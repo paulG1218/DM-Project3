@@ -22,7 +22,7 @@ app.get('/api/logout', handlers.logout)
 // User Routes
 app.post('/api/registerUser', handlers.registerNewUser)
 app.get('/api/getUser/:userId', handlers.getUserProfileInfo)
-
+app.put('/api/addAdmin', handlers.addAdmin)
 
 ViteExpress.listen(app, port, () =>
   console.log(`Server is listening on http://localhost:${port}`)
