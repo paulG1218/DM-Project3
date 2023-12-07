@@ -71,8 +71,8 @@ const NavBar = () => {
           </a>
         </div>
       {userId ?
-      <a href={`/profile`}>{username}</a>
-      <a href="/login">Login</a>
+        <a href={`/profile`}>{username}</a>
+        : <a href="/login">Login</a>
       }
       <a href="#">Services</a>
       <a href="#">Clients</a>
