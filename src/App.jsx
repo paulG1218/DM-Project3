@@ -14,7 +14,7 @@ import Profile from "./pages/Profile";
 import Groups from "./pages/Groups";
 import Root from "./Root.jsx";
 import axios from "axios";
-
+import CatTesting from "./pages/catTesting.jsx";
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<Root />}>
@@ -31,7 +31,7 @@ const router = createBrowserRouter(
       />
 
       <Route path="/login" element={<Login />} />
-
+      <Route path="/catTesting" element={<CatTesting/>} />
       <Route
         path="/profile/:userId"
         element={<Profile />}

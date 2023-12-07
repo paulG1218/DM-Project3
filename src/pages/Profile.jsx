@@ -49,6 +49,7 @@ const Profile = () => {
     } else {
       alert("Account deletion cancelled.");
     }
+
   };
   return (
     <div>

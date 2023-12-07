@@ -23,6 +23,7 @@ const Home = () => {
     console.log(listDisplay)
 
     return (
+
       <div>
         {listDisplay}
       </div>
