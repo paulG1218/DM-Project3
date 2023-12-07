@@ -58,6 +58,7 @@ const Profile = () => {
     } else {
       alert("Account deletion cancelled.");
     }
+
   };
 
   const isAdmin = useSelector((state) => state.login.isAdmin);
