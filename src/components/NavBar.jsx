@@ -70,20 +70,16 @@ const NavBar = () => {
             &times;
           </a>
         </div>
-        {userId ? (
-          <>
-            <a href={`/profile/${userId}`}>{username}</a>
-            <a href="/login" onClick={handleLogout}>
-              Logout
-            </a>
-          </>
-        ) : (
-          <a href="/login">Login</a>
-        )}
-        <a href="#">Services</a>
-        <a href="#">Clients</a>
-        <a href="#">Contact</a>
-      </div>
+      {userId ?
+      <a href={`/profile`}>{username}</a>
+      <a href="/login">Login</a>
+      }
+      <a href="#">Services</a>
+      <a href="#">Clients</a>
+      <a href="#">Contact</a>
+
+      <button onClick={handleLogout}>Logout</button>
+    </div>
     </>
   );
 };

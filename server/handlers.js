@@ -84,13 +84,18 @@ const handlers = {
     },
 
     getUserProfileInfo: async (req, res) => {
-        const { userId } = req.params 
+        const userSession = req.session.user
+
+        if (!userSession) {
+            res.json({message: "no user"})
+            return
+        }
         const user = await User.findOne({ 
             where: {
-                userId: userId
+                userId: userSession.userId
             }
         })
-        res.json(user)
+        res.json({message: 'success', user: user})
     },
 
     addAdmin: async (req, res) => {
