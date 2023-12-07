@@ -8,8 +8,9 @@ import "../css/Home.css";
 const Home = () => {
   const userId = useSelector((state) => state.login.userId);
   const lists = useSelector((state) => state.login.lists);
+  const groups = useSelector((state) => state.login.groups);
 
-  console.log(lists);
+  console.log(groups);
 
   if (!userId) {
     return <p>TODO if no user logged in</p>;

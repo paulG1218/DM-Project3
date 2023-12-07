@@ -4,6 +4,7 @@ const initialState = {
     isAdmin: false,
     username: null,
     email: null,
+    groups: [],
 }
 
 export const loginReducer = (state = initialState, action) => {
@@ -16,6 +17,7 @@ export const loginReducer = (state = initialState, action) => {
                 isAdmin: action.payload.isAdmin,
                 username: action.payload.username,
                 email: action.payload.email,
+                groups: action.payload.groups,
             };
         case "logout":
             return {
