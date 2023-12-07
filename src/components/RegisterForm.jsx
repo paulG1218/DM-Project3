@@ -16,7 +16,10 @@ const RegisterForm = ({ onRegisterUser }) => {
   return (
     <form
       onSubmit={(e) => {
-        if (password === confirmPassword) {
+        if (email === "" || username === "" || password === "") {
+          alert("Please fill in all fields");
+          return;
+        } else if (password === confirmPassword) {
           onRegisterUser(e, {
             username: username,
             email: email,
@@ -32,20 +35,20 @@ const RegisterForm = ({ onRegisterUser }) => {
       <input
         placeholder="Username"
         value={username}
-        onChange={(e) => setUsername(e.target.value)}
+        onChange={(e) => setUsername(e.target.value.trim())}
       />
       <label>Email:</label>
       <input
         placeholder="Email:"
         value={email}
-        onChange={(e) => setEmail(e.target.value)}
+        onChange={(e) => setEmail(e.target.value.trim())}
       />
       <label>Password:</label>
       <input
         placeholder="Password"
         type={showPassword ? "text" : "password"}
         value={password}
-        onChange={(e) => setPassword(e.target.value)}
+        onChange={(e) => setPassword(e.target.value.trim())}
       />
 
       <span onClick={togglePasswordVisibility}>
@@ -56,7 +59,7 @@ const RegisterForm = ({ onRegisterUser }) => {
         placeholder="Confirm password"
         type={showPassword ? "text" : "password"}
         value={confirmPassword}
-        onChange={(e) => setConfirmPassword(e.target.value)}
+        onChange={(e) => setConfirmPassword(e.target.value.trim())}
       />
       <button type="submit">Sign Up</button>
     </form>
