@@ -1,11 +1,11 @@
-// const isAdmin = useSelector((state) => state.login.isAdmin)
-// console.log("Profile.jsx isAdmin: " + isAdmin)
+// const isAdmin = useSelector((state) => state.login.isAdmin);
+// console.log("Profile.jsx isAdmin: " + isAdmin);
 
-//  const [newAdmin, setNewAdmin] = useState('')
+// const [newAdmin, setNewAdmin] = useState("");
 
 // const handleNewAdmin = async () => {
-//   const trueAdmin = await axios.put('/api/addAdmin', newAdmin)
-// }
+//   const trueAdmin = await axios.put("/api/addAdmin", newAdmin);
+// };
 
 // return (
 //     <>
