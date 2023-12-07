@@ -23,11 +23,6 @@ const router = createBrowserRouter(
       <Route 
       index 
       element={<Home />} 
-      loader={async () => {
-        const lists = await axios.get('/api/getLists')
-        const tasks = await axios.get(`/api/getTasks`)
-        return({lists: lists.data, tasks: tasks.data})
-      }}
       />
 
       <Route path="/login" element={<Login />} />

@@ -66,6 +66,7 @@ const handlers = {
 
     logout: async (req, res) => {
         req.session.destroy()
+        res.json('out')
     },
 
     registerNewUser: async (req, res) => {

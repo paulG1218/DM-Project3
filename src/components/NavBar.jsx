@@ -29,11 +29,16 @@ const NavBar = () => {
   };
 
   const handleLogout = async () => {
-    await axios.delete("/api/logout");
+    console.log('etst')
+    const res = await axios.get("/api/logout");
+    if (!res.data) {
+      return
+    }
     dispatch({
       type: "logout",
     });
     console.log("user logged out ");
+    navigate('/')
   };
 
   useEffect(() => sessionCheck, [userId]);
@@ -78,7 +83,10 @@ const NavBar = () => {
       <a href="#">Clients</a>
       <a href="#">Contact</a>
 
-      <button onClick={handleLogout}>Logout</button>
+      {userId &&
+        <a onClick={() => handleLogout()}>Logout</a>
+      }
+
     </div>
     </>
   );
