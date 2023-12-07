@@ -25,6 +25,13 @@ export const loginReducer = (state = initialState, action) => {
                 userId: null,
                 isAdmin: false,
             };
+        case 'userChange':
+            return {
+                ...state,
+                username: action.payload.username,
+                email: action.payload.email,
+                password: action.payload.password
+            }
         default:
             return state
     }
