@@ -1,0 +1,13 @@
+.listDisplay{
+    border-style: solid;
+    border-color: white;
+    border-radius: 9px; 
+    max-width: 50%;
+    height: 100vh;
+    border-width: 3px;
+    margin-left: 2vw;
+}
+
+.lists {
+    text-align: left;
+}
