@@ -6,7 +6,16 @@ import { useDispatch, useSelector } from "react-redux";
 const Profile = () => {
   const dispatch = useDispatch();
 
-  const { user } = useLoaderData();
+  const { data, user } = useLoaderData();
+  
+  const navigate = useNavigate();
+
+  switch (data.message) {
+    case 'success':
+      break;
+    default:
+      window.location.href = '/login'
+  }
 
   const [isEditing, setIsEditing] = useState(false);
   const [userInfo, setUserInfo] = useState({
@@ -15,7 +24,6 @@ const Profile = () => {
     password: user.password,
   });
 
-  const navigate = useNavigate();
 
   const handleSave = async (e) => {
     e.preventDefault();

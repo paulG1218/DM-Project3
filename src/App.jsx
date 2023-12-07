@@ -33,11 +33,11 @@ const router = createBrowserRouter(
       <Route path="/login" element={<Login />} />
 
       <Route
-        path="/profile/:userId"
+        path="/profile"
         element={<Profile />}
-        loader={async ({ params }) => {
-          const res = await axios.get(`/api/getUser/${params.userId}`);
-          return { user: res.data };
+        loader={async () => {
+          const res = await axios.get(`/api/getUser`);
+          return { data: res.data, user: res.data.user };
         }}
       />
 

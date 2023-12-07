@@ -65,7 +65,7 @@ await axios.get("/logout")
         <a href="javascript:void(0)" className="closebtn" onClick={() => closeNav()}>&times;</a>
       </div>
       {userId ?
-      <a href={`/profile/${userId}`}>{username}</a>
+      <a href={`/profile`}>{username}</a>
       : <a href="/login">Login</a>
       }
       <a href="#">Services</a>
