@@ -18,7 +18,7 @@ app.use(
 // Authentication Routes
 app.get('/api/sessionCheck', handlers.sessionCheck)
 app.post('/api/login', handlers.login)
-app.delete('/api/logout', handlers.logout)
+app.get('/api/logout', handlers.logout)
 
 // User Routes
 app.post('/api/registerUser', handlers.registerNewUser)
