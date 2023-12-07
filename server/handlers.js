@@ -33,6 +33,22 @@ const handlers = {
                             model: Task,
                         }
                     ]
+                },
+                {
+                    model: Group,
+                    include: [
+                        {
+                            model: GroupList,
+                            include: [
+                                {
+                                    model: Task,
+                                }
+                            ]
+                        },
+                        {
+                            model: GroupMember,
+                        }
+                    ]
                 }
             ]
             

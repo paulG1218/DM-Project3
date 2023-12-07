@@ -3,7 +3,7 @@ import {Op} from "sequelize";
 
 const user = await User.findOne({
     where: {
-        userId: 1
+     username: "paul is a goober"
     },
     include: [
         {
@@ -13,11 +13,27 @@ const user = await User.findOne({
                     model: Task,
                 }
             ]
+        },
+        {
+            model: Group,
+            include: [
+                {
+                    model: GroupList,
+                    include: [
+                        {
+                            model: Task,
+                        }
+                    ]
+                },
+                {
+                    model: GroupMember,
+                }
+            ]
         }
     ]
     
 })
 
-console.log(user.lists[0].tasks)
+console.log(user.groups[0].groupMembers)
 
 await db.close()

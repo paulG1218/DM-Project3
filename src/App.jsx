@@ -18,15 +18,9 @@ import axios from "axios";
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<Root />}>
-
       //every other route goes here
-      <Route 
-      index 
-      element={<Home />} 
-      />
-
+      <Route index element={<Home />} />
       <Route path="/login" element={<Login />} />
-
       <Route
         path="/profile"
         element={<Profile />}
@@ -35,11 +29,7 @@ const router = createBrowserRouter(
           return { data: res.data, user: res.data.user };
         }}
       />
-
-      <Route 
-        path='/registerNewUser'
-        element={<RegisterNewUser />}
-      />
+      <Route path="/registerNewUser" element={<RegisterNewUser />} />
     </Route>
   )
 );
