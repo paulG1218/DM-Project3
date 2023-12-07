@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import axios from "axios";
 import { useLoaderData, NavLink } from "react-router-dom";
 import List from "../components/List.jsx";
+import { Group } from "../components/Group.jsx";
 import "../css/Home.css";
 
 const Home = () => {
@@ -33,20 +34,26 @@ const Home = () => {
     return <List key={list.listId} tasks={list.tasks} list={list} />;
   });
 
+  console.log(groups)
+
+  const groupDisplay = groups.map((group) => {
+    return <Group key={group.groupId} lists={group.groupLists}/>
+  })
+
   console.log(listDisplay);
 
   return (
-    <>
-      <h1>Daily View</h1>
+    <div className="dailyView">
+      <h1 className="pageHeader">Daily View</h1>
       <div className="listDisplay">
-        <h1>List's</h1>
+        <h1>Lists</h1>
         {listDisplay}
       </div>
-      <div>
-        <h2>Group's</h2>
-        {}
+      <div  className="listDisplay">
+        <h1>Groups</h1>
+        {groupDisplay}
       </div>
-    </>
+    </div>
   );
 };
 

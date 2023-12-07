@@ -35,7 +35,7 @@ const Profile = () => {
       console.log("Error updating User:", error);
     }
     setIsEditing(false);
-    navigate(`/profile/${user.userId}`);
+    navigate(`/profile`);
   };
 
   const handleDelete = async (e) => {

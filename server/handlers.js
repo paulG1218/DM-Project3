@@ -11,7 +11,8 @@ const handlers = {
               isAdmin: req.session.user.isAdmin,
               username: req.session.user.username,
               lists: req.session.user.lists,
-              email: req.session.user.email
+              email: req.session.user.email,
+              groups: req.session.user.groups
             });
           } else {
             res.json("no user logged in");
