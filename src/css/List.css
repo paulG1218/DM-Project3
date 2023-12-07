@@ -1,0 +1,13 @@
+.list {
+    text-align: left;
+    margin: 25px;
+}
+
+.task {
+    margin: 5px 0px 5px 10px;
+}
+
+.taskRow {
+    display: flex;
+    margin-left: 20px;
+}

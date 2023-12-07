@@ -18,33 +18,22 @@ import CatTesting from "./pages/catTesting.jsx";
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<Root />}>
-
       //every other route goes here
-      <Route 
-      index 
-      element={<Home />} 
-      loader={async () => {
-        const lists = await axios.get('/api/getLists')
-        const tasks = await axios.get(`/api/getTasks`)
-        return({lists: lists.data, tasks: tasks.data})
-      }}
-      />
+      <Route index element={<Home />} />
 
       <Route path="/login" element={<Login />} />
+
       <Route path="/catTesting" element={<CatTesting/>} />
+        
       <Route
-        path="/profile/:userId"
+        path="/profile"
         element={<Profile />}
-        loader={async ({ params }) => {
-          const res = await axios.get(`/api/getUser/${params.userId}`);
-          return { user: res.data };
+        loader={async () => {
+          const res = await axios.get(`/api/getUser`);
+          return { data: res.data, user: res.data.user };
         }}
       />
-
-      <Route 
-        path='/registerNewUser'
-        element={<RegisterNewUser />}
-      />
+      <Route path="/registerNewUser" element={<RegisterNewUser />} />
     </Route>
   )
 );

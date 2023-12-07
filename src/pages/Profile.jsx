@@ -6,7 +6,16 @@ import { useDispatch, useSelector } from "react-redux";
 const Profile = () => {
   const dispatch = useDispatch();
 
-  const { user } = useLoaderData();
+  const { data, user } = useLoaderData();
+
+  const navigate = useNavigate();
+
+  switch (data.message) {
+    case "success":
+      break;
+    default:
+      window.location.href = "/login";
+  }
 
   const [isEditing, setIsEditing] = useState(false);
   const [userInfo, setUserInfo] = useState({
@@ -15,19 +24,19 @@ const Profile = () => {
     password: user.password,
   });
 
-  const navigate = useNavigate();
-
   const handleSave = async (e) => {
     e.preventDefault();
 
     try {
       await axios.put(`/api/editUser/${user.userId}`, userInfo);
-      console.log(userInfo);
+      dispatch({
+        type: "userChange",
+        payload: userInfo,
+      });
     } catch (error) {
       console.log("Error updating User:", error);
-    }
-    setIsEditing(false);
-    navigate(`/profile/${user.userId}`);
+    };
+    setIsEditing(false)
   };
 
   const handleDelete = async (e) => {
@@ -51,6 +60,16 @@ const Profile = () => {
     }
 
   };
+
+  const isAdmin = useSelector((state) => state.login.isAdmin);
+  console.log("Profile.jsx isAdmin: " + isAdmin);
+
+  const [newAdmin, setNewAdmin] = useState("");
+
+  const handleNewAdmin = async () => {
+    await axios.put("/api/addAdmin", { newAdmin: newAdmin });
+  };
+
   return (
     <div>
       <h1>Profile Page</h1>
@@ -75,6 +94,7 @@ const Profile = () => {
           }}
           disabled={!isEditing}
           readOnly={!isEditing}
+          type={isEditing ? "text" : "password"}
           value={userInfo.password}
         />
         {isEditing ? (
@@ -99,6 +119,18 @@ const Profile = () => {
           </button>
         )}
       </form>
+      {isAdmin && (
+        <form onSubmit={handleNewAdmin}>
+          <label>Add an admin:</label>
+          <input
+            placeholder="Add an admin"
+            type="text"
+            value={newAdmin}
+            onChange={(e) => setNewAdmin(e.target.value)}
+          />
+          <button type="submit">Add</button>
+        </form>
+      )}
     </div>
   );
 };

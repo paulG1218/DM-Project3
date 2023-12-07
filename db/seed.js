@@ -104,7 +104,7 @@ await list1.addTask(task1)
 await list1.addTask(task2)
 
 // I want user1 to belong to group1
-// group1.addUser(user1)
+await user1.addGroup(group1)
 
 //i want list1 to belong to user1
 await user1.addList(list1)
@@ -125,6 +125,10 @@ await repeat1.addList(list1)
 await repeat2.addGroupList(groupList1)
 
 //i want groupMember1 to belong to user group1
+// await group1.addGroupMember(groupMember1)
+
+//i want user1 to be in group1
+await user1.addGroupMember(groupMember1)
 await group1.addGroupMember(groupMember1)
 
 //i want groupMember1 to belong to a user3

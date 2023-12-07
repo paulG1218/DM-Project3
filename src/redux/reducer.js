@@ -3,7 +3,8 @@ const initialState = {
     lists: [],
     isAdmin: false,
     username: null,
-    email: null
+    email: null,
+    groups: [],
 }
 
 export const loginReducer = (state = initialState, action) => {
@@ -15,7 +16,8 @@ export const loginReducer = (state = initialState, action) => {
                 lists: action.payload.lists,
                 isAdmin: action.payload.isAdmin,
                 username: action.payload.username,
-                email: action.payload.email
+                email: action.payload.email,
+                groups: action.payload.groups,
             };
         case "logout":
             return {
@@ -23,6 +25,13 @@ export const loginReducer = (state = initialState, action) => {
                 userId: null,
                 isAdmin: false,
             };
+        case 'userChange':
+            return {
+                ...state,
+                username: action.payload.username,
+                email: action.payload.email,
+                password: action.payload.password
+            }
         default:
             return state
     }

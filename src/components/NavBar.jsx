@@ -1,20 +1,17 @@
-import React, {useEffect} from 'react'
-import '../css/NavBar.css'
-import { useSelector } from 'react-redux';
+import React, { useEffect } from "react";
+import "../css/NavBar.css";
+import { useSelector } from "react-redux";
 import { IoMdMenu } from "react-icons/io";
-import axios from 'axios';
-import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
-
-
+import axios from "axios";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 const NavBar = () => {
-
-  const dispatch = useDispatch()
-  const navigate = useNavigate()
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const userId = useSelector((state) => state.login.userId);
-  const username = useSelector((state) => state.login.username)
+  const username = useSelector((state) => state.login.username);
 
   const sessionCheck = async () => {
     await axios.get("/api/sessionCheck").then((res) => {
@@ -31,51 +28,68 @@ const NavBar = () => {
     });
   };
 
-  const handleLogout  =  async () => {
-await axios.get("/logout")
-    dispatch({ 
-      type: "logout", 
-    })
-    navigate("/")
-
-  }
+  const handleLogout = async () => {
+    console.log('etst')
+    const res = await axios.get("/api/logout");
+    if (!res.data) {
+      return
+    }
+    dispatch({
+      type: "logout",
+    });
+    console.log("user logged out ");
+    navigate('/')
+  };
 
   useEffect(() => sessionCheck, [userId]);
 
   function openNav() {
     document.getElementById("mySidebar").style.width = "250px";
   }
-  
+
   function closeNav() {
     document.getElementById("mySidebar").style.width = "0";
   }
 
   return (
     <>
-    <div className="topnav">
-      <div id="icon">
-        <button className="openbtn" onClick={() => openNav()}>&#9776;</button>
+      <div className="topnav">
+        <div id="icon">
+          <button className="openbtn" onClick={() => openNav()}>
+            &#9776;
+          </button>
+        </div>
+        <h1 className="title">Title</h1>
       </div>
-      <h1 className='title'>Title</h1>
-    </div>
 
-    <div id="mySidebar" className="sidebar">
-      <div className='sidebarHead'>
-        <a href='/' className='logo'>LOGO</a>
-        <a href="javascript:void(0)" className="closebtn" onClick={() => closeNav()}>&times;</a>
-      </div>
+      <div id="mySidebar" className="sidebar">
+        <div className="sidebarHead">
+          <a href="/" className="logo">
+            LOGO
+          </a>
+          <a
+            href="javascript:void(0)"
+            className="closebtn"
+            onClick={() => closeNav()}
+          >
+            &times;
+          </a>
+        </div>
       {userId ?
-      <a href={`/profile/${userId}`}>{username}</a>
-      : <a href="/login">Login</a>
+        <a href={`/profile`}>{username}</a>
+        : <a href="/login">Login</a>
       }
       <a href="#">Services</a>
       <a href="#">Clients</a>
       <a href="#">Contact</a>
 
-      <button onClick={handleLogout}>Logout</button>
+      {userId &&
+        <a onClick={() => handleLogout()}>Logout</a>
+      }
+
     </div>
     </>
-  )
-}
+  );
+};
 
-export default NavBar
+export default NavBar;

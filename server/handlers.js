@@ -6,13 +6,13 @@ const handlers = {
 
     sessionCheck: async (req, res) => {
         if (req.session.user) {
-            console.log(req.session.user.userId);
             res.json({
               userId: req.session.user.userId,
               isAdmin: req.session.user.isAdmin,
               username: req.session.user.username,
               lists: req.session.user.lists,
-              email: req.session.user.email
+              email: req.session.user.email,
+              groups: req.session.user.groups
             });
           } else {
             res.json("no user logged in");
@@ -21,10 +21,6 @@ const handlers = {
 
     login: async (req, res) => {
         const { usernameOrEmail, password } = req.body 
-
-        console.log(usernameOrEmail)
-        console.log(password)
-        console.log("session data", req.session)
 
         const user = await User.findOne({
             where: {
@@ -36,6 +32,22 @@ const handlers = {
                     include: [
                         {
                             model: Task,
+                        }
+                    ]
+                },
+                {
+                    model: Group,
+                    include: [
+                        {
+                            model: GroupList,
+                            include: [
+                                {
+                                    model: Task,
+                                }
+                            ]
+                        },
+                        {
+                            model: GroupMember,
                         }
                     ]
                 }
@@ -52,8 +64,6 @@ const handlers = {
             return
         } else if (user && user.password === password) {
             req.session.user = user
-
-            console.log(req.session.user.userId)
 
             res.json({
                 message: "Login successful",
@@ -73,7 +83,7 @@ const handlers = {
 
     logout: async (req, res) => {
         req.session.destroy()
-
+        res.json('out')
     },
 
     registerNewUser: async (req, res) => {
@@ -92,19 +102,24 @@ const handlers = {
     },
 
     getUserProfileInfo: async (req, res) => {
-        // console.log(userId)
-        const { userId } = req.params 
+        const userSession = req.session.user
+
+        if (!userSession) {
+            res.json({message: "no user"})
+            return
+        }
         const user = await User.findOne({ 
             where: {
-                userId: userId
+                userId: userSession.userId
             }
         })
-        console.log(user)
-        res.json(user)
+        res.json({message: 'success', user: user})
     },
 
     addAdmin: async (req, res) => {
         const { newAdmin } = req.body
+
+        console.log(newAdmin)
 
         const admin = await User.findOne({
             where: {
@@ -121,11 +136,9 @@ const handlers = {
   
     editUserInfo: async (req, res) => {
         const {userId} = req.params
-        console.log(req.body)
         const { username, email, password } = req.body
         try{
             const user = await User.findByPk(userId)
-            console.log(user)
             if(user) {
               await  user.update({
                     username: username,
@@ -138,7 +151,6 @@ const handlers = {
             console.log("Error")
             res.status(500).json({ success: false, error: "Internal Server Error Editing User"})
         }
-        // console.log(req.body)
     },
     deleteUser: async (req, res) => {
         const userId = req.session.user.userId

@@ -1,0 +1,29 @@
+.listDisplay{
+    border-style: solid;
+    border-color: white;
+    border-radius: 9px; 
+    width: 46vw;
+    height: 100vh;
+    border-width: 3px;
+    margin-left: 2vw;
+    float: left;
+
+}
+
+.lists {
+    text-align: left;
+}
+
+.loginLink {
+    color: white;
+}
+
+.loginLink:hover {
+    color: pink;
+}
+
+
+
+.pageHeader {
+    width: 100vw;
+}
