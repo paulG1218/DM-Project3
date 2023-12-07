@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
 const CatTesting = () => {
@@ -9,12 +9,10 @@ const CatTesting = () => {
     2: false,
     3: false,
   });
-  const [tasks, setTasks] = useState([]);
 
   const getRandomCatGif = async () => {
     try {
       const response = await axios.get('https://api.thecatapi.com/v1/images/search?order=random&format=gif');
-      // Assuming the response data has a 'url' property
       const gifUrl = response.data[0]?.url;
       setCatImageUrl(gifUrl);
       setShowCat(true);
@@ -32,32 +30,29 @@ const CatTesting = () => {
   };
 
   const handleCheckboxChange = (checkboxNumber) => {
-    setCheckboxes((prevCheckboxes) => ({
-      ...prevCheckboxes,
-      [checkboxNumber]: !prevCheckboxes[checkboxNumber],
-    }));
+    setCheckboxes((prevCheckboxes) => {
+      const updatedCheckboxes = { ...prevCheckboxes, [checkboxNumber]: !prevCheckboxes[checkboxNumber] };
 
-    if (!checkboxes[checkboxNumber]) {
-      getRandomCatGif();
-    }
-  };
+      // Check if the checkbox is being checked
+      if (updatedCheckboxes[checkboxNumber]) {
+        getRandomCatGif();
+      } else {
+        // If the checkbox is being unchecked, reset the cat image state
+        setCatImageUrl(null);
+        setShowCat(false);
+      }
 
-  const handleAddTask = () => {
-    const newTask = prompt('Enter the new task:');
-    if (newTask) {
-      setTasks((prevTasks) => [...prevTasks, { task: newTask, checked: false }]);
-    }
-  };
-
-  const handleTaskCheckboxChange = (index) => {
-    setTasks((prevTasks) => {
-      const updatedTasks = [...prevTasks];
-      updatedTasks[index].checked = !updatedTasks[index].checked;
-      return updatedTasks;
+      return updatedCheckboxes;
     });
-
-    // You may add additional logic here based on checkbox change for tasks
   };
+
+  useEffect(() => {
+    // Clean up when the component unmounts
+    return () => {
+      setCatImageUrl(null);
+      setShowCat(false);
+    };
+  }, []);
 
   return (
     <div>
@@ -74,20 +69,6 @@ const CatTesting = () => {
           />
           <label htmlFor={`garage${checkboxNumber}`}> Clean Garage{checkboxNumber}</label>
         </React.Fragment>
-      ))}
-
-      <button onClick={handleAddTask}>Add Task</button>
-
-      {tasks.map((task, index) => (
-        <div key={index}>
-          <input
-            type="checkbox"
-            id={`task${index}`}
-            checked={task.checked}
-            onChange={() => handleTaskCheckboxChange(index)}
-          />
-          <label htmlFor={`task${index}`}>{task.task}</label>
-        </div>
       ))}
 
       {showCat && (
