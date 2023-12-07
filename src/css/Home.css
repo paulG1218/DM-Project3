@@ -11,3 +11,11 @@
 .lists {
     text-align: left;
 }
+
+.loginLink {
+    color: white;
+}
+
+.loginLink:hover {
+    color: pink;
+}

@@ -1,7 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import axios from "axios";
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData, NavLink } from "react-router-dom";
 import List from "../components/List.jsx";
 import "../css/Home.css";
 
@@ -13,7 +13,19 @@ const Home = () => {
   console.log(groups);
 
   if (!userId) {
-    return <p>TODO if no user logged in</p>;
+    return (
+      <div>
+        <h1>Welcome to Title</h1>
+        <p>
+          Where you are able to manage your personal and professional tasks all
+          in one place. Please{" "}
+          <a className="loginLink" href="/login">
+            Login
+          </a>{" "}
+          to view your account
+        </p>
+      </div>
+    );
   }
 
   const listDisplay = lists.map((list) => {
