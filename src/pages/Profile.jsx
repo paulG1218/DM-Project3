@@ -7,14 +7,14 @@ const Profile = () => {
   const dispatch = useDispatch();
 
   const { data, user } = useLoaderData();
-  
+
   const navigate = useNavigate();
 
   switch (data.message) {
-    case 'success':
+    case "success":
       break;
     default:
-      window.location.href = '/login'
+      window.location.href = "/login";
   }
 
   const [isEditing, setIsEditing] = useState(false);
@@ -23,7 +23,6 @@ const Profile = () => {
     email: user.email,
     password: user.password,
   });
-
 
   const handleSave = async (e) => {
     e.preventDefault();
@@ -58,6 +57,16 @@ const Profile = () => {
       alert("Account deletion cancelled.");
     }
   };
+
+  const isAdmin = useSelector((state) => state.login.isAdmin);
+  console.log("Profile.jsx isAdmin: " + isAdmin);
+
+  const [newAdmin, setNewAdmin] = useState("");
+
+  const handleNewAdmin = async () => {
+    await axios.put("/api/addAdmin", { newAdmin: newAdmin });
+  };
+
   return (
     <div>
       <h1>Profile Page</h1>
@@ -82,6 +91,7 @@ const Profile = () => {
           }}
           disabled={!isEditing}
           readOnly={!isEditing}
+          type={isEditing ? "text" : "password"}
           value={userInfo.password}
         />
         {isEditing ? (
@@ -106,6 +116,18 @@ const Profile = () => {
           </button>
         )}
       </form>
+      {isAdmin && (
+        <form onSubmit={handleNewAdmin}>
+          <label>Add an admin:</label>
+          <input
+            placeholder="Add an admin"
+            type="text"
+            value={newAdmin}
+            onChange={(e) => setNewAdmin(e.target.value)}
+          />
+          <button type="submit">Add</button>
+        </form>
+      )}
     </div>
   );
 };

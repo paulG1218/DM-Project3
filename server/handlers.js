@@ -119,6 +119,8 @@ const handlers = {
     addAdmin: async (req, res) => {
         const { newAdmin } = req.body
 
+        console.log(newAdmin)
+
         const admin = await User.findOne({
             where: {
                 username: newAdmin
