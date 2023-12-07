@@ -4,11 +4,12 @@ import axios from 'axios';
 const CatTesting = () => {
   const [catImageUrl, setCatImageUrl] = useState(null);
   const [showCat, setShowCat] = useState(false);
-  const [checkboxes, setCheckboxes] = useState({
-    1: false,
-    2: false,
-    3: false,
-  });
+  const [checklist, setChecklist] = useState([
+    { id: 1, label: 'Item 1', checked: false },
+    { id: 2, label: 'Item 2', checked: false },
+    { id: 3, label: 'Item 3', checked: false },
+  ]);
+  const [newItemLabel, setNewItemLabel] = useState('');
 
   const getRandomCatGif = async () => {
     try {
@@ -29,21 +30,36 @@ const CatTesting = () => {
     setShowCat(false);
   };
 
-  const handleCheckboxChange = (checkboxNumber) => {
-    setCheckboxes((prevCheckboxes) => {
-      const updatedCheckboxes = { ...prevCheckboxes, [checkboxNumber]: !prevCheckboxes[checkboxNumber] };
+  const handleCheck = (itemId) => {
+    setChecklist((prevChecklist) => {
+      const updatedChecklist = prevChecklist.map((item) =>
+        item.id === itemId ? { ...item, checked: !item.checked } : item
+      );
 
-      // Check if the checkbox is being checked
-      if (updatedCheckboxes[checkboxNumber]) {
+      // Check if the item is being checked
+      if (updatedChecklist.find((item) => item.id === itemId)?.checked) {
         getRandomCatGif();
       } else {
-        // If the checkbox is being unchecked, reset the cat image state
+        // If the item is being unchecked, reset the cat image state
         setCatImageUrl(null);
         setShowCat(false);
       }
 
-      return updatedCheckboxes;
+      return updatedChecklist;
     });
+  };
+
+  const handleAddItem = () => {
+    if (newItemLabel.trim() !== '') {
+      const newItem = {
+        id: checklist.length + 1,
+        label: newItemLabel.trim(),
+        checked: false,
+      };
+
+      setChecklist((prevChecklist) => [...prevChecklist, newItem]);
+      setNewItemLabel('');
+    }
   };
 
   useEffect(() => {
@@ -58,18 +74,27 @@ const CatTesting = () => {
     <div>
       <h2>Random Cat GIF Testing</h2>
 
-      {Object.keys(checkboxes).map((checkboxNumber) => (
-        <React.Fragment key={checkboxNumber}>
+      {checklist.map((item) => (
+        <div key={item.id}>
           <input
             type="checkbox"
-            id={`garage${checkboxNumber}`}
-            name={checkboxNumber}
-            checked={checkboxes[checkboxNumber]}
-            onChange={(e) => handleCheckboxChange(e.target.name)}
+            id={`item${item.id}`}
+            checked={item.checked}
+            onChange={() => handleCheck(item.id)}
           />
-          <label htmlFor={`garage${checkboxNumber}`}> Clean Garage{checkboxNumber}</label>
-        </React.Fragment>
+          <label htmlFor={`item${item.id}`}>{item.label}</label>
+        </div>
       ))}
+
+      <div>
+        <input
+          type="text"
+          placeholder="Enter new item"
+          value={newItemLabel}
+          onChange={(e) => setNewItemLabel(e.target.value)}
+        />
+        <button onClick={handleAddItem}>Add Item</button>
+      </div>
 
       {showCat && (
         <div className="cat-container">
