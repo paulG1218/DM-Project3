@@ -6,7 +6,6 @@ const handlers = {
 
     sessionCheck: async (req, res) => {
         if (req.session.user) {
-            console.log(req.session.user.userId);
             res.json({
               userId: req.session.user.userId,
               isAdmin: req.session.user.isAdmin,
@@ -21,10 +20,6 @@ const handlers = {
 
     login: async (req, res) => {
         const { usernameOrEmail, password } = req.body 
-
-        console.log(usernameOrEmail)
-        console.log(password)
-        console.log("session data", req.session)
 
         const user = await User.findOne({
             where: {
@@ -53,8 +48,6 @@ const handlers = {
         } else if (user && user.password === password) {
             req.session.user = user
 
-            console.log(req.session.user.userId)
-
             res.json({
                 message: "Login successful",
                 status: 200,
@@ -73,7 +66,6 @@ const handlers = {
 
     logout: async (req, res) => {
         req.session.destroy()
-
     },
 
     registerNewUser: async (req, res) => {
@@ -92,20 +84,17 @@ const handlers = {
     },
 
     getUserProfileInfo: async (req, res) => {
-        // console.log(userId)
         const userSession = req.session.user
 
         if (!userSession) {
             res.json({message: "no user"})
             return
         }
-
         const user = await User.findOne({ 
             where: {
                 userId: userSession.userId
             }
         })
-        console.log(user)
         res.json({message: 'success', user: user})
     },
 
@@ -127,11 +116,9 @@ const handlers = {
   
     editUserInfo: async (req, res) => {
         const {userId} = req.params
-        console.log(req.body)
         const { username, email, password } = req.body
         try{
             const user = await User.findByPk(userId)
-            console.log(user)
             if(user) {
               await  user.update({
                     username: username,
@@ -144,7 +131,6 @@ const handlers = {
             console.log("Error")
             res.status(500).json({ success: false, error: "Internal Server Error Editing User"})
         }
-        // console.log(req.body)
     },
     deleteUser: async (req, res) => {
         const userId = req.session.user.userId
