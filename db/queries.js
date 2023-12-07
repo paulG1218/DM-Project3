@@ -34,6 +34,6 @@ const user = await User.findOne({
     
 })
 
-console.log(user.groups[0].groupMembers)
+console.log(user.groups[0].groupLists)
 
 await db.close()

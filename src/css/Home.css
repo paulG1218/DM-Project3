@@ -2,10 +2,12 @@
     border-style: solid;
     border-color: white;
     border-radius: 9px; 
-    max-width: 50%;
+    width: 46vw;
     height: 100vh;
     border-width: 3px;
     margin-left: 2vw;
+    float: left;
+
 }
 
 .lists {
@@ -18,4 +20,10 @@
 
 .loginLink:hover {
     color: pink;
+}
+
+
+
+.pageHeader {
+    width: 100vw;
 }

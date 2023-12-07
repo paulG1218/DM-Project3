@@ -14,6 +14,7 @@ const List = ({ tasks, list }) => {
   return (
     <div className="list">
       <h2>{list.listName}</h2>
+      <h2>{list.groupListName}</h2>
       {taskDisplay}
     </div>
   );
