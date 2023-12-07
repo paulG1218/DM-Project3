@@ -29,12 +29,14 @@ const Profile = () => {
 
     try {
       await axios.put(`/api/editUser/${user.userId}`, userInfo);
-      console.log(userInfo);
+      dispatch({
+        type: "userChange",
+        payload: userInfo,
+      });
     } catch (error) {
       console.log("Error updating User:", error);
-    }
-    setIsEditing(false);
-    navigate(`/profile`);
+    };
+    setIsEditing(false)
   };
 
   const handleDelete = async (e) => {
