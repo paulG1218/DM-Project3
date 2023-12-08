@@ -29,7 +29,6 @@ const NavBar = () => {
   };
 
   const handleLogout = async () => {
-    console.log('etst')
     const res = await axios.get("/api/logout");
     if (!res.data) {
       return

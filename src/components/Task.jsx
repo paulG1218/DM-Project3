@@ -1,11 +1,9 @@
 import React, {useState} from 'react'
 import axios from 'axios';
 
-const Task = ({task}) => {
+const Task = ({task, handleCheck, checkState}) => {
 
-    const {title, taskId, checked} = task
-
-    const [isChecked, setIsChecked] = useState(checked)
+    const {title, taskId} = task
 
     const getRandomCatGif = async () => {
         try {
@@ -26,30 +24,16 @@ const Task = ({task}) => {
         }
       };
 
-  const handleCheck = async (e, taskId) => {
-    const currentTask = document.getElementById(e.target.id);
-    // currentTask.disabled = true
-    console.log(taskId);
-    const res = await axios.put("/api/checkTask", { taskId: taskId });
-    if (res.data === "failed") {
-      console.log("shit");
-      return;
-    } else {
-        setIsChecked(true)
-      console.log(res.data);
-    }
-  };
-
     return (
         <div className="taskRow">
           <input
             type="checkbox"
             className="checkbox"
             id={`${title}-${taskId}`}
-            disabled={isChecked}
-            checked={isChecked}
-            readOnly={isChecked}
-            onClick={(e) => handleCheck(e, taskId)}
+            disabled={checkState}
+            checked={checkState}
+            readOnly={checkState}
+            onChange={(e) => handleCheck(e, taskId)}
           ></input>
           <p className="task">{title}</p>
         </div>

@@ -32,7 +32,7 @@ const Home = () => {
 
   const listDisplay = lists.map((list) => {
     console.log(list.tasks);
-    return <List key={list.listId} tasks={list.tasks} list={list} />;
+    return <List key={list.listId} list={list} />;
   });
 
   console.log(groups)

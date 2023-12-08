@@ -6,13 +6,46 @@ const handlers = {
 
     sessionCheck: async (req, res) => {
         if (req.session.user) {
+            const user = await User.findOne({
+                where: {
+                    userId: req.session.user.userId
+                },
+                include: [
+                    {
+                        model: List, 
+                        include: [
+                            {
+                                model: Task,
+                            }
+                        ]
+                    },
+                    {
+                        model: Group,
+                        include: [
+                            {
+                                model: GroupList,
+                                include: [
+                                    {
+                                        model: Task,
+                                    }
+                                ]
+                            },
+                            {
+                                model: GroupMember,
+                            }
+                        ]
+                    }
+                ]
+                
+            })
+
             res.json({
-              userId: req.session.user.userId,
-              isAdmin: req.session.user.isAdmin,
-              username: req.session.user.username,
-              lists: req.session.user.lists,
-              email: req.session.user.email,
-              groups: req.session.user.groups
+              userId: user.userId,
+              isAdmin: user.isAdmin,
+              username: user.username,
+              lists: user.lists,
+              email: user.email,
+              groups: user.groups
             });
           } else {
             res.json("no user logged in");
@@ -176,7 +209,7 @@ const handlers = {
                 checked: true
             })
             
-            res.json('checked')
+            res.json({message: 'checked', task: task})
         } else {
             res.json('failed')
         }
