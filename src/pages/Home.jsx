@@ -35,7 +35,7 @@ const Home = () => {
   }
 
   const listDisplay = lists.map((list) => {
-    return <List key={list.listId} tasks={list.tasks} list={list} />;
+    return <List key={list.listId} list={list} />;
   });
 
   const groupDisplay = groups.map((group) => {

@@ -149,6 +149,7 @@ Task.init(
     checked: {
         type: DataTypes.BOOLEAN,
         allowNull: false,
+        defaultValue: false
     }
 },
 {
