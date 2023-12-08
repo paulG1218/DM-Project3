@@ -12,7 +12,8 @@ const handlers = {
               username: req.session.user.username,
               lists: req.session.user.lists,
               email: req.session.user.email,
-              groups: req.session.user.groups
+              groups: req.session.user.groups,
+              score: req.session.user.score,
             });
           } else {
             res.json("no user logged in");
@@ -127,8 +128,6 @@ const handlers = {
     addAdmin: async (req, res) => {
         const { newAdmin } = req.body
 
-        console.log(newAdmin)
-
         const admin = await User.findOne({
             where: {
                 username: newAdmin
@@ -139,7 +138,7 @@ const handlers = {
             isAdmin: true
         })
 
-        res.send('User is now has admin status')
+        res.send('User now has admin status')
     },
   
     editUserInfo: async (req, res) => {

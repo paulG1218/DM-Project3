@@ -26,6 +26,7 @@ app.get('/api/getUser', handlers.getUserProfileInfo)
 app.put('/api/editUser/:userId', handlers.editUserInfo)
 app.delete('/api/deleteUser', handlers.deleteUser)
 app.put('/api/addAdmin', handlers.addAdmin)
+app.get('/api/getScore', handlers.getScore)
 
 ViteExpress.listen(app, port, () =>
   console.log(`Server is listening on http://localhost:${port}`)

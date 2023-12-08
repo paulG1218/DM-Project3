@@ -11,8 +11,6 @@ const Home = () => {
   const lists = useSelector((state) => state.login.lists);
   const groups = useSelector((state) => state.login.groups);
 
-  console.log(groups);
-
   if (!userId) {
     return (
       <div>
@@ -30,17 +28,12 @@ const Home = () => {
   }
 
   const listDisplay = lists.map((list) => {
-    console.log(list.tasks);
     return <List key={list.listId} tasks={list.tasks} list={list} />;
   });
 
-  console.log(groups)
-
   const groupDisplay = groups.map((group) => {
-    return <Group key={group.groupId} lists={group.groupLists}/>
-  })
-
-  console.log(listDisplay);
+    return <Group key={group.groupId} lists={group.groupLists} />;
+  });
 
   return (
     <div className="dailyView">
@@ -49,7 +42,7 @@ const Home = () => {
         <h1>Lists</h1>
         {listDisplay}
       </div>
-      <div  className="listDisplay">
+      <div className="listDisplay">
         <h1>Groups</h1>
         {groupDisplay}
       </div>
