@@ -123,24 +123,52 @@ const handlers = {
     registerNewUser: async (req, res) => {
         const { username, email, password } = req.body
 
-        const newUser = await User.create({
+        await User.create({
             username: username,
             email: email,
             password: password
         })
 
-        res.json({
-            message: 'New user created',
-            userId: newUser.userId
+        const user = await User.findOne({
+            where: {
+                username: username
+            },
+            include: [
+                {
+                    model: List, 
+                    include: [
+                        {
+                            model: Task,
+                        }
+                    ]
+                },
+                {
+                    model: Group,
+                    include: [
+                        {
+                            model: GroupList,
+                            include: [
+                                {
+                                    model: Task,
+                                }
+                            ]
+                        },
+                        {
+                            model: GroupMember,
+                        }
+                    ]
+                }
+            ]
         })
 
-        const user = await User.findByPk({where: { userId: newUser.userId }})
-        req.session.user = seshUser
+        req.session.user = user
 
         res.json({
-            message: 'New user logged in from register page',
-            newUser: seshUser
+            message: 'success',
+            status: 200,
+            user: user
         })
+
     },
 
     getUserProfileInfo: async (req, res) => {

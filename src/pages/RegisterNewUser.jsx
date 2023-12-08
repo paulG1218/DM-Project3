@@ -11,10 +11,10 @@ const RegisterNewUser = () => {
   const onRegisterUser = async (e, registerFormData) => {
     e.preventDefault();
     await axios.post("/api/registerUser", registerFormData).then((res) => {
-      // dispatch({
-      //   type: "authenticated",
-      //   payload: res.data.user,
-      // });
+      dispatch({
+        type: "authenticated",
+        payload: res.data.user,
+      });
       console.log("newUser created");
       navigate("/");
     });
