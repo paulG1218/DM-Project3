@@ -18,9 +18,10 @@ const group1 = await Group.create({
 const groupMember1 = await GroupMember.create({
     score: 75,
 })
+
 // Seed a new User one with admin one without
 const user1 = await User.create({
-    username: "Paul",
+    username: "paul",
     isAdmin: true,
     password: "asdf",
     score: 50,
@@ -28,14 +29,14 @@ const user1 = await User.create({
 })
 
 const user2 = await User.create({
-    username: "Gabe",
+    username: "gabe",
     isAdmin: false,
     password: "asdf",
     score: 25,
     email: "gabe@coolville"
 })
 const user3 = await User.create({
-    username: "Jacob",
+    username: "jacob",
     isAdmin: false,
     password: "asdf",
     score: 25,
@@ -48,7 +49,7 @@ const list1 = await List.create({
     dueDate: new Date('2023-12-17T03:24:00'),
 })
 const list2 = await List.create({
-    listName: "house cleaning",
+    listName: "group cleaning",
     isGroupList: false,
     dueDate: new Date('2023-12-17T03:24:00'),
 })
@@ -69,9 +70,44 @@ const task2 = await Task.create({
     checked: false,
 })
 const task3 = await Task.create({
-    title: "group task",
+    title: "hard task",
     desc: "the group needs to move the construction the site",
     difficulty: 3,
+    img: "https://media.istockphoto.com/id/178594527/photo/clean-garage.jpg?s=612x612&w=0&k=20&c=0pMNJ53-lcC2kiMgNJSyqsUZVThnDRksbHd751mzoUk=",
+    checked: false,
+})
+const task4 = await Task.create({
+    title: "dishes",
+    desc: "i need to wash the dishes",
+    difficulty: 1,
+    img: "https://media.istockphoto.com/id/178594527/photo/clean-garage.jpg?s=612x612&w=0&k=20&c=0pMNJ53-lcC2kiMgNJSyqsUZVThnDRksbHd751mzoUk=",
+    checked: false,
+})
+const task5 = await Task.create({
+    title: "make paul a goober again",
+    desc: "this is a medium task",
+    difficulty: 2,
+    img: "https://media.istockphoto.com/id/178594527/photo/clean-garage.jpg?s=612x612&w=0&k=20&c=0pMNJ53-lcC2kiMgNJSyqsUZVThnDRksbHd751mzoUk=",
+    checked: false,
+})
+const task6 = await Task.create({
+    title: "medium task",
+    desc: "this is a medium task",
+    difficulty: 2,
+    img: "https://media.istockphoto.com/id/178594527/photo/clean-garage.jpg?s=612x612&w=0&k=20&c=0pMNJ53-lcC2kiMgNJSyqsUZVThnDRksbHd751mzoUk=",
+    checked: false,
+})
+const task7 = await Task.create({
+    title: "easy task",
+    desc: "this is a easy task",
+    difficulty: 1,
+    img: "https://media.istockphoto.com/id/178594527/photo/clean-garage.jpg?s=612x612&w=0&k=20&c=0pMNJ53-lcC2kiMgNJSyqsUZVThnDRksbHd751mzoUk=",
+    checked: false,
+})
+const task8 = await Task.create({
+    title: "medium task",
+    desc: "this is a medium task",
+    difficulty: 2,
     img: "https://media.istockphoto.com/id/178594527/photo/clean-garage.jpg?s=612x612&w=0&k=20&c=0pMNJ53-lcC2kiMgNJSyqsUZVThnDRksbHd751mzoUk=",
     checked: false,
 })
@@ -101,7 +137,7 @@ const repeat2 = await Repeat.create({
 await list1.addTask(task1)
 
 // I want task2 to belong to list2
-await list1.addTask(task2)
+await list2.addTask(task2)
 
 // I want user1 to belong to group1
 await user1.addGroup(group1)
@@ -109,14 +145,21 @@ await user1.addGroup(group1)
 //i want list1 to belong to user1
 await user1.addList(list1)
 
-//i want list2 to belong to user2
+//i want task4, 5, 6to belong to list1
+await list1.addTask(task4)
+await list1.addTask(task5)
+await list1.addTask(task6)
+
+//i want list2 to belong to user2d
 await user2.addList(list2)
 
 //i want grouplist1 to belong to group1
 await group1.addGroupList(groupList1)
 
-// i want task 3 to belong to groupList1
+// i want task 3, 7, 8 to belong to groupList1
 await groupList1.addTask(task3)
+await groupList1.addTask(task7)
+await groupList1.addTask(task8)
 
 //i want list to belong to repeat 1
 await repeat1.addList(list1)
@@ -127,9 +170,25 @@ await repeat2.addGroupList(groupList1)
 //i want groupMember1 to belong to user group1
 // await group1.addGroupMember(groupMember1)
 
+
+// 
+const groupMember2 = await group1.createGroupMember({
+    userId: 2,
+    score: 80
+})
+
+const groupMember3 = await user3.createGroupMember({
+    groupId: 1,
+    score: 85
+})
+
+
 //i want user1 to be in group1
 await user1.addGroupMember(groupMember1)
 await group1.addGroupMember(groupMember1)
+// i want user3 to be in group1 
+// await user3.addGroupMember(groupMember1)
+// await group1.addGroupMember(groupMember1)
 
 //i want groupMember1 to belong to a user3
 // groupMember1.addGroupMember(user3)
