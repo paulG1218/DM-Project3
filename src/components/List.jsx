@@ -11,7 +11,13 @@ const List = ({ list }) => {
   const tasks = list.tasks;
 
   const [catImageUrl, setCatImageUrl] = useState(null);
-  const [showCat, setShowCat] = useState(false);
+  const [story, setStory] = useState("");
+
+  const [showReward, setShowReward] = useState({
+    cat: false,
+    story: false,
+    game: false,
+  });
 
   const getRandomCatGif = async () => {
     try {
@@ -20,7 +26,7 @@ const List = ({ list }) => {
       );
       const gifUrl = response.data[0]?.url;
       setCatImageUrl(gifUrl);
-      setShowCat(true);
+      setShowReward({ ...showReward, cat: true });
 
       // Play the spring sound
       const audio = new Audio(
@@ -33,11 +39,22 @@ const List = ({ list }) => {
   };
 
   const handleCloseCat = () => {
-    setShowCat(false);
+    setShowReward({ ...showReward, cat: false });
+  };
+
+  const getRandomStory = async () => {
+    const res = await axios.get("https://shortstories-api.onrender.com/");
+    setStory(res.data.story);
+    setShowReward({ ...showReward, story: true });
+  };
+
+  const handleCloseStory = () => {
+    setShowReward({ ...showReward, story: false });
   };
 
   const taskDisplay = tasks.map((task) => {
     const [checkState, setCheckState] = useState(task.checked);
+    console.log(showReward);
 
     const handleCheck = async (e, taskId) => {
       const res = await axios.put("/api/checkTask", { taskId: taskId });
@@ -47,10 +64,17 @@ const List = ({ list }) => {
       } else {
         task = res.data.task;
         setCheckState(true);
-    
+
         // Check if the task has difficulty level 1 before displaying cat image
-        if (task.difficulty === 1) {
-          getRandomCatGif(); // Fetch cat image and play sound on task check
+        switch (task.difficulty) {
+          case 1:
+            getRandomCatGif();
+            break;
+          case 2:
+            getRandomStory();
+            break;
+          case 3:
+            console.log("TODO");
         }
       }
     };
@@ -70,8 +94,7 @@ const List = ({ list }) => {
       <h2>{list.listName}</h2>
       <h2>{list.groupListName}</h2>
       {taskDisplay}
-
-      {showCat && (
+      {showReward.cat && (
         <div className="cat-container">
           <button className="close-button" onClick={handleCloseCat}>
             X
@@ -83,9 +106,14 @@ const List = ({ list }) => {
           />
         </div>
       )}
+      {showReward.story && (
+        <div>
+          {story}
+          <button onClick={handleCloseStory}>X</button>
+        </div>
+      )}
     </div>
   );
 };
 
 export default List;
-
