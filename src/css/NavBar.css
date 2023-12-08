@@ -24,7 +24,19 @@
   }
 
   .title {
+    display: inline-flex;
+    flex-direction: row;
+    -ms-flex-align: center;
+    position: absolute;
     margin: 0px;
+    left: 46%
+  }
+
+  .userScore {
+    display: flex;
+    float: right;
+    margin-right: 5%;
+    margin-top: 8px
   }
 
   .sidebar {

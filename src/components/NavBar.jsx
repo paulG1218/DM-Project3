@@ -61,7 +61,7 @@ const NavBar = () => {
           <>
             <h1 className="title">Checkr</h1>
             <h2 className="userScore">
-              {username} : {score}
+              {username}'s Score : {score}
             </h2>
           </>
         ) : (

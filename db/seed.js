@@ -23,7 +23,7 @@ const user1 = await User.create({
     username: "Paul",
     isAdmin: true,
     password: "asdf",
-    score: 5,
+    score: 50,
     email: "paul@gooberville"
 })
 

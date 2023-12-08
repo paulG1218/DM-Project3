@@ -14,14 +14,20 @@ const Home = () => {
   if (!userId) {
     return (
       <div>
-        <h1>Welcome to Title</h1>
+        <h1>Welcome to Checkr</h1>
         <p>
           Where you are able to manage your personal and professional tasks all
-          in one place. Please{" "}
+          in one place.
+          <br />
+          Please{" "}
           <a className="loginLink" href="/login">
             Login
           </a>{" "}
-          to view your account
+          to view your account. If you don't have an account{" "}
+          <a className="loginLink" href="/registerNewUser">
+            Register Here
+          </a>
+          .
         </p>
       </div>
     );
