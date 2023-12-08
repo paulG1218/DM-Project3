@@ -13,6 +13,8 @@ const RegisterForm = ({ onRegisterUser }) => {
     setShowPassword(!showPassword);
   };
 
+  
+
   return (
     <form
       onSubmit={(e) => {
@@ -61,7 +63,7 @@ const RegisterForm = ({ onRegisterUser }) => {
         value={confirmPassword}
         onChange={(e) => setConfirmPassword(e.target.value.trim())}
       />
-      <button type="submit">Sign Up</button>
+      <button type="submit" id="submit">Sign Up</button>
     </form>
   );
 };

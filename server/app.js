@@ -26,6 +26,7 @@ app.get('/api/getUser', handlers.getUserProfileInfo)
 app.put('/api/editUser/:userId', handlers.editUserInfo)
 app.delete('/api/deleteUser', handlers.deleteUser)
 app.put('/api/addAdmin', handlers.addAdmin)
+app.post('/api/addTask', handlers.addTask)
 
 //list routes
 app.put('/api/checkTask', handlers.checkTask)

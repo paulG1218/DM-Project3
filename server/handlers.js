@@ -248,7 +248,23 @@ const handlers = {
         } else {
             res.json('failed')
         }
-    }
+    },
+
+
+    addTask: async(req,res)=> {
+        const {title,desc,difficulty,photo} = req.body
+
+        const newTask = await Task.create({
+            title: title,
+            desc: desc,
+            difficulty: difficulty,
+            photo: photo
+        })
+
+        res.json({
+            message: "Task made"
+        })
+}
 }
 
 export default handlers
