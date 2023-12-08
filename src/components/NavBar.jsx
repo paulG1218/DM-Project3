@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import "../css/NavBar.css";
 import { useSelector } from "react-redux";
 import { IoMdMenu } from "react-icons/io";
+import { GiCheckMark } from "react-icons/gi";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -72,7 +73,7 @@ const NavBar = () => {
       <div id="mySidebar" className="sidebar">
         <div className="sidebarHead">
           <a href="/" className="logo">
-            LOGO
+            <GiCheckMark />
           </a>
           <a
             href="javascript:void(0)"
