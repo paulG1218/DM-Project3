@@ -99,6 +99,14 @@ const handlers = {
             message: 'New user created',
             userId: newUser.userId
         })
+
+        const user = await User.findByPk({where: { userId: newUser.userId }})
+        req.session.user = seshUser
+
+        res.json({
+            message: 'New user logged in from register page',
+            newUser: seshUser
+        })
     },
 
     getUserProfileInfo: async (req, res) => {
