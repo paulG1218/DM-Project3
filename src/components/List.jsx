@@ -1,14 +1,14 @@
 import React from "react";
+import axios from "axios";
+import Task from "./Task.jsx";
 import "../css/List.css";
 
 const List = ({ tasks, list }) => {
+  
+
+
   const taskDisplay = tasks.map((task) => {
-    return (
-      <div className="taskRow">
-        <input type="checkbox" className="checkbox"></input>
-        <p className="task">{task.title}</p>
-      </div>
-    );
+    return <Task task={task}/>
   });
 
   return (

@@ -59,21 +59,21 @@ const task1 = await Task.create({
     desc: "i need to sweep the garadge",
     difficulty: 2,
     img: "https://media.istockphoto.com/id/178594527/photo/clean-garage.jpg?s=612x612&w=0&k=20&c=0pMNJ53-lcC2kiMgNJSyqsUZVThnDRksbHd751mzoUk=",
-    checked: true,
+    checked: false,
 })
 const task2 = await Task.create({
     title: "wipe counters",
     desc: "i need to wipe the counters",
     difficulty: 1,
     img: "https://media.istockphoto.com/id/178594527/photo/clean-garage.jpg?s=612x612&w=0&k=20&c=0pMNJ53-lcC2kiMgNJSyqsUZVThnDRksbHd751mzoUk=",
-    checked: true,
+    checked: false,
 })
 const task3 = await Task.create({
     title: "group task",
     desc: "the group needs to move construct the site",
     difficulty: 3,
     img: "https://media.istockphoto.com/id/178594527/photo/clean-garage.jpg?s=612x612&w=0&k=20&c=0pMNJ53-lcC2kiMgNJSyqsUZVThnDRksbHd751mzoUk=",
-    checked: true,
+    checked: false,
 })
 
 

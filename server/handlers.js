@@ -160,6 +160,27 @@ const handlers = {
         req.session.destroy()
         res.json("success")
     },
+
+    checkTask: async (req, res) => {
+        const {taskId} = req.body
+
+        const task = await Task.findOne({
+            where: {
+                taskId: taskId
+            }
+        })
+
+        if (task) {
+
+            await task.update({
+                checked: true
+            })
+            
+            res.json('checked')
+        } else {
+            res.json('failed')
+        }
+    }
 }
 
 export default handlers
