@@ -15,6 +15,9 @@ import Groups from "./pages/Groups";
 import Root from "./Root.jsx";
 import axios from "axios";
 import CatTesting from "./pages/catTesting.jsx";
+import AddTask from "./pages/addTask";
+
+
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<Root />}>
@@ -24,6 +27,8 @@ const router = createBrowserRouter(
       <Route path="/login" element={<Login />} />
 
       <Route path="/catTesting" element={<CatTesting/>} />
+
+      <Route path="/AddTask" element = {<AddTask/>}/>
         
       <Route
         path="/profile"

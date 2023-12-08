@@ -89,6 +89,7 @@ const NavBar = () => {
         )}
         <a href="#">Services</a>
         <a href="#">Clients</a>
+        <a href={"/AddTask"}>Add a Task</a>
         <a href="#">Contact</a>
 
         {userId && <a onClick={() => handleLogout()}>Logout</a>}
