@@ -5,6 +5,7 @@ const initialState = {
     username: null,
     email: null,
     groups: [],
+    score: null,
 }
 
 export const loginReducer = (state = initialState, action) => {
@@ -18,6 +19,7 @@ export const loginReducer = (state = initialState, action) => {
                 username: action.payload.username,
                 email: action.payload.email,
                 groups: action.payload.groups,
+                score: action.payload.score,
             };
         case "logout":
             return {

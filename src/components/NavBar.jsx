@@ -12,6 +12,7 @@ const NavBar = () => {
 
   const userId = useSelector((state) => state.login.userId);
   const username = useSelector((state) => state.login.username);
+  const score = useSelector((state) => state.login.score);
 
   const sessionCheck = async () => {
     await axios.get("/api/sessionCheck").then((res) => {
@@ -20,8 +21,6 @@ const NavBar = () => {
           type: "authenticated",
           payload: res.data,
         });
-        console.log(res.data.userId);
-        console.log(res.data.isAdmin);
       } else {
         console.log(res.data);
       }
@@ -31,13 +30,13 @@ const NavBar = () => {
   const handleLogout = async () => {
     const res = await axios.get("/api/logout");
     if (!res.data) {
-      return
+      return;
     }
     dispatch({
       type: "logout",
     });
     console.log("user logged out ");
-    navigate('/')
+    navigate("/");
   };
 
   useEffect(() => sessionCheck, [userId]);
@@ -58,7 +57,16 @@ const NavBar = () => {
             &#9776;
           </button>
         </div>
-        <h1 className="title">Title</h1>
+        {userId ? (
+          <>
+            <h1 className="title">Checkr</h1>
+            <h2 className="userScore">
+              {username}'s Score : {score}
+            </h2>
+          </>
+        ) : (
+          <h1 className="title">Checkr</h1>
+        )}
       </div>
 
       <div id="mySidebar" className="sidebar">
@@ -74,19 +82,17 @@ const NavBar = () => {
             &times;
           </a>
         </div>
-      {userId ?
-        <a href={`/profile`}>{username}</a>
-        : <a href="/login">Login</a>
-      }
-      <a href="#">Services</a>
-      <a href="#">Clients</a>
-      <a href="#">Contact</a>
+        {userId ? (
+          <a href={`/profile`}>{username}</a>
+        ) : (
+          <a href="/login">Login</a>
+        )}
+        <a href="#">Services</a>
+        <a href="#">Clients</a>
+        <a href="#">Contact</a>
 
-      {userId &&
-        <a onClick={() => handleLogout()}>Logout</a>
-      }
-
-    </div>
+        {userId && <a onClick={() => handleLogout()}>Logout</a>}
+      </div>
     </>
   );
 };

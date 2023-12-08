@@ -14,28 +14,28 @@ const groupList1 = await GroupList.create({
 const group1 = await Group.create({
     groupName: "kyles DryWall"
 })
-//seed a group memeber table
+//seed a group member table
 const groupMember1 = await GroupMember.create({
     score: 75,
 })
-// Seed a new User one with admin one withought
+// Seed a new User one with admin one without
 const user1 = await User.create({
-    username: "paul is a goober",
+    username: "Paul",
     isAdmin: true,
     password: "asdf",
-    score: 5,
+    score: 50,
     email: "paul@gooberville"
 })
 
 const user2 = await User.create({
-    username: "gabe",
+    username: "Gabe",
     isAdmin: false,
     password: "asdf",
     score: 25,
     email: "gabe@coolville"
 })
 const user3 = await User.create({
-    username: "jacob",
+    username: "Jacob",
     isAdmin: false,
     password: "asdf",
     score: 25,
@@ -56,21 +56,21 @@ const list2 = await List.create({
 //seed a new Task
 const task1 = await Task.create({
     title: "sweep garadge",
-    desc: "i need to sweep the garadge",
+    desc: "I need to sweep the garadge",
     difficulty: 2,
     img: "https://media.istockphoto.com/id/178594527/photo/clean-garage.jpg?s=612x612&w=0&k=20&c=0pMNJ53-lcC2kiMgNJSyqsUZVThnDRksbHd751mzoUk=",
     checked: false,
 })
 const task2 = await Task.create({
     title: "wipe counters",
-    desc: "i need to wipe the counters",
+    desc: "I need to wipe the counters",
     difficulty: 1,
     img: "https://media.istockphoto.com/id/178594527/photo/clean-garage.jpg?s=612x612&w=0&k=20&c=0pMNJ53-lcC2kiMgNJSyqsUZVThnDRksbHd751mzoUk=",
     checked: false,
 })
 const task3 = await Task.create({
     title: "group task",
-    desc: "the group needs to move construct the site",
+    desc: "the group needs to move the construction the site",
     difficulty: 3,
     img: "https://media.istockphoto.com/id/178594527/photo/clean-garage.jpg?s=612x612&w=0&k=20&c=0pMNJ53-lcC2kiMgNJSyqsUZVThnDRksbHd751mzoUk=",
     checked: false,
@@ -118,7 +118,7 @@ await group1.addGroupList(groupList1)
 // i want task 3 to belong to groupList1
 await groupList1.addTask(task3)
 
-//i want list to belong to reapet 1
+//i want list to belong to repeat 1
 await repeat1.addList(list1)
 
 //i want grouplist1 to belong to repeat 2

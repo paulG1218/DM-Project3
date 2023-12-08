@@ -45,7 +45,8 @@ const handlers = {
               username: user.username,
               lists: user.lists,
               email: user.email,
-              groups: user.groups
+              groups: user.groups,
+              score: user.score
             });
           } else {
             res.json("no user logged in");
@@ -132,6 +133,14 @@ const handlers = {
             message: 'New user created',
             userId: newUser.userId
         })
+
+        const user = await User.findByPk({where: { userId: newUser.userId }})
+        req.session.user = seshUser
+
+        res.json({
+            message: 'New user logged in from register page',
+            newUser: seshUser
+        })
     },
 
     getUserProfileInfo: async (req, res) => {
@@ -152,8 +161,6 @@ const handlers = {
     addAdmin: async (req, res) => {
         const { newAdmin } = req.body
 
-        console.log(newAdmin)
-
         const admin = await User.findOne({
             where: {
                 username: newAdmin
@@ -164,7 +171,7 @@ const handlers = {
             isAdmin: true
         })
 
-        res.send('User is now has admin status')
+        res.send('User now has admin status')
     },
   
     editUserInfo: async (req, res) => {

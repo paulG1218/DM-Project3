@@ -11,37 +11,36 @@ const Home = () => {
   const lists = useSelector((state) => state.login.lists);
   const groups = useSelector((state) => state.login.groups);
 
-  console.log(groups);
-
   if (!userId) {
     return (
 
       <div>
-        <h1>Welcome to Title</h1>
+        <h1>Welcome to Checkr</h1>
         <p>
           Where you are able to manage your personal and professional tasks all
-          in one place. Please{" "}
+          in one place.
+          <br />
+          Please{" "}
           <a className="loginLink" href="/login">
             Login
           </a>{" "}
-          to view your account
+          to view your account. If you don't have an account{" "}
+          <a className="loginLink" href="/registerNewUser">
+            Register Here
+          </a>
+          .
         </p>
       </div>
     );
   }
 
   const listDisplay = lists.map((list) => {
-    console.log(list.tasks);
     return <List key={list.listId} list={list} />;
   });
 
-  console.log(groups)
-
   const groupDisplay = groups.map((group) => {
-    return <Group key={group.groupId} lists={group.groupLists}/>
-  })
-
-  console.log(listDisplay);
+    return <Group key={group.groupId} lists={group.groupLists} />;
+  });
 
   return (
     <div className="dailyView">
@@ -50,7 +49,7 @@ const Home = () => {
         <h1>Lists</h1>
         {listDisplay}
       </div>
-      <div  className="listDisplay">
+      <div className="listDisplay">
         <h1>Groups</h1>
         {groupDisplay}
       </div>
