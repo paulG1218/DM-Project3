@@ -46,6 +46,11 @@ const List = ({ list }) => {
     const res = await axios.get("https://shortstories-api.onrender.com/");
     setStory(res.data.story);
     setShowReward({ ...showReward, story: true });
+
+    const audio = new Audio(
+      "http://sfxcontent.s3.amazonaws.com/soundfx/SlideWhistle.mp3"
+    );
+    audio.play();
   };
 
   const handleCloseStory = () => {
@@ -54,7 +59,6 @@ const List = ({ list }) => {
 
   const taskDisplay = tasks.map((task) => {
     const [checkState, setCheckState] = useState(task.checked);
-    console.log(showReward);
 
     const handleCheck = async (e, taskId) => {
       const res = await axios.put("/api/checkTask", { taskId: taskId });
@@ -107,7 +111,7 @@ const List = ({ list }) => {
         </div>
       )}
       {showReward.story && (
-        <div>
+        <div className="story">
           {story}
           <button onClick={handleCloseStory}>X</button>
         </div>
