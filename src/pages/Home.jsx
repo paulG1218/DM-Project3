@@ -47,10 +47,12 @@ const Home = () => {
       <h1 className="pageHeader">Daily View</h1>
       <div className="listDisplay">
         <h1>Lists</h1>
+        <hr className="homeLines"/>
         {listDisplay}
       </div>
       <div className="listDisplay">
         <h1>Groups</h1>
+        <hr className="homeLines"/>
         {groupDisplay}
       </div>
     </div>
