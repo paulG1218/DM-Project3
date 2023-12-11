@@ -1,0 +1,93 @@
+MVP 1
+
+File structure
+docs folder
+component hierarchy
+mvp's
+server folder
+app.js
+handlerFunctions.js
+db folder
+model.js
+db.js
+seed.js
+src folder
+Components folder
+AddTaskForm
+CreateListForm
+Group
+List
+Task
+LoginForm
+Navbar
+RegisterForm
+css folder
+Home
+List
+Login
+Navbar
+pages folder
+AddTask
+CatTesting
+Groups
+Home
+Login
+Profile
+RegisterNewUser
+redux folder
+reducer
+store
+App.css
+App.jsx
+index.css
+main.jsx
+Root.jsx
+game folder
+reward folder
+create db
+Group table
+Group List table
+Group member table
+Repeat table
+User Table
+Task Table
+List Table
+Home page
+Login
+Login Form
+Account page
+Daily view
+Groups
+
+- Add in our scripts into package.json - make sure everyone has all the same scripts and dependencies
+
+MVP 2
+
+GROUPS PAGE
+
+- join a group
+- current groups + scores
+- ability to leave a group
+- create a new group
+  --post request
+  -- new group form
+  EDIT LISTS
+  -put request
+  -handler function
+  -pencil emoji next to list names
+  -making the edit list form on List.jsx
+  -add task when editing
+  CREATE LISTS
+  -post request
+  -handler function
+  -add button next to List header
+  -make add list form
+  COLLAPSIBLE GROUPS/LISTS
+- add a "completed" dropdown at the bottom of each list
+  MISC
+  -Edit checkTask handler to update user score
+- do the cute little animation when you get points + confetti
+
+CALENDAR??
+
+- reevaluate Wednesday, December 13, 2023

@@ -1,0 +1,20 @@
+Main
+App
+Browser Router
+NavBar
+    Score
+Home
+    Lists
+        Tasks
+    Groups
+        Lists
+        Tasks
+Profile/Login
+    Register
+    LoginForm
+    Profile
+        Edit Profile
+Groups
+    Start a Group
+    Current Group
+    Join a Group
