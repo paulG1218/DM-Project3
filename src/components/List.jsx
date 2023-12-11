@@ -53,6 +53,10 @@ const List = ({ list }) => {
     audio.play();
   };
 
+  const getSnakeGame = () => {
+    navigate("/GameBoard")
+  }
+
   const handleCloseStory = () => {
     setShowReward({ ...showReward, story: false });
   };
@@ -77,11 +81,14 @@ const List = ({ list }) => {
           case 2:
             getRandomStory();
             break;
-          case 3:
+          case 3: 
+          getSnakeGame()
             console.log("TODO");
         }
       }
     };
+
+    
 
     return (
       <Task
@@ -116,6 +123,8 @@ const List = ({ list }) => {
           <button onClick={handleCloseStory}>X</button>
         </div>
       )}
+
+     
     </div>
   );
 };
