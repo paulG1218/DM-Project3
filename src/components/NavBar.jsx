@@ -76,7 +76,6 @@ const NavBar = () => {
             <GiCheckMark />
           </a>
           <a
-            href="javascript:void(0)"
             className="closebtn"
             onClick={() => closeNav()}
           >
@@ -88,7 +87,7 @@ const NavBar = () => {
         ) : (
           <a href="/login">Login</a>
         )}
-        <a href="#">Services</a>
+        <a href="/groups">Groups</a>
         <a href="#">Clients</a>
         <a href={"/AddTask"}>Add a Task</a>
         <a href="#">Contact</a>

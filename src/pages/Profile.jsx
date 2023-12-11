@@ -14,7 +14,7 @@ const Profile = () => {
     case "success":
       break;
     default:
-      window.location.href = "/login";
+      navigate("/login");
   }
 
   const [isEditing, setIsEditing] = useState(false);
