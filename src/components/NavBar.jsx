@@ -1,11 +1,12 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "../css/NavBar.css";
 import { useSelector } from "react-redux";
 import { IoMdMenu } from "react-icons/io";
 import { GiCheckMark } from "react-icons/gi";
 import axios from "axios";
-import { useDispatch } from "react-redux";
+import { useDispatch,  } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import Animation from "./Animation";
 
 const NavBar = () => {
   const dispatch = useDispatch();
@@ -14,6 +15,7 @@ const NavBar = () => {
   const userId = useSelector((state) => state.login.userId);
   const username = useSelector((state) => state.login.username);
   const score = useSelector((state) => state.login.score);
+  const [showAnimation, setShowAnimation] = useState(false);
 
   const sessionCheck = async () => {
     await axios.get("/api/sessionCheck").then((res) => {
@@ -49,6 +51,12 @@ const NavBar = () => {
   function closeNav() {
     document.getElementById("mySidebar").style.width = "0";
   }
+
+  const onCheckTask = async (taskId) => {
+    setShowAnimation(true);
+  };
+  const checkedTask = useSelector((state) => state.login.checkedTask);
+
 
   return (
     <>
@@ -94,6 +102,7 @@ const NavBar = () => {
         <a href="#">Contact</a>
 
         {userId && <a onClick={() => handleLogout()}>Logout</a>}
+        <Animation showAnimation={showAnimation} />
       </div>
     </>
   );

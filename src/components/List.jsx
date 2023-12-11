@@ -5,6 +5,7 @@ import axios from "axios";
 import Task from "./Task.jsx";
 import "../css/List.css";
 import { useNavigate } from "react-router-dom";
+import Animation from "./Animation.jsx";
 
 const List = ({ list }) => {
   const navigate = useNavigate();
@@ -12,12 +13,14 @@ const List = ({ list }) => {
 
   const [catImageUrl, setCatImageUrl] = useState(null);
   const [story, setStory] = useState("");
-
+  const [score, setScore] = useState(0);
   const [showReward, setShowReward] = useState({
     cat: false,
     story: false,
     game: false,
   });
+  const [showAnimation, setShowAnimation] = useState(false);
+  const [points, setPoints] = useState(0); // Local state for points
 
   const getRandomCatGif = async () => {
     try {
@@ -69,16 +72,20 @@ const List = ({ list }) => {
         task = res.data.task;
         setCheckState(true);
 
-        // Check if the task has difficulty level 1 before displaying cat image
         switch (task.difficulty) {
           case 1:
             getRandomCatGif();
+            setShowAnimation(true);
+            setPoints(points + 5); // Add 5 points for difficulty 1 tasks
             break;
           case 2:
             getRandomStory();
+            setPoints(points + 10); // Add 10 points for difficulty 2 tasks
             break;
           case 3:
             console.log("TODO");
+            // Update points for difficulty 3 tasks as needed
+            break;
         }
       }
     };
@@ -97,6 +104,8 @@ const List = ({ list }) => {
     <div className="list">
       <h2>{list.listName}</h2>
       <h2>{list.groupListName}</h2>
+      <p>Points: {points}</p> {/* Display the current points */}
+      <Animation showAnimation={showAnimation} />
       {taskDisplay}
       {showReward.cat && (
         <div className="cat-container">

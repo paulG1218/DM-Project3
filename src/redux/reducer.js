@@ -6,7 +6,8 @@ const initialState = {
     email: null,
     groups: [],
     score: null,
-}
+    checkedTask: null, // Add checkedTask to the initial state
+};
 
 export const loginReducer = (state = initialState, action) => {
     switch (action.type) {
@@ -32,9 +33,14 @@ export const loginReducer = (state = initialState, action) => {
                 ...state,
                 username: action.payload.username,
                 email: action.payload.email,
-                password: action.payload.password
-            }
+                password: action.payload.password,
+            };
+        case 'CHECK_TASK': // Add the case for checking a task
+            return {
+                ...state,
+                checkedTask: action.payload.taskId,
+            };
         default:
-            return state
+            return state;
     }
-}
+};
