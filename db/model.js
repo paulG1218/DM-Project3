@@ -44,6 +44,10 @@ GroupList.init(
     groupListName: {
         type: DataTypes.STRING,
         allowNull: false,
+    }, 
+    dueDate: {
+        type: DataTypes.DATE,
+        allowNull:false,
     }
 },
 {
