@@ -16,6 +16,7 @@ import Root from "./Root.jsx";
 import axios from "axios";
 import CatTesting from "./pages/catTesting.jsx";
 import AddTask from "./pages/addTask";
+import Board from "../Games/ReactGames/Board";
 
 
 const router = createBrowserRouter(
@@ -29,6 +30,8 @@ const router = createBrowserRouter(
       <Route path="/catTesting" element={<CatTesting/>} />
 
       <Route path="/AddTask" element = {<AddTask/>}/>
+
+      <Route path="/GameBoard" element = {<Board/>}/>
         
       <Route
         path="/profile"
