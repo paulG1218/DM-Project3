@@ -1,19 +1,43 @@
-import React from "react";
+import React, { useState } from "react";
 import { useSelector } from "react-redux";
-import axios from "axios";
-import { useLoaderData, NavLink } from "react-router-dom";
 import List from "../components/List.jsx";
 import Group from "../components/Group.jsx";
 import "../css/Home.css";
+import { FaPlus } from "react-icons/fa";
+import { CiViewList } from "react-icons/ci";
+import CreateListForm from "../components/CreateListForm.jsx";
+import CreateGroupListForm from "../components/CreateGroupListForm.jsx";
 
 const Home = () => {
   const userId = useSelector((state) => state.login.userId);
   const lists = useSelector((state) => state.login.lists);
   const groups = useSelector((state) => state.login.groups);
 
+  const [showForm, setShowForm] = useState(false);
+  const [showGroupForm, setShowGroupForm] = useState(false);
+
+  const toggleForm = () => {
+    setShowForm(!showForm);
+  };
+
+  const toggleGroupForm = () => {
+    setShowGroupForm(!showGroupForm);
+  };
+
+  const addList = async (e, FormData) => {
+    e.preventDefault();
+    setShowForm(false);
+    await axios.post("/api/addList", FormData);
+  };
+
+  const addGroupList = async (e, groupFormData) => {
+    e.preventDefault();
+    setShowGroupForm(false);
+    await axios.post("/api/addGroupList", groupFormData);
+  };
+
   if (!userId) {
     return (
-
       <div>
         <h1>Welcome to Checkr</h1>
         <p>
@@ -47,12 +71,22 @@ const Home = () => {
       <h1 className="pageHeader">Daily View</h1>
       <div className="listDisplay">
         <h1>Lists</h1>
-        <hr className="homeLines"/>
+        <button onClick={toggleForm}>
+          <FaPlus />
+          <CiViewList />
+          {showForm && <CreateListForm addList={addList} />}
+        </button>
+        <hr className="homeLines" />
         {listDisplay}
       </div>
       <div className="listDisplay">
-        <h1>Groups</h1>
-        <hr className="homeLines"/>
+        <h1>Group List's</h1>
+        <button onClick={toggleGroupForm}>
+          <FaPlus />
+          <CiViewList />
+          {showGroupForm && <CreateGroupListForm addGroupList={addGroupList} />}
+        </button>
+        <hr className="homeLines" />
         {groupDisplay}
       </div>
     </div>

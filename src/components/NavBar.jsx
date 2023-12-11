@@ -40,7 +40,7 @@ const NavBar = () => {
     navigate("/");
   };
 
-  useEffect(() => sessionCheck, [userId]);
+  useEffect(() => sessionCheck, []);
 
   function openNav() {
     document.getElementById("mySidebar").style.width = "250px";
@@ -89,6 +89,7 @@ const NavBar = () => {
         )}
         <a href="/groups">Groups</a>
         <a href="#">Clients</a>
+        <a href={"/AddTask"}>Add a Task</a>
         <a href="#">Contact</a>
 
         {userId && <a onClick={() => handleLogout()}>Logout</a>}
