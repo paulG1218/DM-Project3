@@ -251,8 +251,8 @@ const handlers = {
     },
 
 
-    addTask: async(req,res)=> {
-        const {title,desc,difficulty,photo} = req.body
+    addTask: async(req, res) => {
+        const {title, desc, difficulty, photo} = req.body
 
         const newTask = await Task.create({
             title: title,
@@ -264,7 +264,37 @@ const handlers = {
         res.json({
             message: "Task made"
         })
-}
+    },
+
+    addList: async(req, res) => {
+        const {listName, dueDate} = req.body 
+        const {userId} = req.session
+
+        const newList = await List.create({
+            listName: listName,
+            dueDate: dueDate,
+            userId: userId
+        })
+
+        res.json({
+            message: "List made"
+        })
+    },
+    
+    addGroupList: async(req, res) => {
+        const {groupListName, dueDate} = req.body 
+        const {userId} = req.session
+
+        const newGroupList = await GroupList.create({
+            groupListName: groupListName,
+            dueDate: dueDate,
+            userId: userId,
+        })
+
+        res.json({
+            message: "Group List made"
+        })
+    },
 }
 
 export default handlers
