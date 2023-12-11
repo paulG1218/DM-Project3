@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import axios from "axios";
 import { useLoaderData, NavLink } from "react-router-dom";
 import List from "../components/List.jsx";
-import { Group } from "../components/Group.jsx";
+import Group from "../components/Group.jsx";
 import "../css/Home.css";
 
 const Home = () => {
@@ -39,7 +39,7 @@ const Home = () => {
   });
 
   const groupDisplay = groups.map((group) => {
-    return <Group key={group.groupId} lists={group.groupLists} />;
+    return <Group key={group.groupId} group={group}/>;
   });
 
   return (

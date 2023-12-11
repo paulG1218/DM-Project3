@@ -39,6 +39,8 @@ const handlers = {
                 
             })
 
+            console.log(user)
+
             res.json({
               userId: user.userId,
               isAdmin: user.isAdmin,
@@ -48,6 +50,7 @@ const handlers = {
               groups: user.groups,
               score: user.score
             });
+            return
           } else {
             res.json("no user logged in");
           }
@@ -247,6 +250,45 @@ const handlers = {
             res.json({message: 'checked', task: task})
         } else {
             res.json('failed')
+        }
+    },
+
+    getGroup: async (req, res) => {
+        const {groupId} = req.params
+
+        const group = await Group.findOne({
+            where: {
+                groupId: groupId
+            },
+            include: [
+                {
+                    model: GroupList,
+                    include: [
+                        {
+                            model: Task,
+                        }
+                    ]
+                },
+                {
+                    model: GroupMember,
+                    include: [
+                        {
+                            model: User
+                        }
+                    ]
+                }
+            ]
+        })
+
+        const user = req.session.user
+
+        if (group && user) {
+            res.json({group: group, userId: user.userId})
+        } else {
+            res.json({group: {
+                groupLists: [],
+                groupMembers: []
+            }})
         }
     }
 }

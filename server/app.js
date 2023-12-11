@@ -30,6 +30,9 @@ app.put('/api/addAdmin', handlers.addAdmin)
 //list routes
 app.put('/api/checkTask', handlers.checkTask)
 
+//Group routes
+app.get('/api/getGroup/:groupId', handlers.getGroup)
+
 
 ViteExpress.listen(app, port, () =>
   console.log(`Server is listening on http://localhost:${port}`)
