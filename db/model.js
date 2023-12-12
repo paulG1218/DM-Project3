@@ -20,6 +20,10 @@ Group.init(
         groupName: {
             type: DataTypes.STRING,
             allowNull: false,
+        },
+        code: {
+            type: DataTypes.INTEGER,
+            allowNull: false
         }
     },
     {

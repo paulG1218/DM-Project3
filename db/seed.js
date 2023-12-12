@@ -13,7 +13,8 @@ const groupList1 = await GroupList.create({
 })
 // Seed a new group 
 const group1 = await Group.create({
-    groupName: "kyles DryWall"
+    groupName: "kyles DryWall",
+    code: 111111
 })
 //seed a group member table
 const groupMember1 = await GroupMember.create({
