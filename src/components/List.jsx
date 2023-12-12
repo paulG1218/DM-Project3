@@ -126,6 +126,7 @@ const List = ({ list }) => {
 
 
   return (
+    <div>
     <div className={`accordion-item ${isActive ? 'active' : ''}`}>
       <div className="accordion-header" onClick={toggleAccordion}>
         {list.listName ? list.listName : list.groupListName}
@@ -137,12 +138,12 @@ const List = ({ list }) => {
     </div>
 
     <div className="list">
-      <h2>{list.listName}</h2>
-      <h2>{list.groupListName}</h2>
+      {/* <h2>{list.listName}</h2>
+      <h2>{list.groupListName}</h2> */}
       <AnimationEasy showAnimation={showAnimation} />
       <AnimationMedium showAnimation2={showAnimation2} />
       <AnimationHard showAnimation3={showAnimation3} />
-      {taskDisplay}
+      {/* {taskDisplay} */}
       {showReward.cat && (
         <div className="cat-container">
           <button className="close-button" onClick={handleCloseCat}>
@@ -161,6 +162,7 @@ const List = ({ list }) => {
           <button onClick={handleCloseStory}>X</button>
         </div>
       )}
+     </div>
      </div>
   );
 };
