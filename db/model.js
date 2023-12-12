@@ -179,10 +179,6 @@ List.init(
         type: DataTypes.STRING,
         allowNull: false,
     },
-    isGroupList: {
-        type: DataTypes.BOOLEAN,
-        allowNull: false,
-    },
     dueDate: {
         type: DataTypes.DATE,
         allowNull: false,

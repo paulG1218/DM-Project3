@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import React, { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import List from "../components/List.jsx";
 import { Group } from "../components/Group.jsx";
 import "../css/Home.css";
@@ -7,27 +7,50 @@ import { FaPlus } from "react-icons/fa";
 import { CiViewList } from "react-icons/ci";
 import CreateListForm from "../components/CreateListForm.jsx";
 import CreateGroupListForm from "../components/CreateGroupListForm.jsx";
+import axios from "axios";
+import { useLoaderData, useNavigate } from "react-router-dom";
 
 const Home = () => {
   const userId = useSelector((state) => state.login.userId);
-  const lists = useSelector((state) => state.login.lists);
   const groups = useSelector((state) => state.login.groups);
+  const initialState = useSelector((state) => state.login.lists);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const [lists, setLists] = useState(initialState);
+
+  // "lists" was not getting updated once "initialState" got updated.
+  // On refresh, the Redux store was wiped, and before it could be repopulated with the promised return of the session check from Home.jsx, initialState grabbed the [] value from the default store initialState
+  // When Redux state updates, all components 'watching' with a useSelector (like this one)
+  // re-render with the new value, so locally here, 'initialState' became correct, however 'lists' stayed as []
+  // This useEffect's dependency array watches for changes to 'initialState' only, and so when initialState gets the correct data, useEffect runs, which updates 'lists'
+  useEffect(() => {
+    setLists(initialState);
+  }, [initialState]);
+
+  console.log("initial state: ", initialState);
+  console.log("lists: ", lists);
 
   const [showForm, setShowForm] = useState(false);
   const [showGroupForm, setShowGroupForm] = useState(false);
 
-  const toggleForm = () => {
+  const toggleForm = (e) => {
     setShowForm(!showForm);
   };
 
-  const toggleGroupForm = () => {
+  const toggleGroupForm = (e) => {
     setShowGroupForm(!showGroupForm);
   };
 
   const addList = async (e, FormData) => {
     e.preventDefault();
+    const res = await axios.post("/api/addList", FormData);
+    const newList = res.data.list;
+    console.log(newList);
+
+    setLists([...lists, newList]);
+
     setShowForm(false);
-    await axios.post("/api/addList", FormData);
   };
 
   const addGroupList = async (e, groupFormData) => {
@@ -71,21 +94,39 @@ const Home = () => {
       <h1 className="pageHeader">Daily View</h1>
       <div className="listDisplay">
         <h1>Lists</h1>
-        <button onClick={toggleForm}>
-          <FaPlus />
-          <CiViewList />
-          {showForm && <CreateListForm addList={addList} />}
-        </button>
+        {showForm ? (
+          <>
+            <button onClick={toggleForm}>
+              <FaPlus />
+              <CiViewList />
+            </button>
+            <CreateListForm addList={addList} />
+          </>
+        ) : (
+          <button onClick={toggleForm}>
+            <FaPlus />
+            <CiViewList />
+          </button>
+        )}
         <hr className="homeLines" />
         {listDisplay}
       </div>
       <div className="listDisplay">
         <h1>Group List's</h1>
-        <button onClick={toggleGroupForm}>
-          <FaPlus />
-          <CiViewList />
-          {showGroupForm && <CreateGroupListForm addGroupList={addGroupList} />}
-        </button>
+        {showGroupForm ? (
+          <>
+            <button onClick={toggleGroupForm}>
+              <FaPlus />
+              <CiViewList />
+            </button>
+            <CreateGroupListForm addList={addGroupList} />
+          </>
+        ) : (
+          <button onClick={toggleGroupForm}>
+            <FaPlus />
+            <CiViewList />
+          </button>
+        )}
         <hr className="homeLines" />
         {groupDisplay}
       </div>

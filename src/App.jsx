@@ -17,19 +17,14 @@ import axios from "axios";
 import CatTesting from "./pages/catTesting.jsx";
 import AddTask from "./pages/addTask";
 
-
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<Root />}>
       //every other route goes here
       <Route index element={<Home />} />
-
       <Route path="/login" element={<Login />} />
-
-      <Route path="/catTesting" element={<CatTesting/>} />
-
-      <Route path="/AddTask" element = {<AddTask/>}/>
-        
+      <Route path="/catTesting" element={<CatTesting />} />
+      <Route path="/AddTask" element={<AddTask />} />
       <Route
         path="/profile"
         element={<Profile />}
