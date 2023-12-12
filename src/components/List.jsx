@@ -1,5 +1,3 @@
-// List.jsx
-
 import React, { useState } from "react";
 import axios from "axios";
 import Task from "./Task.jsx";
@@ -54,8 +52,8 @@ const List = ({ list }) => {
   };
 
   const getSnakeGame = () => {
-    navigate("/GameBoard")
-  }
+    navigate("/GameBoard");
+  };
 
   const handleCloseStory = () => {
     setShowReward({ ...showReward, story: false });
@@ -81,14 +79,12 @@ const List = ({ list }) => {
           case 2:
             getRandomStory();
             break;
-          case 3: 
-          getSnakeGame()
+          case 3:
+            getSnakeGame();
             console.log("TODO");
         }
       }
     };
-
-    
 
     return (
       <Task
@@ -123,8 +119,6 @@ const List = ({ list }) => {
           <button onClick={handleCloseStory}>X</button>
         </div>
       )}
-
-     
     </div>
   );
 };

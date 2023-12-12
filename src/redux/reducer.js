@@ -6,6 +6,7 @@ const initialState = {
     email: null,
     groups: [],
     score: null,
+    groupLists: [],
 }
 
 export const loginReducer = (state = initialState, action) => {
