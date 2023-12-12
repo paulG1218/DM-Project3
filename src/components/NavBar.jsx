@@ -18,6 +18,7 @@ const NavBar = () => {
   const sessionCheck = async () => {
     await axios.get("/api/sessionCheck").then((res) => {
       if (res.data.userId) {
+        console.log(res.data);
         dispatch({
           type: "authenticated",
           payload: res.data,

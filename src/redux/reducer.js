@@ -33,7 +33,7 @@ export const loginReducer = (state = initialState, action) => {
                 username: action.payload.username,
                 email: action.payload.email,
                 password: action.payload.password
-            }
+            };
         default:
             return state
     }

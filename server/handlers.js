@@ -308,18 +308,30 @@ const handlers = {
     },
 
     addList: async(req, res) => {
-        const {listName, dueDate} = req.body 
-        const {userId} = req.session
+        if(req.session.user.userId) {
+            const { listName, dueDate } = req.body
+               const newList = await List.create({
+                listName: listName,
+                dueDate: dueDate,
+                userId: req.session.user.userId
+            })
 
-        const newList = await List.create({
-            listName: listName,
-            dueDate: dueDate,
-            userId: userId
-        })
-
-        res.json({
-            message: "List made"
-        })
+            const list = await List.findOne({
+                where: {
+                    listId: newList.listId
+                },
+                include: [
+                    {
+                        model: Task
+                    }
+                ]
+            })
+            res.json({
+                message: "List made",
+                list: list
+            })
+        } else { res.status(403).send('Not authorized to create a List')
+    }
     },
     
     addGroupList: async(req, res) => {
@@ -333,9 +345,22 @@ const handlers = {
         })
 
         res.json({
-            message: "Group List made"
+            message: "Group List made",
+            list: newGroupList
         })
     },
+
+    getLists: async (req, res) => {
+        const user = req.session.user
+        if(user){
+            const lists = List.findAll({
+                where: {
+                    userId: user.userId
+                }
+            })
+            res.json({ lists: lists })
+        } 
+    }
 }
 
 export default handlers

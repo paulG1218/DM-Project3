@@ -19,13 +19,16 @@ import GroupPage from "./pages/GroupPage.jsx";
 import AddTask from "./pages/addTask";
 import Board from "../Games/ReactGames/Board";
 
+
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<Root />}>
       //every other route goes here
       <Route index element={<Home />} />
-
       <Route path="/login" element={<Login />} />
+
+     
+
 
       <Route path="/catTesting" element={<CatTesting/>} />
 
@@ -33,6 +36,7 @@ const router = createBrowserRouter(
 
       <Route path="/GameBoard" element = {<Board/>}/>
         
+
       <Route
         path="/profile"
         element={<Profile />}
