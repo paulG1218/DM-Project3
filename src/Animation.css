@@ -1,0 +1,11 @@
+/* Animation.css */
+
+.animation-container {
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+    /* Adjust the duration and easing as needed */
+}
+
+.pop-up {
+    opacity: 1;
+}
