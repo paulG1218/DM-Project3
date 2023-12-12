@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import List from "../components/List.jsx";
-import { Group } from "../components/Group.jsx";
+import Group from "../components/Group.jsx";
 import "../css/Home.css";
 import { FaPlus } from "react-icons/fa";
 import { CiViewList } from "react-icons/ci";
@@ -86,7 +86,7 @@ const Home = () => {
   });
 
   const groupDisplay = groups.map((group) => {
-    return <Group key={group.groupId} lists={group.groupLists} />;
+    return <Group key={group.groupId} group={group}/>;
   });
 
   return (
