@@ -5,10 +5,15 @@ import axios from "axios";
 import Task from "./Task.jsx";
 import "../css/List.css";
 import { useNavigate } from "react-router-dom";
+
 import { AnimationEasy, AnimationMedium ,AnimationHard } from "./Animation.jsx";
 import { useSelector, useDispatch } from "react-redux";
 
+
 const List = ({ list }) => {
+
+  console.log(list)
+
   const navigate = useNavigate();
   const tasks = list.tasks;
 
@@ -62,8 +67,8 @@ const List = ({ list }) => {
   };
 
   const getSnakeGame = () => {
-    navigate("/GameBoard")
-  }
+    navigate("/GameBoard");
+  };
 
   const handleCloseStory = () => {
     setShowReward({ ...showReward, story: false });
@@ -92,8 +97,8 @@ const List = ({ list }) => {
             setShowAnimation2(true)
             dispatch({ type: 'updateScore', payload: { points: 10 } });
             break;
-          case 3: 
-          getSnakeGame()
+          case 3:
+            getSnakeGame();
             console.log("TODO");
             setShowAnimation3(true);
             dispatch({ type: 'updateScore', payload: { points: 20 } });
@@ -102,8 +107,6 @@ const List = ({ list }) => {
         console.log(state)
       }
     };
-
-    
 
     return (
       <Task
@@ -115,7 +118,24 @@ const List = ({ list }) => {
     );
   });
 
+  const [isActive, setIsActive] = useState(false);
+
+  const toggleAccordion = () => {
+    setIsActive(!isActive);
+  };
+
+
   return (
+    <div className={`accordion-item ${isActive ? 'active' : ''}`}>
+      <div className="accordion-header" onClick={toggleAccordion}>
+        {list.listName ? list.listName : list.groupListName}
+      </div>
+      <div className="accordion-body">
+        {/* Render your taskDisplay content here */}
+        {isActive && <div>{taskDisplay}</div>}
+      </div>
+    </div>
+
     <div className="list">
       <h2>{list.listName}</h2>
       <h2>{list.groupListName}</h2>
@@ -141,9 +161,7 @@ const List = ({ list }) => {
           <button onClick={handleCloseStory}>X</button>
         </div>
       )}
-
-     
-    </div>
+     </div>
   );
 };
 

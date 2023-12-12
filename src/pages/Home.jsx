@@ -9,6 +9,7 @@ import CreateListForm from "../components/CreateListForm.jsx";
 import CreateGroupListForm from "../components/CreateGroupListForm.jsx";
 import axios from "axios";
 import { useLoaderData, useNavigate } from "react-router-dom";
+import Accordion from 'react-bootstrap/Accordion';
 
 const Home = () => {
   const userId = useSelector((state) => state.login.userId);
@@ -18,6 +19,7 @@ const Home = () => {
   const navigate = useNavigate();
 
   const [lists, setLists] = useState(initialState);
+  console.log(lists)
 
   // "lists" was not getting updated once "initialState" got updated.
   // On refresh, the Redux store was wiped, and before it could be repopulated with the promised return of the session check from Home.jsx, initialState grabbed the [] value from the default store initialState
@@ -77,6 +79,7 @@ const Home = () => {
           </a>
           .
         </p>
+       
       </div>
     );
   }
