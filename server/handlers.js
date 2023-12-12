@@ -232,24 +232,65 @@ const handlers = {
         res.json("success")
     },
 
+    
     checkTask: async (req, res) => {
-        const {taskId} = req.body
+        const { taskId } = req.body;
+    
+        try {
+            const task = await Task.findOne({
+                where: {
+                    taskId: taskId
+                }
+            });
+    
+            if (task) {
+                await task.update({
+                    checked: true
+                });
 
-        const task = await Task.findOne({
-            where: {
-                taskId: taskId
+                const userSession = req.session.user
+
+                if (!userSession) {
+                    res.json("no user")
+                    return
+                }
+    
+                // Update the user's score based on task difficulty
+                const user = await User.findByPk(req.session.user.userId);
+    
+                if (user) {
+                    let pointsToAdd = 0;
+    
+                    switch (task.difficulty) {
+                        case 1:
+                            pointsToAdd = 10;
+                            break;
+                        case 2:
+                            pointsToAdd = 15;
+                            break;
+                        case 3:
+                            pointsToAdd = 20;
+                            break;
+                        // Add more cases for other difficulties if needed
+    
+                        default:
+                            // Handle other difficulties if needed
+                    }
+    
+                    await user.update({
+                        score: user.score + pointsToAdd
+                    });
+    
+                    res.json({ message: 'checked', task: task, pointsAdded: pointsToAdd, updatedUserScore: user.score });
+                } else {
+                    res.json({ message: 'failed', error: 'User not found' });
+                }
+            } else {
+                res.json({ message: 'failed', error: 'Task not found' });
             }
-        })
-
-        if (task) {
-
-            await task.update({
-                checked: true
-            })
-            
-            res.json({message: 'checked', task: task})
-        } else {
-            res.json('failed')
+        } catch (error) {
+            console.error('Error checking task:', error);
+            res.status(500).json({ message: 'failed', error: 'Internal Server Error' });
         }
     },
 
@@ -305,7 +346,9 @@ const handlers = {
         res.json({
             message: "Task made"
         })
-    },
+
+},
+
 
     addList: async(req, res) => {
         if(req.session.user.userId) {
@@ -361,6 +404,7 @@ const handlers = {
             res.json({ lists: lists })
         } 
     }
+
 }
 
 export default handlers
