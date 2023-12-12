@@ -7,6 +7,9 @@ import { FaPlus } from "react-icons/fa";
 import { CiViewList } from "react-icons/ci";
 import CreateListForm from "../components/CreateListForm.jsx";
 import axios from "axios";
+import { useLoaderData, useNavigate } from "react-router-dom";
+import Accordion from 'react-bootstrap/Accordion';
+
 
 const Home = () => {
   const userId = useSelector((state) => state.login.userId);
@@ -14,6 +17,7 @@ const Home = () => {
   const initialState = useSelector((state) => state.login.lists);
 
   const [lists, setLists] = useState(initialState);
+  console.log(lists)
 
   useEffect(() => {
     setLists(initialState);
@@ -53,6 +57,7 @@ const Home = () => {
           </a>
           .
         </p>
+       
       </div>
     );
   }
