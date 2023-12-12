@@ -1,25 +1,27 @@
 import React, { useState } from "react";
 
-const CreateListForm = ({ addList }) => {
-  const [listName, setListName] = useState("");
+const CreateGroupListForm = ({ addGroupList }) => {
+  const [groupListName, setGroupListName] = useState("");
   const [dueDate, setDueDate] = useState("");
 
   return (
     <>
       <form
         className="addList"
-        onSubmit={(e) => addList(e, { listName: listName, dueDate: dueDate })}
+        onSubmit={(e) =>
+          addGroupList(e, { groupListName: groupListName, dueDate: dueDate })
+        }
       >
         <input
           type="text"
-          value={listName}
-          placeholder="List Name"
-          onChange={(e) => setListName(e.target.value)}
+          defaultValue={groupListName}
+          placeholder="Group List Name"
+          onChange={(e) => setGroupListName(e.target.value)}
         />
         <br />
         <input
           type="date"
-          value={dueDate}
+          defaultValue={dueDate}
           placeholder="Due Date"
           onChange={(e) => setDueDate(e.target.value)}
         />
@@ -30,4 +32,4 @@ const CreateListForm = ({ addList }) => {
   );
 };
 
-export default CreateListForm;
+export default CreateGroupListForm;

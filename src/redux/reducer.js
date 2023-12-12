@@ -32,6 +32,7 @@ export const loginReducer = (state = initialState, action) => {
                 ...state,
                 username: action.payload.username,
                 email: action.payload.email,
+
                 password: action.payload.password,
             };
          case 'updateScore':
@@ -39,6 +40,7 @@ export const loginReducer = (state = initialState, action) => {
         ...state,
         score: state.score + action.payload.points,
              }
+
         default:
             return state;
     }

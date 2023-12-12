@@ -61,6 +61,10 @@ const List = ({ list }) => {
     audio.play();
   };
 
+  const getSnakeGame = () => {
+    navigate("/GameBoard")
+  }
+
   const handleCloseStory = () => {
     setShowReward({ ...showReward, story: false });
   };
@@ -88,7 +92,8 @@ const List = ({ list }) => {
             setShowAnimation2(true)
             dispatch({ type: 'updateScore', payload: { points: 10 } });
             break;
-          case 3:
+          case 3: 
+          getSnakeGame()
             console.log("TODO");
             setShowAnimation3(true);
             dispatch({ type: 'updateScore', payload: { points: 20 } });
@@ -97,6 +102,8 @@ const List = ({ list }) => {
         console.log(state)
       }
     };
+
+    
 
     return (
       <Task
@@ -134,6 +141,8 @@ const List = ({ list }) => {
           <button onClick={handleCloseStory}>X</button>
         </div>
       )}
+
+     
     </div>
   );
 };

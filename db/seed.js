@@ -9,6 +9,7 @@ console.log("Seeding database...");
 //seeding a group list
 const groupList1 = await GroupList.create({
     groupListName: "punch the wall",
+    dueDate: new Date('2023-12-24T12:24:00'),
 })
 // Seed a new group 
 const group1 = await Group.create({

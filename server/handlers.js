@@ -39,6 +39,8 @@ const handlers = {
                 
             })
 
+            console.log(user)
+
             res.json({
               userId: user.userId,
               isAdmin: user.isAdmin,
@@ -48,6 +50,7 @@ const handlers = {
               groups: user.groups,
               score: user.score
             });
+            return
           } else {
             res.json("no user logged in");
           }
@@ -291,9 +294,47 @@ const handlers = {
         }
     },
 
+    getGroup: async (req, res) => {
+        const {groupId} = req.params
 
-    addTask: async(req,res)=> {
-        const {title,desc,difficulty,photo} = req.body
+        const group = await Group.findOne({
+            where: {
+                groupId: groupId
+            },
+            include: [
+                {
+                    model: GroupList,
+                    include: [
+                        {
+                            model: Task,
+                        }
+                    ]
+                },
+                {
+                    model: GroupMember,
+                    include: [
+                        {
+                            model: User
+                        }
+                    ]
+                }
+            ]
+        })
+
+        const user = req.session.user
+
+        if (group && user) {
+            res.json({group: group, userId: user.userId})
+        } else {
+            res.json({group: {
+                groupLists: [],
+                groupMembers: []
+            }})
+        }
+    },
+
+    addTask: async(req, res) => {
+        const {title, desc, difficulty, photo} = req.body
 
         const newTask = await Task.create({
             title: title,
@@ -305,7 +346,66 @@ const handlers = {
         res.json({
             message: "Task made"
         })
+
 },
+
+    },
+
+    addList: async(req, res) => {
+        if(req.session.user.userId) {
+            const { listName, dueDate } = req.body
+               const newList = await List.create({
+                listName: listName,
+                dueDate: dueDate,
+                userId: req.session.user.userId
+            })
+
+            const list = await List.findOne({
+                where: {
+                    listId: newList.listId
+                },
+                include: [
+                    {
+                        model: Task
+                    }
+                ]
+            })
+            res.json({
+                message: "List made",
+                list: list
+            })
+        } else { res.status(403).send('Not authorized to create a List')
+    }
+    },
+    
+    addGroupList: async(req, res) => {
+        const {groupListName, dueDate} = req.body 
+        const {userId} = req.session
+
+        const newGroupList = await GroupList.create({
+            groupListName: groupListName,
+            dueDate: dueDate,
+            userId: userId,
+        })
+
+        res.json({
+            message: "Group List made",
+            list: newGroupList
+        })
+    },
+
+    getLists: async (req, res) => {
+        const user = req.session.user
+        if(user){
+            const lists = List.findAll({
+                where: {
+                    userId: user.userId
+                }
+            })
+            res.json({ lists: lists })
+        } 
+    }
+
 }
 
 export default handlers

@@ -1,13 +1,20 @@
 import React from "react";
 import List from "./List.jsx";
 
-export const Group = ({lists}) => {
+const Group = ({group}) => {
 
-  const listDisplay = lists.map((list) => 
+  const {groupName, groupLists, groupId} = group
+
+  const listDisplay = groupLists.map((list) => 
   <List key={list.groupListId} tasks={list.tasks} list={list} />
   )
 
   return <div>
+    <h1>
+      <a href={`/groups/${groupId}`}>{groupName}</a>
+    </h1>
     {listDisplay}
   </div>;
 };
+
+export default Group

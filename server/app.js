@@ -30,7 +30,13 @@ app.post('/api/addTask', handlers.addTask)
 
 //list routes
 app.put('/api/checkTask', handlers.checkTask)
-// app.put('/api/updatScore', handlers.updateScore)
+app.post('/api/addList', handlers.addList)
+app.post('/api/addGroupList', handlers.addGroupList)
+app.get('/api/getLists', handlers.getLists)
+
+//Group routes
+app.get('/api/getGroup/:groupId', handlers.getGroup)
+
 
 ViteExpress.listen(app, port, () =>
   console.log(`Server is listening on http://localhost:${port}`)
