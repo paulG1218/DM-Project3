@@ -349,7 +349,6 @@ const handlers = {
 
 },
 
-    },
 
     addList: async(req, res) => {
         if(req.session.user.userId) {
