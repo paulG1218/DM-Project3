@@ -6,6 +6,7 @@ const Task = ({ task, handleCheck, checkState }) => {
 
   return (
     <div className="taskRow">
+     
       <input
         type="checkbox"
         className="checkbox"

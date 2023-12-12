@@ -5,8 +5,14 @@ import axios from "axios";
 import Task from "./Task.jsx";
 import "../css/List.css";
 import { useNavigate } from "react-router-dom";
+import Accordion from "react-bootstrap/Accordion";
+// import 'bootstrap/dist/css/bootstrap.min.css';
+// import "../css/Bootstrap.css"
 
 const List = ({ list }) => {
+
+  console.log(list)
+
   const navigate = useNavigate();
   const tasks = list.tasks;
 
@@ -54,8 +60,8 @@ const List = ({ list }) => {
   };
 
   const getSnakeGame = () => {
-    navigate("/GameBoard")
-  }
+    navigate("/GameBoard");
+  };
 
   const handleCloseStory = () => {
     setShowReward({ ...showReward, story: false });
@@ -81,14 +87,12 @@ const List = ({ list }) => {
           case 2:
             getRandomStory();
             break;
-          case 3: 
-          getSnakeGame()
+          case 3:
+            getSnakeGame();
             console.log("TODO");
         }
       }
     };
-
-    
 
     return (
       <Task
@@ -100,11 +104,45 @@ const List = ({ list }) => {
     );
   });
 
+  const [isActive, setIsActive] = useState(false);
+
+  const toggleAccordion = () => {
+    setIsActive(!isActive);
+  };
+
+
   return (
-    <div className="list">
-      <h2>{list.listName}</h2>
-      <h2>{list.groupListName}</h2>
-      {taskDisplay}
+    <div className="Accordion" >
+      
+
+    {/* <Accordion defaultActiveKey="0"  className="Accordion">
+      <Accordion.Item eventKey="0">
+        {list.listName ? 
+        <Accordion.Header className="Accordion">{list.listName}</Accordion.Header> 
+        : 
+        <Accordion.Header className="Accordion">{list.groupListName}</Accordion.Header>
+        }
+        <Accordion.Body className="Accordion">
+        {taskDisplay}
+        </Accordion.Body>
+      </Accordion.Item>
+     
+    </Accordion> */}
+      
+
+    <div className={`accordion-item ${isActive ? 'active' : ''}`}>
+      <div className="accordion-header" onClick={toggleAccordion}>
+        {list.listName ? list.listName : list.groupListName}
+      </div>
+      <div className="accordion-body">
+        {/* Render your taskDisplay content here */}
+        {isActive && <div>{taskDisplay}</div>}
+      </div>
+    </div>
+
+
+      
+
       {showReward.cat && (
         <div className="cat-container">
           <button className="close-button" onClick={handleCloseCat}>
@@ -123,9 +161,7 @@ const List = ({ list }) => {
           <button onClick={handleCloseStory}>X</button>
         </div>
       )}
-
-     
-    </div>
+     </div>
   );
 };
 
