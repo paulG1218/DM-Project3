@@ -5,11 +5,16 @@ import axios from "axios";
 import Task from "./Task.jsx";
 import "../css/List.css";
 import { useNavigate } from "react-router-dom";
-import Animation from "./Animation.jsx";
+import { AnimationEasy, AnimationMedium ,AnimationHard } from "./Animation.jsx";
+import { useSelector, useDispatch } from "react-redux";
 
 const List = ({ list }) => {
   const navigate = useNavigate();
   const tasks = list.tasks;
+
+  const dispatch = useDispatch()
+
+  const state = useSelector((state) => state.login)
 
   const [catImageUrl, setCatImageUrl] = useState(null);
   const [story, setStory] = useState("");
@@ -20,8 +25,8 @@ const List = ({ list }) => {
     game: false,
   });
   const [showAnimation, setShowAnimation] = useState(false);
-  const [points, setPoints] = useState(0); // Local state for points
-
+  const [showAnimation2, setShowAnimation2] = useState(false);
+  const [showAnimation3, setShowAnimation3] = useState(false);
   const getRandomCatGif = async () => {
     try {
       const response = await axios.get(
@@ -76,17 +81,20 @@ const List = ({ list }) => {
           case 1:
             getRandomCatGif();
             setShowAnimation(true);
-            setPoints(points + 5); // Add 5 points for difficulty 1 tasks
+            dispatch({ type: 'updateScore', payload: { points: 5 } });
             break;
           case 2:
             getRandomStory();
-            setPoints(points + 10); // Add 10 points for difficulty 2 tasks
+            setShowAnimation2(true)
+            dispatch({ type: 'updateScore', payload: { points: 10 } });
             break;
           case 3:
             console.log("TODO");
-            // Update points for difficulty 3 tasks as needed
+            setShowAnimation3(true);
+            dispatch({ type: 'updateScore', payload: { points: 20 } });
             break;
         }
+        console.log(state)
       }
     };
 
@@ -104,8 +112,9 @@ const List = ({ list }) => {
     <div className="list">
       <h2>{list.listName}</h2>
       <h2>{list.groupListName}</h2>
-      <p>Points: {points}</p> {/* Display the current points */}
-      <Animation showAnimation={showAnimation} />
+      <AnimationEasy showAnimation={showAnimation} />
+      <AnimationMedium showAnimation2={showAnimation2} />
+      <AnimationHard showAnimation3={showAnimation3} />
       {taskDisplay}
       {showReward.cat && (
         <div className="cat-container">

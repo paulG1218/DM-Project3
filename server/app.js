@@ -30,7 +30,7 @@ app.post('/api/addTask', handlers.addTask)
 
 //list routes
 app.put('/api/checkTask', handlers.checkTask)
-
+// app.put('/api/updatScore', handlers.updateScore)
 
 ViteExpress.listen(app, port, () =>
   console.log(`Server is listening on http://localhost:${port}`)
