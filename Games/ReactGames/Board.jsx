@@ -1,9 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, } from "react";
 import {
   randomIntFromInterval,
   reverseLinkedList,
   useInterval,
 } from "./Utils.js";
+
+import { useNavigate } from "react-router-dom";
+
 
 import "./Board.css";
 
@@ -172,14 +175,29 @@ const Board = () => {
     setScore(score + 1);
   };
 
-  const handleGameOver = () => {
-    setScore(0);
-    const snakeLLStartingValue = getStartingSnakeLLValue(board);
-    setSnake(new LinkedList(snakeLLStartingValue));
-    setFoodCell(snakeLLStartingValue.cell + 5);
-    setSnakeCells(new Set([snakeLLStartingValue.cell]));
-    setDirection(Direction.RIGHT);
-  };
+  
+    const navigate = useNavigate();
+    const [gameOverCount, setGameOverCount] = useState(0);
+  
+    const handleGameOver = () => {
+      setScore(0);
+  
+      if (gameOverCount === 2) {
+        // Navigate to "/" when gameOverCount reaches 3
+        navigate("/");
+      } else {
+        const snakeLLStartingValue = getStartingSnakeLLValue(board);
+        setSnake(new LinkedList(snakeLLStartingValue));
+        setFoodCell(snakeLLStartingValue.cell + 5);
+        setSnakeCells(new Set([snakeLLStartingValue.cell]));
+        setDirection(Direction.RIGHT);
+  
+        // Increment the gameOverCount
+        setGameOverCount((prevCount) => prevCount + 1);
+      }
+    };
+  
+    
 
   return (
     <>
@@ -204,17 +222,33 @@ const Board = () => {
 };
 
 const createBoard = (BOARD_SIZE) => {
+  const navigate = useNavigate();
   let counter = 1;
   const board = [];
+  const [allowNavigation, setAllowNavigation] = useState(true);
+
   for (let row = 0; row < BOARD_SIZE; row++) {
     const currentRow = [];
+
     for (let col = 0; col < BOARD_SIZE; col++) {
       currentRow.push(counter++);
+
+      // Example navigation condition
+      if (counter === 10 && allowNavigation) {
+        // Use the navigate function here when the condition is met
+        navigate("/");
+        // Set allowNavigation to false to prevent further navigation
+        setAllowNavigation(false);
+      }
     }
+
     board.push(currentRow);
   }
+
   return board;
 };
+
+
 
 const getCoordsInDirection = (coords, direction) => {
   if (direction === Direction.UP) {
@@ -318,6 +352,8 @@ const getCellClassName = (
   if (snakeCells.has(cellValue)) className = "cell cell-green";
 
   return className;
+
+ 
 };
 
 export default Board;
