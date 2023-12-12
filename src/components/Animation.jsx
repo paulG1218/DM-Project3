@@ -12,7 +12,7 @@ export const AnimationEasy = ({ showAnimation }) => {
 
       const timeoutId = setTimeout(() => {
         setAnimationVisible(false);
-      }, 3000);
+      }, 1200);
 
       // Clear the timeout on component unmount
       return () => clearTimeout(timeoutId);
@@ -37,7 +37,7 @@ export const AnimationEasy = ({ showAnimation }) => {
   
         const timeoutId = setTimeout(() => {
           setAnimationVisible(false);
-        }, 3000);
+        }, 1200);
   
         // Clear the timeout on component unmount
         return () => clearTimeout(timeoutId);
@@ -61,7 +61,7 @@ export const AnimationEasy = ({ showAnimation }) => {
   
         const timeoutId = setTimeout(() => {
           setAnimationVisible(false);
-        }, 3000);
+        }, 1200);
   
         // Clear the timeout on component unmount
         return () => clearTimeout(timeoutId);
@@ -79,4 +79,7 @@ export const AnimationEasy = ({ showAnimation }) => {
   
 
 // export default {AnimationEasy, animationVisible, Animationhard};
+
+
+
 
