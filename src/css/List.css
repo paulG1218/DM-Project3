@@ -12,53 +12,43 @@
   margin-left: 20px;
 }
 
-/* .story {
-    
-} */
-
-.accordion {
+/* .accordion {
   background-color: #eee;
   color: #444;
   cursor: pointer;
   padding: 18px;
   width: 100%;
   text-align: left;
-  border: none;
-  outline: none;
   transition: 0.4s;
-}
+} */
 
 /* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
-.active,
 .accordion:hover {
-  background-color: #ccc;
+  color: #fc3571;
 }
 
 /* Style the accordion panel. Note: hidden by default */
 .panel {
   padding: 0 18px;
-  background-color: white;
+  background-color: rgba(255, 255, 255, 0.87);
   display: none;
   overflow: hidden;
 }
 
-.accordion-item {
+/* .accordion-item {
   border: 1px solid #fc3571;
   margin-bottom: 4px;
-}
+} */
 
 .accordion-header {
-  padding: 10px;
-  background-color: #333;
-  cursor: pointer;
-  user-select: none;
+  padding: 30px;
 }
 
-.accordion-body {
+/* .accordion-body {
   display: none;
   padding: 10px;
   background-color: #333;
-}
+} */
 
 .accordion-item.active .accordion-body {
   display: block;
