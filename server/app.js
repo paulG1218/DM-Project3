@@ -31,7 +31,7 @@ app.post('/api/addTask', handlers.addTask)
 //list routes
 app.put('/api/checkTask', handlers.checkTask)
 app.post('/api/addList', handlers.addList)
-app.post('/api/addGroupList', handlers.addGroupList)
+app.post('/api/addGroupList/:groupId', handlers.addGroupList)
 app.get('/api/getLists', handlers.getLists)
 
 //Group routes

@@ -1,6 +1,5 @@
 import { Group, GroupList, GroupMember, User, List, Repeat, Task} from '../db/model.js'
 import {Op} from "sequelize";
-import session from 'express-session';
 
 const handlers = {
 
@@ -38,8 +37,6 @@ const handlers = {
                 ]
                 
             })
-
-            console.log(user)
 
             res.json({
               userId: user.userId,
@@ -378,19 +375,32 @@ const handlers = {
     },
     
     addGroupList: async(req, res) => {
-        const {groupListName, dueDate} = req.body 
-        const {userId} = req.session
+        const userId = req.session.user.userId
+        const { groupId } = req.params
+        if(userId) {
+            const { groupListName, dueDate } = req.body 
 
         const newGroupList = await GroupList.create({
             groupListName: groupListName,
             dueDate: dueDate,
-            userId: userId,
+            userId: req.session.user.userId,
+            groupId: groupId
         })
-
+        const groupLists = await GroupList.findOne({
+            where: {
+                groupListId: newGroupList.groupListId
+            },
+            include: {
+                model: Task
+            }
+        })
         res.json({
             message: "Group List made",
-            list: newGroupList
+            groupLists: groupLists
         })
+        } else {
+            res.status(403).send('You must be the group owner to create a GroupList')  
+        }
     },
 
     getLists: async (req, res) => {

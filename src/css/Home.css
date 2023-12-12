@@ -1,6 +1,5 @@
 .listDisplay{
     border-style: solid;
-    border-color: white;
     border-radius: 9px; 
     width: 46vw;
     height: 100vh;
@@ -8,7 +7,6 @@
     border-color: #fc3571;
     margin-left: 2vw;
     float: left;
-
 }
 
 .lists {
@@ -20,10 +18,8 @@
 }
 
 .loginLink:hover {
-    color: pink;
+    color: #fc3571;
 }
-
-
 
 .pageHeader {
     width: 100vw;
@@ -32,3 +28,34 @@
 .homeLines {
     border-color: #fc3571;
 }
+
+.groupName:hover {
+    color: #fc3571;
+}
+
+.groupName {
+    color: rgba(255, 255, 255, 0.87);
+    text-decoration: none;
+    display: inline-flex;
+    float: left;
+    margin-left: 25%;
+}
+
+.addGroupListBtn {
+    display: inline-flex;
+    float: right;
+    margin-top: 15px;
+    margin-right: 10%;
+}  
+
+/* .listTitle {
+display: inline-flex;
+margin-left: 24%;
+}
+
+.addListBtn {
+display: inline-flex; 
+float: right;
+margin-top: 35px;
+margin-right: 15%;
+} */

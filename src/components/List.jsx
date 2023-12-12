@@ -1,5 +1,3 @@
-// List.jsx
-
 import React, { useState } from "react";
 import axios from "axios";
 import Task from "./Task.jsx";
@@ -162,8 +160,8 @@ const List = ({ list }) => {
           <button onClick={handleCloseStory}>X</button>
         </div>
       )}
-     </div>
-     </div>
+    </div>
+   </div>
   );
 };
 

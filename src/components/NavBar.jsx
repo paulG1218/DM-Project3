@@ -19,7 +19,6 @@ const NavBar = () => {
   const sessionCheck = async () => {
     await axios.get("/api/sessionCheck").then((res) => {
       if (res.data.userId) {
-        console.log(res.data);
         dispatch({
           type: "authenticated",
           payload: res.data,
@@ -76,10 +75,7 @@ const NavBar = () => {
           <a href="/" className="logo">
             <GiCheckMark />
           </a>
-          <a
-            className="closebtn"
-            onClick={() => closeNav()}
-          >
+          <a className="closebtn" onClick={() => closeNav()}>
             &times;
           </a>
         </div>

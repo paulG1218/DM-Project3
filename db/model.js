@@ -205,31 +205,31 @@ Repeat.init(
         },
         monday: {
             type: DataTypes. BOOLEAN,
-            allowNull: false,
+            // allowNull: false,
         },
         tuesday: {
             type: DataTypes. BOOLEAN,
-            allowNull: false,
+            // allowNull: false,
         },
         wednesday: {
             type: DataTypes. BOOLEAN,
-            allowNull: false,
+            // allowNull: false,
         },
         thursday: {
             type: DataTypes. BOOLEAN,
-            allowNull: false,
+            // allowNull: false,
         },
         friday: {
             type: DataTypes. BOOLEAN,
-            allowNull: false,
+            // allowNull: false,
         },
         saturday: {
             type: DataTypes. BOOLEAN,
-            allowNull: false,
+            // allowNull: false,
         },
         sunday: {
             type: DataTypes. BOOLEAN,
-            allowNull: false,
+            // allowNull: false,
         },
     },
     {
