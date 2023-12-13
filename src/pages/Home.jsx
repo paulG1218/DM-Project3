@@ -10,6 +10,7 @@ import axios from "axios";
 import { useLoaderData, useNavigate } from "react-router-dom";
 import Accordion from "react-bootstrap/Accordion";
 
+
 const Home = () => {
   const userId = useSelector((state) => state.login.userId);
   const groups = useSelector((state) => state.login.groups);
@@ -37,11 +38,14 @@ const Home = () => {
     setShowForm(false);
   };
 
+ 
+
   if (!userId) {
     return (
       <div>
-        <h1>Welcome to Checkr</h1>
-        <p>
+        <br />
+        <h1> Welcome to </h1>{""}<h1 className="Checkr">Checkr</h1>
+        {/* <p className="homep"> 
           Where you are able to manage your personal and professional tasks all
           in one place.
           <br />
@@ -52,9 +56,18 @@ const Home = () => {
           to view your account. If you don't have an account{" "}
           <a className="loginLink" href="/registerNewUser">
             Register Here
-          </a>
-          .
-        </p>
+          </a> */}
+
+          <h1>Make Task</h1>
+          <h1>Complete Task</h1>
+
+         <br></br>
+         
+          <a className="loginLinkHome" hover href="/login" >Login</a>
+          <br />
+          <a className="loginLinkHome" hover href="/registerNewUser">Register</a>
+          
+        {/* </p> */}
       </div>
     );
   }
