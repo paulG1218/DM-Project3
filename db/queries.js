@@ -2,42 +2,51 @@ import { Group, GroupList, GroupMember, User, List, Repeat, Task, db} from '../d
 
 const user = await User.findOne({
     where: {
-        userId: 1
+     userId: 2
     },
     include: [
-        {
-            model: List, 
+      {
+        model: List,
+        include: [
+          {
+            model: Task,
+          },
+        ],
+      },
+      {
+        model: Group,
+        include: [
+          {
+            model: GroupList,
             include: [
-                {
-                    model: Task,
-                }
-            ]
-        },
-        {
+              {
+                model: Task,
+              },
+            ],
+          },
+        ],
+      },
+       { 
+        model: GroupMember, 
+        include: [
+          {
             model: Group,
             include: [
-                {
-                    model: GroupList,
-                    include: [
-                        {
-                            model: Task,
-                        }
-                    ]
-                },
-                {
-                    model: GroupMember,
-                }
-            ]
-        }
-    ]
-    
-})
+              {
+                model: GroupList,
+                include: [
+                  {
+                    model: Task,
+                  },
+                ],
+              },
+            ],
+          }
+        ] 
+      },
+    ],
+  });
 
-const group1 = await Group.findByPk(
-    1, 
-    {include: {
-        model: GroupMember
-    }}
-)
+  console.log(user)
 
 await db.close()
