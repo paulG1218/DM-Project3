@@ -6,15 +6,19 @@ import { useNavigate } from "react-router-dom";
 
 import { AnimationEasy, AnimationMedium, AnimationHard } from "./Animation.jsx";
 import { useSelector, useDispatch } from "react-redux";
+import AddTaskForm from "./AddTaskForm.jsx";
 
-const List = ({ list }) => {
+const List = ({ list, ownerId }) => {
   const navigate = useNavigate();
-  const tasks = list.tasks;
 
+  console.log(list)
+  
   const dispatch = useDispatch();
 
-  const state = useSelector((state) => state.login);
+  const [tasks, setTasks] = useState(list.tasks)
 
+  const [checkStates, setCheckStates] = useState(tasks.map(task => task.checked));
+  
   const [catImageUrl, setCatImageUrl] = useState(null);
   const [story, setStory] = useState("");
   const [score, setScore] = useState(0);
@@ -26,6 +30,10 @@ const List = ({ list }) => {
   const [showAnimation, setShowAnimation] = useState(false);
   const [showAnimation2, setShowAnimation2] = useState(false);
   const [showAnimation3, setShowAnimation3] = useState(false);
+
+  const [isActive, setIsActive] = useState(false);
+  
+  const [showTaskForm, setShowTaskForm] = useState(false)
   const getRandomCatGif = async () => {
     try {
       const response = await axios.get(
@@ -68,17 +76,21 @@ const List = ({ list }) => {
     setShowReward({ ...showReward, story: false });
   };
 
-  const taskDisplay = tasks.map((task) => {
-    const [checkState, setCheckState] = useState(task.checked);
+  const taskDisplay = tasks.map((task, index) => {
 
     const handleCheck = async (e, taskId) => {
+
       const res = await axios.put("/api/checkTask", { taskId: taskId });
       if (res.data === "failed") {
         console.log("Failed to check task");
         return;
       } else {
         task = res.data.task;
-        setCheckState(true);
+        setCheckStates(prevCheckStates => {
+          const updatedCheckStates = [...prevCheckStates];
+          updatedCheckStates[index] = true;
+          return updatedCheckStates;
+        })
 
         switch (task.difficulty) {
           case 1:
@@ -106,12 +118,21 @@ const List = ({ list }) => {
         key={task.taskId}
         task={task}
         handleCheck={handleCheck}
-        checkState={checkState}
+        checkState={checkStates[index]}
       />
     );
   });
 
-  const [isActive, setIsActive] = useState(false);
+  const handleAddTask = async (e, formData) => {
+    e.preventDefault()
+
+    const res = await axios.post('/api/addTask', {...formData, listId: list.listid, groupListId: list.groupListId})
+    console.log(res.data)
+    setTasks(res.data.tasks)
+
+    setShowTaskForm(false)
+  }
+
 
   const toggleAccordion = () => {
     setIsActive(!isActive);
@@ -122,10 +143,15 @@ const List = ({ list }) => {
       <div className={`accordion-item ${isActive ? "active" : ""}`}>
         <div className="accordion-header" onClick={toggleAccordion}>
           {list.listName ? list.listName : list.groupListName}
+          <button className="addTaskButton" onClick={() => {
+            setShowTaskForm(true)
+            setIsActive(true)
+          }}>Add</button>
         </div>
         <div className="accordion-body">
           {/* Render your taskDisplay content here */}
           {isActive && <div>{taskDisplay}</div>}
+          {showTaskForm && <AddTaskForm handleAddTask={handleAddTask}/>}
         </div>
       </div>
 

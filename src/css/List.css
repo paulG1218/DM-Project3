@@ -53,3 +53,11 @@
 .accordion-item.active .accordion-body {
   display: block;
 }
+
+.addTaskButton {
+  float: right;
+  background-color: #fc3571;
+  border-radius: 7px;
+  border-color: #fc3571;
+  border-style: solid;
+}

@@ -7,7 +7,7 @@ import CreateGroupListForm from "./CreateGroupListForm.jsx";
 import axios from "axios";
 
 const Group = ({ group }) => {
-  const { groupName, groupLists, groupId } = group;
+  const { groupName, groupLists, groupId, userId } = group;
   const [groupListState, setGroupListState] = useState(groupLists);
 
   const [showGroupForm, setShowGroupForm] = useState(false);
@@ -27,7 +27,7 @@ const Group = ({ group }) => {
   };
 
   const listDisplay = groupListState.map((list) => {
-    return <List key={list.groupListId} tasks={list.tasks} list={list} />;
+    return <List key={list.groupListId} tasks={list.tasks} list={list} ownerId={userId}/>;
   });
 
   return (
