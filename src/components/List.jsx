@@ -114,6 +114,10 @@ const List = ({ list, ownerId }) => {
       }
     };
 
+
+
+    
+
     return (
       <Task
         key={task.taskId}
@@ -140,11 +144,26 @@ const List = ({ list, ownerId }) => {
     setIsActive(!isActive);
   };
 
+
+  const [isHovered, setHovered] = useState(false);
+
+  const handleMouseEnter = () => {
+    setHovered(true);
+  };
+
+  const handleMouseLeave = () => {
+    setHovered(false);
+  };
   return (
     <div>
       <div className={`accordion-item ${isActive ? "active" : ""}`}>
         <div className="accordion-header" >
-          <h2 className="listHeader" onClick={toggleAccordion}>
+          <h2 className="listHeader" onClick={toggleAccordion} onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+      style={{
+        
+        cursor: isHovered ? 'pointer' : 'default',
+      }} >
             {list.listName ? list.listName : list.groupListName}
             {isActive ? <TiArrowSortedUp className="dropArrow"/> : <TiArrowSortedDown className="dropArrow"/>}
           </h2>
