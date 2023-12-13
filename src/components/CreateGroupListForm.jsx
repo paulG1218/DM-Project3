@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const CreateGroupListForm = ({ addGroupList }) => {
+const CreateGroupListForm = ({ addGroupList, errorGroupMessage }) => {
   const [groupListName, setGroupListName] = useState("");
   const [dueDate, setDueDate] = useState("");
 
@@ -28,6 +28,9 @@ const CreateGroupListForm = ({ addGroupList }) => {
         <br />
         <button type="submit">Add</button>
       </form>
+      {errorGroupMessage && (
+        <div>Please fill out both fields.</div>
+      )}
     </>
   );
 };
