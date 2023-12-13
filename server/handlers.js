@@ -453,6 +453,54 @@ import {
         res.json({ message: "no user" });
       }
     },
+
+    addTask: async (req,res) => {
+        const {title, difficulty, listId, groupListId} = req.body
+        
+        const newTask = await Task.create({
+            title: title,
+            difficulty: difficulty
+        })
+
+        const list = await List.findByPk(listId)
+
+        if (list) {
+
+            console.log(list)
+    
+            await list.addTask(newTask)
+    
+            const updatedList = await List.findOne({
+                where: {
+                    listId: listId
+                },
+                include: [
+                  {
+                    model: Task,
+                  },
+                ]
+            })
+            res.json(updatedList)
+            
+        } else if (groupListId){
+            const groupList = await GroupList.findByPk(groupListId)
+
+            await groupList.addTask(newTask)
+
+            const updatedList = await GroupList.findOne({
+                where: {
+                    groupListId: groupListId
+                },
+                include: [
+                  {
+                    model: Task,
+                  },
+                ],
+            })
+            res.json(updatedList)
+        }
+
+    }
   };
   
   export default handlers;

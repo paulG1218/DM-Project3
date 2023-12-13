@@ -143,10 +143,6 @@ Task.init(
         type: DataTypes.STRING,
         allowNull: false,
     },
-    desc: {
-        type: DataTypes.TEXT,
-        allowNull: false,
-    },
     difficulty: {
         type: DataTypes.INTEGER,
         allowNull: false,

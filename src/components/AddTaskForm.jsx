@@ -1,52 +1,34 @@
 import React, { useState } from "react";
 
-const AddTaskForm = ({ addNewTask }) => {
+const AddTaskForm = ({handleAddTask}) => {
   const [title, setTitle] = useState("");
-  const [desc, setDesc] = useState("");
-  const [difficulty, setDifficulty] = useState("")
-  const [photo, setPhoto] = useState("")
+  const [difficulty, setDifficulty] = useState(1)
 
   return (
     <div>
-      AddTaskForm
       <form onSubmit={(e)=>{
-
-        addNewTask(e,{
+        handleAddTask(e,{
             title: title,
-            desc: desc,
             difficulty: difficulty,
-            photo: photo
-
         })
 
       }}>
     
         <input
-          placeholder="titleplaceholder"
+          placeholder="title"
           value={title}
           type="text"
           onChange={(e) => setTitle(e.target.value)}
         />
-        <input
-          placeholder="Desc"
-          value={desc}
-          type="text"
-          onChange={(e) => setDesc(e.target.value)}
-        />
-        <input 
-            placeholder="difficltly"
-            value={difficulty}
-            onChange={(e)=> setDifficulty(e.target.value)}
-        />
-        <input 
-            placeholder="photo"
-            value={photo}
-            onChange={(e)=> setPhoto(e.target.value)}
-        />
-      </form>
-      <button type="submit">
-        funny btn{" "}
+        <select value={difficulty} onChange={(e)=> setDifficulty(e.target.value)}>
+          <option value='1'>1</option>
+          <option value='2'>2</option>
+          <option value='3'>3</option>
+        </select>
+      <button type="submit" disabled={title === ''}>
+        Add task
       </button>
+      </form>
     </div>
   );
 };

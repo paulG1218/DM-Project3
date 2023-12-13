@@ -60,7 +60,7 @@ const Home = () => {
   }
 
   const listDisplay = lists.map((list) => {
-    return <List key={list.listId} list={list} />;
+    return <List key={list.listId} list={list} ownerId={userId}/>;
   });
 
   const groupDisplay = groups.map((group) => {
