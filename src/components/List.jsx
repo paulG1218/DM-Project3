@@ -143,10 +143,10 @@ const List = ({ list, ownerId }) => {
   return (
     <div>
       <div className={`accordion-item ${isActive ? "active" : ""}`}>
-        <div className="accordion-header" onClick={toggleAccordion}>
-          <h2>
+        <div className="accordion-header" >
+          <h2 className="listHeader" onClick={toggleAccordion}>
             {list.listName ? list.listName : list.groupListName}
-            {isActive ? <TiArrowSortedUp/> : <TiArrowSortedDown/>}
+            {isActive ? <TiArrowSortedUp className="dropArrow"/> : <TiArrowSortedDown className="dropArrow"/>}
           </h2>
           <div className="addTask">
             {isActive &&

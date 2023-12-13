@@ -5,6 +5,7 @@ import { CiViewList } from "react-icons/ci";
 import { useState } from "react";
 import CreateGroupListForm from "./CreateGroupListForm.jsx";
 import axios from "axios";
+import '../css/GroupComponent.css'
 
 const Group = ({ group }) => {
   const { groupName, groupLists, groupId, userId } = group;
@@ -44,25 +45,22 @@ const Group = ({ group }) => {
 
   return (
     <div>
-      <h1>
+      <h1 className="groupHeading">
         <a href={`/groups/${groupId}`} className="groupName">
           {groupName}
         </a>
+        <button onClick={toggleGroupForm} className="addGroupListBtn">
+            <FaPlus />
+            <CiViewList />
+        </button>
       </h1>
       {showGroupForm ? (
         <div className="addGroupList">
-          <button onClick={toggleGroupForm} className="addGroupListBtn">
-            <FaPlus />
-            <CiViewList />
-          </button>
           <CreateGroupListForm addGroupList={addGroupList} errorGroupMessage={errorGroupMessage} />
         </div>
       ) : (
         <div className="addGroupList">
-          <button onClick={toggleGroupForm} className="addGroupListBtn">
-            <FaPlus />
-            <CiViewList />
-          </button>
+          
         </div>
       )}
       <br />

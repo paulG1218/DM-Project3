@@ -35,12 +35,12 @@
     color: #fc3571;
 }
 
-.groupName {
+a.groupName {
     color: rgba(255, 255, 255, 0.87);
     text-decoration: none;
-    display: inline-flex;
     float: left;
-    margin-left: 25%;
+    margin-left: 2em;
+    flex: 5;
 }
 
 .addGroupList {
@@ -52,11 +52,20 @@
 
 .addGroupListBtn {
     background-color: #fc3571;
+    flex: 1;
     border-color: #fc3571;
     border-radius: 7px;
     border-style: solid;
     color: rgba(255, 255, 255, 0.87);
-    padding-bottom: 4px;
+    font-size: 0.4em;
+    padding-top: 4px;
+    padding-bottom: 8px;
+    margin-top: auto;
+    margin-bottom: auto;
+    float: right;
+    height: fit-content;
+    max-width: 48px;
+    margin-right: 2em;
 }
 
 .listTitle {
@@ -82,4 +91,8 @@ margin-right: 15%;
 
 .groupListTitles {
     margin-bottom: 24px;
+}
+
+h1.groupHeading {
+    display: flex;
 }
