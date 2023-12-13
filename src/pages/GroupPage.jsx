@@ -2,19 +2,22 @@ import React, { useEffect } from "react";
 import { useLoaderData } from "react-router-dom";
 import List from "../components/List.jsx";
 import { useNavigate } from "react-router-dom";
+import "../css/Groups.css";
 
 const GroupPage = () => {
-    
-    const { group, userId } = useLoaderData();
-    
-    const navigate = useNavigate();
+  const { group, userId } = useLoaderData();
 
-    useEffect(() => {
-        if (group.groupMembers.filter((mem) => mem.userId === userId).length <= 0 || !userId) {
-            navigate('/')
-          console.log(userId);
-        }
-      }, []);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (
+      group.groupMembers.filter((mem) => mem.userId === userId).length <= 0 ||
+      !userId
+    ) {
+      navigate("/");
+      console.log(userId);
+    }
+  }, []);
 
   const listDisplay = group.groupLists.map((list) => (
     <List key={list.groupListId} tasks={list.tasks} list={list} />
