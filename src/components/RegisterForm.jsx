@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 import "../css/Register.css";
 
@@ -13,6 +13,16 @@ const RegisterForm = ({ onRegisterUser }) => {
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
+
+  const focusUsername = () => {
+    setTimeout(() => {
+      document.getElementById("username").focus();
+    }, 0);
+  };
+
+  useEffect(() => {
+    focusUsername();
+  }, []);
 
   return (
     <form
@@ -33,10 +43,12 @@ const RegisterForm = ({ onRegisterUser }) => {
       }}
     >
       <input
+        id="username"
         className="username"
         placeholder="Username"
         value={username}
         onChange={(e) => setUsername(e.target.value.trim())}
+        maxLength={20}
       />
       <br />
       <input
@@ -44,6 +56,7 @@ const RegisterForm = ({ onRegisterUser }) => {
         placeholder="Email"
         value={email}
         onChange={(e) => setEmail(e.target.value.trim())}
+        maxLength={20}
       />
       <br />
       <input
@@ -52,6 +65,7 @@ const RegisterForm = ({ onRegisterUser }) => {
         type={showPassword ? "text" : "password"}
         value={password}
         onChange={(e) => setPassword(e.target.value.trim())}
+        maxLength={20}
       />
       <span onClick={togglePasswordVisibility}>
         {showPassword ? <FaRegEyeSlash /> : <FaRegEye />}
@@ -63,6 +77,7 @@ const RegisterForm = ({ onRegisterUser }) => {
         type={showPassword ? "text" : "password"}
         value={confirmPassword}
         onChange={(e) => setConfirmPassword(e.target.value.trim())}
+        maxLength={20}
       />
       <br />
       <button type="submit" id="submit" className="signUpBtn">
