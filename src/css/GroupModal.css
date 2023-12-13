@@ -49,8 +49,6 @@
   }
 
   .joinButton {
-    float: right;
-    margin-right: 1vw;
     width:15rem;
     height: 48px;
     font-size: 20px;
@@ -63,6 +61,7 @@ a.btn {
     background-color: #fc3571;
     color: white;
     font-weight: bold;
+    margin-top: 25px;
 }
 
 .joinGroupCodeBox {
@@ -97,12 +96,9 @@ a.btn {
     border-radius: 7px;
     border-color: #fc3571;
     border-style: solid;
-
-
 }
 
 #errorTxt {
     color: red;
     font-weight: bold;
 }
-

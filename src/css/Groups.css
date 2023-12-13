@@ -19,17 +19,10 @@
     border-width: 3px;
     border-color: #fc3571;
     margin-left: 2vw;
-    float: left;
-
+    float: center;
 }
 
-.joinButton {
-    float: right;
-    margin-right: 1vw;
-    width:15rem;
-    height: 48px;
-    font-size: 20px;
-    border-radius: 7px;
-    background-color: #fc3571;
-    border: #fc3571;
-}
+.pageTitle {
+    margin: 10px;
+    justify-content: center;
+  }
