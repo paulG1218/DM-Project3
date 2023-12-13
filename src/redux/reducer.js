@@ -7,6 +7,7 @@ const initialState = {
     groups: [],
     score: null,
     groupLists: [],
+    isMemberOf: [],
 };
 
 
@@ -22,6 +23,7 @@ export const loginReducer = (state = initialState, action) => {
                 email: action.payload.email,
                 groups: action.payload.groups,
                 score: action.payload.score,
+                isMemberOf: action.payload.groupMembers
             };
         case "logout":
             return {

@@ -1,12 +1,11 @@
 import RegisterForm from "../components/RegisterForm.jsx";
-import { useNavigate, NavLink } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 
 const RegisterNewUser = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const user = useSelector((state) => state.login.userId);
 
   const onRegisterUser = async (e, registerFormData) => {
     e.preventDefault();
@@ -22,7 +21,7 @@ const RegisterNewUser = () => {
 
   return (
     <div>
-      <h1>Register Today</h1>
+      <h1>Register Here</h1>
       <div>
         Already registered?{" "}
         <a href="/login" className="loginLink">

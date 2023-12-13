@@ -2,11 +2,9 @@
   font-family:  'Work Sans', 'Josefin Sans',  sans-serif;
   line-height: 1.5;
   font-weight: 400;
-
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
   background-color: #242424;
-
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -15,10 +13,10 @@
 
 body {
   font-family:  'Work Sans', 'Josefin Sans',  sans-serif;
-  margin: 0;
   display: flex;
   place-items: center;
   min-height: 100vh;
   color: rgba(255, 255, 255, 0.87);
   background-color: #242424;
+  overflow-x: hidden;
 }

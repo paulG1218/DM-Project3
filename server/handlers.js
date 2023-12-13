@@ -1,4 +1,4 @@
-import {
+  import {
     Group,
     GroupList,
     GroupMember,
@@ -36,10 +36,25 @@ import {
                     },
                   ],
                 },
-                {
-                  model: GroupMember,
-                },
               ],
+            },
+             { 
+              model: GroupMember, 
+              include: [
+                {
+                  model: Group,
+                  include: [
+                    {
+                      model: GroupList,
+                      include: [
+                        {
+                          model: Task,
+                        },
+                      ],
+                    },
+                  ],
+                }
+              ] 
             },
           ],
         });
@@ -437,8 +452,17 @@ import {
           where: {
             code: code,
           },
+          include: [
+            {
+              model: GroupMember
+            },
+          ]
         });
         if (group) {
+          if(group.groupMembers.filter(m => m.userId === user.userId).length > 0) {
+            res.json({ message: "already in"})
+            return
+          }
           const groupMember = await GroupMember.create({
             score: 0,
             userId: user.userId,

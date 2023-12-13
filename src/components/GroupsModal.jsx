@@ -44,6 +44,9 @@ const GroupsModal = ({ show, handleModal }) => {
         case 'no user':
             navigate('/')
             break;
+        case 'already in':
+            errorTxt.innerText = 'Already a member.'
+            break;
         default:
             errorTxt.innerText = 'Something went wrong'
             break;
