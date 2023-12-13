@@ -12,14 +12,13 @@ import AddTaskForm from "./AddTaskForm.jsx";
 
 const List = ({ list, ownerId }) => {
   const navigate = useNavigate();
-
-  console.log(list)
   
   const dispatch = useDispatch();
 
   const [tasks, setTasks] = useState(list.tasks)
 
-  const [checkStates, setCheckStates] = useState(tasks.map(task => task.checked));
+
+  const [checkStates, setCheckStates] = useState(tasks.map((task) => task.checked));
   
   const [catImageUrl, setCatImageUrl] = useState(null);
   const [story, setStory] = useState("");
@@ -127,10 +126,11 @@ const List = ({ list, ownerId }) => {
 
   const handleAddTask = async (e, formData) => {
     e.preventDefault()
-
-    const res = await axios.post('/api/addTask', {...formData, listId: list.listid, groupListId: list.groupListId})
+    console.log({when: 'start', list: list})
+    const res = await axios.post('/api/addTask', {...formData, listId: list.listId, groupListId: list.groupListId})
     console.log(res.data)
     setTasks(res.data.tasks)
+    console.log({data: res.data.tasks})
 
     setShowTaskForm(false)
   }
