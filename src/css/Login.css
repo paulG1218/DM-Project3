@@ -15,3 +15,20 @@
     color: rgba(255, 255, 255, 0.87);
     padding-bottom: 4px;
 }
+
+.loginLink {
+    font-family: 'Nova Square', sans-serif;
+    font-size: 20px;
+    color: white;
+    text-decoration: none;
+}
+
+.loginLink:hover {
+    color: #fc3571;
+    text-decoration: underline;
+}
+
+.welcome {
+    display: flex;
+    justify-content: center;
+}

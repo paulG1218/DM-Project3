@@ -13,16 +13,6 @@
     text-align: left;
 }
 
-.loginLink {
-    font-family: 'Nova Square', sans-serif;
-    font-size: 40px;
-    color: white;
-}
-
-.loginLink:hover {
-    color: #fc3571;
-}
-
 .pageHeader {
     width: 100vw;
     display: flex;

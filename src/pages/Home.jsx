@@ -10,7 +10,6 @@ import axios from "axios";
 import { useLoaderData, useNavigate } from "react-router-dom";
 import Accordion from "react-bootstrap/Accordion";
 
-
 const Home = () => {
   const userId = useSelector((state) => state.login.userId);
   const groups = useSelector((state) => state.login.groups);
@@ -37,7 +36,7 @@ const Home = () => {
 
   const addList = async (e, FormData) => {
     e.preventDefault();
-    if(!FormData.listName || !FormData.dueDate) {
+    if (!FormData.listName || !FormData.dueDate) {
       setErrorMessage(true);
       return;
     }
@@ -46,48 +45,38 @@ const Home = () => {
     const newList = res.data.list;
 
     setLists([...lists, newList]);
-    
+
     setErrorMessage(false);
 
     setShowForm(false);
   };
 
- 
-
   if (!userId) {
     return (
       <div>
         <br />
-        <h1> Welcome to </h1>{""}<h1 className="Checkr">Checkr</h1>
-        {/* <p className="homep"> 
+        <h1 className="welcome">
+          Welcome to{"\u00A0"}
+          <span className="Checkr">Checkr</span>
+        </h1>
+        <h3>
           Where you are able to manage your personal and professional tasks all
           in one place.
-          <br />
-          Please{" "}
-          <a className="loginLink" href="/login">
-            Login
-          </a>{" "}
-          to view your account. If you don't have an account{" "}
-          <a className="loginLink" href="/registerNewUser">
-            Register Here
-          </a> */}
-
-          <h1>Make Task</h1>
-          <h1>Complete Task</h1>
-
-         <br></br>
-         
-          <a className="loginLinkHome" hover href="/login" >Login</a>
-          <br />
-          <a className="loginLinkHome" hover href="/registerNewUser">Register</a>
-          
-        {/* </p> */}
+        </h3>
+        <br />
+        <a className="loginLinkHome" hover href="/login">
+          Login
+        </a>
+        <br />
+        <a className="loginLinkHome" hover href="/registerNewUser">
+          Register
+        </a>
       </div>
     );
   }
 
   const listDisplay = lists.map((list) => {
-    return <List key={list.listId} list={list} ownerId={userId}/>;
+    return <List key={list.listId} list={list} ownerId={userId} />;
   });
 
   const merge = (a, b, predicate = (a, b) => a === b) => {
@@ -117,7 +106,7 @@ const isMemberMap = isMemberOf.map((groupMember) => {
               <FaPlus />
               <CiViewList />
             </button>
-            <CreateListForm addList={addList} errorMessage={errorMessage}/>
+            <CreateListForm addList={addList} errorMessage={errorMessage} />
           </div>
         ) : (
           <div className="addList">
