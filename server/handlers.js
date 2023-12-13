@@ -67,6 +67,7 @@
           email: user.email,
           groups: user.groups,
           score: user.score,
+          groupMembers: user.groupMembers
         });
         return;
       } else {

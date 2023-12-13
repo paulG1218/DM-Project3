@@ -15,6 +15,9 @@ const Home = () => {
   const userId = useSelector((state) => state.login.userId);
   const groups = useSelector((state) => state.login.groups);
   const initialState = useSelector((state) => state.login.lists);
+  const isMemberOf = useSelector((state) => state.login.isMemberOf);
+
+  console.log(isMemberOf)
 
   const [lists, setLists] = useState(initialState);
   const [showForm, setShowForm] = useState(false);
@@ -87,9 +90,21 @@ const Home = () => {
     return <List key={list.listId} list={list} ownerId={userId}/>;
   });
 
-  const groupDisplay = groups.map((group) => {
-    return <Group key={group.groupId} group={group} />;
-  });
+  const merge = (a, b, predicate = (a, b) => a === b) => {
+    const c = [...a];
+    b.forEach((bItem) => (c.some((cItem) => predicate(bItem, cItem)) ? null : c.push(bItem)))
+    return c;
+}
+
+const groupMap = groups.map((group) => {
+  return <Group key={group.groupId} group={group} />;
+});
+
+const isMemberMap = isMemberOf.map((groupMember) => {
+  return <Group key={groupMember.groupId} group={groupMember.group} />;
+});
+
+  const groupDisplay = merge(groupMap, isMemberMap, (a, b) => a.props.groupId === b.props.groupId)
 
   return (
     <div className="dailyView">

@@ -47,6 +47,6 @@ const user = await User.findOne({
     ],
   });
 
-  console.log(user)
+  console.log(user.groupMembers)
 
 await db.close()
