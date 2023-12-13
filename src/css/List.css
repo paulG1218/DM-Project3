@@ -74,3 +74,8 @@ flex: 1;
 .accordion-body {
   display: none;
 }
+
+.dropArrow {
+  width: 1.5em;
+  height: 1.5em;
+}

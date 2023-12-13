@@ -480,10 +480,11 @@
 
     addTask: async (req,res) => {
         const {title, difficulty, listId, groupListId} = req.body
+        console.log(req.body)
         
         const newTask = await Task.create({
             title: title,
-            difficulty: difficulty
+            difficulty: +difficulty
         })
 
         const list = await List.findByPk(listId)
@@ -522,6 +523,8 @@
                 ],
             })
             res.json(updatedList)
+        } else {
+            res.json('failed')
         }
 
     }
