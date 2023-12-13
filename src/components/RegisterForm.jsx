@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
+import "../css/Register.css";
 
 const RegisterForm = ({ onRegisterUser }) => {
   const [username, setUsername] = useState("");
@@ -12,8 +13,6 @@ const RegisterForm = ({ onRegisterUser }) => {
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
-
-  
 
   return (
     <form
@@ -33,37 +32,42 @@ const RegisterForm = ({ onRegisterUser }) => {
         }
       }}
     >
-      <label>Username:</label>
       <input
+        className="username"
         placeholder="Username"
         value={username}
         onChange={(e) => setUsername(e.target.value.trim())}
       />
-      <label>Email:</label>
+      <br />
       <input
-        placeholder="Email:"
+        className="email"
+        placeholder="Email"
         value={email}
         onChange={(e) => setEmail(e.target.value.trim())}
       />
-      <label>Password:</label>
+      <br />
       <input
+        className="password"
         placeholder="Password"
         type={showPassword ? "text" : "password"}
         value={password}
         onChange={(e) => setPassword(e.target.value.trim())}
       />
-
       <span onClick={togglePasswordVisibility}>
         {showPassword ? <FaRegEyeSlash /> : <FaRegEye />}
       </span>
-      <label>Confirm Password:</label>
+      <br />
       <input
+        className="confirmPassword"
         placeholder="Confirm password"
         type={showPassword ? "text" : "password"}
         value={confirmPassword}
         onChange={(e) => setConfirmPassword(e.target.value.trim())}
       />
-      <button type="submit" id="submit">Sign Up</button>
+      <br />
+      <button type="submit" id="submit" className="signUpBtn">
+        Sign Up
+      </button>
     </form>
   );
 };

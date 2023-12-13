@@ -1,0 +1,17 @@
+#usernameOrEmail {
+    margin: 5px;
+}
+
+.password {
+    margin: 5px;
+    margin-left: 20px;
+}
+
+.loginBtn {
+    background-color: #fc3571;
+    border-color: #fc3571;
+    border-radius: 7px;
+    border-style: solid;
+    color: rgba(255, 255, 255, 0.87);
+    padding-bottom: 4px;
+}
