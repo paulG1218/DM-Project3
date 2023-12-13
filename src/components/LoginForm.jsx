@@ -12,6 +12,16 @@ const LoginForm = ({ onLogin }) => {
     setShowPassword(!showPassword);
   };
 
+  const handleUsernameChange = (e) => {
+    const removeSpace = e.target.value.replace(/\s/g, "").slice(0, 20);
+    setUsernameOrEmail(removeSpace);
+  };
+
+  const handlePasswordChange = (e) => {
+    const removeSpace = e.target.value.replace(/\s/g, "").slice(0, 20);
+    setPassword(removeSpace);
+  };
+
   const focusUsername = () => {
     setTimeout(() => {
       document.getElementById("usernameOrEmail").focus();
@@ -32,7 +42,8 @@ const LoginForm = ({ onLogin }) => {
         placeholder="Username or email"
         id="usernameOrEmail"
         value={usernameOrEmail}
-        onChange={(e) => setUsernameOrEmail(e.target.value)}
+        onChange={handleUsernameChange}
+        maxLength={20}
       />
       <br />
       <input
@@ -40,7 +51,8 @@ const LoginForm = ({ onLogin }) => {
         placeholder="Password"
         type={showPassword ? "text" : "password"}
         value={password}
-        onChange={(e) => setPassword(e.target.value)}
+        onChange={handlePasswordChange}
+        maxLength={20}
       />
       <span onClick={togglePasswordVisibility}>
         {showPassword ? <FaRegEyeSlash /> : <FaRegEye />}
