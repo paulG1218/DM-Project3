@@ -22,3 +22,14 @@
     float: left;
 
 }
+
+.joinButton {
+    float: right;
+    margin-right: 1vw;
+    width:15rem;
+    height: 48px;
+    font-size: 20px;
+    border-radius: 7px;
+    background-color: #fc3571;
+    border: #fc3571;
+}
