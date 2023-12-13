@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const CreateListForm = ({ addList }) => {
+const CreateListForm = ({ addList, errorMessage }) => {
   const [listName, setListName] = useState("");
   const [dueDate, setDueDate] = useState("");
 
@@ -26,6 +26,9 @@ const CreateListForm = ({ addList }) => {
         <br />
         <button type="submit">Add</button>
       </form>
+      {errorMessage && (
+        <div>Please fill out both fields.</div>
+      )}
     </>
   );
 };

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import List from "./List.jsx";
 import { FaPlus } from "react-icons/fa";
 import { CiViewList } from "react-icons/ci";
@@ -11,6 +11,11 @@ const Group = ({ group }) => {
   const [groupListState, setGroupListState] = useState(groupLists);
 
   const [showGroupForm, setShowGroupForm] = useState(false);
+  const [errorGroupMessage, setErrorGroupMessage] = useState(false);
+
+  useEffect(() => {
+    setErrorGroupMessage(false)
+  }, [showGroupForm]);
 
   const toggleGroupForm = (e) => {
     setShowGroupForm(!showGroupForm);
@@ -18,10 +23,17 @@ const Group = ({ group }) => {
 
   const addGroupList = async (e, groupFormData) => {
     e.preventDefault();
+    if(!groupFormData.groupListName || !groupFormData.dueDate) {
+      setErrorGroupMessage(true);
+      return;
+    }
+
     const res = await axios.post(`/api/addGroupList/${groupId}`, groupFormData);
     const newGroupList = res.data.groupLists;
 
     setGroupListState([...groupListState, newGroupList]);
+
+    setErrorGroupMessage(false);
 
     setShowGroupForm(false);
   };
@@ -43,7 +55,7 @@ const Group = ({ group }) => {
             <FaPlus />
             <CiViewList />
           </button>
-          <CreateGroupListForm addGroupList={addGroupList} />
+          <CreateGroupListForm addGroupList={addGroupList} errorGroupMessage={errorGroupMessage} />
         </div>
       ) : (
         <div className="addGroupListBtn">

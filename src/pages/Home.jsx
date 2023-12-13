@@ -16,12 +16,16 @@ const Home = () => {
   const initialState = useSelector((state) => state.login.lists);
 
   const [lists, setLists] = useState(initialState);
+  const [showForm, setShowForm] = useState(false);
+  const [errorMessage, setErrorMessage] = useState(false);
+
+  useEffect(() => {
+    setErrorMessage(false);
+  }, [showForm]);
 
   useEffect(() => {
     setLists(initialState);
   }, [initialState]);
-
-  const [showForm, setShowForm] = useState(false);
 
   const toggleForm = (e) => {
     setShowForm(!showForm);
@@ -29,10 +33,17 @@ const Home = () => {
 
   const addList = async (e, FormData) => {
     e.preventDefault();
+    if(!FormData.listName || !FormData.dueDate) {
+      setErrorMessage(true);
+      return;
+    }
+
     const res = await axios.post("/api/addList", FormData);
     const newList = res.data.list;
 
     setLists([...lists, newList]);
+    
+    setErrorMessage(false);
 
     setShowForm(false);
   };
@@ -78,7 +89,7 @@ const Home = () => {
               <FaPlus />
               <CiViewList />
             </button>
-            <CreateListForm addList={addList} />
+            <CreateListForm addList={addList} errorMessage={errorMessage}/>
           </div>
         ) : (
           <div className="addListBtn">

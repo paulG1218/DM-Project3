@@ -51,7 +51,7 @@ GroupList.init(
     }, 
     dueDate: {
         type: DataTypes.DATE,
-        allowNull:false,
+        allowNull: false,
     }
 },
 {
