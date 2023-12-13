@@ -22,7 +22,6 @@
   }
 
   .title {
-    /* display: inline-flex; */
     font-family: 'Nova Square', sans-serif;
     font-size: 40px;
     color: #fc3571;
@@ -88,10 +87,6 @@
     top: 50%;
     transform: translateY(-18%);
   }
-  
-  /* .openbtn:hover {
-    background-color: #444;
-  } */
 
   div.sidebarHead {
     display: flex;
