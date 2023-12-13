@@ -16,9 +16,15 @@ const CreateGroupListForm = ({ addGroupList }) => {
           type="text"
           defaultValue={groupListName}
           placeholder="Group List Name"
+          onChange={(e) => setGroupListName(e.target.value)}
         />
         <br />
-        <input type="date" defaultValue={dueDate} placeholder="Due Date" />
+        <input
+          type="date"
+          defaultValue={dueDate}
+          placeholder="Due Date"
+          onChange={(e) => setDueDate(e.target.value)}
+        />
         <br />
         <button type="submit">Add</button>
       </form>

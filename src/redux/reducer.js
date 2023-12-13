@@ -6,7 +6,9 @@ const initialState = {
     email: null,
     groups: [],
     score: null,
-}
+    groupLists: [],
+};
+
 
 export const loginReducer = (state = initialState, action) => {
     switch (action.type) {
@@ -32,9 +34,16 @@ export const loginReducer = (state = initialState, action) => {
                 ...state,
                 username: action.payload.username,
                 email: action.payload.email,
-                password: action.payload.password
-            }
+
+                password: action.payload.password,
+            };
+         case 'updateScore':
+             return {
+        ...state,
+        score: state.score + action.payload.points,
+             }
+
         default:
-            return state
+            return state;
     }
-}
+};

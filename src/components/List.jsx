@@ -1,24 +1,31 @@
-// List.jsx
-
 import React, { useState } from "react";
 import axios from "axios";
 import Task from "./Task.jsx";
 import "../css/List.css";
 import { useNavigate } from "react-router-dom";
 
+import { AnimationEasy, AnimationMedium, AnimationHard } from "./Animation.jsx";
+import { useSelector, useDispatch } from "react-redux";
+
 const List = ({ list }) => {
   const navigate = useNavigate();
   const tasks = list.tasks;
 
+  const dispatch = useDispatch();
+
+  const state = useSelector((state) => state.login);
+
   const [catImageUrl, setCatImageUrl] = useState(null);
   const [story, setStory] = useState("");
-
+  const [score, setScore] = useState(0);
   const [showReward, setShowReward] = useState({
     cat: false,
     story: false,
     game: false,
   });
-
+  const [showAnimation, setShowAnimation] = useState(false);
+  const [showAnimation2, setShowAnimation2] = useState(false);
+  const [showAnimation3, setShowAnimation3] = useState(false);
   const getRandomCatGif = async () => {
     try {
       const response = await axios.get(
@@ -53,6 +60,10 @@ const List = ({ list }) => {
     audio.play();
   };
 
+  const getSnakeGame = () => {
+    navigate("/GameBoard");
+  };
+
   const handleCloseStory = () => {
     setShowReward({ ...showReward, story: false });
   };
@@ -69,16 +80,23 @@ const List = ({ list }) => {
         task = res.data.task;
         setCheckState(true);
 
-        // Check if the task has difficulty level 1 before displaying cat image
         switch (task.difficulty) {
           case 1:
             getRandomCatGif();
+            setShowAnimation(true);
+            dispatch({ type: "updateScore", payload: { points: 5 } });
             break;
           case 2:
             getRandomStory();
+            setShowAnimation2(true);
+            dispatch({ type: "updateScore", payload: { points: 10 } });
             break;
           case 3:
+            getSnakeGame();
             console.log("TODO");
+            setShowAnimation3(true);
+            dispatch({ type: "updateScore", payload: { points: 20 } });
+            break;
         }
       }
     };
@@ -93,29 +111,47 @@ const List = ({ list }) => {
     );
   });
 
+  const [isActive, setIsActive] = useState(false);
+
+  const toggleAccordion = () => {
+    setIsActive(!isActive);
+  };
+
   return (
-    <div className="list">
-      <h2>{list.listName}</h2>
-      <h2>{list.groupListName}</h2>
-      {taskDisplay}
-      {showReward.cat && (
-        <div className="cat-container">
-          <button className="close-button" onClick={handleCloseCat}>
-            X
-          </button>
-          <img
-            src={catImageUrl}
-            alt="Random Cat GIF"
-            style={{ width: "300px", height: "200px" }}
-          />
+    <div>
+      <div className={`accordion-item ${isActive ? "active" : ""}`}>
+        <div className="accordion-header" onClick={toggleAccordion}>
+          {list.listName ? list.listName : list.groupListName}
         </div>
-      )}
-      {showReward.story && (
-        <div className="story">
-          {story}
-          <button onClick={handleCloseStory}>X</button>
+        <div className="accordion-body">
+          {/* Render your taskDisplay content here */}
+          {isActive && <div>{taskDisplay}</div>}
         </div>
-      )}
+      </div>
+
+      <div className="list">
+        <AnimationEasy showAnimation={showAnimation} />
+        <AnimationMedium showAnimation2={showAnimation2} />
+        <AnimationHard showAnimation3={showAnimation3} />
+        {showReward.cat && (
+          <div className="cat-container">
+            <button className="close-button" onClick={handleCloseCat}>
+              X
+            </button>
+            <img
+              src={catImageUrl}
+              alt="Random Cat GIF"
+              style={{ width: "300px", height: "200px" }}
+            />
+          </div>
+        )}
+        {showReward.story && (
+          <div className="story">
+            {story}
+            <button onClick={handleCloseStory}>X</button>
+          </div>
+        )}
+      </div>
     </div>
   );
 };
