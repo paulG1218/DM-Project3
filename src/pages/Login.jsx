@@ -2,6 +2,7 @@ import LoginForm from "../components/LoginForm.jsx";
 import { NavLink, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useDispatch } from "react-redux";
+import "../css/Login.css";
 
 const Login = () => {
   const navigate = useNavigate();
