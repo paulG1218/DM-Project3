@@ -1,16 +1,24 @@
 .board {
-    outline: 2px solid rgb(134, 154, 189);
+    outline: 3px solid rgb(134, 154, 189) !important;
+    right: 700px !important; 
+    
+    height: 525px !important;
+    float: flex;
+    position: absolute
   }
   
   .row {
-    height: 35px;
+    
+    height: 35px !important; 
   }
   
   .cell {
-    width: 35px;
-    height: 35px;
-    outline: 1px solid rgb(134, 154, 189);
-    display: inline-block;
+    
+    
+    width: 35px !important;
+    height: 35px !important;
+    outline: 1px solid rgb(134, 154, 189) !important;
+    display: inline-block !important;
   }
   
   .cell-green {

@@ -184,7 +184,7 @@ const Board = () => {
   
       if (gameOverCount === 2) {
         // Navigate to "/" when gameOverCount reaches 3
-        navigate("/");
+        // navigate("/");
       } else {
         const snakeLLStartingValue = getStartingSnakeLLValue(board);
         setSnake(new LinkedList(snakeLLStartingValue));
