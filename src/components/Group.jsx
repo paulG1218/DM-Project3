@@ -38,16 +38,16 @@ const Group = ({ group }) => {
         </a>
       </h1>
       {showGroupForm ? (
-        <div className="addGroupListBtn">
-          <button onClick={toggleGroupForm}>
+        <div className="addGroupList">
+          <button onClick={toggleGroupForm} className="addGroupListBtn">
             <FaPlus />
             <CiViewList />
           </button>
           <CreateGroupListForm addGroupList={addGroupList} />
         </div>
       ) : (
-        <div className="addGroupListBtn">
-          <button onClick={toggleGroupForm}>
+        <div className="addGroupList">
+          <button onClick={toggleGroupForm} className="addGroupListBtn">
             <FaPlus />
             <CiViewList />
           </button>

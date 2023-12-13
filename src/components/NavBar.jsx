@@ -4,9 +4,8 @@ import { useSelector } from "react-redux";
 import { IoMdMenu } from "react-icons/io";
 import { GiCheckMark } from "react-icons/gi";
 import axios from "axios";
-import { useDispatch,  } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-
 
 const NavBar = () => {
   const dispatch = useDispatch();
@@ -87,9 +86,11 @@ const NavBar = () => {
         <a href="/groups">Groups</a>
         <a href="#">Clients</a>
         <a href="#">Contact</a>
-        {userId && 
-          <a onClick={() => handleLogout()}>Logout</a>
-        }
+        {userId && (
+          <a onClick={() => handleLogout()} className="logout">
+            Logout
+          </a>
+        )}
       </div>
     </>
   );

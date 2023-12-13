@@ -73,16 +73,16 @@ const Home = () => {
       <div className="listDisplay">
         <h1 className="listTitle">Lists</h1>
         {showForm ? (
-          <div className="addListBtn">
-            <button onClick={toggleForm}>
+          <div className="addList">
+            <button onClick={toggleForm} className="addListBtn">
               <FaPlus />
               <CiViewList />
             </button>
             <CreateListForm addList={addList} />
           </div>
         ) : (
-          <div className="addListBtn">
-            <button onClick={toggleForm}>
+          <div className="addList">
+            <button onClick={toggleForm} className="addListBtn">
               <FaPlus />
               <CiViewList />
             </button>
