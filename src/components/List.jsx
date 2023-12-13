@@ -3,6 +3,8 @@ import axios from "axios";
 import Task from "./Task.jsx";
 import "../css/List.css";
 import { useNavigate } from "react-router-dom";
+import { TiArrowSortedDown } from "react-icons/ti";
+import { TiArrowSortedUp } from "react-icons/ti";
 
 import { AnimationEasy, AnimationMedium, AnimationHard } from "./Animation.jsx";
 import { useSelector, useDispatch } from "react-redux";
@@ -142,15 +144,21 @@ const List = ({ list, ownerId }) => {
     <div>
       <div className={`accordion-item ${isActive ? "active" : ""}`}>
         <div className="accordion-header" onClick={toggleAccordion}>
-          {list.listName ? list.listName : list.groupListName}
-          <button className="addTaskButton" onClick={() => {
-            setShowTaskForm(true)
-            setIsActive(true)
-          }}>Add</button>
+          <h2>
+            {list.listName ? list.listName : list.groupListName}
+            {isActive ? <TiArrowSortedUp/> : <TiArrowSortedDown/>}
+          </h2>
+          <div className="addTask">
+            {isActive &&
+              <button className="addTaskButton" onClick={() => {
+                setShowTaskForm(true) 
+              }}>Add</button>
+            }
+          </div>
         </div>
         <div className="accordion-body">
           {/* Render your taskDisplay content here */}
-          {isActive && <div>{taskDisplay}</div>}
+          {isActive && <div className="checklist-display">{taskDisplay}</div>}
           {showTaskForm && <AddTaskForm handleAddTask={handleAddTask}/>}
         </div>
       </div>

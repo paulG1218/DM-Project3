@@ -41,23 +41,36 @@
 } */
 
 .accordion-header {
+  display: flex;
+  align-items: center;
   padding: 30px;
 }
 
-/* .accordion-body {
-  display: none;
-  padding: 10px;
-  background-color: #333;
-} */
-
 .accordion-item.active .accordion-body {
-  display: block;
+  display: flex;
+  flex-direction: column;
+}
+
+.accordion-item {
+  display: flex;
+  flex-direction: column;
 }
 
 .addTaskButton {
-  float: right;
   background-color: #fc3571;
   border-radius: 7px;
   border-color: #fc3571;
   border-style: solid;
+  float: right;
+}
+
+.addTask {
+float: right;
+margin-top: auto;
+margin-bottom: auto;
+flex: 1;
+}
+
+.accordion-body {
+  display: none;
 }
