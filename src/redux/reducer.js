@@ -27,9 +27,7 @@ export const loginReducer = (state = initialState, action) => {
             };
         case "logout":
             return {
-                ...state,
-                userId: null,
-                isAdmin: false,
+                initialState
             };
         case 'userChange':
             return {
