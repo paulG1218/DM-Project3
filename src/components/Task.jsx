@@ -3,6 +3,15 @@ import axios from "axios";
 
 const Task = ({ task, handleCheck, checkState }) => {
   const { title, taskId } = task;
+  const [isHovered, setHovered] = useState(false);
+
+  const handleMouseEnter = () => {
+    setHovered(true);
+  };
+
+  const handleMouseLeave = () => {
+    setHovered(false);
+  };
 
   return (
     <div className="taskRow">
@@ -14,6 +23,12 @@ const Task = ({ task, handleCheck, checkState }) => {
         disabled={checkState}
         checked={checkState}
         readOnly={checkState}
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
+        style={{
+          cursor: isHovered ? "pointer" : "default",
+        }}
+
         onChange={(e) => handleCheck(e, taskId)}
       ></input>
       <p className="task">{title}</p>
