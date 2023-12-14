@@ -47,10 +47,15 @@ export const loginReducer = (state = initialState, action) => {
                 password: action.payload.password,
             };
          case 'updateScore':
-             return {
-        ...state,
-        score: state.score + action.payload.points,
-             }
+            return {
+                ...state,
+                score: state.score + action.payload.points,
+            };
+        case 'leave_group':
+            return {
+                ...state,
+                isMemberOf: action.payload.groupMembers,
+            }
 
         default:
             return state;

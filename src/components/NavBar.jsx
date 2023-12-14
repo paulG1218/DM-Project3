@@ -76,7 +76,7 @@ const NavBar = () => {
             </h2>
           </>
         ) : (
-          <h1 className="title">Checkr</h1>
+          <h1 className="title">Checkr </h1>
         )}
       </div>
 
