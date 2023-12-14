@@ -17,11 +17,7 @@ const List = ({ list, ownerId }) => {
 
   const [tasks, setTasks] = useState(list.tasks.filter((task) => !task.checked))
 
-  console.log (tasks)
-
   const [completedTasks, setCompleteTasks] = useState(list.tasks.filter((task) => task.checked))
-
-  console.log(completedTasks)
 
 
   const [checkStates, setCheckStates] = useState(tasks.map((task) => task.checked));
@@ -219,8 +215,6 @@ const List = ({ list, ownerId }) => {
                     {completedTaskDisplay}
                   </div>
                 }
-
-
             </div>
           } 
         </div>  
