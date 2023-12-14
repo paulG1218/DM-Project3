@@ -15,6 +15,7 @@ const CreateGroupListForm = ({ addGroupList, errorGroupMessage }) => {
         <input
           type="text"
           defaultValue={groupListName}
+          className="listName"
           placeholder="Group List Name"
           onChange={(e) => setGroupListName(e.target.value)}
         />
@@ -22,15 +23,15 @@ const CreateGroupListForm = ({ addGroupList, errorGroupMessage }) => {
         <input
           type="date"
           defaultValue={dueDate}
-          placeholder="Due Date"
+          className="dueDate"
           onChange={(e) => setDueDate(e.target.value)}
         />
         <br />
-        <button type="submit">Add</button>
+        <button type="submit" className="addBtn">
+          Add
+        </button>
       </form>
-      {errorGroupMessage && (
-        <div>Please fill out both fields.</div>
-      )}
+      {errorGroupMessage && <div>Please fill out both fields.</div>}
     </>
   );
 };

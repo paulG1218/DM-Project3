@@ -23,6 +23,7 @@
     border: solid #fc3571;
     border-width: 1px;
     opacity: 1;
+    margin-top: 0;
 }
 
 .groupName:hover {
@@ -63,8 +64,10 @@ a.groupName {
 }
 
 .listTitle {
-    display: inline-flex;
-    margin-left: 25%;
+display: inline-flex;
+margin-left: 25%;
+margin-top: auto;
+margin-bottom: auto;
 }
 
 .addList {
@@ -81,6 +84,16 @@ a.groupName {
     border-style: solid;
     color: rgba(255, 255, 255, 0.87);
     padding-bottom: 4px;
+    margin-left: 10%;
+    height: fit-content;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.listHeader {
+    display: flex;
+    justify-content: center;
+    margin-top: 15px;
 }
 
 .editButton,
@@ -98,6 +111,7 @@ a.groupName {
 
 .groupListTitles {
     margin-bottom: 24px;
+    margin-top: 13px;
 }
 
 h1.groupHeading {

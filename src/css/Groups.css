@@ -27,6 +27,11 @@
     justify-content: center;
   }
 
+
+  .addGroupLBtn {
+    
+  }
+
 .leaveGroupBtn {
     width: 11rem;
     height: 48px;
@@ -36,3 +41,4 @@
     border: #fc3571;
     color: white;
 }
+
