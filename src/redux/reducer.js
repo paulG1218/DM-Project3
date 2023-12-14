@@ -27,7 +27,16 @@ export const loginReducer = (state = initialState, action) => {
             };
         case "logout":
             return {
-                initialState
+                ...state,
+                userId: null,
+                lists: [],
+                isAdmin: false,
+                username: null,
+                email: null,
+                groups: [],
+                score: null,
+                groupLists: [],
+                isMemberOf: [],
             };
         case 'userChange':
             return {

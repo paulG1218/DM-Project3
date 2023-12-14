@@ -1,8 +1,8 @@
-.listDisplay{
+.listDisplay {
     border-style: solid;
-    border-radius: 9px; 
+    border-radius: 9px;
     width: 45vw;
-    height: 100vh;
+    min-height: 100vh;
     border-width: 3px;
     border-color: #fc3571;
     margin-left: 48px;
@@ -42,7 +42,7 @@ a.groupName {
     float: right;
     margin-top: 12px;
     margin-right: 10%;
-}  
+}
 
 .addGroupListBtn {
     background-color: #fc3571;
@@ -63,15 +63,15 @@ a.groupName {
 }
 
 .listTitle {
-display: inline-flex;
-margin-left: 25%;
+    display: inline-flex;
+    margin-left: 25%;
 }
 
 .addList {
-display: inline-flex; 
-float: right;
-margin-top: 13px;
-margin-right: 15%;
+    display: inline-flex;
+    float: right;
+    margin-top: 13px;
+    margin-right: 15%;
 }
 
 .addListBtn {
@@ -83,6 +83,19 @@ margin-right: 15%;
     padding-bottom: 4px;
 }
 
+.editButton,
+.deleteButton,
+.saveButton,
+.cancelButton {
+    background-color: #fc3571;
+    border-color: #fc3571;
+    border-radius: 7px;
+    border-style: solid;
+    color: rgba(255, 255, 255, 0.87);
+    float: right;
+    margin-left: 0.7rem;
+}
+
 .groupListTitles {
     margin-bottom: 24px;
 }
@@ -91,23 +104,23 @@ h1.groupHeading {
     display: flex;
 }
 
-.Checkr{
+.Checkr {
     color: #fc3571;
     font-family: 'Nova Square', sans-serif;
 }
 
-.homep{
-text-size-adjust: 20px;
+.homep {
+    text-size-adjust: 20px;
 }
 
-.loginLinkHome{
+.loginLinkHome {
     color: white;
     font-family: 'Nova Square', sans-serif;
     font-size: 40px;
-   text-decoration: none;
+    text-decoration: none;
 }
 
-.loginLinkHome:hover{
+.loginLinkHome:hover {
     color: #fc3571;
     font-family: 'Nova Square', sans-serif;
     font-size: 40px;

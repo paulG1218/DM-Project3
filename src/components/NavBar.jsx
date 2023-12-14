@@ -11,12 +11,9 @@ const NavBar = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const userId = useSelector((state) => state.login.userId);
-  const username = useSelector((state) => state.login.username);
-  const score = useSelector((state) => state.login.score);
-
+  
   const sessionCheck = async () => {
-    await axios.get("/api/sessionCheck").then((res) => {
+    const res = await axios.get("/api/sessionCheck")
       if (res.data.userId) {
         dispatch({
           type: "authenticated",
@@ -25,8 +22,12 @@ const NavBar = () => {
       } else {
         console.log(res.data);
       }
-    });
-  };
+    }
+
+
+  const userId = useSelector((state) => state.login.userId);
+  const username = useSelector((state) => state.login.username);
+  const score = useSelector((state) => state.login.score);
 
   const handleLogout = async () => {
     const res = await axios.get("/api/logout");
@@ -49,6 +50,16 @@ const NavBar = () => {
   function closeNav() {
     document.getElementById("mySidebar").style.width = "0";
   }
+
+  const [isHovered, setHovered] = useState(false);
+
+  const handleMouseEnter = () => {
+    setHovered(true);
+  };
+
+  const handleMouseLeave = () => {
+    setHovered(false);
+  };
   return (
     <>
       <div className="topnav">
@@ -71,14 +82,22 @@ const NavBar = () => {
 
       <div id="mySidebar" className="sidebar">
         <div className="sidebarHead">
-          <a href="/" className="logo">
-            <img 
-              alt=""
-              src="https://drive.google.com/uc?export=view&id=1olv49pW4uHtCYnjC9c6qhH0ojkODV5vR"
-              style={{ width: 40 }}
-            />
+          <a href="/" className="logo" onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
+            style={{
+              cursor: isHovered ? "pointer" : "default",
+            }}>
+            <GiCheckMark onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
+            style={{
+              cursor: isHovered ? "pointer" : "default",
+            }} />
           </a>
-          <a className="closebtn" onClick={() => closeNav()}>
+          <a className="closebtn" onClick={() => closeNav()} onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
+            style={{
+              cursor: isHovered ? "pointer" : "default",
+            }}>
             &times;
           </a>
         </div>
@@ -91,7 +110,11 @@ const NavBar = () => {
         <a href="#">Clients</a>
         <a href="#">Contact</a>
         {userId && (
-          <a onClick={() => handleLogout()} className="logout">
+          <a onClick={() => handleLogout()} className="logout" onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
+          style={{
+            cursor: isHovered ? "pointer" : "default",
+          }}>
             Logout
           </a>
         )}

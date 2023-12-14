@@ -242,6 +242,7 @@
           .json({ success: false, error: "Internal Server Error Editing User" });
       }
     },
+    
     deleteUser: async (req, res) => {
       const userId = req.session.user.userId;
   
@@ -402,6 +403,33 @@
         res.status(403).send("Not authorized to create a List");
       }
     },
+    deleteList: async (req, res) => {
+        const { listId } = req.params;
+      
+        await List.destroy({ where: { listId: listId } });
+
+      res.json("success");
+    },
+    
+    editList: async (req, res) => {
+      const { titleState, listId } = req.body;
+      console.log(titleState)
+      try {
+        const list = await List.findByPk(listId);
+        if (list) {
+          await list.update({
+            listName: titleState,
+          });
+          const updatedList = await List.findByPk(listId)
+          res.json(updatedList);
+        }
+      } catch (error) {
+        console.log("Error");
+        res
+          .status(500)
+          .json({ success: false, error: "Internal Server Error Editing List" });
+      }
+    },
   
     addGroupList: async (req, res) => {
       const userId = req.session.user.userId;
@@ -552,6 +580,7 @@
       return res.status(200).json({ message: 'User successfully removed from the group.', groupMembers: updatedGroupMembers})
     },
   };
+
   
   export default handlers;
   

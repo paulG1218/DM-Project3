@@ -65,10 +65,10 @@
 }
 
 .addTask {
-float: right;
-margin-top: auto;
-margin-bottom: auto;
-flex: 1;
+  float: right;
+  margin-top: auto;
+  margin-bottom: auto;
+  flex: 1;
 }
 
 .accordion-body {
@@ -78,4 +78,30 @@ flex: 1;
 .dropArrow {
   width: 1.5em;
   height: 1.5em;
+}
+
+.completed-header {
+  display: flex;
+  padding: 30px !important;
+}
+
+.completed-accordion .completed-accordion-body {
+  display: flex;
+  flex-direction: column;
+}
+
+.completed-accordion {
+  display: flex;
+  flex-direction: column;
+}
+
+.completed-accordion-body {
+  align-items: start;
+  padding-left: 15px;
+}
+
+
+.complete-task {
+  margin: 5px 0px 5px 10px;
+  color: #fc3571;
 }

@@ -16,9 +16,11 @@ const Home = () => {
   const initialState = useSelector((state) => state.login.lists);
   const isMemberOf = useSelector((state) => state.login.isMemberOf);
 
-  console.log(isMemberOf)
+  const sortedLists = initialState.sort((a,b) => {
+    return new Date(a.dueDate) - new Date(b.dueDate);
+  });
 
-  const [lists, setLists] = useState(initialState);
+  const [lists, setLists] = useState(sortedLists);
   const [showForm, setShowForm] = useState(false);
   const [errorMessage, setErrorMessage] = useState(false);
 
@@ -44,7 +46,10 @@ const Home = () => {
     const res = await axios.post("/api/addList", FormData);
     const newList = res.data.list;
 
-    setLists([...lists, newList]);
+    setLists([...lists, newList].sort(function(a,b){
+      return new Date(a.dueDate) - new Date(b.dueDate);
+    })
+    );
 
     setErrorMessage(false);
 
@@ -81,19 +86,25 @@ const Home = () => {
 
   const merge = (a, b, predicate = (a, b) => a === b) => {
     const c = [...a];
-    b.forEach((bItem) => (c.some((cItem) => predicate(bItem, cItem)) ? null : c.push(bItem)))
+    b.forEach((bItem) =>
+      c.some((cItem) => predicate(bItem, cItem)) ? null : c.push(bItem)
+    );
     return c;
-}
+  };
 
-const groupMap = groups.map((group) => {
-  return <Group key={group.groupId} group={group} />;
-});
+  const groupMap = groups.map((group) => {
+    return <Group key={group.groupId} group={group} />;
+  });
 
-const isMemberMap = isMemberOf.map((groupMember) => {
-  return <Group key={groupMember.groupId} group={groupMember.group} />;
-});
+  const isMemberMap = isMemberOf.map((groupMember) => {
+    return <Group key={groupMember.groupId} group={groupMember.group} />;
+  });
 
-  const groupDisplay = merge(groupMap, isMemberMap, (a, b) => a.props.groupId === b.props.groupId)
+  const groupDisplay = merge(
+    groupMap,
+    isMemberMap,
+    (a, b) => a.props.groupId === b.props.groupId
+  );
 
   return (
     <div className="dailyView">
