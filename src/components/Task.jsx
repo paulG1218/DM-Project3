@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import '../css/Task.css'
 
 const Task = ({ task, handleCheck, checkState }) => {
   const { title, taskId } = task;
