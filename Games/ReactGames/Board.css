@@ -1,8 +1,10 @@
 .board {
-    outline: 3px solid rgb(134, 154, 189) !important;
-    right: 700px !important; 
+   color: wheat !important;
     
-    height: 525px !important;
+    margin-top: px;
+    right: 700px;
+    
+
     float: flex;
     position: absolute
   }
@@ -13,11 +15,13 @@
   }
   
   .cell {
+
+    background-color: #6B7A8A;
     
     
     width: 35px !important;
     height: 35px !important;
-    outline: 1px solid rgb(134, 154, 189) !important;
+    outline: 1px solid black!important;
     display: inline-block !important;
   }
   

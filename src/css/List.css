@@ -65,10 +65,10 @@
 }
 
 .addTask {
-float: right;
-margin-top: auto;
-margin-bottom: auto;
-flex: 1;
+  float: right;
+  margin-top: auto;
+  margin-bottom: auto;
+  flex: 1;
 }
 
 .accordion-body {

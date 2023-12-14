@@ -16,7 +16,11 @@ const Home = () => {
   const initialState = useSelector((state) => state.login.lists);
   const isMemberOf = useSelector((state) => state.login.isMemberOf);
 
-  const [lists, setLists] = useState(initialState);
+  const sortedLists = initialState.sort((a,b) => {
+    return new Date(a.dueDate) - new Date(b.dueDate);
+  });
+
+  const [lists, setLists] = useState(sortedLists);
   const [showForm, setShowForm] = useState(false);
   const [errorMessage, setErrorMessage] = useState(false);
 
@@ -42,7 +46,10 @@ const Home = () => {
     const res = await axios.post("/api/addList", FormData);
     const newList = res.data.list;
 
-    setLists([...lists, newList]);
+    setLists([...lists, newList].sort(function(a,b){
+      return new Date(a.dueDate) - new Date(b.dueDate);
+    })
+    );
 
     setErrorMessage(false);
 

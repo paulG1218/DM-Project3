@@ -50,6 +50,16 @@ const NavBar = () => {
   function closeNav() {
     document.getElementById("mySidebar").style.width = "0";
   }
+
+  const [isHovered, setHovered] = useState(false);
+
+  const handleMouseEnter = () => {
+    setHovered(true);
+  };
+
+  const handleMouseLeave = () => {
+    setHovered(false);
+  };
   return (
     <>
       <div className="topnav">
@@ -72,10 +82,22 @@ const NavBar = () => {
 
       <div id="mySidebar" className="sidebar">
         <div className="sidebarHead">
-          <a href="/" className="logo">
-            <GiCheckMark />
+          <a href="/" className="logo" onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
+            style={{
+              cursor: isHovered ? "pointer" : "default",
+            }}>
+            <GiCheckMark onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
+            style={{
+              cursor: isHovered ? "pointer" : "default",
+            }} />
           </a>
-          <a className="closebtn" onClick={() => closeNav()}>
+          <a className="closebtn" onClick={() => closeNav()} onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
+            style={{
+              cursor: isHovered ? "pointer" : "default",
+            }}>
             &times;
           </a>
         </div>
@@ -88,7 +110,11 @@ const NavBar = () => {
         <a href="#">Clients</a>
         <a href="#">Contact</a>
         {userId && (
-          <a onClick={() => handleLogout()} className="logout">
+          <a onClick={() => handleLogout()} className="logout" onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
+          style={{
+            cursor: isHovered ? "pointer" : "default",
+          }}>
             Logout
           </a>
         )}

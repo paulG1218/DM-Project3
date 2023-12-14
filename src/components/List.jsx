@@ -43,7 +43,7 @@ const List = ({ list, ownerId }) => {
   const [showTaskForm, setShowTaskForm] = useState(false);
   const [isEditingList, setIsEditingList] = useState(false);
 
-  const [titleState, setTitleState] = useState(list.listName);
+  const [titleState, setTitleState] = useState(list.listName ? list.listName : list.groupListName);
 
   const [completedIsActive, setCompletedIsActive] = useState(false);
 
@@ -125,6 +125,7 @@ const List = ({ list, ownerId }) => {
 
     return (
       <Task
+      
         key={task.taskId}
         task={task}
         handleCheck={handleCheck}
@@ -134,6 +135,7 @@ const List = ({ list, ownerId }) => {
   });
 
   const completedTaskDisplay = completedTasks.map((task) => {
+
     return (
       <div className="taskRow">
         <input
@@ -205,7 +207,17 @@ const List = ({ list, ownerId }) => {
     <div>
       <div className={`accordion-item ${isActive ? "active" : ""}`}>
         <div className="accordion-header">
-          <h2
+          {isEditingList ? (
+          <h2>
+            <input
+                value={titleState}
+                type="text"
+                maxLength={17}
+                onChange={(e) => setTitleState(e.target.value)}
+              />
+          </h2>
+          ):(
+            <h2
             className="listHeader"
             onClick={toggleAccordion}
             onMouseEnter={handleMouseEnter}
@@ -214,38 +226,30 @@ const List = ({ list, ownerId }) => {
               cursor: isHovered ? "pointer" : "default",
             }}
           >
-            {isEditingList ? (
-              <input
-                value={list.listName ? titleState : list.groupListName}
-                type="text"
-                onChange={(e) => setTitleState(e.target.value)}
-              />
-            ) : list.listName ? (
-              titleState
-            ) : (
-              list.groupListName
-            )}
+            {titleState}
             {isActive ? (
-              <TiArrowSortedUp className="dropArrow" />
+              <TiArrowSortedUp className="dropArrow" onClick={toggleAccordion}/>
             ) : (
-              <TiArrowSortedDown className="dropArrow" />
+              <TiArrowSortedDown className="dropArrow" onClick={toggleAccordion} />
             )}
           </h2>
+          )
+        }
           <div className="addTask">
             {isActive && (
               <>
                 {isEditingList ? (
                   <>
-                    <button onClick={(e) => handleDeleteList(e)}>Delete</button>
-                    <button onClick={(e) => handleSave(e)}>Save</button>
-                    <button onClick={(e) => setIsEditingList(false)}>
+                    <button className="deleteButton" onClick={(e) => handleDeleteList(e)}>Delete</button>
+                    <button className="saveButton" onClick={(e) => handleSave(e)}>Save</button>
+                    <button className="cancelButton" onClick={(e) => setIsEditingList(false)}>
                       Cancel
                     </button>
                   </>
                 ) : (
                   <>
-                    <button onClick={(e) => setIsEditingList(true)}>
-                      <FaPencilAlt />
+                    <button className="editButton"  onClick={(e) => setIsEditingList(true)}>
+                      < FaPencilAlt />
                     </button>
                     <button
                       className="addTaskButton"
