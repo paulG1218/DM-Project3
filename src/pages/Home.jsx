@@ -16,8 +16,6 @@ const Home = () => {
   const initialState = useSelector((state) => state.login.lists);
   const isMemberOf = useSelector((state) => state.login.isMemberOf);
 
-  console.log(isMemberOf)
-
   const [lists, setLists] = useState(initialState);
   const [showForm, setShowForm] = useState(false);
   const [errorMessage, setErrorMessage] = useState(false);
