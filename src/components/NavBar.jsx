@@ -11,12 +11,9 @@ const NavBar = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const userId = useSelector((state) => state.login.userId);
-  const username = useSelector((state) => state.login.username);
-  const score = useSelector((state) => state.login.score);
-
+  
   const sessionCheck = async () => {
-    await axios.get("/api/sessionCheck").then((res) => {
+    const res = await axios.get("/api/sessionCheck")
       if (res.data.userId) {
         dispatch({
           type: "authenticated",
@@ -25,8 +22,12 @@ const NavBar = () => {
       } else {
         console.log(res.data);
       }
-    });
-  };
+    }
+
+
+  const userId = useSelector((state) => state.login.userId);
+  const username = useSelector((state) => state.login.username);
+  const score = useSelector((state) => state.login.score);
 
   const handleLogout = async () => {
     const res = await axios.get("/api/logout");
