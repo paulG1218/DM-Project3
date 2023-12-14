@@ -15,7 +15,7 @@ const RegisterNewUser = () => {
         payload: res.data.user,
       });
       console.log("newUser created");
-      navigate("/");
+      window.location.href = '/'
     });
   };
 
