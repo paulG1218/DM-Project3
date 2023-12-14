@@ -18,7 +18,7 @@ const Login = () => {
           type: "authenticated",
           payload: res.data.user,
         });
-        navigate("/");
+        window.location.href = '/'
       }
     });
   };
