@@ -15,7 +15,13 @@ const List = ({ list, ownerId }) => {
   
   const dispatch = useDispatch();
 
-  const [tasks, setTasks] = useState(list.tasks)
+  const [tasks, setTasks] = useState(list.tasks.filter((task) => !task.checked))
+
+  console.log (tasks)
+
+  const [completedTasks, setCompleteTasks] = useState(list.tasks.filter((task) => task.checked))
+
+  console.log(completedTasks)
 
 
   const [checkStates, setCheckStates] = useState(tasks.map((task) => task.checked));
@@ -33,6 +39,7 @@ const List = ({ list, ownerId }) => {
   const [showAnimation3, setShowAnimation3] = useState(false);
 
   const [isActive, setIsActive] = useState(false);
+  const [completedIsActive, setCompletedIsActive] = useState(false)
   
   const [showTaskForm, setShowTaskForm] = useState(false)
   const getRandomCatGif = async () => {
@@ -78,8 +85,8 @@ const List = ({ list, ownerId }) => {
   };
 
   const taskDisplay = tasks.map((task, index) => {
-
-    const handleCheck = async (e, taskId) => {
+      
+      const handleCheck = async (e, taskId) => {
 
       const res = await axios.put("/api/checkTask", { taskId: taskId });
       if (res.data === "failed") {
@@ -114,10 +121,6 @@ const List = ({ list, ownerId }) => {
       }
     };
 
-
-
-    
-
     return (
       <Task
         key={task.taskId}
@@ -125,15 +128,30 @@ const List = ({ list, ownerId }) => {
         handleCheck={handleCheck}
         checkState={checkStates[index]}
       />
-    );
+      );
   });
+
+  const completedTaskDisplay = completedTasks.map((task) => {
+      return (
+        <div className="taskRow">
+          <input 
+            type="checkbox"
+            checked={true}
+            readOnly={true}
+            disabled={true}
+          ></input>
+          <p className="complete-task">{task.title}</p>
+        </div>
+      )
+  })
 
   const handleAddTask = async (e, formData) => {
     e.preventDefault()
     console.log({when: 'start', list: list})
     const res = await axios.post('/api/addTask', {...formData, listId: list.listId, groupListId: list.groupListId})
     console.log(res.data)
-    setTasks(res.data.tasks)
+    setTasks(res.data.tasks.filter((task) => !task.checked))
+    setCompleteTasks(res.data.tasks.filter((task) => task.checked))
     console.log({data: res.data.tasks})
 
     setShowTaskForm(false)
@@ -144,6 +162,10 @@ const List = ({ list, ownerId }) => {
     setIsActive(!isActive);
   };
 
+
+  const toggleCompletedAccordion = () => {
+    setCompletedIsActive(!completedIsActive);
+  };
 
   const [isHovered, setHovered] = useState(false);
 
@@ -161,7 +183,6 @@ const List = ({ list, ownerId }) => {
           <h2 className="listHeader" onClick={toggleAccordion} onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       style={{
-        
         cursor: isHovered ? 'pointer' : 'default',
       }} >
             {list.listName ? list.listName : list.groupListName}
@@ -179,7 +200,30 @@ const List = ({ list, ownerId }) => {
           {/* Render your taskDisplay content here */}
           {isActive && <div className="checklist-display">{taskDisplay}</div>}
           {showTaskForm && <AddTaskForm handleAddTask={handleAddTask}/>}
-        </div>
+          {completedTasks.length > 0 &&
+            <div className="completed-accordion">
+              <div 
+                className="completed-header" 
+                onClick={toggleCompletedAccordion} 
+                onMouseEnter={handleMouseEnter} 
+                onMouseLeave={handleMouseLeave}
+                style={{
+                  cursor: isHovered ? 'pointer' : 'default',
+                }}
+                >
+                <h4 className="completed-title">Completed</h4>
+                {completedIsActive ? <TiArrowSortedUp className="dropArrow"/> : <TiArrowSortedDown className="dropArrow"/>}
+              </div>
+                {completedIsActive &&  
+                  <div className="completed-accordion-body">
+                    {completedTaskDisplay}
+                  </div>
+                }
+
+
+            </div>
+          } 
+        </div>  
       </div>
 
       <div className="list">
@@ -205,6 +249,11 @@ const List = ({ list, ownerId }) => {
           </div>
         )}
       </div>
+
+
+    
+
+
     </div>
   );
 };
