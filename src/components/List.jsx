@@ -2,24 +2,25 @@ import React, { useState } from "react";
 import axios from "axios";
 import Task from "./Task.jsx";
 import "../css/List.css";
-import { useNavigate } from "react-router-dom";
+import { redirect, useNavigate } from "react-router-dom";
 import { TiArrowSortedDown } from "react-icons/ti";
 import { TiArrowSortedUp } from "react-icons/ti";
-
 import { AnimationEasy, AnimationMedium, AnimationHard } from "./Animation.jsx";
 import { useSelector, useDispatch } from "react-redux";
 import AddTaskForm from "./AddTaskForm.jsx";
+import { FaPencilAlt } from "react-icons/fa";
 
 const List = ({ list, ownerId }) => {
   const navigate = useNavigate();
-  
+
   const dispatch = useDispatch();
 
-  const [tasks, setTasks] = useState(list.tasks)
+  const [tasks, setTasks] = useState(list.tasks);
 
+  const [checkStates, setCheckStates] = useState(
+    tasks.map((task) => task.checked)
+  );
 
-  const [checkStates, setCheckStates] = useState(tasks.map((task) => task.checked));
-  
   const [catImageUrl, setCatImageUrl] = useState(null);
   const [story, setStory] = useState("");
   const [score, setScore] = useState(0);
@@ -31,10 +32,12 @@ const List = ({ list, ownerId }) => {
   const [showAnimation, setShowAnimation] = useState(false);
   const [showAnimation2, setShowAnimation2] = useState(false);
   const [showAnimation3, setShowAnimation3] = useState(false);
-
   const [isActive, setIsActive] = useState(false);
-  
-  const [showTaskForm, setShowTaskForm] = useState(false)
+  const [showTaskForm, setShowTaskForm] = useState(false);
+  const [isEditingList, setIsEditingList] = useState(false);
+
+  const [titleState, setTitleState] = useState(list.listName);
+
   const getRandomCatGif = async () => {
     try {
       const response = await axios.get(
@@ -78,20 +81,18 @@ const List = ({ list, ownerId }) => {
   };
 
   const taskDisplay = tasks.map((task, index) => {
-
     const handleCheck = async (e, taskId) => {
-
       const res = await axios.put("/api/checkTask", { taskId: taskId });
       if (res.data === "failed") {
         console.log("Failed to check task");
         return;
       } else {
         task = res.data.task;
-        setCheckStates(prevCheckStates => {
+        setCheckStates((prevCheckStates) => {
           const updatedCheckStates = [...prevCheckStates];
           updatedCheckStates[index] = true;
           return updatedCheckStates;
-        })
+        });
 
         switch (task.difficulty) {
           case 1:
@@ -114,10 +115,6 @@ const List = ({ list, ownerId }) => {
       }
     };
 
-
-
-    
-
     return (
       <Task
         key={task.taskId}
@@ -129,21 +126,20 @@ const List = ({ list, ownerId }) => {
   });
 
   const handleAddTask = async (e, formData) => {
-    e.preventDefault()
-    console.log({when: 'start', list: list})
-    const res = await axios.post('/api/addTask', {...formData, listId: list.listId, groupListId: list.groupListId})
-    console.log(res.data)
-    setTasks(res.data.tasks)
-    console.log({data: res.data.tasks})
+    e.preventDefault();
+    const res = await axios.post("/api/addTask", {
+      ...formData,
+      listId: list.listId,
+      groupListId: list.groupListId,
+    });
+    setTasks(res.data.tasks);
 
-    setShowTaskForm(false)
-  }
-
+    setShowTaskForm(false);
+  };
 
   const toggleAccordion = () => {
     setIsActive(!isActive);
   };
-
 
   const [isHovered, setHovered] = useState(false);
 
@@ -154,31 +150,91 @@ const List = ({ list, ownerId }) => {
   const handleMouseLeave = () => {
     setHovered(false);
   };
+
+  const handleDeleteList = async () => {
+    const res = await axios.delete(`/api/deleteList/${list.listId}`);
+    if (res.data === "success") {
+      console.log("List Deleted");
+    }
+    redirect("/");
+  };
+
+  const handleSave = async (e) => {
+    await axios
+      .put("/api/editList", { titleState: titleState, listId: list.listId })
+      .then((res) => {
+        console.log(res.data);
+
+        setTitleState(res.data.listName);
+
+        setIsEditingList(false);
+      });
+  };
+
   return (
     <div>
       <div className={`accordion-item ${isActive ? "active" : ""}`}>
-        <div className="accordion-header" >
-          <h2 className="listHeader" onClick={toggleAccordion} onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
-      style={{
-        
-        cursor: isHovered ? 'pointer' : 'default',
-      }} >
-            {list.listName ? list.listName : list.groupListName}
-            {isActive ? <TiArrowSortedUp className="dropArrow"/> : <TiArrowSortedDown className="dropArrow"/>}
+        <div className="accordion-header">
+          <h2
+            className="listHeader"
+            onClick={toggleAccordion}
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
+            style={{
+              cursor: isHovered ? "pointer" : "default",
+            }}
+          >
+            {isEditingList ? (
+              <input
+                value={list.listName ? titleState : list.groupListName}
+                type="text"
+                onChange={(e) => setTitleState(e.target.value)}
+              />
+            ) : list.listName ? (
+              titleState
+            ) : (
+              list.groupListName
+            )}
+            {isActive ? (
+              <TiArrowSortedUp className="dropArrow" />
+            ) : (
+              <TiArrowSortedDown className="dropArrow" />
+            )}
           </h2>
           <div className="addTask">
-            {isActive &&
-              <button className="addTaskButton" onClick={() => {
-                setShowTaskForm(true) 
-              }}>Add</button>
-            }
+            {isActive && (
+              <>
+                {isEditingList ? (
+                  <>
+                    <button onClick={(e) => handleDeleteList(e)}>Delete</button>
+                    <button onClick={(e) => handleSave(e)}>Save</button>
+                    <button onClick={(e) => setIsEditingList(false)}>
+                      Cancel
+                    </button>
+                  </>
+                ) : (
+                  <>
+                    <button onClick={(e) => setIsEditingList(true)}>
+                      <FaPencilAlt />
+                    </button>
+                    <button
+                      className="addTaskButton"
+                      onClick={() => {
+                        setShowTaskForm(true);
+                      }}
+                    >
+                      Add
+                    </button>
+                  </>
+                )}
+              </>
+            )}
           </div>
         </div>
         <div className="accordion-body">
           {/* Render your taskDisplay content here */}
           {isActive && <div className="checklist-display">{taskDisplay}</div>}
-          {showTaskForm && <AddTaskForm handleAddTask={handleAddTask}/>}
+          {showTaskForm && <AddTaskForm handleAddTask={handleAddTask} />}
         </div>
       </div>
 
