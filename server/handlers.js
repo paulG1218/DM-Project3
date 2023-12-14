@@ -528,7 +528,22 @@
             res.json('failed')
         }
 
-    }
+    },
+
+    leaveGroup: async (req, res) => {
+      const {groupId} = req.params
+      const {userId} = req.session.user
+const groupMemberEntry = await GroupMember.findOne({
+  where: {
+    userId:userId,
+    groupId:groupId
+  }}
+)
+
+      await groupMemberEntry.destroy()
+
+      return res.status(200).json({ message: 'User successfully removed from the group.'})
+    },
   };
   
   export default handlers;

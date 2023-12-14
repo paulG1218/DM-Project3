@@ -37,6 +37,7 @@ app.post('/api/addTask', handlers.addTask)
 //Group routes
 app.get('/api/getGroup/:groupId', handlers.getGroup)
 app.put('/api/addmember', handlers.addMember)
+app.delete('/api/leaveGroup/:groupId', handlers.leaveGroup)
 
 
 ViteExpress.listen(app, port, () =>

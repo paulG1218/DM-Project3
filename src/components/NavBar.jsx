@@ -72,7 +72,11 @@ const NavBar = () => {
       <div id="mySidebar" className="sidebar">
         <div className="sidebarHead">
           <a href="/" className="logo">
-            <GiCheckMark />
+            <img 
+              alt=""
+              src="https://drive.google.com/uc?export=view&id=1id9qX5XHaGiCOtpQJ6iRJbLHjkwhmDQi"
+              style={{ width: 40 }}
+            />
           </a>
           <a className="closebtn" onClick={() => closeNav()}>
             &times;

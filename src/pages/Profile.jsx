@@ -14,7 +14,7 @@ const Profile = () => {
     case "success":
       break;
     default:
-      navigate("/login");
+      // navigate("/login");
   }
 
   const [isEditing, setIsEditing] = useState(false);
