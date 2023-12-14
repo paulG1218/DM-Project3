@@ -531,18 +531,25 @@
     },
 
     leaveGroup: async (req, res) => {
-      const {groupId} = req.params
+      const {groupId} = req.params //use req.body
       const {userId} = req.session.user
-const groupMemberEntry = await GroupMember.findOne({
-  where: {
-    userId:userId,
-    groupId:groupId
-  }}
-)
+      
+      const groupMemberEntry = await GroupMember.findOne({
+        where: {
+          userId:userId,
+          groupId:groupId,
+        }
+      })
 
       await groupMemberEntry.destroy()
 
-      return res.status(200).json({ message: 'User successfully removed from the group.'})
+      const updatedGroupMembers = await GroupMember.findAll({
+        where: {
+          userId: userId,
+        }
+      })
+
+      return res.status(200).json({ message: 'User successfully removed from the group.', groupMembers: updatedGroupMembers})
     },
   };
   

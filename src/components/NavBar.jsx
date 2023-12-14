@@ -65,7 +65,7 @@ const NavBar = () => {
             </h2>
           </>
         ) : (
-          <h1 className="title">Checkr</h1>
+          <h1 className="title">Checkr </h1>
         )}
       </div>
 
@@ -74,7 +74,7 @@ const NavBar = () => {
           <a href="/" className="logo">
             <img 
               alt=""
-              src="https://drive.google.com/uc?export=view&id=1id9qX5XHaGiCOtpQJ6iRJbLHjkwhmDQi"
+              src="https://drive.google.com/uc?export=view&id=1olv49pW4uHtCYnjC9c6qhH0ojkODV5vR"
               style={{ width: 40 }}
             />
           </a>
