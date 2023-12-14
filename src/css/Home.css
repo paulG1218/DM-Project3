@@ -2,7 +2,7 @@
     border-style: solid;
     border-radius: 9px; 
     width: 45vw;
-    height: 100vh;
+    min-height: 100vh;
     border-width: 3px;
     border-color: #fc3571;
     margin-left: 48px;
