@@ -159,9 +159,6 @@ const List = ({ list, ownerId }) => {
     setShowTaskForm(false)
   }
 
-    setShowTaskForm(false);
-  };
-
   const toggleAccordion = () => {
     setIsActive(!isActive);
   };
