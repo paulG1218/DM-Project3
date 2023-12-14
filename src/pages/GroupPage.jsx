@@ -3,11 +3,23 @@ import { useLoaderData } from "react-router-dom";
 import List from "../components/List.jsx";
 import { useNavigate } from "react-router-dom";
 import "../css/Groups.css";
+import axios from 'axios';
+import { useDispatch } from "react-redux";
 
 const GroupPage = () => {
   const { group, userId } = useLoaderData();
-
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const handleLeaveGroup = async () => {
+    const res = await axios.delete(`/api/leaveGroup/${group.groupId}`);
+    console.log('User removed from the group:', res.data);
+    dispatch({
+      type: 'leave_group',
+      payload: res.data.groupMembers
+    });
+    window.location.href = '/'
+  }
 
   useEffect(() => {
     if (
@@ -30,6 +42,11 @@ const GroupPage = () => {
   return (
     <div>
       <h1 className="pageHeader">{group.groupName}</h1>
+      <div>
+        {group.userId !== userId && 
+          <button className="leaveGroupBtn" onClick={handleLeaveGroup}>Leave Group</button>
+        }
+      </div>
       <div className="groupListDisplay">
         <h1>Lists</h1>
         <hr className="homeLines" />
