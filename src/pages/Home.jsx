@@ -103,23 +103,20 @@ const Home = () => {
     <div className="dailyView">
       <h1 className="pageHeader">Daily View</h1>
       <div className="listDisplay">
-        <h1 className="listTitle">Lists</h1>
-        {showForm ? (
+        <div className="listHeader">
+          <h1 className="listTitle">Lists</h1>
           <div className="addList">
             <button onClick={toggleForm} className="addListBtn">
               <FaPlus />
               <CiViewList />
             </button>
-            <CreateListForm addList={addList} errorMessage={errorMessage} />
+            {showForm && (
+              <div className="listFormPopup">
+                <CreateListForm addList={addList} errorMessage={errorMessage} />
+              </div>
+            )}
           </div>
-        ) : (
-          <div className="addList">
-            <button onClick={toggleForm} className="addListBtn">
-              <FaPlus />
-              <CiViewList />
-            </button>
-          </div>
-        )}
+        </div>
         <br />
         <hr className="homeLines" />
         {listDisplay}
@@ -132,5 +129,4 @@ const Home = () => {
     </div>
   );
 };
-
 export default Home;

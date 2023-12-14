@@ -5,7 +5,7 @@ import { CiViewList } from "react-icons/ci";
 import { useState } from "react";
 import CreateGroupListForm from "./CreateGroupListForm.jsx";
 import axios from "axios";
-import '../css/GroupComponent.css'
+import "../css/GroupComponent.css";
 
 const Group = ({ group }) => {
   const { groupName, groupLists, groupId, userId } = group;
@@ -15,7 +15,7 @@ const Group = ({ group }) => {
   const [errorGroupMessage, setErrorGroupMessage] = useState(false);
 
   useEffect(() => {
-    setErrorGroupMessage(false)
+    setErrorGroupMessage(false);
   }, [showGroupForm]);
 
   const toggleGroupForm = (e) => {
@@ -24,7 +24,7 @@ const Group = ({ group }) => {
 
   const addGroupList = async (e, groupFormData) => {
     e.preventDefault();
-    if(!groupFormData.groupListName || !groupFormData.dueDate) {
+    if (!groupFormData.groupListName || !groupFormData.dueDate) {
       setErrorGroupMessage(true);
       return;
     }
@@ -40,28 +40,38 @@ const Group = ({ group }) => {
   };
 
   const listDisplay = groupListState.map((list) => {
-    return <List key={list.groupListId} tasks={list.tasks} list={list} ownerId={userId}/>;
+    return (
+      <List
+        key={list.groupListId}
+        tasks={list.tasks}
+        list={list}
+        ownerId={userId}
+      />
+    );
   });
 
   return (
     <div>
-      <h1 className="groupHeading">
-        <a href={`/groups/${groupId}`} className="groupName">
-          {groupName}
-        </a>
-        <button onClick={toggleGroupForm} className="addGroupListBtn">
+      <div className="addGroupLBtn">
+        <h1 className="groupHeading">
+          <a href={`/groups/${groupId}`} className="groupName">
+            {groupName}
+          </a>
+          <button onClick={toggleGroupForm} className="addGroupListBtn">
             <FaPlus />
             <CiViewList />
-        </button>
-      </h1>
+          </button>
+        </h1>
+      </div>
       {showGroupForm ? (
         <div className="addGroupList">
-          <CreateGroupListForm addGroupList={addGroupList} errorGroupMessage={errorGroupMessage} />
+          <CreateGroupListForm
+            addGroupList={addGroupList}
+            errorGroupMessage={errorGroupMessage}
+          />
         </div>
       ) : (
-        <div className="addGroupList">
-          
-        </div>
+        <div className="addGroupList"></div>
       )}
       <br />
       {listDisplay}

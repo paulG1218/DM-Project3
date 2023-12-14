@@ -39,7 +39,6 @@ app.put('/api/editList', handlers.editList)
 app.get('/api/getGroup/:groupId', handlers.getGroup)
 app.put('/api/addmember', handlers.addMember)
 
-
 ViteExpress.listen(app, port, () =>
   console.log(`Server is listening on http://localhost:${port}`)
 );
