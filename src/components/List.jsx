@@ -129,6 +129,7 @@ const List = ({ list, ownerId }) => {
    
       if(res.data === "Task successfully deleted.") {
        console.log("Delete Task with ID:", taskId);
+       setTasks(tasks.filter(task => task.taskId !== taskId));
       };
     };
 
@@ -140,7 +141,7 @@ const List = ({ list, ownerId }) => {
         handleCheck={handleCheck}
         checkState={checkStates[index]}
         isEditingList={isEditingList}
-        handleDeleteList={handleDeleteTask}
+        handleDeleteTask={handleDeleteTask}
       />
     );
   });
