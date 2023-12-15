@@ -40,20 +40,6 @@ const Task = ({ task, handleCheck, checkState, isEditingList, handleDeleteTask }
           onChange={(e) => handleCheck(e, taskId)}
         />
       ): null}
-      <input
-        type="checkbox"
-        className="checkbox"
-        id={`${title}-${taskId}`}
-        disabled={checkState}
-        checked={checkState}
-        readOnly={checkState}
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
-        style={{
-          cursor: isHovered ? "pointer" : "default",
-        }}
-        onChange={(e) => handleCheck(e, taskId)}
-      ></input>
       <p className="task">{title}</p>
     </div>
   );
