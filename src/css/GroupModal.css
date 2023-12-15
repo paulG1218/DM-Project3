@@ -62,7 +62,10 @@ a.btn {
     color: white;
     font-weight: bold;
     margin-top: 25px;
-}
+    &:hover {
+      background-color: #fc3571;
+      color: white;
+    }
 
 .joinGroupCodeBox {
     display: flex;
@@ -101,4 +104,14 @@ a.btn {
 #errorTxt {
     color: red;
     font-weight: bold;
+}
+
+.container {
+  display: flex;
+  float: left;
+}
+
+.groupsModal {
+  display: flex;
+  float: left;
 }

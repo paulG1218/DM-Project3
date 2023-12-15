@@ -2,11 +2,16 @@
     border-style: solid;
     border-radius: 9px;
     width: 45vw;
-    min-height: 100vh;
+    height: 88vh;
     border-width: 3px;
     border-color: #fc3571;
     margin-left: 48px;
     float: left;
+}
+
+.listBody {
+    height: 40.5vw;
+    overflow-y:auto;
 }
 
 .lists {
@@ -23,7 +28,7 @@
     border: solid #fc3571;
     border-width: 1px;
     opacity: 1;
-    margin-top: 0;
+    margin: 0;
 }
 
 .groupName:hover {

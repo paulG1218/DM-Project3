@@ -15,7 +15,7 @@
     border-color: white;
     border-radius: 9px; 
     width: 40vw;
-    height: 100vh;
+    height: 88vh;
     border-width: 3px;
     border-color: #fc3571;
     margin-left: 2vw;
@@ -25,11 +25,7 @@
 .pageTitle {
     margin: 10px;
     justify-content: center;
-  }
-
-
-  .addGroupLBtn {
-    
+    display: flex;
   }
 
 .leave-group-btn-container {
@@ -45,5 +41,22 @@
     background-color: #fc3571;
     border: #fc3571;
     color: white;
+}
+
+.pageHeader {
+    display: flex;
+}
+
+div.container {
+    position: absolute;
+    width: fit-content;
+    right: 1vw;
+    top: 95px;
+}
+
+div.container-new {
+    position: absolute;
+    right: 1.6vw;
+    top: 50px
 }
 
