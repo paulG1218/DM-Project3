@@ -23,7 +23,8 @@ Group.init(
         },
         code: {
             type: DataTypes.INTEGER,
-            allowNull: false
+            allowNull: false,
+            unique: true
         }
     },
     {
@@ -75,6 +76,7 @@ GroupMember.init(
     score: {
         type: DataTypes.INTEGER,
         allowNull: false,
+        defaultValue: 0
     }
 },
 {
