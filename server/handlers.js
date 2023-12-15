@@ -112,7 +112,7 @@
   
       if (!user) {
         res.json({
-          message: "No username found",
+          message: "no username found",
           status: 404,
           userId: "",
         });
@@ -121,7 +121,7 @@
         req.session.user = user;
   
         res.json({
-          message: "Login successful",
+          message: "login successful",
           status: 200,
           user: user,
         });
@@ -129,7 +129,7 @@
       }
   
       res.json({
-        message: "Password incorrect",
+        message: "password incorrect",
         status: 401,
         userId: "",
       });
@@ -143,7 +143,21 @@
   
     registerNewUser: async (req, res) => {
       const { username, email, password } = req.body;
-  
+
+
+      if (await User.findOne({
+            where: {
+              username: username
+            }
+          })
+
+        ) {
+        res.json({
+          message: "username taken",
+          status: 401
+        });
+        return
+      }  
       await User.create({
         username: username,
         email: email,

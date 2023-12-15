@@ -35,7 +35,7 @@ const LoginForm = ({ onLogin }) => {
   return (
     <form
       onSubmit={(e) =>
-        onLogin(e, { usernameOrEmail: usernameOrEmail, password: password })
+        onLogin(e, { usernameOrEmail: usernameOrEmail, password: password }, document.getElementById('errorTxt'))
       }
     >
       <input
@@ -57,6 +57,7 @@ const LoginForm = ({ onLogin }) => {
       <span onClick={togglePasswordVisibility}>
         {showPassword ? <FaRegEyeSlash /> : <FaRegEye />}
       </span>
+      <p id="errorTxt"></p>
       <br />
       <button type="submit" className="loginBtn">
         Login

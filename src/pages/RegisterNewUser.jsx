@@ -7,15 +7,22 @@ const RegisterNewUser = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const onRegisterUser = async (e, registerFormData) => {
+  const onRegisterUser = async (e, registerFormData, errorText) => {
     e.preventDefault();
     await axios.post("/api/registerUser", registerFormData).then((res) => {
-      dispatch({
-        type: "authenticated",
-        payload: res.data.user,
-      });
-      console.log("newUser created");
-      window.location.href = '/'
+      if (res.data.user) {
+        dispatch({
+          type: "authenticated",
+          payload: res.data.user,
+        });
+        console.log("newUser created");
+        window.location.href = '/'
+      } else if (res.data.message === 'username taken') {
+        errorText.innerText = 'Username taken'
+        return
+      } else {
+        errorText.innerText = 'Something went wrong'
+      }
     });
   };
 
