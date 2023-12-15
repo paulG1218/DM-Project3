@@ -208,48 +208,69 @@ const List = ({ list, ownerId }) => {
       <div className={`accordion-item ${isActive ? "active" : ""}`}>
         <div className="accordion-header">
           {isEditingList ? (
-          <h2>
-            <input
+            <h2>
+              <input
                 value={titleState}
                 type="text"
                 maxLength={17}
                 onChange={(e) => setTitleState(e.target.value)}
               />
-          </h2>
-          ):(
+            </h2>
+          ) : (
             <h2
-            className="listHeader"
-            onClick={toggleAccordion}
-            onMouseEnter={handleMouseEnter}
-            onMouseLeave={handleMouseLeave}
-            style={{
-              cursor: isHovered ? "pointer" : "default",
-            }}
-          >
-            {titleState}
-            {isActive ? (
-              <TiArrowSortedUp className="dropArrow" onClick={toggleAccordion}/>
-            ) : (
-              <TiArrowSortedDown className="dropArrow" onClick={toggleAccordion} />
-            )}
-          </h2>
-          )
-        }
+              className="listHeader"
+              onClick={toggleAccordion}
+              onMouseEnter={handleMouseEnter}
+              onMouseLeave={handleMouseLeave}
+              style={{
+                cursor: isHovered ? "pointer" : "default",
+              }}
+            >
+              {titleState}
+              {isActive ? (
+                <TiArrowSortedUp
+                  className="dropArrow"
+                  onClick={toggleAccordion}
+                />
+              ) : (
+                <TiArrowSortedDown
+                  className="dropArrow"
+                  onClick={toggleAccordion}
+                />
+              )}
+            </h2>
+          )}
           <div className="addTask">
             {isActive && (
               <>
                 {isEditingList ? (
                   <>
-                    <button className="deleteButton" onClick={(e) => handleDeleteList(e)}>Delete</button>
-                    <button className="saveButton" onClick={(e) => handleSave(e)}>Save</button>
-                    <button className="cancelButton" onClick={(e) => setIsEditingList(false)}>
+                    <button
+                      className="deleteButton"
+                      onClick={(e) => handleDeleteList(e)}
+                    >
+                      Delete
+                    </button>
+                    <button
+                      className="saveButton"
+                      onClick={(e) => handleSave(e)}
+                    >
+                      Save
+                    </button>
+                    <button
+                      className="cancelButton"
+                      onClick={(e) => setIsEditingList(false)}
+                    >
                       Cancel
                     </button>
                   </>
                 ) : (
                   <>
-                    <button className="editButton"  onClick={(e) => setIsEditingList(true)}>
-                      < FaPencilAlt />
+                    <button
+                      className="editButton"
+                      onClick={(e) => setIsEditingList(true)}
+                    >
+                      <FaPencilAlt />
                     </button>
                     <button
                       className="addTaskButton"
@@ -260,6 +281,16 @@ const List = ({ list, ownerId }) => {
                       Add
                     </button>
                   </>
+                )}
+                {showTaskForm && (
+                  <button
+                    className="cancelButton"
+                    onClick={() => {
+                      setShowTaskForm(false);
+                    }}
+                  >
+                    Cancel
+                  </button>
                 )}
               </>
             )}
@@ -296,7 +327,6 @@ const List = ({ list, ownerId }) => {
           )}
         </div>
       </div>
-
       <div className="list">
         <AnimationEasy showAnimation={showAnimation} />
         <AnimationMedium showAnimation2={showAnimation2} />
@@ -322,6 +352,7 @@ const List = ({ list, ownerId }) => {
       </div>
     </div>
   );
+  
 };
 
 export default List;
