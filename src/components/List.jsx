@@ -9,6 +9,10 @@ import { AnimationEasy, AnimationMedium, AnimationHard } from "./Animation.jsx";
 import { useSelector, useDispatch } from "react-redux";
 import AddTaskForm from "./AddTaskForm.jsx";
 import { FaPencilAlt } from "react-icons/fa";
+import "bootstrap/dist/css/bootstrap.min.css";
+// import "bootstrap/js/src/modal";
+import Button from "react-bootstrap/Button";
+import Modal from "react-bootstrap/Modal";
 
 const List = ({ list, ownerId }) => {
   const navigate = useNavigate();
@@ -43,7 +47,9 @@ const List = ({ list, ownerId }) => {
   const [showTaskForm, setShowTaskForm] = useState(false);
   const [isEditingList, setIsEditingList] = useState(false);
 
-  const [titleState, setTitleState] = useState(list.listName ? list.listName : list.groupListName);
+  const [titleState, setTitleState] = useState(
+    list.listName ? list.listName : list.groupListName
+  );
 
   const [completedIsActive, setCompletedIsActive] = useState(false);
 
@@ -96,6 +102,7 @@ const List = ({ list, ownerId }) => {
         console.log("Failed to check task");
         return;
       } else {
+        
         task = res.data.task;
         setCheckStates((prevCheckStates) => {
           const updatedCheckStates = [...prevCheckStates];
@@ -121,11 +128,11 @@ const List = ({ list, ownerId }) => {
             break;
         }
       }
+      handleShow()
     };
 
     return (
       <Task
-      
         key={task.taskId}
         task={task}
         handleCheck={handleCheck}
@@ -135,7 +142,6 @@ const List = ({ list, ownerId }) => {
   });
 
   const completedTaskDisplay = completedTasks.map((task) => {
-
     return (
       <div className="taskRow">
         <input
@@ -203,53 +209,130 @@ const List = ({ list, ownerId }) => {
       });
   };
 
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
   return (
     <div>
+      {/* <Button variant="primary" onClick={handleShow}>
+                      Launch demo modal
+                    </Button> */}
+
+                    <Modal show={show} onHide={handleClose} variant='dark'>
+                      <Modal.Header closeButton>
+                        <Modal.Title>Cat Picture</Modal.Title>
+                      </Modal.Header>
+                      <Modal.Body > 1cat
+                        
+
+                        {catImageUrl ??
+                          <img
+                            src={catImageUrl}
+                            alt="Random Cat GIF"
+                            style={{ width: "300px", height: "200px" }}
+                          />
+                        }
+                        
+
+               
+                      </Modal.Body>
+                      <Modal.Footer>
+                        <Button variant="secondary" onClick={handleClose} >
+                          Close
+                        </Button>
+                       
+                      </Modal.Footer>
+                    </Modal>
+
+                    <Modal show={show} onHide={handleClose} style={{color: "black"}}>
+                      <Modal.Header closeButton>
+                        <Modal.Title>Short Story</Modal.Title>
+                      </Modal.Header>
+                      <Modal.Body >
+                        
+
+                       
+                        {story ??
+                        {story}
+                        }
+
+               
+                      </Modal.Body>
+                      <Modal.Footer>
+                        <Button variant="secondary" onClick={handleClose} >
+                          Close
+                        </Button>
+                       
+                      </Modal.Footer>
+                    </Modal>
       <div className={`accordion-item ${isActive ? "active" : ""}`}>
         <div className="accordion-header">
           {isEditingList ? (
-          <h2>
-            <input
+            <h2>
+              <input
                 value={titleState}
                 type="text"
                 maxLength={17}
                 onChange={(e) => setTitleState(e.target.value)}
               />
-          </h2>
-          ):(
+            </h2>
+          ) : (
             <h2
-            className="listHeader"
-            onClick={toggleAccordion}
-            onMouseEnter={handleMouseEnter}
-            onMouseLeave={handleMouseLeave}
-            style={{
-              cursor: isHovered ? "pointer" : "default",
-            }}
-          >
-            {titleState}
-            {isActive ? (
-              <TiArrowSortedUp className="dropArrow" onClick={toggleAccordion}/>
-            ) : (
-              <TiArrowSortedDown className="dropArrow" onClick={toggleAccordion} />
-            )}
-          </h2>
-          )
-        }
+              className="listHeader"
+              onClick={toggleAccordion}
+              onMouseEnter={handleMouseEnter}
+              onMouseLeave={handleMouseLeave}
+              style={{
+                cursor: isHovered ? "pointer" : "default",
+              }}
+            >
+              {titleState}
+              {isActive ? (
+                <TiArrowSortedUp
+                  className="dropArrow"
+                  onClick={toggleAccordion}
+                />
+              ) : (
+                <TiArrowSortedDown
+                  className="dropArrow"
+                  onClick={toggleAccordion}
+                />
+              )}
+            </h2>
+          )}
           <div className="addTask">
             {isActive && (
               <>
                 {isEditingList ? (
                   <>
-                    <button className="deleteButton" onClick={(e) => handleDeleteList(e)}>Delete</button>
-                    <button className="saveButton" onClick={(e) => handleSave(e)}>Save</button>
-                    <button className="cancelButton" onClick={(e) => setIsEditingList(false)}>
+                    <button
+                      className="deleteButton"
+                      onClick={(e) => handleDeleteList(e)}
+                    >
+                      Delete
+                    </button>
+                    <button
+                      className="saveButton"
+                      onClick={(e) => handleSave(e)}
+                    >
+                      Save
+                    </button>
+                    <button
+                      className="cancelButton"
+                      onClick={(e) => setIsEditingList(false)}
+                    >
                       Cancel
                     </button>
                   </>
                 ) : (
                   <>
-                    <button className="editButton"  onClick={(e) => setIsEditingList(true)}>
-                      < FaPencilAlt />
+                    <button
+                      className="editButton"
+                      onClick={(e) => setIsEditingList(true)}
+                    >
+                      <FaPencilAlt />
                     </button>
                     <button
                       className="addTaskButton"
@@ -303,14 +386,54 @@ const List = ({ list, ownerId }) => {
         <AnimationHard showAnimation3={showAnimation3} />
         {showReward.cat && (
           <div className="cat-container">
-            <button className="close-button" onClick={handleCloseCat}>
-              X
-            </button>
-            <img
-              src={catImageUrl}
-              alt="Random Cat GIF"
-              style={{ width: "300px", height: "200px" }}
-            />
+            Hello from cat
+            <div
+              className="modal fade"
+              id="catImg"
+              tabIndex="-1"
+              aria-hidden="true"
+            >
+              <div className="modal-dialog">
+                <div className="modal-content">
+                  <button className="close-button" onClick={handleCloseCat}>
+                    X
+                  </button>
+
+                  <div
+                    className="modal show"
+                    style={{ display: "block", position: "initial" }}
+                  ></div>
+
+                  <>
+                    <Button variant="primary" onClick={handleShow}>
+                      Launch demo modal
+                    </Button>
+
+            <Modal show={show} onHide={handleClose} style={ {color: "black"}}>
+                      <Modal.Header closeButton>
+                        <Modal.Title>Cat Picture</Modal.Title>
+                      </Modal.Header>
+                      <Modal.Body>
+
+                       
+                  <img
+                    src={catImageUrl}
+                    alt="Random Cat GIF"
+                    style={{ width: "300px", height: "200px" }}
+                  />
+               
+                      </Modal.Body>
+                      <Modal.Footer>
+                        <Button variant="secondary" onClick={handleClose}>
+                          Close
+                        </Button>
+                        
+                      </Modal.Footer>
+                    </Modal>
+                  </>
+                </div>
+              </div>
+            </div>
           </div>
         )}
         {showReward.story && (
