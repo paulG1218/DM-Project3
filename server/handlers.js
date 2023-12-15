@@ -403,6 +403,7 @@
         res.status(403).send("Not authorized to create a List");
       }
     },
+
     deleteList: async (req, res) => {
         const { listId } = req.params;
       
@@ -430,7 +431,7 @@
           .json({ success: false, error: "Internal Server Error Editing List" });
       }
     },
-  
+
     addGroupList: async (req, res) => {
       const userId = req.session.user.userId;
       const { groupId } = req.params;
@@ -459,7 +460,35 @@
         res.status(403).send("You must be the group owner to create a GroupList");
       }
     },
-  
+    
+    deleteGroupList: async (req, res) => {
+      const { groupListId } = req.params;
+    
+      await GroupList.destroy({ where: { groupListId: groupListId } });
+
+    res.json("success");
+  },
+
+    editGroupList: async (req, res) => {
+      const { titleState, groupListId } = req.body;
+      console.log(titleState)
+      try {
+        const groupList = await GroupList.findByPk(groupListId);
+        if (groupList) {
+          await groupList.update({
+            groupListName: titleState,
+          });
+          const updatedGroupList = await GroupList.findByPk(groupListId)
+          res.json(updatedGroupList);
+        }
+      } catch (error) {
+        console.log("Error");
+        res
+          .status(500)
+          .json({ success: false, error: "Internal Server Error Editing Group List" });
+      }
+    }, 
+
     getLists: async (req, res) => {
       const user = req.session.user;
       if (user) {

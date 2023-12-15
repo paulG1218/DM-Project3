@@ -62,6 +62,7 @@
   border-color: #fc3571;
   border-style: solid;
   float: right;
+  color: rgba(255, 255, 255, 0.87);
 }
 
 .addTask {
@@ -104,4 +105,8 @@
 .complete-task {
   margin: 5px 0px 5px 10px;
   color: #fc3571;
+}
+
+.deleteButton, .saveButton, .cancelButton {
+  margin: 2px;
 }
