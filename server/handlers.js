@@ -112,7 +112,7 @@
   
       if (!user) {
         res.json({
-          message: "No username found",
+          message: "no username found",
           status: 404,
           userId: "",
         });
@@ -121,7 +121,7 @@
         req.session.user = user;
   
         res.json({
-          message: "Login successful",
+          message: "login successful",
           status: 200,
           user: user,
         });
@@ -129,7 +129,7 @@
       }
   
       res.json({
-        message: "Password incorrect",
+        message: "password incorrect",
         status: 401,
         userId: "",
       });
@@ -143,7 +143,21 @@
   
     registerNewUser: async (req, res) => {
       const { username, email, password } = req.body;
-  
+
+
+      if (await User.findOne({
+            where: {
+              username: username
+            }
+          })
+
+        ) {
+        res.json({
+          message: "username taken",
+          status: 401
+        });
+        return
+      }  
       await User.create({
         username: username,
         email: email,
@@ -180,7 +194,8 @@
             ],
           },
         ],
-      });
+      }
+      );
   
       req.session.user = user;
   
@@ -415,6 +430,7 @@
         res.status(403).send("Not authorized to create a List");
       }
     },
+
     deleteList: async (req, res) => {
         const { listId } = req.params;
       
@@ -424,13 +440,13 @@
     },
     
     editList: async (req, res) => {
-      const { titleState, listId } = req.body;
-      console.log(titleState)
+      const { titleState, listId, dateState } = req.body;
       try {
         const list = await List.findByPk(listId);
         if (list) {
           await list.update({
             listName: titleState,
+            dueDate: dateState,
           });
           const updatedList = await List.findByPk(listId)
           res.json(updatedList);
@@ -442,7 +458,7 @@
           .json({ success: false, error: "Internal Server Error Editing List" });
       }
     },
-  
+
     addGroupList: async (req, res) => {
       const userId = req.session.user.userId;
       const { groupId } = req.params;
@@ -471,7 +487,35 @@
         res.status(403).send("You must be the group owner to create a GroupList");
       }
     },
-  
+    
+    deleteGroupList: async (req, res) => {
+      const { groupListId } = req.params;
+    
+      await GroupList.destroy({ where: { groupListId: groupListId } });
+
+    res.json("success");
+  },
+
+    editGroupList: async (req, res) => {
+      const { titleState, groupListId, dateState } = req.body;
+      try {
+        const groupList = await GroupList.findByPk(groupListId);
+        if (groupList) {
+          await groupList.update({
+            groupListName: titleState,
+            dueDate: dateState,
+          });
+          const updatedGroupList = await GroupList.findByPk(groupListId)
+          res.json(updatedGroupList);
+        }
+      } catch (error) {
+        console.log("Error");
+        res
+          .status(500)
+          .json({ success: false, error: "Internal Server Error Editing Group List" });
+      }
+    }, 
+
     getLists: async (req, res) => {
       const user = req.session.user;
       if (user) {

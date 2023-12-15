@@ -17,9 +17,8 @@ const Home = () => {
   const initialState = useSelector((state) => state.login.lists);
   const isMemberOf = useSelector((state) => state.login.isMemberOf);
 
-  console.log(isMemberOf)
+  const sortedLists = initialState.sort((a, b) => {
 
-  const sortedLists = initialState.sort((a,b) => {
     return new Date(a.dueDate) - new Date(b.dueDate);
   });
 
@@ -49,9 +48,10 @@ const Home = () => {
     const res = await axios.post("/api/addList", FormData);
     const newList = res.data.list;
 
-    setLists([...lists, newList].sort(function(a,b){
-      return new Date(a.dueDate) - new Date(b.dueDate);
-    })
+    setLists(
+      [...lists, newList].sort(function (a, b) {
+        return new Date(a.dueDate) - new Date(b.dueDate);
+      })
     );
 
     setErrorMessage(false);
@@ -84,7 +84,27 @@ const Home = () => {
   }
 
   const listDisplay = lists.map((list) => {
-    return <List key={list.listId} list={list} ownerId={userId} />;
+    const handleDeleteList = async () => {
+      if (
+        list.listName &&
+        confirm(`Are you sure you want to delete ${list.listName}?`)
+      ) {
+        const res = await axios.delete(`/api/deleteList/${list.listId}`);
+        if (res.data === "success") {
+          console.log("List Deleted");
+          setLists(lists.filter((el) => el.listId !== list.listId));
+        }
+      }
+    };
+
+    return (
+      <List
+        key={list.listId}
+        list={list}
+        ownerId={userId}
+        handleDeleteList={handleDeleteList}
+      />
+    );
   });
 
   const merge = (a, b, predicate = (a, b) => a === b) => {
@@ -129,12 +149,16 @@ const Home = () => {
         </div>
         <br />
         <hr className="homeLines" />
-        {listDisplay}
+        <div className="listBody">
+          {listDisplay}
+        </div>
       </div>
       <div className="listDisplay">
-        <h1 className="groupListTitles">Group List's</h1>
+        <h1 className="groupListTitles">Group Lists</h1>
         <hr className="homeLines" />
-        {groupDisplay}
+        <div className="listBody">
+          {groupDisplay}
+        </div>
       </div>
     </div>
   );

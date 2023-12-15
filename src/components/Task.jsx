@@ -1,7 +1,9 @@
 import React, { useState } from "react";
+
 import axios from "axios";
 import '../css/Task.css'
 import { MdDeleteForever } from "react-icons/md";
+
 
 const Task = ({ task, handleCheck, checkState, isEditingList, handleDeleteTask }) => {
   const { title, taskId } = task;
@@ -38,6 +40,20 @@ const Task = ({ task, handleCheck, checkState, isEditingList, handleDeleteTask }
           onChange={(e) => handleCheck(e, taskId)}
         />
       ): null}
+      <input
+        type="checkbox"
+        className="checkbox"
+        id={`${title}-${taskId}`}
+        disabled={checkState}
+        checked={checkState}
+        readOnly={checkState}
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
+        style={{
+          cursor: isHovered ? "pointer" : "default",
+        }}
+        onChange={(e) => handleCheck(e, taskId)}
+      ></input>
       <p className="task">{title}</p>
     </div>
   );

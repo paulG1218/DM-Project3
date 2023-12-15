@@ -27,18 +27,20 @@ const RegisterForm = ({ onRegisterUser }) => {
   return (
     <form
       onSubmit={(e) => {
+        const errorText = document.getElementById('errorTxt')
         if (email === "" || username === "" || password === "") {
-          alert("Please fill in all fields");
+          e.preventDefault()
+          errorText.innerText = 'Please fill out all fields'
           return;
         } else if (password === confirmPassword) {
           onRegisterUser(e, {
             username: username,
             email: email,
             password: password,
-          });
+          }, document.getElementById('errorTxt'));
         } else {
           e.preventDefault();
-          alert("Passwords do not match");
+          errorText.innerText = 'Passwords must match'
         }
       }}
     >
@@ -56,7 +58,7 @@ const RegisterForm = ({ onRegisterUser }) => {
         placeholder="Email"
         value={email}
         onChange={(e) => setEmail(e.target.value.trim())}
-        maxLength={20}
+        maxLength={30}
       />
       <br />
       <input
@@ -80,6 +82,7 @@ const RegisterForm = ({ onRegisterUser }) => {
         maxLength={20}
       />
       <br />
+      <p id="errorTxt"></p>
       <button type="submit" id="submit" className="signUpBtn">
         Sign Up
       </button>

@@ -13,7 +13,7 @@ const GroupsModal = ({ show, handleModal }) => {
     pos6: { disabled: true, value: "" },
   });
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const handleJoin = async () => {
     const res = await axios.put("/api/addMember", {
@@ -23,34 +23,34 @@ const GroupsModal = ({ show, handleModal }) => {
         joinCodeState.pos3.value +
         joinCodeState.pos4.value +
         joinCodeState.pos5.value +
-        joinCodeState.pos6.value
+        joinCodeState.pos6.value,
     });
-    console.log(res.data)
-    const errorTxt = document.getElementById('errorTxt')
+
+    const errorTxt = document.getElementById("errorTxt");
     switch (res.data.message) {
-        case 'added':
-            setJoinCodeState({
-                pos1: { disabled: false, value: "" },
-                pos2: { disabled: true, value: "" },
-                pos3: { disabled: true, value: "" },
-                pos4: { disabled: true, value: "" },
-                pos5: { disabled: true, value: "" },
-                pos6: { disabled: true, value: "" },
-              })
-            handleModal()
-            break;
-        case 'no group':
-            errorTxt.innerText = 'Group does not exist'
-            break;
-        case 'no user':
-            navigate('/')
-            break;
-        case 'already in':
-            errorTxt.innerText = 'Already a member.'
-            break;
-        default:
-            errorTxt.innerText = 'Something went wrong'
-            break;
+      case "added":
+        setJoinCodeState({
+          pos1: { disabled: false, value: "" },
+          pos2: { disabled: true, value: "" },
+          pos3: { disabled: true, value: "" },
+          pos4: { disabled: true, value: "" },
+          pos5: { disabled: true, value: "" },
+          pos6: { disabled: true, value: "" },
+        });
+        handleModal();
+        break;
+      case "no group":
+        errorTxt.innerText = "Group does not exist";
+        break;
+      case "no user":
+        navigate("/");
+        break;
+      case "already in":
+        errorTxt.innerText = "Already a member.";
+        break;
+      default:
+        errorTxt.innerText = "Something went wrong";
+        break;
     }
   };
 
@@ -86,7 +86,7 @@ const GroupsModal = ({ show, handleModal }) => {
         }
         break;
       case "pos2":
-        console.log(Number.isInteger(+e.key))
+        console.log(Number.isInteger(+e.key));
         if (e.key !== "" && Number.isInteger(+e.key)) {
           setJoinCodeState({
             ...joinCodeState,
@@ -228,52 +228,51 @@ const GroupsModal = ({ show, handleModal }) => {
             },
           });
         } else if (e.keyCode === 8) {
-            if(joinCodeState.pos6.value !== '') {
-                setJoinCodeState({
-                    ...joinCodeState,
-                    pos6: {
-                      ...joinCodeState.pos6,
-                      value: "",
-                      disabled: false,
-                    }
-                })
-            }else{
-                setJoinCodeState({
-                    ...joinCodeState,
-                    pos5: {
-                        ...joinCodeState.pos5,
-                        value: "",
-                        disabled: false,
-                    },
-                    pos6: {
-                        ...joinCodeState.pos6,
-                        value: "",
-                        disabled: true,
-                    },
-                });
-                setTimeout(() => {
-                    document.getElementById("pos5").focus();
-                }, 10);
-            }
-        } else if (e.keyCode === 13 && joinCodeState.pos6.value !== '') {
-            handleJoin()
+          if (joinCodeState.pos6.value !== "") {
+            setJoinCodeState({
+              ...joinCodeState,
+              pos6: {
+                ...joinCodeState.pos6,
+                value: "",
+                disabled: false,
+              },
+            });
+          } else {
+            setJoinCodeState({
+              ...joinCodeState,
+              pos5: {
+                ...joinCodeState.pos5,
+                value: "",
+                disabled: false,
+              },
+              pos6: {
+                ...joinCodeState.pos6,
+                value: "",
+                disabled: true,
+              },
+            });
+            setTimeout(() => {
+              document.getElementById("pos5").focus();
+            }, 10);
+          }
+        } else if (e.keyCode === 13 && joinCodeState.pos6.value !== "") {
+          handleJoin();
         }
         break;
     }
   };
 
-
   return (
-    <div>
+    <div className="groupsModal">
       <div className="container">
         <div className="interior">
           <a
-            className="btn"
+            className="btn joinGroupBtn"
             href="#open-modal"
             id="openJoinCodeButton"
             onClick={() => {
-                handleModal()
-                focusFirst()
+              handleModal();
+              focusFirst();
             }}
           >
             + Join a group
@@ -281,104 +280,107 @@ const GroupsModal = ({ show, handleModal }) => {
         </div>
       </div>
       {show ? (
-      <div id="open-modal" className="modal-window">
-        <div>
-          <a
-            title="Close"
-            class="modal-close"
-            onClick={() => {
-              setJoinCodeState({
-                pos1: { disabled: false, value: "" },
-                pos2: { disabled: true, value: "" },
-                pos3: { disabled: true, value: "" },
-                pos4: { disabled: true, value: "" },
-                pos5: { disabled: true, value: "" },
-                pos6: { disabled: true, value: "" },
-              })
-            handleModal()
-        }
-            }
-          >
-            Close
-          </a>
-          <h1>Join a group</h1>
-          <div>Enter a group code to join!</div>
-          <br />
-          <div className="joinGroupCodeBox">
-            <input
-              type="text"
-              className="joinGroupCode"
-              id="pos1"
-              maxLength={1}
-              disabled={joinCodeState.pos1.disabled}
-              onKeyDown={(e) => handleKeyDown(e)}
-              value={joinCodeState.pos1.value}
-              readOnly={joinCodeState.pos1.disabled}
-            />
-            <input
-              type="text"
-              className="joinGroupCode"
-              id="pos2"
-              maxLength={1}
-              disabled={joinCodeState.pos2.disabled}
-              onKeyDown={(e) => handleKeyDown(e)}
-              value={joinCodeState.pos2.value}
-              readOnly={joinCodeState.pos2.disabled}
-            />
-            <input
-              type="text"
-              className="joinGroupCode"
-              id="pos3"
-              maxLength={1}
-              disabled={joinCodeState.pos3.disabled}
-              onKeyDown={(e) => handleKeyDown(e)}
-              value={joinCodeState.pos3.value}
-              readOnly={joinCodeState.pos3.disabled}
-            />
-            <input
-              type="text"
-              className="joinGroupCode"
-              id="pos4"
-              maxLength={1}
-              disabled={joinCodeState.pos4.disabled}
-              onKeyDown={(e) => handleKeyDown(e)}
-              value={joinCodeState.pos4.value}
-              readOnly={joinCodeState.pos4.disabled}
-            />
-            <input
-              type="text"
-              className="joinGroupCode"
-              id="pos5"
-              maxLength={1}
-              disabled={joinCodeState.pos5.disabled}
-              onKeyDown={(e) => handleKeyDown(e)}
-              value={joinCodeState.pos5.value}
-              readOnly={joinCodeState.pos5.disabled}
-            />
-            <input
-              type="text"
-              className="joinGroupCode"
-              id="pos6"
-              maxLength={1}
-              disabled={joinCodeState.pos6.disabled}
-              onKeyDown={(e) => handleKeyDown(e)}
-              value={joinCodeState.pos6.value}
-              readOnly={joinCodeState.pos6.disabled}
-            />
-          </div>
+        <div id="open-modal" className="modal-window">
           <div>
-            <p id="errorTxt"></p>
-          </div>
-          <div>
-            <button className="joinSubmit" onClick={() => {
-                handleJoin()
-                }}>
-              Join
-            </button>
+            <a
+              title="Close"
+              class="modal-close"
+              onClick={() => {
+                setJoinCodeState({
+                  pos1: { disabled: false, value: "" },
+                  pos2: { disabled: true, value: "" },
+                  pos3: { disabled: true, value: "" },
+                  pos4: { disabled: true, value: "" },
+                  pos5: { disabled: true, value: "" },
+                  pos6: { disabled: true, value: "" },
+                });
+                handleModal();
+              }}
+            >
+              Close
+            </a>
+            <h1>Join a group</h1>
+            <div>Enter a group code to join!</div>
+            <br />
+            <div className="joinGroupCodeBox">
+              <input
+                type="text"
+                className="joinGroupCode"
+                id="pos1"
+                maxLength={1}
+                disabled={joinCodeState.pos1.disabled}
+                onKeyDown={(e) => handleKeyDown(e)}
+                value={joinCodeState.pos1.value}
+                readOnly={joinCodeState.pos1.disabled}
+              />
+              <input
+                type="text"
+                className="joinGroupCode"
+                id="pos2"
+                maxLength={1}
+                disabled={joinCodeState.pos2.disabled}
+                onKeyDown={(e) => handleKeyDown(e)}
+                value={joinCodeState.pos2.value}
+                readOnly={joinCodeState.pos2.disabled}
+              />
+              <input
+                type="text"
+                className="joinGroupCode"
+                id="pos3"
+                maxLength={1}
+                disabled={joinCodeState.pos3.disabled}
+                onKeyDown={(e) => handleKeyDown(e)}
+                value={joinCodeState.pos3.value}
+                readOnly={joinCodeState.pos3.disabled}
+              />
+              <input
+                type="text"
+                className="joinGroupCode"
+                id="pos4"
+                maxLength={1}
+                disabled={joinCodeState.pos4.disabled}
+                onKeyDown={(e) => handleKeyDown(e)}
+                value={joinCodeState.pos4.value}
+                readOnly={joinCodeState.pos4.disabled}
+              />
+              <input
+                type="text"
+                className="joinGroupCode"
+                id="pos5"
+                maxLength={1}
+                disabled={joinCodeState.pos5.disabled}
+                onKeyDown={(e) => handleKeyDown(e)}
+                value={joinCodeState.pos5.value}
+                readOnly={joinCodeState.pos5.disabled}
+              />
+              <input
+                type="text"
+                className="joinGroupCode"
+                id="pos6"
+                maxLength={1}
+                disabled={joinCodeState.pos6.disabled}
+                onKeyDown={(e) => handleKeyDown(e)}
+                value={joinCodeState.pos6.value}
+                readOnly={joinCodeState.pos6.disabled}
+              />
+            </div>
+            <div>
+              <p id="errorTxt"></p>
+            </div>
+            <div>
+              <button
+                className="joinSubmit"
+                onClick={() => {
+                  handleJoin();
+                }}
+              >
+                Join
+              </button>
+            </div>
           </div>
         </div>
-      </div>) : null}
+      ) : null}
     </div>
-    )
+  );
 };
 export default GroupsModal;

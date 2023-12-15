@@ -34,18 +34,20 @@ const isMemberMap = isMemberOf.map((groupMember) => {
   const groupDisplay = merge(groupMap, isMemberMap, (a, b) => a.props.groupId === b.props.groupId)
 
   return (
-    <>
       <div>
-        <h1 className="pageTitle">Your Groups</h1>
-        <GroupsModal show={showJoinModal} handleModal={handleJoinModal} />
-        <NewGroupModal className="newGroupModal" show={showNewModal} handleModal={handleNewModal}/>
+        <div className="pageHeader">
+          <h1 className="pageTitle">
+            Your Groups
+          </h1>
+          <GroupsModal show={showJoinModal} handleModal={handleJoinModal} />
+          <NewGroupModal className="newGroupModal" show={showNewModal} handleModal={handleNewModal}/>
+        </div>
         <div className="groupListDisplay">
           <h1 className="groupListHeader">All</h1>
           <hr className="homeLines" />
           {groupDisplay}
         </div>
       </div>
-    </>
   );
 };
 

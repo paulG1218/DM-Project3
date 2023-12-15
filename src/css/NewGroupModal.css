@@ -32,4 +32,8 @@
       font-size: 150%;
       margin: 0 0 15px;
     }
-  }
+}
+
+div.joinGroupCodeBox {
+    justify-content: center;
+}

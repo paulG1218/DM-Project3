@@ -1,0 +1,17 @@
+.addTaskBtn, .cancelBtn {
+    background-color: #fc3571;
+    border-radius: 7px;
+    border-color: #fc3571;
+    border-style: solid;
+    color: rgba(255, 255, 255, 0.87);
+    float: right;
+    margin-right: 10px;
+}
+
+.titleBox {
+    border-radius: 7px;
+}
+
+.diff {
+    border-radius: 7px;
+}

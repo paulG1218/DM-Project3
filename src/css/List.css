@@ -12,16 +12,6 @@
   margin-left: 20px;
 }
 
-/* .accordion {
-  background-color: #eee;
-  color: #444;
-  cursor: pointer;
-  padding: 18px;
-  width: 100%;
-  text-align: left;
-  transition: 0.4s;
-} */
-
 /* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
 .accordion:hover {
   color: #fc3571;
@@ -34,11 +24,6 @@
   display: none;
   overflow: hidden;
 }
-
-/* .accordion-item {
-  border: 1px solid #fc3571;
-  margin-bottom: 4px;
-} */
 
 .accordion-header {
   display: flex;
@@ -62,6 +47,7 @@
   border-color: #fc3571;
   border-style: solid;
   float: right;
+  color: rgba(255, 255, 255, 0.87);
 }
 
 .addTask {
@@ -124,3 +110,16 @@
   width: 24px;
   padding: 3px 2px 5px 1px;
 }
+
+.deleteButton, .saveButton, .cancelButton {
+  margin: 2px;
+}
+
+.editInput {
+  border-radius: 9px;
+  max-width: fit-content;
+  max-height: fit-content;
+  margin: 2px;
+}
+
+

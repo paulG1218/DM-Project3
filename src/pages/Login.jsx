@@ -8,17 +8,25 @@ const Login = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const onLogin = async (e, formData) => {
+  const onLogin = async (e, formData, errorText) => {
     e.preventDefault();
     await axios.post("/api/login", formData).then((res) => {
-      if (res.data.status !== 200) {
-        console.log("login failed");
-      } else {
-        dispatch({
-          type: "authenticated",
-          payload: res.data.user,
-        });
-        window.location.href = '/'
+      switch (res.data.message) {
+        case 'login successful':
+          dispatch({
+            type: "authenticated",
+            payload: res.data.user,
+          });
+          window.location.href = '/'
+          break;
+        case 'no username found':
+          errorText.innerText = "User does not exist";
+          break;
+        case 'password incorrect':
+          errorText.innerText = "Password incorrect";
+          break;
+        default:
+          errorText.innerText = "Something went wrong";
       }
     });
   };
