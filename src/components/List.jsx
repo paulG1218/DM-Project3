@@ -15,7 +15,6 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 
-
 const List = ({ list, handleDeleteList }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -99,7 +98,6 @@ const List = ({ list, handleDeleteList }) => {
         console.log("Failed to check task");
         return;
       } else {
-        
         task = res.data.task;
         setCheckStates((prevCheckStates) => {
           const updatedCheckStates = [...prevCheckStates];
@@ -125,16 +123,16 @@ const List = ({ list, handleDeleteList }) => {
             break;
         }
       }
-      handleShow()
+      handleShow();
     };
 
     const handleDeleteTask = async (taskId) => {
       const res = await axios.delete(`/api/deleteTask/${taskId}`);
-   
-      if(res.data === "Task successfully deleted.") {
-       console.log("Delete Task with ID:", taskId);
-       setTasks(tasks.filter(task => task.taskId !== taskId));
-      };
+
+      if (res.data === "Task successfully deleted.") {
+        console.log("Delete Task with ID:", taskId);
+        setTasks(tasks.filter((task) => task.taskId !== taskId));
+      }
     };
 
     return (
@@ -233,53 +231,39 @@ const List = ({ list, handleDeleteList }) => {
                       Launch demo modal
                     </Button> */}
 
-                    <Modal show={show} onHide={handleClose} variant='dark'>
-                      <Modal.Header closeButton>
-                        <Modal.Title>Cat Picture</Modal.Title>
-                      </Modal.Header>
-                      <Modal.Body > 1cat
-                        
+      <Modal show={show} onHide={handleClose} variant="dark">
+        <Modal.Header closeButton>
+          <Modal.Title>Cat Picture</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          {" "}
+          1cat
+          {catImageUrl ?? (
+            <img
+              src={catImageUrl}
+              alt="Random Cat GIF"
+              style={{ width: "300px", height: "200px" }}
+            />
+          )}
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            Close
+          </Button>
+        </Modal.Footer>
+      </Modal>
 
-                        {catImageUrl ??
-                          <img
-                            src={catImageUrl}
-                            alt="Random Cat GIF"
-                            style={{ width: "300px", height: "200px" }}
-                          />
-                        }
-                        
-
-               
-                      </Modal.Body>
-                      <Modal.Footer>
-                        <Button variant="secondary" onClick={handleClose} >
-                          Close
-                        </Button>
-                       
-                      </Modal.Footer>
-                    </Modal>
-
-                    <Modal show={show} onHide={handleClose} style={{color: "black"}}>
-                      <Modal.Header closeButton>
-                        <Modal.Title>Short Story</Modal.Title>
-                      </Modal.Header>
-                      <Modal.Body >
-                        
-
-                       
-                        {story ??
-                        {story}
-                        }
-
-               
-                      </Modal.Body>
-                      <Modal.Footer>
-                        <Button variant="secondary" onClick={handleClose} >
-                          Close
-                        </Button>
-                       
-                      </Modal.Footer>
-                    </Modal>
+      <Modal show={show} onHide={handleClose} style={{ color: "black" }}>
+        <Modal.Header closeButton>
+          <Modal.Title>Short Story</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>{story ?? { story }}</Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            Close
+          </Button>
+        </Modal.Footer>
+      </Modal>
       <div className={`accordion-item ${isActive ? "active" : ""}`}>
         <div className="accordion-header">
           {isEditingList ? (
@@ -344,7 +328,7 @@ const List = ({ list, handleDeleteList }) => {
                       onClick={() => {
                         setIsEditingList(false), titleState;
                       }}
-                    >
+                    />
                   </>
                 ) : (
                   <>
@@ -433,25 +417,25 @@ const List = ({ list, handleDeleteList }) => {
                       Launch demo modal
                     </Button>
 
-            <Modal show={show} onHide={handleClose} style={ {color: "black"}}>
+                    <Modal
+                      show={show}
+                      onHide={handleClose}
+                      style={{ color: "black" }}
+                    >
                       <Modal.Header closeButton>
                         <Modal.Title>Cat Picture</Modal.Title>
                       </Modal.Header>
                       <Modal.Body>
-
-                       
-                  <img
-                    src={catImageUrl}
-                    alt="Random Cat GIF"
-                    style={{ width: "300px", height: "200px" }}
-                  />
-               
+                        <img
+                          src={catImageUrl}
+                          alt="Random Cat GIF"
+                          style={{ width: "300px", height: "200px" }}
+                        />
                       </Modal.Body>
                       <Modal.Footer>
                         <Button variant="secondary" onClick={handleClose}>
                           Close
                         </Button>
-                        
                       </Modal.Footer>
                     </Modal>
                   </>
