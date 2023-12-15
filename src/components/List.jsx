@@ -26,6 +26,7 @@ const List = ({ list, handleDeleteList }) => {
   const [titleState, setTitleState] = useState(
     list.listName ? list.listName : list.groupListName
   );
+  const [dateState, setDateState] = useState(list.dueDate);
   const [catImageUrl, setCatImageUrl] = useState(null);
   const [story, setStory] = useState("");
   const [score, setScore] = useState(0);
@@ -172,34 +173,17 @@ const List = ({ list, handleDeleteList }) => {
     setHovered(false);
   };
 
-  // const handleDeleteList = async () => {
-  //   if (
-  //     list.listName &&
-  //     confirm(`Are you sure you want to delete ${list.listName}?`)
-  //   ) {
-  //     const res = await axios.delete(`/api/deleteList/${list.listId}`);
-  //     if (res.data === "success") {
-  //       console.log("List Deleted");
-  //     }
-  //   } else if (
-  //     list.groupListName &&
-  //     confirm(`Are you sure you want to delete ${list.groupListName}?`)
-  //   ) {
-  //     const res = await axios.delete(
-  //       `/api/deleteGroupList/${list.groupListId}`
-  //     );
-  //     if (res.data === "success") {
-  //       console.log("Group List Deleted");
-  //     }
-  //   }
-  // };
-
   const handleSaveList = async () => {
     if (list.listName) {
       await axios
-        .put("/api/editList", { titleState: titleState, listId: list.listId })
+        .put("/api/editList", {
+          titleState: titleState,
+          listId: list.listId,
+          dateState: dateState,
+        })
         .then((res) => {
           setTitleState(res.data.listName);
+          setDateState(res.data.dueDate);
 
           setIsEditingList(false);
         });
@@ -208,9 +192,11 @@ const List = ({ list, handleDeleteList }) => {
         .put("/api/editGroupList", {
           titleState: titleState,
           groupListId: list.groupListId,
+          dateState: dateState,
         })
         .then((res) => {
           setTitleState(res.data.groupListName);
+          setDateState(res.data.dueDate);
 
           setIsEditingList(false);
         });
@@ -225,9 +211,16 @@ const List = ({ list, handleDeleteList }) => {
             <h2>
               <input
                 value={titleState}
+                className="editInput"
                 type="text"
                 maxLength={17}
                 onChange={(e) => setTitleState(e.target.value)}
+              />
+              <input
+                className="editInput"
+                value={dateState}
+                type="date"
+                onChange={(e) => setDateState(e.target.value)}
               />
             </h2>
           ) : (
@@ -305,7 +298,12 @@ const List = ({ list, handleDeleteList }) => {
         <div className="accordion-body">
           {/* Render your taskDisplay content here */}
           {isActive && <div className="checklist-display">{taskDisplay}</div>}
-          {showTaskForm && <AddTaskForm handleAddTask={handleAddTask} setShowTaskForm={setShowTaskForm}/>}
+          {showTaskForm && (
+            <AddTaskForm
+              handleAddTask={handleAddTask}
+              setShowTaskForm={setShowTaskForm}
+            />
+          )}
           {completedTasks.length > 0 && (
             <div className="completed-accordion">
               <div

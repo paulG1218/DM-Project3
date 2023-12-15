@@ -110,3 +110,9 @@
 .deleteButton, .saveButton, .cancelButton {
   margin: 2px;
 }
+
+.editInput {
+  border-radius: 9px;
+  max-width: fit-content;
+  /* background-color: rgba(255, 255, 255, 0.87); */
+}
