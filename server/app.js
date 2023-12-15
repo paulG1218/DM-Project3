@@ -44,6 +44,8 @@ app.delete('/api/leaveGroup/:groupId', handlers.leaveGroup)
 app.post('/api/addGroupList/:groupId', handlers.addGroupList)
 app.put('/api/editGroupList', handlers.editGroupList)
 app.delete('/api/deleteGroupList/:groupListId', handlers.deleteGroupList)
+app.post('/api/createGroup', handlers.createGroup)
+
 
 ViteExpress.listen(app, port, () =>
   console.log(`Server is listening on http://localhost:${port}`)

@@ -25,6 +25,7 @@ const GroupsModal = ({ show, handleModal }) => {
         joinCodeState.pos5.value +
         joinCodeState.pos6.value
     });
+    console.log(res.data)
     const errorTxt = document.getElementById('errorTxt')
     switch (res.data.message) {
         case 'added':

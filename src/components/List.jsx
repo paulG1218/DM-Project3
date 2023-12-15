@@ -305,7 +305,7 @@ const List = ({ list, handleDeleteList }) => {
         <div className="accordion-body">
           {/* Render your taskDisplay content here */}
           {isActive && <div className="checklist-display">{taskDisplay}</div>}
-          {showTaskForm && <AddTaskForm handleAddTask={handleAddTask} />}
+          {showTaskForm && <AddTaskForm handleAddTask={handleAddTask} setShowTaskForm={setShowTaskForm}/>}
           {completedTasks.length > 0 && (
             <div className="completed-accordion">
               <div
