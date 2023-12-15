@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const AddTaskForm = ({handleAddTask}) => {
+const AddTaskForm = ({handleAddTask, setShowTaskForm}) => {
   const [title, setTitle] = useState("");
   const [difficulty, setDifficulty] = useState(1)
 
@@ -13,7 +13,15 @@ const AddTaskForm = ({handleAddTask}) => {
         })
 
       }}>
-    
+        <button
+          className="cancelButton"
+           onClick={(e) => {
+            e.preventDefault()
+          setShowTaskForm(false);
+          }}
+        >
+         Cancel
+       </button>
         <input
           placeholder="title"
           value={title}
@@ -29,6 +37,7 @@ const AddTaskForm = ({handleAddTask}) => {
         Add task
       </button>
       </form>
+
     </div>
   );
 };
