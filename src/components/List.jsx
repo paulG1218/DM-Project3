@@ -213,7 +213,7 @@ const List = ({ list, handleDeleteList }) => {
                 value={titleState}
                 className="editInput"
                 type="text"
-                maxLength={17}
+                maxLength={25}
                 onChange={(e) => setTitleState(e.target.value)}
               />
               <input
@@ -296,7 +296,6 @@ const List = ({ list, handleDeleteList }) => {
           </div>
         </div>
         <div className="accordion-body">
-          {/* Render your taskDisplay content here */}
           {isActive && <div className="checklist-display">{taskDisplay}</div>}
           {showTaskForm && (
             <AddTaskForm
