@@ -24,7 +24,6 @@
 .modal-content {
   max-width: 25%;
   max-height: 90%;
-  top: -9%;
   position: absolute;
   background-color: black !important;
   padding: 20px;
