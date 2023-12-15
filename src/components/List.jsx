@@ -9,6 +9,7 @@ import { AnimationEasy, AnimationMedium, AnimationHard } from "./Animation.jsx";
 import { useSelector, useDispatch } from "react-redux";
 import AddTaskForm from "./AddTaskForm.jsx";
 import { FaPencilAlt } from "react-icons/fa";
+import { MdDeleteForever } from "react-icons/md";
 
 const List = ({ list, ownerId }) => {
   const navigate = useNavigate();
@@ -123,6 +124,14 @@ const List = ({ list, ownerId }) => {
       }
     };
 
+    const handleDeleteTask = async (taskId) => {
+      const res = await axios.delete(`/api/deleteTask/${taskId}`);
+   
+      if(res.data === "Task successfully deleted.") {
+       console.log("Delete Task with ID:", taskId);
+      };
+    };
+
     return (
       <Task
       
@@ -130,6 +139,8 @@ const List = ({ list, ownerId }) => {
         task={task}
         handleCheck={handleCheck}
         checkState={checkStates[index]}
+        isEditingList={isEditingList}
+        handleDeleteList={handleDeleteTask}
       />
     );
   });
@@ -240,10 +251,12 @@ const List = ({ list, ownerId }) => {
               <>
                 {isEditingList ? (
                   <>
-                    <button className="deleteButton" onClick={(e) => handleDeleteList(e)}>Delete</button>
-                    <button className="saveButton" onClick={(e) => handleSave(e)}>Save</button>
                     <button className="cancelButton" onClick={(e) => setIsEditingList(false)}>
                       Cancel
+                    </button>
+                    <button className="saveButton" onClick={(e) => handleSave(e)}>Save</button>
+                    <button className="deleteButton" onClick={(e) => handleDeleteList(e)}>
+                      <MdDeleteForever />
                     </button>
                   </>
                 ) : (
