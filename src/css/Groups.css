@@ -32,6 +32,11 @@
     
   }
 
+.leave-group-btn-container {
+    margin-top: 20px;
+    margin-bottom: 30px;
+}
+
 .leaveGroupBtn {
     width: 11rem;
     height: 48px;

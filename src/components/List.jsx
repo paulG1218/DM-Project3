@@ -40,7 +40,7 @@ const List = ({ list, ownerId }) => {
   const [showAnimation3, setShowAnimation3] = useState(false);
   const [isActive, setIsActive] = useState(false);
 
-  const [showTaskForm, setShowTaskForm] = useState(false);
+  const [showTaskForm, setShowTaskForm] = useState(false); //
   const [isEditingList, setIsEditingList] = useState(false);
 
   const [titleState, setTitleState] = useState(list.listName ? list.listName : list.groupListName);
@@ -268,7 +268,7 @@ const List = ({ list, ownerId }) => {
         <div className="accordion-body">
           {/* Render your taskDisplay content here */}
           {isActive && <div className="checklist-display">{taskDisplay}</div>}
-          {showTaskForm && <AddTaskForm handleAddTask={handleAddTask} />}
+          {showTaskForm && <AddTaskForm handleAddTask={handleAddTask} setShowTaskForm={setShowTaskForm}/>}
           {completedTasks.length > 0 && (
             <div className="completed-accordion">
               <div

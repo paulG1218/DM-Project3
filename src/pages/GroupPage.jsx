@@ -1,15 +1,21 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
 import { useLoaderData } from "react-router-dom";
 import List from "../components/List.jsx";
 import { useNavigate } from "react-router-dom";
+import "../css/LeaveGroupModal.css";
 import "../css/Groups.css";
 import axios from 'axios';
-import { useDispatch } from "react-redux";
+import LeaveGroupModal from "../components/LeaveGroupModal.jsx";
 
 const GroupPage = () => {
   const { group, userId } = useLoaderData();
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
+  const [showLeaveGroupModal, setShowLeaveGroupModal] = useState(false);
+
+  const handleLeaveGroupModal = () => setShowLeaveGroupModal(!showLeaveGroupModal)
 
   const handleLeaveGroup = async () => {
     const res = await axios.delete(`/api/leaveGroup/${group.groupId}`);
@@ -18,6 +24,7 @@ const GroupPage = () => {
       type: 'leave_group',
       payload: res.data.groupMembers
     });
+    setShowLeaveGroupModal(false)
     window.location.href = '/'
   }
 
@@ -46,8 +53,21 @@ const GroupPage = () => {
         {group.userId === userId ? (
             <h4>Code: {group.code}</h4>
           ) : (
-            <button className="leaveGroupBtn" onClick={handleLeaveGroup}>Leave Group</button>
+             <div>
+            <div className="leave-group-btn-container">
+              <button className="leaveGroupBtn" onClick={handleLeaveGroupModal}>
+                Leave Group
+              </button>
+            </div>
+
+            <LeaveGroupModal 
+              show={showLeaveGroupModal}
+              handleLeaveGroupModal={handleLeaveGroupModal} 
+              handleLeaveGroup={handleLeaveGroup}
+            />
+          </div>
           )
+
         }
       </div>
       <div className="groupListDisplay">
