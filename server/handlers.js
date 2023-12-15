@@ -390,6 +390,18 @@
         message: "Task made",
       });
     },
+
+    deleteTask: async (req, res) => {
+      const { taskId } = req.params
+
+      await Task.destroy({
+        where: {
+          taskId: taskId,
+        }
+      })
+
+      res.json("Task successfully deleted.")
+    },
   
     addList: async (req, res) => {
       if (req.session.user.userId) {

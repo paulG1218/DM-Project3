@@ -9,10 +9,12 @@ import { AnimationEasy, AnimationMedium, AnimationHard } from "./Animation.jsx";
 import { useDispatch } from "react-redux";
 import AddTaskForm from "./AddTaskForm.jsx";
 import { FaPencilAlt } from "react-icons/fa";
+import { MdDeleteForever } from "react-icons/md";
 import "bootstrap/dist/css/bootstrap.min.css";
 // import "bootstrap/js/src/modal";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
+
 
 const List = ({ list, handleDeleteList }) => {
   const navigate = useNavigate();
@@ -126,12 +128,23 @@ const List = ({ list, handleDeleteList }) => {
       handleShow()
     };
 
+    const handleDeleteTask = async (taskId) => {
+      const res = await axios.delete(`/api/deleteTask/${taskId}`);
+   
+      if(res.data === "Task successfully deleted.") {
+       console.log("Delete Task with ID:", taskId);
+       setTasks(tasks.filter(task => task.taskId !== taskId));
+      };
+    };
+
     return (
       <Task
         key={task.taskId}
         task={task}
         handleCheck={handleCheck}
         checkState={checkStates[index]}
+        isEditingList={isEditingList}
+        handleDeleteTask={handleDeleteTask}
       />
     );
   });
@@ -318,7 +331,7 @@ const List = ({ list, handleDeleteList }) => {
                       className="deleteButton"
                       onClick={() => handleDeleteList()}
                     >
-                      Delete
+                      <MdDeleteForever />
                     </button>
                     <button
                       className="saveButton"
@@ -332,8 +345,6 @@ const List = ({ list, handleDeleteList }) => {
                         setIsEditingList(false), titleState;
                       }}
                     >
-                      Cancel
-                    </button>
                   </>
                 ) : (
                   <>

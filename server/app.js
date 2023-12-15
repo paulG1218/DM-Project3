@@ -27,7 +27,8 @@ app.put('/api/editUser/:userId', handlers.editUserInfo)
 app.delete('/api/deleteUser', handlers.deleteUser)
 app.put('/api/addAdmin', handlers.addAdmin)
 
-//list routes
+
+//List routes
 app.post('/api/addList', handlers.addList)
 app.get('/api/getLists', handlers.getLists)
 app.delete('/api/deleteList/:listId', handlers.deleteList)
@@ -36,6 +37,7 @@ app.put('/api/editList', handlers.editList)
 //task routes
 app.put('/api/checkTask', handlers.checkTask)
 app.post('/api/addTask', handlers.addTask)
+app.delete('/api/deleteTask/:taskId', handlers.deleteTask)
 
 //Group routes
 app.get('/api/getGroup/:groupId', handlers.getGroup)
