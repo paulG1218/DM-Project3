@@ -9,6 +9,10 @@ import { AnimationEasy, AnimationMedium, AnimationHard } from "./Animation.jsx";
 import { useDispatch } from "react-redux";
 import AddTaskForm from "./AddTaskForm.jsx";
 import { FaPencilAlt } from "react-icons/fa";
+import "bootstrap/dist/css/bootstrap.min.css";
+// import "bootstrap/js/src/modal";
+import Button from "react-bootstrap/Button";
+import Modal from "react-bootstrap/Modal";
 
 const List = ({ list, handleDeleteList }) => {
   const navigate = useNavigate();
@@ -93,6 +97,7 @@ const List = ({ list, handleDeleteList }) => {
         console.log("Failed to check task");
         return;
       } else {
+        
         task = res.data.task;
         setCheckStates((prevCheckStates) => {
           const updatedCheckStates = [...prevCheckStates];
@@ -118,6 +123,7 @@ const List = ({ list, handleDeleteList }) => {
             break;
         }
       }
+      handleShow()
     };
 
     return (
@@ -203,8 +209,64 @@ const List = ({ list, handleDeleteList }) => {
     }
   };
 
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
   return (
     <div>
+      {/* <Button variant="primary" onClick={handleShow}>
+                      Launch demo modal
+                    </Button> */}
+
+                    <Modal show={show} onHide={handleClose} variant='dark'>
+                      <Modal.Header closeButton>
+                        <Modal.Title>Cat Picture</Modal.Title>
+                      </Modal.Header>
+                      <Modal.Body > 1cat
+                        
+
+                        {catImageUrl ??
+                          <img
+                            src={catImageUrl}
+                            alt="Random Cat GIF"
+                            style={{ width: "300px", height: "200px" }}
+                          />
+                        }
+                        
+
+               
+                      </Modal.Body>
+                      <Modal.Footer>
+                        <Button variant="secondary" onClick={handleClose} >
+                          Close
+                        </Button>
+                       
+                      </Modal.Footer>
+                    </Modal>
+
+                    <Modal show={show} onHide={handleClose} style={{color: "black"}}>
+                      <Modal.Header closeButton>
+                        <Modal.Title>Short Story</Modal.Title>
+                      </Modal.Header>
+                      <Modal.Body >
+                        
+
+                       
+                        {story ??
+                        {story}
+                        }
+
+               
+                      </Modal.Body>
+                      <Modal.Footer>
+                        <Button variant="secondary" onClick={handleClose} >
+                          Close
+                        </Button>
+                       
+                      </Modal.Footer>
+                    </Modal>
       <div className={`accordion-item ${isActive ? "active" : ""}`}>
         <div className="accordion-header">
           {isEditingList ? (
@@ -337,14 +399,54 @@ const List = ({ list, handleDeleteList }) => {
         <AnimationHard showAnimation3={showAnimation3} />
         {showReward.cat && (
           <div className="cat-container">
-            <button className="close-button" onClick={handleCloseCat}>
-              X
-            </button>
-            <img
-              src={catImageUrl}
-              alt="Random Cat GIF"
-              style={{ width: "300px", height: "200px" }}
-            />
+            Hello from cat
+            <div
+              className="modal fade"
+              id="catImg"
+              tabIndex="-1"
+              aria-hidden="true"
+            >
+              <div className="modal-dialog">
+                <div className="modal-content">
+                  <button className="close-button" onClick={handleCloseCat}>
+                    X
+                  </button>
+
+                  <div
+                    className="modal show"
+                    style={{ display: "block", position: "initial" }}
+                  ></div>
+
+                  <>
+                    <Button variant="primary" onClick={handleShow}>
+                      Launch demo modal
+                    </Button>
+
+            <Modal show={show} onHide={handleClose} style={ {color: "black"}}>
+                      <Modal.Header closeButton>
+                        <Modal.Title>Cat Picture</Modal.Title>
+                      </Modal.Header>
+                      <Modal.Body>
+
+                       
+                  <img
+                    src={catImageUrl}
+                    alt="Random Cat GIF"
+                    style={{ width: "300px", height: "200px" }}
+                  />
+               
+                      </Modal.Body>
+                      <Modal.Footer>
+                        <Button variant="secondary" onClick={handleClose}>
+                          Close
+                        </Button>
+                        
+                      </Modal.Footer>
+                    </Modal>
+                  </>
+                </div>
+              </div>
+            </div>
           </div>
         )}
         {showReward.story && (
