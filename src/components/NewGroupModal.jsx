@@ -30,7 +30,7 @@ const NewGroupModal = ({show, handleModal}) => {
 
     return (
         <div>
-          <div className="container">
+          <div className="container-new">
             <div className="interior">
               <a
                 className="btn"
@@ -58,8 +58,7 @@ const NewGroupModal = ({show, handleModal}) => {
               >
                 Close
               </a>
-              <h1></h1>
-              <div>Name your Group:</div>
+              <h1>Name your Group:</h1>
               <br />
               <div className="joinGroupCodeBox">
                 <input 

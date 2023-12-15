@@ -264,11 +264,11 @@ const GroupsModal = ({ show, handleModal }) => {
 
 
   return (
-    <div>
+    <div className="groupsModal">
       <div className="container">
         <div className="interior">
           <a
-            className="btn"
+            className="btn joinGroupBtn"
             href="#open-modal"
             id="openJoinCodeButton"
             onClick={() => {

@@ -149,12 +149,16 @@ const Home = () => {
         </div>
         <br />
         <hr className="homeLines" />
-        {listDisplay}
+        <div className="listBody">
+          {listDisplay}
+        </div>
       </div>
       <div className="listDisplay">
         <h1 className="groupListTitles">Group Lists</h1>
         <hr className="homeLines" />
-        {groupDisplay}
+        <div className="listBody">
+          {groupDisplay}
+        </div>
       </div>
     </div>
   );
