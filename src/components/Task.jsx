@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import axios from "axios";
-import '../css/Task.css'
+import "../css/Task.css";
 
 const Task = ({ task, handleCheck, checkState }) => {
   const { title, taskId } = task;
@@ -16,7 +15,6 @@ const Task = ({ task, handleCheck, checkState }) => {
 
   return (
     <div className="taskRow">
-     
       <input
         type="checkbox"
         className="checkbox"
@@ -29,7 +27,6 @@ const Task = ({ task, handleCheck, checkState }) => {
         style={{
           cursor: isHovered ? "pointer" : "default",
         }}
-
         onChange={(e) => handleCheck(e, taskId)}
       ></input>
       <p className="task">{title}</p>

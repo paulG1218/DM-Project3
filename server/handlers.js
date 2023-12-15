@@ -413,13 +413,13 @@
     },
     
     editList: async (req, res) => {
-      const { titleState, listId } = req.body;
-      console.log(titleState)
+      const { titleState, listId, dateState } = req.body;
       try {
         const list = await List.findByPk(listId);
         if (list) {
           await list.update({
             listName: titleState,
+            dueDate: dateState,
           });
           const updatedList = await List.findByPk(listId)
           res.json(updatedList);
@@ -470,13 +470,13 @@
   },
 
     editGroupList: async (req, res) => {
-      const { titleState, groupListId } = req.body;
-      console.log(titleState)
+      const { titleState, groupListId, dateState } = req.body;
       try {
         const groupList = await GroupList.findByPk(groupListId);
         if (groupList) {
           await groupList.update({
             groupListName: titleState,
+            dueDate: dateState,
           });
           const updatedGroupList = await GroupList.findByPk(groupListId)
           res.json(updatedGroupList);
