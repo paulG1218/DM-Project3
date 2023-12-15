@@ -180,7 +180,8 @@
             ],
           },
         ],
-      });
+      }
+      );
   
       req.session.user = user;
   

@@ -145,3 +145,8 @@ h1.groupHeading {
     font-size: 40px;
     font-style: none;
 }
+
+#errorTxt {
+    color: red;
+    font-weight: bold;
+}
