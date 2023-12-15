@@ -43,8 +43,11 @@ const GroupPage = () => {
     <div>
       <h1 className="pageHeader">{group.groupName}</h1>
       <div>
-        {group.userId !== userId && 
-          <button className="leaveGroupBtn" onClick={handleLeaveGroup}>Leave Group</button>
+        {group.userId === userId ? (
+            <h4>Code: {group.code}</h4>
+          ) : (
+            <button className="leaveGroupBtn" onClick={handleLeaveGroup}>Leave Group</button>
+          )
         }
       </div>
       <div className="groupListDisplay">

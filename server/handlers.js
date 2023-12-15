@@ -499,11 +499,14 @@
           });
   
           res.json({ message: "added", groupMember: groupMember });
+          return
         } else {
           res.json({ message: "no group" });
+          return
         }
       } else {
         res.json({ message: "no user" });
+        return
       }
     },
 
@@ -579,6 +582,48 @@
 
       return res.status(200).json({ message: 'User successfully removed from the group.', groupMembers: updatedGroupMembers})
     },
+
+    createGroup: async (req, res) => {
+      const {groupName} = req.body
+
+      if (!req.session.user) {
+        res.json({message: 'no user'})
+        return
+      }
+
+      let code = Math.floor(Math.random() * (899999) + 100000)
+
+      let currentGroup = await Group.findOne({
+        where: {
+          code: code
+        }
+      })
+
+      while (currentGroup) {
+        code = Math.floor(Math.random() * (899999) + 100000)
+
+        currentGroup = await Group.findOne({
+          where: {
+            code: code
+          }
+        })
+
+      }
+
+
+      const newGroup = await Group.create({
+        userId: req.session.user.userId,
+        groupName: groupName,
+        code: code
+      })
+
+      await GroupMember.create({
+        userId: req.session.user.userId,
+        groupId: newGroup.groupId
+      })
+
+      res.json({message: 'created', group: newGroup})
+    }
   };
 
   
