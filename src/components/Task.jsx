@@ -16,22 +16,20 @@ const Task = ({ task, handleCheck, checkState }) => {
 
   return (
     <div className="taskRow">
-     
-      <input
-        type="checkbox"
-        className="checkbox"
-        id={`${title}-${taskId}`}
-        disabled={checkState}
-        checked={checkState}
-        readOnly={checkState}
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
-        style={{
+        <input
+          type="checkbox"
+          className="checkbox"
+          id={`${title}-${taskId}`}
+          disabled={checkState}
+          checked={checkState}
+          readOnly={checkState}
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
+          style={{
           cursor: isHovered ? "pointer" : "default",
         }}
-
         onChange={(e) => handleCheck(e, taskId)}
-      ></input>
+        ></input>
       <p className="task">{title}</p>
     </div>
   );

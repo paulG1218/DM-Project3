@@ -105,3 +105,22 @@
   margin: 5px 0px 5px 10px;
   color: #fc3571;
 }
+
+.delete-task-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #fc3571;
+  border-color: #fc3571;
+  border-radius: 7px;
+  border-style: solid;
+  color: rgba(255, 255, 255, 0.87);
+  float: left;
+  margin-left: 0.7rem;
+  margin-right: 10px;
+  margin-top: 5px;
+  cursor: pointer;
+  height: 23px;
+  width: 24px;
+  padding: 3px 2px 5px 1px;
+}
