@@ -4,11 +4,15 @@ import "../css/Groups.css";
 import { useSelector } from "react-redux";
 import Group from "../components/Group.jsx";
 import GroupsModal from "../components/GroupsModal.jsx";
+import NewGroupModal from "../components/NewGroupModal.jsx";
 
 const Groups = () => {
-  const [showModal, setShowModal] = useState(false);
+  const [showJoinModal, setShowJoinModal] = useState(false);
+  const [showNewModal, setShowNewModal] = useState(false);
 
-  const handleModal = () => setShowModal(!showModal);
+  const handleJoinModal = () => setShowJoinModal(!showJoinModal);
+
+  const handleNewModal = () => setShowNewModal(!showNewModal)
 
   const groups = useSelector((state) => state.login.groups);
   const isMemberOf = useSelector((state) => state.login.isMemberOf)
@@ -31,9 +35,10 @@ const isMemberMap = isMemberOf.map((groupMember) => {
 
   return (
     <>
-      <GroupsModal show={showModal} handleModal={handleModal} />
       <div>
         <h1 className="pageTitle">Your Groups</h1>
+        <GroupsModal show={showJoinModal} handleModal={handleJoinModal} />
+        <NewGroupModal className="newGroupModal" show={showNewModal} handleModal={handleNewModal}/>
         <div className="groupListDisplay">
           <h1 className="groupListHeader">All</h1>
           <hr className="homeLines" />

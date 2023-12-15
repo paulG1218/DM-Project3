@@ -28,17 +28,24 @@ app.delete('/api/deleteUser', handlers.deleteUser)
 app.put('/api/addAdmin', handlers.addAdmin)
 
 //list routes
-app.put('/api/checkTask', handlers.checkTask)
 app.post('/api/addList', handlers.addList)
-app.post('/api/addGroupList/:groupId', handlers.addGroupList)
 app.get('/api/getLists', handlers.getLists)
-app.post('/api/addTask', handlers.addTask)
 app.delete('/api/deleteList/:listId', handlers.deleteList)
 app.put('/api/editList', handlers.editList)
+
+//task routes
+app.put('/api/checkTask', handlers.checkTask)
+app.post('/api/addTask', handlers.addTask)
+
 //Group routes
 app.get('/api/getGroup/:groupId', handlers.getGroup)
 app.put('/api/addmember', handlers.addMember)
 app.delete('/api/leaveGroup/:groupId', handlers.leaveGroup)
+app.post('/api/addGroupList/:groupId', handlers.addGroupList)
+app.put('/api/editGroupList', handlers.editGroupList)
+app.delete('/api/deleteGroupList/:groupListId', handlers.deleteGroupList)
+app.post('/api/createGroup', handlers.createGroup)
+
 
 ViteExpress.listen(app, port, () =>
   console.log(`Server is listening on http://localhost:${port}`)

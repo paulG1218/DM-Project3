@@ -403,6 +403,7 @@
         res.status(403).send("Not authorized to create a List");
       }
     },
+
     deleteList: async (req, res) => {
         const { listId } = req.params;
       
@@ -412,13 +413,13 @@
     },
     
     editList: async (req, res) => {
-      const { titleState, listId } = req.body;
-      console.log(titleState)
+      const { titleState, listId, dateState } = req.body;
       try {
         const list = await List.findByPk(listId);
         if (list) {
           await list.update({
             listName: titleState,
+            dueDate: dateState,
           });
           const updatedList = await List.findByPk(listId)
           res.json(updatedList);
@@ -430,7 +431,7 @@
           .json({ success: false, error: "Internal Server Error Editing List" });
       }
     },
-  
+
     addGroupList: async (req, res) => {
       const userId = req.session.user.userId;
       const { groupId } = req.params;
@@ -459,7 +460,35 @@
         res.status(403).send("You must be the group owner to create a GroupList");
       }
     },
-  
+    
+    deleteGroupList: async (req, res) => {
+      const { groupListId } = req.params;
+    
+      await GroupList.destroy({ where: { groupListId: groupListId } });
+
+    res.json("success");
+  },
+
+    editGroupList: async (req, res) => {
+      const { titleState, groupListId, dateState } = req.body;
+      try {
+        const groupList = await GroupList.findByPk(groupListId);
+        if (groupList) {
+          await groupList.update({
+            groupListName: titleState,
+            dueDate: dateState,
+          });
+          const updatedGroupList = await GroupList.findByPk(groupListId)
+          res.json(updatedGroupList);
+        }
+      } catch (error) {
+        console.log("Error");
+        res
+          .status(500)
+          .json({ success: false, error: "Internal Server Error Editing Group List" });
+      }
+    }, 
+
     getLists: async (req, res) => {
       const user = req.session.user;
       if (user) {
@@ -499,11 +528,14 @@
           });
   
           res.json({ message: "added", groupMember: groupMember });
+          return
         } else {
           res.json({ message: "no group" });
+          return
         }
       } else {
         res.json({ message: "no user" });
+        return
       }
     },
 
@@ -579,6 +611,48 @@
 
       return res.status(200).json({ message: 'User successfully removed from the group.', groupMembers: updatedGroupMembers})
     },
+
+    createGroup: async (req, res) => {
+      const {groupName} = req.body
+
+      if (!req.session.user) {
+        res.json({message: 'no user'})
+        return
+      }
+
+      let code = Math.floor(Math.random() * (899999) + 100000)
+
+      let currentGroup = await Group.findOne({
+        where: {
+          code: code
+        }
+      })
+
+      while (currentGroup) {
+        code = Math.floor(Math.random() * (899999) + 100000)
+
+        currentGroup = await Group.findOne({
+          where: {
+            code: code
+          }
+        })
+
+      }
+
+
+      const newGroup = await Group.create({
+        userId: req.session.user.userId,
+        groupName: groupName,
+        code: code
+      })
+
+      await GroupMember.create({
+        userId: req.session.user.userId,
+        groupId: newGroup.groupId
+      })
+
+      res.json({message: 'created', group: newGroup})
+    }
   };
 
   

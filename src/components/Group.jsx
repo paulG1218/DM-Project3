@@ -6,10 +6,13 @@ import { useState } from "react";
 import CreateGroupListForm from "./CreateGroupListForm.jsx";
 import axios from "axios";
 import "../css/GroupComponent.css";
+import { useSelector } from "react-redux";
 
 const Group = ({ group }) => {
   const { groupName, groupLists, groupId, userId } = group;
   const [groupListState, setGroupListState] = useState(groupLists);
+
+  const currentUser = useSelector((state) => state.login.userId)
 
   const [showGroupForm, setShowGroupForm] = useState(false);
   const [errorGroupMessage, setErrorGroupMessage] = useState(false);
@@ -40,12 +43,29 @@ const Group = ({ group }) => {
   };
 
   const listDisplay = groupListState.map((list) => {
+    const handleDeleteList = async () => {
+      if (
+        list.groupListName &&
+        confirm(`Are you sure you want to delete ${list.groupListName}?`)
+      ) {
+        const res = await axios.delete(
+          `/api/deleteGroupList/${list.groupListId}`
+        );
+        if (res.data === "success") {
+          console.log("Group List Deleted");
+          setGroupListState(
+            groupListState.filter((el) => el.groupListId !== list.groupListId)
+          );
+        }
+      }
+    };
     return (
       <List
         key={list.groupListId}
         tasks={list.tasks}
         list={list}
         ownerId={userId}
+        handleDeleteList={handleDeleteList}
       />
     );
   });
@@ -57,10 +77,12 @@ const Group = ({ group }) => {
           <a href={`/groups/${groupId}`} className="groupName">
             {groupName}
           </a>
+          {currentUser === userId &&
           <button onClick={toggleGroupForm} className="addGroupListBtn">
             <FaPlus />
             <CiViewList />
           </button>
+          }
         </h1>
       </div>
       {showGroupForm ? (

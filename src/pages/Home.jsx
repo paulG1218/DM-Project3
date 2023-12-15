@@ -9,6 +9,7 @@ import CreateListForm from "../components/CreateListForm.jsx";
 import axios from "axios";
 import { useLoaderData, useNavigate } from "react-router-dom";
 import Accordion from "react-bootstrap/Accordion";
+import { GiConsoleController } from "react-icons/gi";
 
 const Home = () => {
   const userId = useSelector((state) => state.login.userId);
@@ -16,7 +17,8 @@ const Home = () => {
   const initialState = useSelector((state) => state.login.lists);
   const isMemberOf = useSelector((state) => state.login.isMemberOf);
 
-  const sortedLists = initialState.sort((a,b) => {
+  const sortedLists = initialState.sort((a, b) => {
+
     return new Date(a.dueDate) - new Date(b.dueDate);
   });
 
@@ -46,9 +48,10 @@ const Home = () => {
     const res = await axios.post("/api/addList", FormData);
     const newList = res.data.list;
 
-    setLists([...lists, newList].sort(function(a,b){
-      return new Date(a.dueDate) - new Date(b.dueDate);
-    })
+    setLists(
+      [...lists, newList].sort(function (a, b) {
+        return new Date(a.dueDate) - new Date(b.dueDate);
+      })
     );
 
     setErrorMessage(false);
@@ -69,11 +72,11 @@ const Home = () => {
           in one place.
         </h3>
         <br />
-        <a className="loginLinkHome" hover href="/login">
+        <a className="loginLinkHome" href="/login">
           Login
         </a>
         <br />
-        <a className="loginLinkHome" hover href="/registerNewUser">
+        <a className="loginLinkHome" href="/registerNewUser">
           Register
         </a>
       </div>
@@ -81,13 +84,33 @@ const Home = () => {
   }
 
   const listDisplay = lists.map((list) => {
-    return <List key={list.listId} list={list} ownerId={userId} />;
+    const handleDeleteList = async () => {
+      if (
+        list.listName &&
+        confirm(`Are you sure you want to delete ${list.listName}?`)
+      ) {
+        const res = await axios.delete(`/api/deleteList/${list.listId}`);
+        if (res.data === "success") {
+          console.log("List Deleted");
+          setLists(lists.filter((el) => el.listId !== list.listId));
+        }
+      }
+    };
+
+    return (
+      <List
+        key={list.listId}
+        list={list}
+        ownerId={userId}
+        handleDeleteList={handleDeleteList}
+      />
+    );
   });
 
   const merge = (a, b, predicate = (a, b) => a === b) => {
     const c = [...a];
     b.forEach((bItem) =>
-      c.some((cItem) => predicate(bItem, cItem)) ? null : c.push(bItem)
+      c.some((cItem) => predicate(cItem, bItem)) ? null : c.push(bItem)
     );
     return c;
   };
@@ -103,7 +126,7 @@ const Home = () => {
   const groupDisplay = merge(
     groupMap,
     isMemberMap,
-    (a, b) => a.props.groupId === b.props.groupId
+    (a, b) => a.props.group.groupId === b.props.group.groupId
   );
 
   return (
@@ -129,7 +152,7 @@ const Home = () => {
         {listDisplay}
       </div>
       <div className="listDisplay">
-        <h1 className="groupListTitles">Group List's</h1>
+        <h1 className="groupListTitles">Group Lists</h1>
         <hr className="homeLines" />
         {groupDisplay}
       </div>
