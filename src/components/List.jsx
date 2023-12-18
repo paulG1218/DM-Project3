@@ -3,7 +3,7 @@ import axios from "axios";
 import Task from "./Task.jsx";
 import "../css/List.css";
 import { useNavigate } from "react-router-dom";
-import { TiArrowSortedDown, TiArrowSortedUp  } from "react-icons/ti";
+import { TiArrowSortedDown, TiArrowSortedUp } from "react-icons/ti";
 import { AnimationEasy, AnimationMedium, AnimationHard } from "./Animation.jsx";
 import { useDispatch } from "react-redux";
 import AddTaskForm from "./AddTaskForm.jsx";
@@ -38,9 +38,8 @@ const List = ({ list, handleDeleteList }) => {
   const [showAnimation, setShowAnimation] = useState({
     easy: false,
     med: false,
-    hard: false
-
-  })
+    hard: false,
+  });
   const [isActive, setIsActive] = useState(false);
   const [showTaskForm, setShowTaskForm] = useState(false);
   const [isEditingList, setIsEditingList] = useState(false);
@@ -93,20 +92,20 @@ const List = ({ list, handleDeleteList }) => {
         switch (task.difficulty) {
           case 1:
             getRandomCatGif();
-            setShowReward({...showReward, cat: true})
-            setShowAnimation({...showAnimation, easy: true})
+            setShowReward({ ...showReward, cat: true });
+            setShowAnimation({ ...showAnimation, easy: true });
             dispatch({ type: "updateScore", payload: { points: 5 } });
             break;
           case 2:
             getRandomStory();
-            setShowReward({...showReward, story: true})
-            setShowAnimation({...showAnimation, med: true})
+            setShowReward({ ...showReward, story: true });
+            setShowAnimation({ ...showAnimation, med: true });
             dispatch({ type: "updateScore", payload: { points: 10 } });
             break;
           case 3:
             getSnakeGame();
-            setShowReward({...showReward, game: true})
-            setShowAnimation({...showAnimation, hard: true})
+            setShowReward({ ...showReward, game: true });
+            setShowAnimation({ ...showAnimation, hard: true });
             dispatch({ type: "updateScore", payload: { points: 20 } });
             break;
         }
@@ -168,7 +167,7 @@ const List = ({ list, handleDeleteList }) => {
   const toggleCompletedAccordion = () => {
     setCompletedIsActive(!completedIsActive);
   };
-  
+
   const handleSaveList = async () => {
     if (list.listName) {
       await axios
@@ -201,34 +200,45 @@ const List = ({ list, handleDeleteList }) => {
 
   return (
     <div>
-      <CatReward handleModal={() => setShowReward({...showReward, cat: !showReward.cat})} cat={catImageUrl} showModal={showReward.cat}/>
-      <StoryReward handleModal={() => setShowReward({...showReward, story: !showReward.story})} story={story} showModal={showReward.story}/> 
+      <CatReward
+        handleModal={() =>
+          setShowReward({ ...showReward, cat: !showReward.cat })
+        }
+        cat={catImageUrl}
+        showModal={showReward.cat}
+      />
+      <StoryReward
+        handleModal={() =>
+          setShowReward({ ...showReward, story: !showReward.story })
+        }
+        story={story}
+        showModal={showReward.story}
+      />
       <div className={`accordion-item ${isActive ? "active" : ""}`}>
-        <AnimationEasy showAnimation={showAnimation.easy}/>
-        <AnimationMedium showAnimation2={showAnimation.med}/>
-        <AnimationHard showAnimation3={showAnimation.hard}/>
+        <AnimationEasy showAnimation={showAnimation.easy} />
+        <AnimationMedium showAnimation2={showAnimation.med} />
+        <AnimationHard showAnimation3={showAnimation.hard} />
         <div className="accordion-header">
           {isEditingList ? (
-            <h2>
+            <h4>
               <input
-                value={titleState}
-                className="editInput"
                 type="text"
-                maxLength={25}
+                className="editInput"
+                value={titleState}
                 onChange={(e) => setTitleState(e.target.value)}
+                maxLength={35}
               />
               <input
-                className="editInput"
-                value={dateState}
                 type="date"
-                onChange={(e) => setDateState(e.target.value)}
+                className="editInput"
+                value={new Date(dateState).toISOString().split("T")[0]}
+                onChange={(e) => {
+                  setDateState(e.target.value);
+                }}
               />
-            </h2>
+            </h4>
           ) : (
-            <h2
-              className="listNameHeader"
-              onClick={toggleAccordion}
-            >
+            <h2 className="listNameHeader" onClick={toggleAccordion}>
               {titleState}
               {isActive ? (
                 <TiArrowSortedUp
@@ -265,7 +275,9 @@ const List = ({ list, handleDeleteList }) => {
                       onClick={() => {
                         setIsEditingList(false), titleState;
                       }}
-                    />
+                    >
+                      Cancel
+                    </button>
                   </>
                 ) : (
                   <>

@@ -107,6 +107,7 @@ a.logo {
   color:#fc3571;
   height: 50px;
   width: auto;
+  margin-left: 20%;
 }
 
 .checkMark:hover {
