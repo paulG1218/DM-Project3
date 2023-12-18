@@ -133,7 +133,7 @@ h1.groupHeading {
 }
 
 .loginLinkHome {
-    color: white;
+    color: rgba(255, 255, 255, 0.87);
     font-family: 'Nova Square', sans-serif;
     font-size: 40px;
     text-decoration: none;
