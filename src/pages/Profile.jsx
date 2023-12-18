@@ -11,11 +11,14 @@ const Profile = () => {
 
   const navigate = useNavigate();
 
+  const errorTxt = document.getElementById('errorText')
+
   switch (data.message) {
     case "success":
       break;
     default:
-    // navigate("/login");
+      window.location.href = "/login";
+      break;
   }
 
   const [isEditing, setIsEditing] = useState(false);
@@ -27,17 +30,26 @@ const Profile = () => {
 
   const handleSave = async (e) => {
     e.preventDefault();
-
-    try {
-      await axios.put(`/api/editUser/${user.userId}`, userInfo);
-      dispatch({
-        type: "userChange",
-        payload: userInfo,
-      });
-    } catch (error) {
-      console.log("Error updating User:", error);
-    }
-    setIsEditing(false);
+      const res = await axios.put(`/api/editUser/${user.userId}`, userInfo);
+      switch (res.data.message) {
+        case 'saved':
+          dispatch({
+            type: "userChange",
+            payload: userInfo,
+          });
+          setIsEditing(false)
+          errorTxt.style.color = 'green'
+          errorTxt.innerText = 'Saved!'
+          break;
+        case 'name taken':
+          errorTxt.style.color = 'red'
+          errorTxt.innerText = 'Username taken'
+          break;
+        default:
+          errorTxt.style.color = 'red'
+          errorTxt.innerText = 'Something went wrong'
+          break;
+      }
   };
 
   const handleDelete = async (e) => {
@@ -62,12 +74,25 @@ const Profile = () => {
   };
 
   const isAdmin = useSelector((state) => state.login.isAdmin);
-  console.log("Profile.jsx isAdmin: " + isAdmin);
 
   const [newAdmin, setNewAdmin] = useState("");
 
-  const handleNewAdmin = async () => {
-    await axios.put("/api/addAdmin", { newAdmin: newAdmin });
+  const handleNewAdmin = async (e) => {
+    e.preventDefault()
+    const res = await axios.put("/api/addAdmin", { newAdmin: newAdmin });
+    if (res.data.message === 'admin added') {
+     errorTxt.style.color = 'green'
+     errorTxt.innerText = 'Admin added!'
+      return
+    } else if (res.data.message === 'no user') {
+     errorTxt.style.color = 'red'
+     errorTxt.innerText = 'User does not exist'
+      return
+    } else {
+     errorTxt.style.color = 'red'
+     errorTxt.innerText = 'Something went wrong'
+      return
+    }
   };
 
   return (
@@ -136,7 +161,7 @@ const Profile = () => {
       <br />
 
       {isAdmin && (
-        <form onSubmit={handleNewAdmin}>
+        <form onSubmit={(e) => handleNewAdmin(e)}>
           <label className="addmin">Add an admin:</label>
           <input
             placeholder="Add an admin"
@@ -149,6 +174,7 @@ const Profile = () => {
           </button>
         </form>
       )}
+      <p id="errorText"></p>
     </div>
   );
 };
