@@ -71,6 +71,8 @@ a.btn {
   &:hover {
     background-color: #fc3571;
     color: rgba(255, 255, 255, 0.87);
+    font-weight: bold;
+    margin-top: 25px;
   }
 }
 

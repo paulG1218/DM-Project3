@@ -5,6 +5,7 @@
   min-height: 58px;
 }
 
+
 /* Style the links inside the navigation bar */
 .topnav a {
   color: rgba(255, 255, 255, 0.87);
@@ -14,6 +15,11 @@
   font-size: 17px;
   cursor: pointer;
 }
+  
+  
+  
+
+
 
 /* Add a color to the active/current link */
 .topnav a.active {
@@ -111,5 +117,20 @@ a.logo {
 
   .sidebar a {
     font-size: 18px;
+
+  .checkMark {
+    color:#fc3571;
+    height: 50px;
+    width: auto;
+  }
+
+  .checkMark:hover {
+    color: rgba(255, 255, 255, 0.87);
+  }
+  
+  /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+  @media screen and (max-height: 450px) {
+    .sidebar {padding-top: 15px;}
+    .sidebar a {font-size: 18px;}
   }
 }

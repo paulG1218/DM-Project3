@@ -11,19 +11,17 @@ const NavBar = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  
   const sessionCheck = async () => {
-    const res = await axios.get("/api/sessionCheck")
-      if (res.data.userId) {
-        dispatch({
-          type: "authenticated",
-          payload: res.data,
-        });
-      } else {
-        console.log(res.data);
-      }
+    const res = await axios.get("/api/sessionCheck");
+    if (res.data.userId) {
+      dispatch({
+        type: "authenticated",
+        payload: res.data,
+      });
+    } else {
+      console.log(res.data);
     }
-
+  };
 
   const userId = useSelector((state) => state.login.userId);
   const username = useSelector((state) => state.login.username);
@@ -82,22 +80,33 @@ const NavBar = () => {
 
       <div id="mySidebar" className="sidebar">
         <div className="sidebarHead">
-          <a href="/" className="logo" onMouseEnter={handleMouseEnter}
+          <a
+            href="/"
+            className="logo"
+            onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
             style={{
               cursor: isHovered ? "pointer" : "default",
-            }}>
-            <GiCheckMark onMouseEnter={handleMouseEnter}
-            onMouseLeave={handleMouseLeave}
-            style={{
-              cursor: isHovered ? "pointer" : "default",
-            }} />
+            }}
+          >
+            <GiCheckMark
+              className="checkMark"
+              onMouseEnter={handleMouseEnter}
+              onMouseLeave={handleMouseLeave}
+              style={{
+                cursor: isHovered ? "pointer" : "default",
+              }}
+            />
           </a>
-          <a className="closebtn" onClick={() => closeNav()} onMouseEnter={handleMouseEnter}
+          <a
+            className="closebtn"
+            onClick={() => closeNav()}
+            onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
             style={{
               cursor: isHovered ? "pointer" : "default",
-            }}>
+            }}
+          >
             &times;
           </a>
         </div>
@@ -108,11 +117,15 @@ const NavBar = () => {
         )}
         <a href="/groups">Groups</a>
         {userId && (
-          <a onClick={() => handleLogout()} className="logout" onMouseEnter={handleMouseEnter}
-          onMouseLeave={handleMouseLeave}
-          style={{
-            cursor: isHovered ? "pointer" : "default",
-          }}>
+          <a
+            onClick={() => handleLogout()}
+            className="logout"
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
+            style={{
+              cursor: isHovered ? "pointer" : "default",
+            }}
+          >
             Logout
           </a>
         )}
