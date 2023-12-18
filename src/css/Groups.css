@@ -6,8 +6,11 @@
     height: 50vh;
     border-width: 3px;
     border-color: #fc3571;
-    margin-left: 15.5vw;
-    float: left;
+    top: 30px;
+    top: 30vh;
+    bottom: 50px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .groupListDisplay {
@@ -15,11 +18,11 @@
     border-color: rgba(255, 255, 255, 0.87);
     border-radius: 9px;
     width: 40vw;
-    height: 88vh;
+   height: 88vh;
     border-width: 3px;
     border-color: #fc3571;
     margin-left: 2vw;
-    float: center;
+    
     flex-direction: column;
     height: 74vh;
     overflow-y: auto;
@@ -52,10 +55,11 @@
 }
 
 div.container {
-    position: absolute;
+    /* position: absolute;
     width: fit-content;
     right: 1vw;
-    top: 95px;
+    top: 95px; */
+
 }
 
 div.container-new {
@@ -81,3 +85,14 @@ div.container-new {
     padding: 4px 8px;
     height: fit-content;
 }
+
+.container {
+ 
+    bottom: 10px;
+ 
+    position: relative;
+    left: 10vw;
+    right: 10vw;
+    top: 1vw;
+  }
+  

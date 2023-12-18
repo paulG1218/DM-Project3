@@ -53,18 +53,19 @@ const GroupPage = () => {
     setShowGroupForm(false);
   };
 
-  const handleLeaveGroupModal = () => setShowLeaveGroupModal(!showLeaveGroupModal)
+  const handleLeaveGroupModal = () =>
+    setShowLeaveGroupModal(!showLeaveGroupModal);
 
   const handleLeaveGroup = async () => {
     const res = await axios.delete(`/api/leaveGroup/${groupState.groupId}`);
     console.log('User removed from the group:', res.data);
     dispatch({
-      type: 'leave_group',
-      payload: res.data.groupMembers
+      type: "leave_group",
+      payload: res.data.groupMembers,
     });
-    setShowLeaveGroupModal(false)
-    window.location.href = '/'
-  }
+    setShowLeaveGroupModal(false);
+    window.location.href = "/";
+  };
 
   useEffect(() => {
     if (
@@ -160,5 +161,7 @@ const GroupPage = () => {
                 </div>
               </div>
 )}
+
+
 
 export default GroupPage;

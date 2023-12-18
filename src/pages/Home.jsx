@@ -16,13 +16,14 @@ const Home = () => {
   const isMemberOf = useSelector((state) => state.login.isMemberOf);
 
   const sortedLists = initialState.sort((a, b) => {
-
     return new Date(a.dueDate) - new Date(b.dueDate);
   });
 
   const [lists, setLists] = useState(sortedLists);
   const [showForm, setShowForm] = useState(false);
   const [errorMessage, setErrorMessage] = useState(false);
+  const [listName, setListName] = useState("");
+  const [dueDate, setDueDate] = useState("");
 
   useEffect(() => {
     setErrorMessage(false);
@@ -37,14 +38,14 @@ const Home = () => {
   };
 
   const closeForm = () => {
-    setShowForm(false)
-  }
+    setShowForm(false);
+  };
 
   const addList = async (e, FormData) => {
     e.preventDefault();
     if (!FormData.listName || !FormData.dueDate) {
       setErrorMessage(true);
-      return;
+      return "Failed";
     }
 
     const res = await axios.post("/api/addList", FormData);
@@ -59,6 +60,7 @@ const Home = () => {
     setErrorMessage(false);
 
     setShowForm(false);
+    return "Success";
   };
 
   if (!userId) {
@@ -137,33 +139,29 @@ const Home = () => {
       <div className="listDisplay">
         <div className="listHeader">
           <h1 className="listTitle">Lists</h1>
-            <div className="addListContainer">
-              <button onClick={toggleForm} className="addListBtn">
-               <FaPlus />
-                <CiViewList />
-              </button>
-            </div>
-            <div className="listFormPopup">
-              <CreateListForm 
-                addList={addList} 
-                errorMessage={errorMessage}
-                setShowForm={setShowForm}
-                showForm={showForm}
-              />
-            </div>
+          <div className="addListContainer">
+            <button onClick={toggleForm} className="addListBtn">
+              <FaPlus />
+              <CiViewList />
+            </button>
+          </div>
+          <div className="listFormPopup">
+            <CreateListForm
+              addList={addList}
+              errorMessage={errorMessage}
+              setShowForm={setShowForm}
+              showForm={showForm}
+            />
+          </div>
         </div>
         <br />
         <hr className="homeLines" />
-        <div className="listBody">
-          {listDisplay}
-        </div>
+        <div className="listBody">{listDisplay}</div>
       </div>
       <div className="listDisplay">
         <h1 className="groupListTitles">Group Lists</h1>
         <hr className="homeLines" />
-        <div className="listBody">
-          {groupDisplay}
-        </div>
+        <div className="listBody">{groupDisplay}</div>
       </div>
     </div>
   );
