@@ -63,3 +63,21 @@ div.container-new {
     right: 1.6vw;
     top: 50px
 }
+
+.groupListsPageTitle {
+
+}
+
+.addGroupListPageContainer{
+    
+}
+
+.addGroupListBtn-groupPage {
+    background-color: #fc3571;
+    border-color: #fc3571;
+    border-radius: 7px;
+    border-style: solid;
+    color: rgba(255, 255, 255, 0.87);
+    padding: 4px 8px;
+    height: fit-content;
+}
