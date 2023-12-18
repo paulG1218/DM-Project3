@@ -6,15 +6,6 @@ import { MdDeleteForever } from "react-icons/md";
 
 const Task = ({ task, handleCheck, checkState, isEditingList, handleDeleteTask }) => {
   const { title, taskId } = task;
-  const [isHovered, setHovered] = useState(false);
-
-  const handleMouseEnter = () => {
-    setHovered(true);
-  };
-
-  const handleMouseLeave = () => {
-    setHovered(false);
-  };
 
   return (
     <div className="taskRow">
@@ -22,23 +13,17 @@ const Task = ({ task, handleCheck, checkState, isEditingList, handleDeleteTask }
         <button className="delete-task-button" onClick={() => handleDeleteTask(taskId)}>
           <MdDeleteForever />
         </button>
-      ): null}
-      {!isEditingList ? (
-        <input
+      ) : ( 
+      <input
           type="checkbox"
           className="checkbox"
           id={`${title}-${taskId}`}
           disabled={checkState}
           checked={checkState}
           readOnly={checkState}
-          onMouseEnter={handleMouseEnter}
-          onMouseLeave={handleMouseLeave}
-          style={{
-            cursor: isHovered ? "pointer" : "default",
-          }}
-          onChange={(e) => handleCheck(e, taskId)}
+          onChange={() => handleCheck(taskId)}
         />
-      ): null}
+        )}
       <p className="task">{title}</p>
     </div>
   );

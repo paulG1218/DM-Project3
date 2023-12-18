@@ -3,8 +3,8 @@ import axios from "axios";
 import Task from "./Task.jsx";
 import "../css/List.css";
 import { useNavigate } from "react-router-dom";
-import { TiArrowSortedDown } from "react-icons/ti";
-import { TiArrowSortedUp } from "react-icons/ti";
+import { TiArrowSortedDown, TiArrowSortedUp  } from "react-icons/ti";
+import { AnimationEasy, AnimationMedium, AnimationHard } from "./Animation.jsx";
 import { useDispatch } from "react-redux";
 import AddTaskForm from "./AddTaskForm.jsx";
 import { FaPencilAlt } from "react-icons/fa";
@@ -37,6 +37,12 @@ const List = ({ list, handleDeleteList }) => {
     story: false,
     game: false,
   });
+  const [showAnimation, setShowAnimation] = useState({
+    easy: false,
+    med: false,
+    hard: false
+
+  })
   const [isActive, setIsActive] = useState(false);
   const [showTaskForm, setShowTaskForm] = useState(false);
   const [isEditingList, setIsEditingList] = useState(false);
@@ -94,16 +100,19 @@ const List = ({ list, handleDeleteList }) => {
           case 1:
             getRandomCatGif();
             setShowReward({...showReward, cat: true})
+            setShowAnimation({...showAnimation, easy: true})
             dispatch({ type: "updateScore", payload: { points: 5 } });
             break;
           case 2:
             getRandomStory();
             setShowReward({...showReward, story: true})
+            setShowAnimation({...showAnimation, med: true})
             dispatch({ type: "updateScore", payload: { points: 10 } });
             break;
           case 3:
             getSnakeGame();
             setShowReward({...showReward, game: true})
+            setShowAnimation({...showAnimation, hard: true})
             dispatch({ type: "updateScore", payload: { points: 20 } });
             break;
         }
@@ -201,6 +210,9 @@ const List = ({ list, handleDeleteList }) => {
       <CatReward handleModal={() => setShowReward({...showReward, cat: !showReward.cat})} cat={catImageUrl} showModal={showReward.cat}/>
       <StoryReward handleModal={() => setShowReward({...showReward, story: !showReward.story})} story={story} showModal={showReward.story}/> 
       <div className={`accordion-item ${isActive ? "active" : ""}`}>
+        <AnimationEasy showAnimation={showAnimation.easy}/>
+        <AnimationMedium showAnimation2={showAnimation.med}/>
+        <AnimationHard showAnimation3={showAnimation.hard}/>
         <div className="accordion-header">
           {isEditingList ? (
             <h2>

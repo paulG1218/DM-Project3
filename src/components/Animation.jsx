@@ -78,7 +78,6 @@ export const AnimationEasy = ({ showAnimation }) => {
   };
   
 
-// export default {AnimationEasy, animationVisible, Animationhard};
 
 
 

@@ -1,3 +1,7 @@
 .checkbox:checked {
     background-color: red;
 }
+
+.checkbox:hover {
+    cursor: pointer;
+}
