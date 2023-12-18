@@ -137,22 +137,20 @@ const Home = () => {
       <div className="listDisplay">
         <div className="listHeader">
           <h1 className="listTitle">Lists</h1>
-          <div className="addList">
-            <button onClick={toggleForm} className="addListBtn">
-              <FaPlus />
-              <CiViewList />
-            </button>
-            {showForm && (
-              <div className="listFormPopup">
-                <CreateListForm 
-                  addList={addList} 
-                  errorMessage={errorMessage}
-                  setShowForm={setShowForm}
-                  showForm={showForm}
-                />
-              </div>
-            )}
-          </div>
+            <div className="addListContainer">
+              <button onClick={toggleForm} className="addListBtn">
+               <FaPlus />
+                <CiViewList />
+              </button>
+            </div>
+            <div className="listFormPopup">
+              <CreateListForm 
+                addList={addList} 
+                errorMessage={errorMessage}
+                setShowForm={setShowForm}
+                showForm={showForm}
+              />
+            </div>
         </div>
         <br />
         <hr className="homeLines" />
