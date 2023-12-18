@@ -11,7 +11,7 @@
 
 .listBody {
     height: 40.5vw;
-    overflow-y:auto;
+    overflow-y: auto;
 }
 
 .lists {
@@ -69,17 +69,13 @@ a.groupName {
 }
 
 .listTitle {
-display: inline-flex;
-margin-left: 25%;
-margin-top: auto;
-margin-bottom: auto;
+    margin: 0;
+    padding: 0;
+    margin-left: 43%;
 }
 
-.addList {
-    display: inline-flex;
-    float: right;
-    margin-top: 13px;
-    margin-right: 15%;
+.addListContainer {
+    margin-right: 10px;
 }
 
 .addListBtn {
@@ -88,16 +84,14 @@ margin-bottom: auto;
     border-radius: 7px;
     border-style: solid;
     color: rgba(255, 255, 255, 0.87);
-    padding-bottom: 4px;
-    margin-left: 10%;
+    padding: 4px 8px;
     height: fit-content;
-    margin-top: auto;
-    margin-bottom: auto;
 }
 
 .listHeader {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
+    align-items: center;
     margin-top: 15px;
 }
 
@@ -133,7 +127,7 @@ h1.groupHeading {
 }
 
 .loginLinkHome {
-    color: white;
+    color: rgba(255, 255, 255, 0.87);
     font-family: 'Nova Square', sans-serif;
     font-size: 40px;
     text-decoration: none;
