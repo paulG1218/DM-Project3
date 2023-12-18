@@ -18,7 +18,7 @@
   /* Add a color to the active/current link */
   .topnav a.active {
     background-color: #04AA6D;
-    color: white;
+    color: rgba(255, 255, 255, 0.87);
   }
 
   .title {
@@ -78,7 +78,7 @@
   .openbtn {
     font-size: 45px;
     background-color: #333;
-    color: white;
+    color: rgba(255, 255, 255, 0.87);
     border: none;
     float: left;
     height: 60px;
@@ -99,8 +99,18 @@
 
   a.logo {
     padding-right: 40px;
-    padding-left: 100px;
+    padding-left: 110px;
     padding-top: 11px;
+  }
+
+  .checkMark {
+    color:#fc3571;
+    height: 50px;
+    width: auto;
+  }
+
+  .checkMark:hover {
+    color: rgba(255, 255, 255, 0.87);
   }
   
   /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */

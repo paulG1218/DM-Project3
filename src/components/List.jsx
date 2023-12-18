@@ -8,6 +8,7 @@ import { TiArrowSortedUp } from "react-icons/ti";
 import { useDispatch } from "react-redux";
 import AddTaskForm from "./AddTaskForm.jsx";
 import { FaPencilAlt } from "react-icons/fa";
+import { MdDeleteForever } from "react-icons/md";
 import "bootstrap/dist/css/bootstrap.min.css";
 import CatReward from "./CatReward.jsx";
 import StoryReward from "./StoryReward.jsx";
@@ -109,12 +110,23 @@ const List = ({ list, handleDeleteList }) => {
       }
     };
 
+    const handleDeleteTask = async (taskId) => {
+      const res = await axios.delete(`/api/deleteTask/${taskId}`);
+
+      if (res.data === "Task successfully deleted.") {
+        console.log("Delete Task with ID:", taskId);
+        setTasks(tasks.filter((task) => task.taskId !== taskId));
+      }
+    };
+
     return (
       <Task
         key={task.taskId}
         task={task}
         handleCheck={handleCheck}
         checkState={checkStates[index]}
+        isEditingList={isEditingList}
+        handleDeleteTask={handleDeleteTask}
       />
     );
   });
@@ -188,7 +200,6 @@ const List = ({ list, handleDeleteList }) => {
     <div>
       <CatReward handleModal={() => setShowReward({...showReward, cat: !showReward.cat})} cat={catImageUrl} showModal={showReward.cat}/>
       <StoryReward handleModal={() => setShowReward({...showReward, story: !showReward.story})} story={story} showModal={showReward.story}/> 
-
       <div className={`accordion-item ${isActive ? "active" : ""}`}>
         <div className="accordion-header">
           {isEditingList ? (
@@ -235,7 +246,7 @@ const List = ({ list, handleDeleteList }) => {
                       className="deleteButton"
                       onClick={() => handleDeleteList()}
                     >
-                      Delete
+                      <MdDeleteForever />
                     </button>
                     <button
                       className="saveButton"
@@ -248,9 +259,7 @@ const List = ({ list, handleDeleteList }) => {
                       onClick={() => {
                         setIsEditingList(false), titleState;
                       }}
-                    >
-                      Cancel
-                    </button>
+                    />
                   </>
                 ) : (
                   <>
