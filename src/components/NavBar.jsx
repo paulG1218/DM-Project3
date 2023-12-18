@@ -107,8 +107,6 @@ const NavBar = () => {
           <a href="/login">Login</a>
         )}
         <a href="/groups">Groups</a>
-        <a href="#">Clients</a>
-        <a href="#">Contact</a>
         {userId && (
           <a onClick={() => handleLogout()} className="logout" onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
