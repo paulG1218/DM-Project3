@@ -21,6 +21,8 @@
     margin-left: 2vw;
     float: center;
     flex-direction: column;
+    height: 74vh;
+    overflow-y: auto;
 }
 
 .pageTitle {
@@ -46,6 +48,7 @@
 
 .pageHeader {
     display: flex;
+    /* flex-direction: row; */
 }
 
 div.container {
