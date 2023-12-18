@@ -231,7 +231,7 @@ const List = ({ list, handleDeleteList }) => {
                       Launch demo modal
                     </Button> */}
 
-      <Modal show={show} onHide={handleClose} variant="dark">
+      <Modal show={show} onHide={handleClose} >
         <Modal.Header closeButton>
           <Modal.Title>Cat Picture</Modal.Title>
         </Modal.Header>
@@ -253,7 +253,7 @@ const List = ({ list, handleDeleteList }) => {
         </Modal.Footer>
       </Modal>
 
-      <Modal show={show} onHide={handleClose} style={{ color: "black" }}>
+      <Modal show={show} onHide={handleClose} >
         <Modal.Header closeButton>
           <Modal.Title>Short Story</Modal.Title>
         </Modal.Header>
@@ -420,7 +420,7 @@ const List = ({ list, handleDeleteList }) => {
                     <Modal
                       show={show}
                       onHide={handleClose}
-                      style={{ color: "black" }}
+                     
                     >
                       <Modal.Header closeButton>
                         <Modal.Title>Cat Picture</Modal.Title>

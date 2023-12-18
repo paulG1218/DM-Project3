@@ -1,0 +1,45 @@
+.editingUser{
+    flex-direction: column;
+}
+
+
+.delete {
+
+    flex-direction: column;
+    background-color: #fc3571;
+    border-radius: 7px;
+    border-color: #fc3571;
+    border-style: solid;
+    
+    color: rgba(255, 255, 255, 0.87);
+  }
+.header{
+    color: rgba(255, 255, 255, 0.87);
+    
+}
+
+.save {
+    flex-direction: column;
+    background-color: #fc3571 !important;
+    border-radius: 7px!important;
+    border-color: #fc3571!important;
+    border-style: solid!important;
+    margin-top: 5px;
+    
+    color: rgba(255, 255, 255, 0.87)!important;
+  }
+
+  .username{
+    color: rgba(255, 255, 255, 0.87);
+  }
+
+  .password{
+    color: rgba(255, 255, 255, 0.87);
+    margin: 0;
+    margin-top: 5px;
+
+  }
+
+  .addmin{
+    size: 25px;
+  }
