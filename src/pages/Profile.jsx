@@ -2,7 +2,7 @@ import { useLoaderData, useNavigate } from "react-router-dom";
 import React, { useState } from "react";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
-import "../css/Profile.css"
+import "../css/Profile.css";
 
 const Profile = () => {
   const dispatch = useDispatch();
@@ -18,7 +18,6 @@ const Profile = () => {
       break;
     default:
       window.location.href = "/login";
-      console.log('login')
       break;
   }
 
@@ -72,7 +71,6 @@ const Profile = () => {
     } else {
       alert("Account deletion cancelled.");
     }
-
   };
 
   const isAdmin = useSelector((state) => state.login.isAdmin);
@@ -99,9 +97,8 @@ const Profile = () => {
 
   return (
     <div>
-
       <h1 className="header">Profile Page</h1>
-      
+
       <form className="editingUser">
         <input
           onChange={(e) =>
@@ -112,7 +109,7 @@ const Profile = () => {
           value={userInfo.username}
           className="username"
         />
-        <br/>
+        <br />
         <input
           className="email"
           onChange={(e) => setUserInfo({ ...userInfo, email: e.target.value })}
@@ -129,26 +126,26 @@ const Profile = () => {
           readOnly={!isEditing}
           type={isEditing ? "text" : "password"}
           value={userInfo.password}
-          className="password"
+          className="profilePassword"
         />
         <br />
         {isEditing ? (
           <>
-          
-            <button onClick={(e) => handleSave(e)}
-            className="save">Save</button>
+            <button onClick={(e) => handleSave(e)} className="save">
+              Save
+            </button>
             <button
-                className="delete"
+              className="delete"
               onClick={(e) => {
                 handleDelete(e);
               }}
             >
               Delete
-            </button >
+            </button>
           </>
         ) : (
           <button
-          className="save"
+            className="save"
             onClick={(e) => {
               e.preventDefault();
               setIsEditing(true);
@@ -157,14 +154,12 @@ const Profile = () => {
             Edit
           </button>
         )}
-        
       </form>
       <br />
       <br />
       <br />
       <br />
-      
-      
+
       {isAdmin && (
         <form onSubmit={(e) => handleNewAdmin(e)}>
           <label className="addmin">Add an admin:</label>
@@ -174,8 +169,9 @@ const Profile = () => {
             value={newAdmin}
             onChange={(e) => setNewAdmin(e.target.value)}
           />
-          <button type="submit"
-          className="save">Add</button>
+          <button type="submit" className="save">
+            Add
+          </button>
         </form>
       )}
       <p id="errorText"></p>
