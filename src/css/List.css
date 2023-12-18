@@ -103,3 +103,12 @@
   margin: 2px;
 }
 
+.listHeader:hover {
+  cursor: pointer;
+  color: #fc3571;
+}
+.completed-header:hover {
+  cursor: pointer;
+  color: #fc3571;
+}
+

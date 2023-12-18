@@ -27,7 +27,7 @@ const Task = ({ task, handleCheck, checkState }) => {
         style={{
           cursor: isHovered ? "pointer" : "default",
         }}
-        onChange={(e) => handleCheck(e, taskId)}
+        onChange={() => handleCheck(taskId)}
       ></input>
       <p className="task">{title}</p>
     </div>

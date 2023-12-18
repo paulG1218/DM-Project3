@@ -64,7 +64,7 @@ a.btn {
     margin-top: 25px;
     &:hover {
       background-color: #fc3571;
-      color: white;
+      color: rgba(255, 255, 255, 0.87);
     }
 }
 

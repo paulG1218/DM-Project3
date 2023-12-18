@@ -5,14 +5,12 @@ import "../css/List.css";
 import { useNavigate } from "react-router-dom";
 import { TiArrowSortedDown } from "react-icons/ti";
 import { TiArrowSortedUp } from "react-icons/ti";
-import { AnimationEasy, AnimationMedium, AnimationHard } from "./Animation.jsx";
 import { useDispatch } from "react-redux";
 import AddTaskForm from "./AddTaskForm.jsx";
 import { FaPencilAlt } from "react-icons/fa";
 import "bootstrap/dist/css/bootstrap.min.css";
-// import "bootstrap/js/src/modal";
-import Button from "react-bootstrap/Button";
-import Modal from "react-bootstrap/Modal";
+import CatReward from "./CatReward.jsx";
+import StoryReward from "./StoryReward.jsx";
 
 const List = ({ list, handleDeleteList }) => {
   const navigate = useNavigate();
@@ -33,20 +31,15 @@ const List = ({ list, handleDeleteList }) => {
   const [dateState, setDateState] = useState(list.dueDate);
   const [catImageUrl, setCatImageUrl] = useState(null);
   const [story, setStory] = useState("");
-  const [score, setScore] = useState(0);
   const [showReward, setShowReward] = useState({
     cat: false,
     story: false,
     game: false,
   });
-  const [showAnimation, setShowAnimation] = useState(false);
-  const [showAnimation2, setShowAnimation2] = useState(false);
-  const [showAnimation3, setShowAnimation3] = useState(false);
   const [isActive, setIsActive] = useState(false);
   const [showTaskForm, setShowTaskForm] = useState(false);
   const [isEditingList, setIsEditingList] = useState(false);
   const [completedIsActive, setCompletedIsActive] = useState(false);
-  const [isHovered, setHovered] = useState(false);
 
   const getRandomCatGif = async () => {
     try {
@@ -67,10 +60,6 @@ const List = ({ list, handleDeleteList }) => {
     }
   };
 
-  const handleCloseCat = () => {
-    setShowReward({ ...showReward, cat: false });
-  };
-
   const getRandomStory = async () => {
     const res = await axios.get("https://shortstories-api.onrender.com/");
     setStory(res.data.story);
@@ -86,18 +75,13 @@ const List = ({ list, handleDeleteList }) => {
     navigate("/GameBoard");
   };
 
-  const handleCloseStory = () => {
-    setShowReward({ ...showReward, story: false });
-  };
-
   const taskDisplay = tasks.map((task, index) => {
-    const handleCheck = async (e, taskId) => {
+    const handleCheck = async (taskId) => {
       const res = await axios.put("/api/checkTask", { taskId: taskId });
       if (res.data === "failed") {
         console.log("Failed to check task");
         return;
       } else {
-        
         task = res.data.task;
         setCheckStates((prevCheckStates) => {
           const updatedCheckStates = [...prevCheckStates];
@@ -108,22 +92,21 @@ const List = ({ list, handleDeleteList }) => {
         switch (task.difficulty) {
           case 1:
             getRandomCatGif();
-            setShowAnimation(true);
+            setShowReward({...showReward, cat: true})
             dispatch({ type: "updateScore", payload: { points: 5 } });
             break;
           case 2:
             getRandomStory();
-            setShowAnimation2(true);
+            setShowReward({...showReward, story: true})
             dispatch({ type: "updateScore", payload: { points: 10 } });
             break;
           case 3:
             getSnakeGame();
-            setShowAnimation3(true);
+            setShowReward({...showReward, game: true})
             dispatch({ type: "updateScore", payload: { points: 20 } });
             break;
         }
       }
-      handleShow()
     };
 
     return (
@@ -170,15 +153,7 @@ const List = ({ list, handleDeleteList }) => {
   const toggleCompletedAccordion = () => {
     setCompletedIsActive(!completedIsActive);
   };
-
-  const handleMouseEnter = () => {
-    setHovered(true);
-  };
-
-  const handleMouseLeave = () => {
-    setHovered(false);
-  };
-
+  
   const handleSaveList = async () => {
     if (list.listName) {
       await axios
@@ -209,64 +184,11 @@ const List = ({ list, handleDeleteList }) => {
     }
   };
 
-  const [show, setShow] = useState(false);
-
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
-
   return (
     <div>
-      {/* <Button variant="primary" onClick={handleShow}>
-                      Launch demo modal
-                    </Button> */}
+      <CatReward handleModal={() => setShowReward({...showReward, cat: !showReward.cat})} cat={catImageUrl} showModal={showReward.cat}/>
+      <StoryReward handleModal={() => setShowReward({...showReward, story: !showReward.story})} story={story} showModal={showReward.story}/> 
 
-                    <Modal show={show} onHide={handleClose} variant='dark'>
-                      <Modal.Header closeButton>
-                        <Modal.Title>Cat Picture</Modal.Title>
-                      </Modal.Header>
-                      <Modal.Body > 1cat
-                        
-
-                        {catImageUrl ??
-                          <img
-                            src={catImageUrl}
-                            alt="Random Cat GIF"
-                            style={{ width: "300px", height: "200px" }}
-                          />
-                        }
-                        
-
-               
-                      </Modal.Body>
-                      <Modal.Footer>
-                        <Button variant="secondary" onClick={handleClose} >
-                          Close
-                        </Button>
-                       
-                      </Modal.Footer>
-                    </Modal>
-
-                    <Modal show={show} onHide={handleClose} style={{color: "black"}}>
-                      <Modal.Header closeButton>
-                        <Modal.Title>Short Story</Modal.Title>
-                      </Modal.Header>
-                      <Modal.Body >
-                        
-
-                       
-                        {story ??
-                        {story}
-                        }
-
-               
-                      </Modal.Body>
-                      <Modal.Footer>
-                        <Button variant="secondary" onClick={handleClose} >
-                          Close
-                        </Button>
-                       
-                      </Modal.Footer>
-                    </Modal>
       <div className={`accordion-item ${isActive ? "active" : ""}`}>
         <div className="accordion-header">
           {isEditingList ? (
@@ -289,11 +211,6 @@ const List = ({ list, handleDeleteList }) => {
             <h2
               className="listHeader"
               onClick={toggleAccordion}
-              onMouseEnter={handleMouseEnter}
-              onMouseLeave={handleMouseLeave}
-              style={{
-                cursor: isHovered ? "pointer" : "default",
-              }}
             >
               {titleState}
               {isActive ? (
@@ -370,11 +287,6 @@ const List = ({ list, handleDeleteList }) => {
               <div
                 className="completed-header"
                 onClick={toggleCompletedAccordion}
-                onMouseEnter={handleMouseEnter}
-                onMouseLeave={handleMouseLeave}
-                style={{
-                  cursor: isHovered ? "pointer" : "default",
-                }}
               >
                 <h4 className="completed-title">Completed</h4>
                 {completedIsActive ? (
@@ -391,70 +303,6 @@ const List = ({ list, handleDeleteList }) => {
             </div>
           )}
         </div>
-      </div>
-
-      <div className="list">
-        <AnimationEasy showAnimation={showAnimation} />
-        <AnimationMedium showAnimation2={showAnimation2} />
-        <AnimationHard showAnimation3={showAnimation3} />
-        {showReward.cat && (
-          <div className="cat-container">
-            Hello from cat
-            <div
-              className="modal fade"
-              id="catImg"
-              tabIndex="-1"
-              aria-hidden="true"
-            >
-              <div className="modal-dialog">
-                <div className="modal-content">
-                  <button className="close-button" onClick={handleCloseCat}>
-                    X
-                  </button>
-
-                  <div
-                    className="modal show"
-                    style={{ display: "block", position: "initial" }}
-                  ></div>
-
-                  <>
-                    <Button variant="primary" onClick={handleShow}>
-                      Launch demo modal
-                    </Button>
-
-            <Modal show={show} onHide={handleClose} style={ {color: "black"}}>
-                      <Modal.Header closeButton>
-                        <Modal.Title>Cat Picture</Modal.Title>
-                      </Modal.Header>
-                      <Modal.Body>
-
-                       
-                  <img
-                    src={catImageUrl}
-                    alt="Random Cat GIF"
-                    style={{ width: "300px", height: "200px" }}
-                  />
-               
-                      </Modal.Body>
-                      <Modal.Footer>
-                        <Button variant="secondary" onClick={handleClose}>
-                          Close
-                        </Button>
-                        
-                      </Modal.Footer>
-                    </Modal>
-                  </>
-                </div>
-              </div>
-            </div>
-          </div>
-        )}
-        {showReward.story && (
-          <div className="story">
-            {story}
-            <button onClick={handleCloseStory}>X</button>
-          </div>
-        )}
       </div>
     </div>
   );
