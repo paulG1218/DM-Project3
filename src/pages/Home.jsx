@@ -3,13 +3,11 @@ import { useSelector } from "react-redux";
 import List from "../components/List.jsx";
 import Group from "../components/Group.jsx";
 import "../css/Home.css";
+import "../css/CreateListForm.css";
 import { FaPlus } from "react-icons/fa";
 import { CiViewList } from "react-icons/ci";
 import CreateListForm from "../components/CreateListForm.jsx";
 import axios from "axios";
-import { useLoaderData, useNavigate } from "react-router-dom";
-import Accordion from "react-bootstrap/Accordion";
-import { GiConsoleController } from "react-icons/gi";
 
 const Home = () => {
   const userId = useSelector((state) => state.login.userId);
@@ -34,9 +32,13 @@ const Home = () => {
     setLists(initialState);
   }, [initialState]);
 
-  const toggleForm = (e) => {
+  const toggleForm = () => {
     setShowForm(!showForm);
   };
+
+  const closeForm = () => {
+    setShowForm(false)
+  }
 
   const addList = async (e, FormData) => {
     e.preventDefault();
@@ -142,7 +144,12 @@ const Home = () => {
             </button>
             {showForm && (
               <div className="listFormPopup">
-                <CreateListForm addList={addList} errorMessage={errorMessage} />
+                <CreateListForm 
+                  addList={addList} 
+                  errorMessage={errorMessage}
+                  setShowForm={setShowForm}
+                  showForm={showForm}
+                />
               </div>
             )}
           </div>
