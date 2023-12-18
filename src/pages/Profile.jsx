@@ -11,7 +11,7 @@ const Profile = () => {
 
   const navigate = useNavigate();
 
-  const errorTxt = document.getElementById('errorText')
+  const errorTxt = document.getElementById("errorText");
 
   switch (data.message) {
     case "success":
@@ -30,26 +30,26 @@ const Profile = () => {
 
   const handleSave = async (e) => {
     e.preventDefault();
-      const res = await axios.put(`/api/editUser/${user.userId}`, userInfo);
-      switch (res.data.message) {
-        case 'saved':
-          dispatch({
-            type: "userChange",
-            payload: userInfo,
-          });
-          setIsEditing(false)
-          errorTxt.style.color = 'green'
-          errorTxt.innerText = 'Saved!'
-          break;
-        case 'name taken':
-          errorTxt.style.color = 'red'
-          errorTxt.innerText = 'Username taken'
-          break;
-        default:
-          errorTxt.style.color = 'red'
-          errorTxt.innerText = 'Something went wrong'
-          break;
-      }
+    const res = await axios.put(`/api/editUser/${user.userId}`, userInfo);
+    switch (res.data.message) {
+      case "saved":
+        dispatch({
+          type: "userChange",
+          payload: userInfo,
+        });
+        setIsEditing(false);
+        errorTxt.style.color = "green";
+        errorTxt.innerText = "Saved!";
+        break;
+      case "name taken":
+        errorTxt.style.color = "red";
+        errorTxt.innerText = "Username taken";
+        break;
+      default:
+        errorTxt.style.color = "red";
+        errorTxt.innerText = "Something went wrong";
+        break;
+    }
   };
 
   const handleDelete = async (e) => {
@@ -78,20 +78,20 @@ const Profile = () => {
   const [newAdmin, setNewAdmin] = useState("");
 
   const handleNewAdmin = async (e) => {
-    e.preventDefault()
+    e.preventDefault();
     const res = await axios.put("/api/addAdmin", { newAdmin: newAdmin });
-    if (res.data.message === 'admin added') {
-     errorTxt.style.color = 'green'
-     errorTxt.innerText = 'Admin added!'
-      return
-    } else if (res.data.message === 'no user') {
-     errorTxt.style.color = 'red'
-     errorTxt.innerText = 'User does not exist'
-      return
+    if (res.data.message === "admin added") {
+      errorTxt.style.color = "green";
+      errorTxt.innerText = "Admin added!";
+      return;
+    } else if (res.data.message === "no user") {
+      errorTxt.style.color = "red";
+      errorTxt.innerText = "User does not exist";
+      return;
     } else {
-     errorTxt.style.color = 'red'
-     errorTxt.innerText = 'Something went wrong'
-      return
+      errorTxt.style.color = "red";
+      errorTxt.innerText = "Something went wrong";
+      return;
     }
   };
 
@@ -141,6 +141,14 @@ const Profile = () => {
               }}
             >
               Delete
+            </button>
+            <button
+              className="cancel"
+              onClick={() => {
+                isEditing(false), userInfo;
+              }}
+            >
+              Cancel
             </button>
           </>
         ) : (

@@ -2,20 +2,32 @@
     flex-direction: column;
 }
 
+.header{
+    color: rgba(255, 255, 255, 0.87);
+}
+
+.profilePassword{
+    margin: 0;
+    margin-top: 5px;
+}
 
 .delete {
-
     flex-direction: column;
     background-color: #fc3571;
     border-radius: 7px;
     border-color: #fc3571;
     border-style: solid;
-    
     color: rgba(255, 255, 255, 0.87);
-  }
-.header{
+}
+
+.cancel {
+    flex-direction: column;
+    background-color: #fc3571;
+    border-radius: 7px;
+    border-color: #fc3571;
+    border-style: solid;
     color: rgba(255, 255, 255, 0.87);
-    
+    margin: 5px;
 }
 
 .save {
@@ -25,21 +37,10 @@
     border-color: #fc3571!important;
     border-style: solid!important;
     margin-top: 5px;
-    
     color: rgba(255, 255, 255, 0.87)!important;
-  }
+    margin: 5px;
+}
 
-  .username{
-    color: rgba(255, 255, 255, 0.87);
-  }
-
-  .profilePassword{
-    color: rgba(255, 255, 255, 0.87);
-    margin: 0;
-    margin-top: 5px;
-
-  }
-
-  .addmin{
+.addmin{
     size: 25px;
-  }
+}

@@ -111,14 +111,25 @@
   padding: 3px 2px 5px 1px;
 }
 
-.deleteButton, .saveButton, .cancelButton {
+.deleteButton {
+display: inline-flex;
+margin: 2px;
+} 
+
+.saveButton {
+  display: inline-flex;
+  margin: 2px;
+}
+
+.cancelButton {
+  display: inline-flex;
   margin: 2px;
 }
 
 .editInput {
   border-radius: 9px;
-  max-width: fit-content;
-  max-height: fit-content;
+  width: 69%;
+  height: 25%;
   margin: 2px;
 }
 

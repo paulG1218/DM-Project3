@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "../css/CreateListForm.css";
-import "../css/Home.css"
+import "../css/Home.css";
 
 const CreateListForm = ({ addList, showForm, setShowForm, errorMessage }) => {
   const [listName, setListName] = useState("");
@@ -10,7 +10,17 @@ const CreateListForm = ({ addList, showForm, setShowForm, errorMessage }) => {
     <div className={`create-list-modal ${showForm ? "show" : ""}`}>
       <form
         className="create-list-modal-content"
-        onSubmit={(e) => addList(e, { listName: listName, dueDate: dueDate })}
+        onSubmit={async (e) => {
+          const res = await addList(e, {
+            listName: listName,
+            dueDate: dueDate,
+          });
+          if (res === "Success") {
+            setListName("");
+            setDueDate("");
+          }
+          return;
+        }}
       >
         <div className="form-group">
           <label htmlFor="listName">List Name:</label>
