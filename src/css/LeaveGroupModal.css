@@ -1,7 +1,9 @@
 /* Modal Container */
 .modal {
-  display: none; /* Hide modal by default */
-  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black background */
+  display: none;
+  /* Hide modal by default */
+  background-color: rgba(0, 0, 0, 0.5);
+  /* Semi-transparent black background */
   position: fixed;
   top: 0;
   right: 0;
@@ -25,24 +27,26 @@
   max-width: 25%;
   max-height: 90%;
   position: absolute;
-  background-color: black !important;
+  background-color: rgb(24, 24, 24) !important;
   padding: 20px;
   border-radius: 5px;
-  color: white; /* Text color for modal content */
+  color: rgba(255, 255, 255, 0.87);
 }
 
 .leave-modal-header {
   font-size: 150%;
-  background-color: black; /* Black background for header */
-  color: white;
-  padding: 10px 20px; /* Padding added for better visualization */
+  background-color: rgb(24, 24, 24);
+  /* Black background for header */
+  color: rgba(255, 255, 255, 0.87);
+  padding: 10px 20px;
+  /* Padding added for better visualization */
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
 }
 
 /* Modal Buttons */
 .modal-buttons {
-  background-color: black;
+  background-color: rgb(24, 24, 24);
   display: flex;
   justify-content: center;
   margin-bottom: 10px;
@@ -57,4 +61,3 @@
   font-weight: bold;
   margin: 0 5px;
 }
-

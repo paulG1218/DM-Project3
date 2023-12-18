@@ -1,110 +1,115 @@
 /* Add a black background color to the top navigation */
 .topnav {
-    background-color: #333;
-    width: 100vw;
-    min-height: 58px;
-  }
+  background-color: #333;
+  width: 100vw;
+  min-height: 58px;
+}
 
-  /* Style the links inside the navigation bar */
-  .topnav a {
-    color: #f2f2f2;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-    font-size: 17px;
-    cursor: pointer;
-  }
-  
-  /* Add a color to the active/current link */
-  .topnav a.active {
-    background-color: #04AA6D;
-    color: white;
-  }
+/* Style the links inside the navigation bar */
+.topnav a {
+  color: rgba(255, 255, 255, 0.87);
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+  cursor: pointer;
+}
 
-  .title {
-    font-family: 'Nova Square', sans-serif;
-    font-size: 40px;
-    color: #fc3571;
-    flex-direction: row;
-    -ms-flex-align: center;
-    position: absolute;
-    margin: 0px;
-    left: 46%
-  }
+/* Add a color to the active/current link */
+.topnav a.active {
+  background-color: #04AA6D;
+  color: rgba(255, 255, 255, 0.87);
+}
 
-  .userScore {
-    display: flex;
-    float: right;
-    margin-right: 5%;
-    margin-top: 8px
-  }
+.title {
+  font-family: 'Nova Square', sans-serif;
+  font-size: 40px;
+  color: #fc3571;
+  flex-direction: row;
+  -ms-flex-align: center;
+  position: absolute;
+  margin: 0px;
+  left: 46%
+}
 
+.userScore {
+  display: flex;
+  float: right;
+  margin-right: 5%;
+  margin-top: 8px
+}
+
+.sidebar {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #111;
+  overflow-x: hidden;
+  padding-top: 20px;
+  transition: 0.5s;
+}
+
+/* The sidebar links */
+.sidebar a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #818181;
+  display: block;
+  transition: 0.3s;
+}
+
+/* When you mouse over the navigation links, change their color */
+.sidebar a:hover {
+  color: #fc3571;
+  text-decoration: underline;
+}
+
+/* Position and style the close button (top right corner) */
+.sidebar .closebtn {
+  font-size: 36px;
+  padding: 0px;
+}
+
+/* The button used to open the sidebar */
+.openbtn {
+  font-size: 45px;
+  background-color: #333;
+  color: rgba(255, 255, 255, 0.87);
+  border: none;
+  float: left;
+  height: 60px;
+  padding: 0px 0px 0px 7px;
+  position: relative;
+  top: 50%;
+  transform: translateY(-18%);
+}
+
+div.sidebarHead {
+  display: flex;
+}
+
+/* Style page content - use this if you want to push the page content to the right when you open the side navigation */
+#icon {
+  transition: margin-left .5s;
+}
+
+a.logo {
+  padding-right: 40px;
+  padding-left: 100px;
+  padding-top: 11px;
+}
+
+/* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+@media screen and (max-height: 450px) {
   .sidebar {
-    height: 100%;
-    width: 0; 
-    position: fixed;
-    z-index: 1; 
-    top: 0;
-    left: 0;
-    background-color: #111; 
-    overflow-x: hidden; 
-    padding-top: 20px;
-    transition: 0.5s;
+    padding-top: 15px;
   }
-  
-  /* The sidebar links */
+
   .sidebar a {
-    padding: 8px 8px 8px 32px;
-    text-decoration: none;
-    font-size: 25px;
-    color: #818181;
-    display: block;
-    transition: 0.3s;
+    font-size: 18px;
   }
-  
-  /* When you mouse over the navigation links, change their color */
-  .sidebar a:hover {
-    color: #fc3571;
-    text-decoration: underline;
-  }
-  
-  /* Position and style the close button (top right corner) */
-  .sidebar .closebtn {
-    font-size: 36px;
-    padding: 0px;
-  }
-
-  /* The button used to open the sidebar */
-  .openbtn {
-    font-size: 45px;
-    background-color: #333;
-    color: white;
-    border: none;
-    float: left;
-    height: 60px;
-    padding: 0px 0px 0px 7px;
-    position: relative;
-    top: 50%;
-    transform: translateY(-18%);
-  }
-
-  div.sidebarHead {
-    display: flex;
-  }
-  
-  /* Style page content - use this if you want to push the page content to the right when you open the side navigation */
-  #icon {
-    transition: margin-left .5s;
-  }
-
-  a.logo {
-    padding-right: 40px;
-    padding-left: 100px;
-    padding-top: 11px;
-  }
-  
-  /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
-  @media screen and (max-height: 450px) {
-    .sidebar {padding-top: 15px;}
-    .sidebar a {font-size: 18px;}
-  }
+}

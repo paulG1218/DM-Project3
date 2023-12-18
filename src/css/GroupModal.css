@@ -1,110 +1,119 @@
 .modal-window {
-    position: fixed;
-    background-color: rgba(255, 255, 255, 0.25);
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    z-index: 999;
-    visibility: hidden;
-    opacity: 0;
-    pointer-events: none;
-    transition: all 0.3s;
-    &:target {
-      visibility: visible;
-      opacity: 1;
-      pointer-events: auto;
-    }
-    & > div {
-      width: 400px;
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      padding: 2em;
-      background: #242424;
-      border-radius: 7px;
-    }
-    header {
-      font-weight: bold;
-    }
-    h1 {
-      font-size: 150%;
-      margin: 0 0 15px;
-    }
-  }
-  
-  .modal-close {
-    color: #aaa;
-    line-height: 50px;
-    position: absolute;
-    right: 0;
-    text-align: center;
-    top: 0;
-    width: 70px;
-    text-decoration: none;
-    &:hover {
-      color: #fc3571;
-    }
+  position: fixed;
+  background-color: rgba(255, 255, 255, 0.25);
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 999;
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.3s;
+
+  &:target {
+    visibility: visible;
+    opacity: 1;
+    pointer-events: auto;
   }
 
-  .joinButton {
-    width:15rem;
-    height: 48px;
-    font-size: 20px;
+  &>div {
+    width: 400px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 2em;
+    background: #242424;
     border-radius: 7px;
-    background-color: #fc3571;
-    border: #fc3571;
+  }
+
+  header {
+    font-weight: bold;
+  }
+
+  h1 {
+    font-size: 150%;
+    margin: 0 0 15px;
+  }
+}
+
+.modal-close {
+  color: #aaa;
+  line-height: 50px;
+  position: absolute;
+  right: 0;
+  text-align: center;
+  top: 0;
+  width: 70px;
+  text-decoration: none;
+
+  &:hover {
+    color: #fc3571;
+  }
+}
+
+.joinButton {
+  width: 15rem;
+  height: 48px;
+  font-size: 20px;
+  border-radius: 7px;
+  background-color: #fc3571;
+  border: #fc3571;
 }
 
 a.btn {
+  background-color: #fc3571;
+  color: rgba(255, 255, 255, 0.87);
+  font-weight: bold;
+  margin-top: 25px;
+
+  &:hover {
     background-color: #fc3571;
-    color: white;
-    font-weight: bold;
-    margin-top: 25px;
-    &:hover {
-      background-color: #fc3571;
-      color: white;
-    }
+    color: rgba(255, 255, 255, 0.87);
+  }
 }
 
 .joinGroupCodeBox {
-    display: flex;
+  display: flex;
 }
 
 .joinGroupCode {
-    width: 57px;
-    background: none;
-    border: none;
-    font-size: 200%;
-    text-align: center;
-    border-bottom: 2px solid white;
-    &:disabled {
-        color: white;
-    }
-    &:focus {
-        outline: none;
-        border-bottom: 2px solid #fc3571;
-    }
-    &::-webkit-outer-spin-button,
-    &::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
+  width: 57px;
+  background: none;
+  border: none;
+  font-size: 200%;
+  text-align: center;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.87);
+
+  &:disabled {
+    color: rgba(255, 255, 255, 0.87);
+  }
+
+  &:focus {
+    outline: none;
+    border-bottom: 2px solid #fc3571;
+  }
+
+  &::-webkit-outer-spin-button,
+  &::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
 }
 
 .joinSubmit {
-    background-color: #fc3571;
-    color: white;
-    font-weight: bold;
-    border-radius: 7px;
-    border-color: #fc3571;
-    border-style: solid;
+  background-color: #fc3571;
+  color: rgba(255, 255, 255, 0.87);
+  font-weight: bold;
+  border-radius: 7px;
+  border-color: #fc3571;
+  border-style: solid;
 }
 
 #errorTxt {
-    color: red;
-    font-weight: bold;
+  color: #fc3571;
+  font-weight: bold;
 }
 
 .container {

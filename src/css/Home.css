@@ -11,7 +11,7 @@
 
 .listBody {
     height: 40.5vw;
-    overflow-y:auto;
+    overflow-y: auto;
 }
 
 .lists {
@@ -69,10 +69,10 @@ a.groupName {
 }
 
 .listTitle {
-display: inline-flex;
-margin-left: 25%;
-margin-top: auto;
-margin-bottom: auto;
+    display: inline-flex;
+    margin-left: 25%;
+    margin-top: auto;
+    margin-bottom: auto;
 }
 
 .addList {
@@ -133,7 +133,7 @@ h1.groupHeading {
 }
 
 .loginLinkHome {
-    color: white;
+    color: rgba(255, 255, 255, 0.87);
     font-family: 'Nova Square', sans-serif;
     font-size: 40px;
     text-decoration: none;
