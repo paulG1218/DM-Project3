@@ -2,6 +2,7 @@ import { useLoaderData, useNavigate } from "react-router-dom";
 import React, { useState } from "react";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
+import "../css/Profile.css"
 
 const Profile = () => {
   const dispatch = useDispatch();
@@ -98,7 +99,9 @@ const Profile = () => {
 
   return (
     <div>
-      <h1>Profile Page</h1>
+
+      <h1 className="header">Profile Page</h1>
+      
       <form className="editingUser">
         <input
           onChange={(e) =>
@@ -107,13 +110,17 @@ const Profile = () => {
           disabled={!isEditing}
           readOnly={!isEditing}
           value={userInfo.username}
+          className="username"
         />
+        <br/>
         <input
+          className="email"
           onChange={(e) => setUserInfo({ ...userInfo, email: e.target.value })}
           disabled={!isEditing}
           readOnly={!isEditing}
           value={userInfo.email}
         />
+        <br />
         <input
           onChange={(e) => {
             setUserInfo({ ...userInfo, password: e.target.value });
@@ -122,20 +129,26 @@ const Profile = () => {
           readOnly={!isEditing}
           type={isEditing ? "text" : "password"}
           value={userInfo.password}
+          className="password"
         />
+        <br />
         {isEditing ? (
           <>
-            <button onClick={(e) => handleSave(e)}>Save</button>
+          
+            <button onClick={(e) => handleSave(e)}
+            className="save">Save</button>
             <button
+                className="delete"
               onClick={(e) => {
                 handleDelete(e);
               }}
             >
               Delete
-            </button>
+            </button >
           </>
         ) : (
           <button
+          className="save"
             onClick={(e) => {
               e.preventDefault();
               setIsEditing(true);
@@ -144,17 +157,25 @@ const Profile = () => {
             Edit
           </button>
         )}
+        
       </form>
+      <br />
+      <br />
+      <br />
+      <br />
+      
+      
       {isAdmin && (
         <form onSubmit={(e) => handleNewAdmin(e)}>
-          <label>Add an admin:</label>
+          <label className="addmin">Add an admin:</label>
           <input
             placeholder="Add an admin"
             type="text"
             value={newAdmin}
             onChange={(e) => setNewAdmin(e.target.value)}
           />
-          <button type="submit">Add</button>
+          <button type="submit"
+          className="save">Add</button>
         </form>
       )}
       <p id="errorText"></p>
