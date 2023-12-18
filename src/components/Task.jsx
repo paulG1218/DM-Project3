@@ -4,7 +4,7 @@ import '../css/Task.css'
 import { MdDeleteForever } from "react-icons/md";
 
 
-const Task = ({ task, handleCheck, checkState, isEditingList, handleDeleteTask }) => {
+const Task = ({ task, handleCheck, isEditingList, handleDeleteTask }) => {
   const { title, taskId } = task;
 
   return (
@@ -18,9 +18,6 @@ const Task = ({ task, handleCheck, checkState, isEditingList, handleDeleteTask }
           type="checkbox"
           className="checkbox"
           id={`${title}-${taskId}`}
-          disabled={checkState}
-          checked={checkState}
-          readOnly={checkState}
           onChange={() => handleCheck(taskId)}
         />
         )}

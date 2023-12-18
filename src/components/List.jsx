@@ -20,12 +20,10 @@ const List = ({ list, handleDeleteList }) => {
   const [tasks, setTasks] = useState(
     list.tasks.filter((task) => !task.checked)
   );
-  const [completedTasks, setCompleteTasks] = useState(
+  const [completedTasks, setCompletedTasks] = useState(
     list.tasks.filter((task) => task.checked)
   );
-  const [checkStates, setCheckStates] = useState(
-    tasks.map((task) => task.checked)
-  );
+
   const [titleState, setTitleState] = useState(
     list.listName ? list.listName : list.groupListName
   );
@@ -90,11 +88,7 @@ const List = ({ list, handleDeleteList }) => {
         return;
       } else {
         task = res.data.task;
-        setCheckStates((prevCheckStates) => {
-          const updatedCheckStates = [...prevCheckStates];
-          updatedCheckStates[index] = true;
-          return updatedCheckStates;
-        });
+        setTasks(tasks.filter((t) => t.taskId !== task.taskId))
 
         switch (task.difficulty) {
           case 1:
@@ -133,7 +127,6 @@ const List = ({ list, handleDeleteList }) => {
         key={task.taskId}
         task={task}
         handleCheck={handleCheck}
-        checkState={checkStates[index]}
         isEditingList={isEditingList}
         handleDeleteTask={handleDeleteTask}
       />
@@ -142,9 +135,10 @@ const List = ({ list, handleDeleteList }) => {
 
   const completedTaskDisplay = completedTasks.map((task) => {
     return (
-      <div className="taskRow">
+      <div className="taskRow" key={task.taskId}>
         <input
           type="checkbox"
+          key={task.taskId}
           checked={true}
           readOnly={true}
           disabled={true}
@@ -162,7 +156,7 @@ const List = ({ list, handleDeleteList }) => {
       groupListId: list.groupListId,
     });
     setTasks(res.data.tasks.filter((task) => !task.checked));
-    setCompleteTasks(res.data.tasks.filter((task) => task.checked));
+    setCompletedTasks(res.data.tasks.filter((task) => task.checked));
 
     setShowTaskForm(false);
   };
@@ -296,7 +290,12 @@ const List = ({ list, handleDeleteList }) => {
           </div>
         </div>
         <div className="accordion-body">
-          {isActive && <div className="checklist-display">{taskDisplay}</div>}
+          {isActive && <div className="checklist-display">
+            {taskDisplay}
+            {taskDisplay.length === 0 && !showTaskForm && !isEditingList ?
+              <h4>You're all done!</h4> : null
+            }
+          </div>}
           {showTaskForm && (
             <AddTaskForm
               handleAddTask={handleAddTask}
