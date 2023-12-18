@@ -35,7 +35,11 @@ const LoginForm = ({ onLogin }) => {
   return (
     <form
       onSubmit={(e) =>
-        onLogin(e, { usernameOrEmail: usernameOrEmail, password: password }, document.getElementById('errorTxt'))
+        onLogin(
+          e,
+          { usernameOrEmail: usernameOrEmail, password: password },
+          document.getElementById("errorTxt")
+        )
       }
     >
       <input
@@ -47,7 +51,7 @@ const LoginForm = ({ onLogin }) => {
       />
       <br />
       <input
-        className="password"
+        id="loginPassword"
         placeholder="Password"
         type={showPassword ? "text" : "password"}
         value={password}

@@ -1,10 +1,13 @@
 .username {
     margin: 5px;
-    align-self: center;
+}
+
+.registerPassword {
+    margin: 5px;
+    margin-left: 20px;
 }
 
 .signUpBtn {
-    margin: 5px;
     background-color: #fc3571;
     border-color: #fc3571;
     border-radius: 7px;

@@ -27,20 +27,24 @@ const RegisterForm = ({ onRegisterUser }) => {
   return (
     <form
       onSubmit={(e) => {
-        const errorText = document.getElementById('errorTxt')
+        const errorText = document.getElementById("errorTxt");
         if (email === "" || username === "" || password === "") {
-          e.preventDefault()
-          errorText.innerText = 'Please fill out all fields'
+          e.preventDefault();
+          errorText.innerText = "Please fill out all fields";
           return;
         } else if (password === confirmPassword) {
-          onRegisterUser(e, {
-            username: username,
-            email: email,
-            password: password,
-          }, document.getElementById('errorTxt'));
+          onRegisterUser(
+            e,
+            {
+              username: username,
+              email: email,
+              password: password,
+            },
+            document.getElementById("errorTxt")
+          );
         } else {
           e.preventDefault();
-          errorText.innerText = 'Passwords must match'
+          errorText.innerText = "Passwords must match";
         }
       }}
     >
@@ -62,7 +66,7 @@ const RegisterForm = ({ onRegisterUser }) => {
       />
       <br />
       <input
-        className="password"
+        className="registerPassword"
         placeholder="Password"
         type={showPassword ? "text" : "password"}
         value={password}
