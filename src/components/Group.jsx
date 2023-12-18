@@ -90,6 +90,8 @@ const Group = ({ group }) => {
           <CreateGroupListForm
             addGroupList={addGroupList}
             errorGroupMessage={errorGroupMessage}
+            setShowGroupForm={setShowGroupForm}
+            showGroupForm={showGroupForm}
           />
         </div>
       ) : (

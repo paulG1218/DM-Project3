@@ -1,62 +1,61 @@
 .create-list-modal {
-    display: none; /* Hide modal by default */
-    background-color: rgba(0, 0, 0); /* Semi-transparent black background */
-    position: fixed;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
+  display: none; /* Hide modal by default */
+  background-color: rgba(0, 0, 0); /* Semi-transparent black background */
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
 }
 
 .create-list-modal.show {
-    display: flex;
-    background-color: rgba(255, 255, 255, 0.25);
-  }
+  display: flex;
+  background-color: rgba(255, 255, 255, 0.25);
+}
 
 
-  .create-list-modal-content {
-    /* Update this block */
-    width: 30%;
-    max-height: 55%;
-    margin: auto;
-    background-color: rgba(0, 0, 0);
-    padding: 20px;
-    border-radius: 5px;
-    color: rgba(255, 255, 255, 0.87);
-    display: flex;
-    flex-direction: column;
-  }
+.create-list-modal-content {
+  width: 30%;
+  max-height: 55%;
+  margin: auto;
+  background-color: rgba(0, 0, 0);
+  padding: 20px;
+  border-radius: 5px;
+  color: rgba(255, 255, 255, 0.87);
+  display: flex;
+  flex-direction: column;
+}
   
-  #dueDate {
-    width: 42%;
-    margin: 5px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-    background-color: rgba(255, 255, 255, 0.87);
-  }
+#dueDate {
+  width: 42%;
+  margin: 5px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  background-color: rgba(255, 255, 255, 0.87);
+}
 
-  #listName {
-    width: 42%;
-    margin: 5px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-    margin-right: 13px;
-    background-color: rgba(255, 255, 255, 0.87);
-  }
+#listName {
+  width: 42%;
+  margin: 5px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  margin-right: 13px;
+  background-color: rgba(255, 255, 255, 0.87);
+}
   
-  .addBtn,
-  .create-list-cancelBtn {
-    margin: 5px;
-    padding: 6px 10px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    background-color: #fc3571;
-    border-color: #fc3571;
-    color: rgba(255, 255, 255, 0.87);
-  }
+.addBtn,
+.create-list-cancelBtn {
+  margin: 5px;
+  padding: 6px 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  background-color: #fc3571;
+  border-color: #fc3571;
+  color: rgba(255, 255, 255, 0.87);
+}
