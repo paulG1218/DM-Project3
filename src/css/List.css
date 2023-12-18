@@ -122,7 +122,7 @@
   margin: 2px;
 }
 
-.listHeader:hover {
+.listNameHeader:hover {
   cursor: pointer;
   color: #fc3571;
 }

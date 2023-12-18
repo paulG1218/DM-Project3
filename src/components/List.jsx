@@ -232,7 +232,7 @@ const List = ({ list, handleDeleteList }) => {
             </h2>
           ) : (
             <h2
-              className="listHeader"
+              className="listNameHeader"
               onClick={toggleAccordion}
             >
               {titleState}
