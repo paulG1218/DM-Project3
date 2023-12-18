@@ -229,33 +229,46 @@
           username: newAdmin,
         },
       });
+
+      if (admin) {
+        await admin.update({
+          isAdmin: true,
+        });
+    
+        res.json({message: 'admin added'});
+      } else {
+        res.json({message: 'no user'})
+      }
   
-      await admin.update({
-        isAdmin: true,
-      });
-  
-      res.send("User now has admin status");
     },
   
     editUserInfo: async (req, res) => {
       const { userId } = req.params;
       const { username, email, password } = req.body;
-      try {
-        const user = await User.findByPk(userId);
+
+      const existingUser = await User.findOne({
+        where: {
+          username: username
+        }
+      })
+
+      const user = await User.findByPk(userId)
+
+      if (existingUser.userId !== user.userId) {
+        res.json({message: 'name taken'})
+        return
+      }
+
         if (user) {
           await user.update({
             username: username,
             email: email,
             password: password,
           });
-          res.json({ user });
+          res.json({ user: user, message: 'saved' });
+        } else {
+          res.json({message: 'error'})
         }
-      } catch (error) {
-        console.log("Error");
-        res
-          .status(500)
-          .json({ success: false, error: "Internal Server Error Editing User" });
-      }
     },
     
     deleteUser: async (req, res) => {
