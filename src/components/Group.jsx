@@ -85,7 +85,7 @@ const Group = ({ group }) => {
           }
         </h1>
       </div>
-      {showGroupForm ? (
+      {showGroupForm &&
         <div className="addGroupList">
           <CreateGroupListForm
             addGroupList={addGroupList}
@@ -94,9 +94,7 @@ const Group = ({ group }) => {
             showGroupForm={showGroupForm}
           />
         </div>
-      ) : (
-        <div className="addGroupList"></div>
-      )}
+        }
       <br />
       {listDisplay}
     </div>
