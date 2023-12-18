@@ -5,6 +5,7 @@
 .aboutTitle {
     display: inline;
     color: rgba(255, 255, 255, 0.87);
+    padding: 5px;
 }
 
 .checkr {
