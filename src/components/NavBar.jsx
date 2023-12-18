@@ -116,6 +116,7 @@ const NavBar = () => {
           <a href="/login">Login</a>
         )}
         <a href="/groups">Groups</a>
+        <a href="/about">About</a>
         {userId && (
           <a
             onClick={() => handleLogout()}

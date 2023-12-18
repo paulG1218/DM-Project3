@@ -1,0 +1,48 @@
+.aboutPage {
+    color: rgba(255, 255, 255, 0.87);
+}
+
+.aboutTitle {
+    display: inline;
+    color: rgba(255, 255, 255, 0.87);
+}
+
+.checkr {
+    display: inline;
+    color: #fc3571;
+    font-family: 'Nova Square';
+}
+
+.instructions {
+    border: 2px solid;
+    border-radius: 9px;
+    border-color: #fc3571;
+    width: 70vw;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 5px;
+}
+
+.rewards {
+    border: 2px solid;
+    border-radius: 9px;
+    border-color: #fc3571;
+    width: 70vw;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 5px;
+}
+
+.features {
+    border: 2px solid;
+    border-radius: 9px;
+    border-color: #fc3571;
+    width: 70vw;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 5px;
+}
+
+.contact {
+    padding: 5px;
+}

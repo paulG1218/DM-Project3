@@ -71,11 +71,6 @@ const Home = () => {
           Welcome to{"\u00A0"}
           <span className="Checkr">Checkr</span>
         </h1>
-        <h3>
-          Where you are able to manage your personal and professional tasks all
-          in one place.
-        </h3>
-        <br />
         <a className="loginLinkHome" href="/login">
           Login
         </a>

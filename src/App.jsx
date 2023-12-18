@@ -18,23 +18,18 @@ import CatTesting from "./pages/catTesting.jsx";
 import GroupPage from "./pages/GroupPage.jsx";
 import AddTask from "./pages/addTask";
 import Board from "../Games/ReactGames/Board";
-
+import About from "./pages/About.jsx";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<Root />}>
       //every other route goes here
       <Route index element={<Home />} />
-
       <Route path="/login" element={<Login />} />
-
-      <Route path="/catTesting" element={<CatTesting/>} />
-
-      <Route path="/AddTask" element = {<AddTask/>}/>
-
-      <Route path="/GameBoard" element = {<Board/>}/>
-        
-
+      <Route path="/catTesting" element={<CatTesting />} />
+      <Route path="/AddTask" element={<AddTask />} />
+      <Route path="/GameBoard" element={<Board />} />
+      <Route path="/about" element={<About />} />
       <Route
         path="/profile"
         element={<Profile />}
@@ -43,20 +38,14 @@ const router = createBrowserRouter(
           return { data: res.data, user: res.data.user };
         }}
       />
-
-      <Route
-        path="/groups"
-        element={<Groups/>}
-      />
-
+      <Route path="/groups" element={<Groups />} />
       <Route path="/registerNewUser" element={<RegisterNewUser />} />
-
       <Route
         path="/groups/:groupId"
-        element={<GroupPage/>}
-        loader={async ({params}) => {
+        element={<GroupPage />}
+        loader={async ({ params }) => {
           const res = await axios.get(`/api/getGroup/${params.groupId}`);
-          return { group: res.data.group, userId: res.data.userId};
+          return { group: res.data.group, userId: res.data.userId };
         }}
       />
     </Route>
