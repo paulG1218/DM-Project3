@@ -11,7 +11,7 @@
 
 .listBody {
     height: 40.5vw;
-    overflow-y:auto;
+    overflow-y: auto;
 }
 
 .lists {
@@ -69,10 +69,10 @@ a.groupName {
 }
 
 .listTitle {
-display: inline-flex;
-margin-left: 25%;
-margin-top: auto;
-margin-bottom: auto;
+    display: inline-flex;
+    margin-left: 25%;
+    margin-top: auto;
+    margin-bottom: auto;
 }
 
 .addList {
