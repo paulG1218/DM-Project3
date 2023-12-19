@@ -36,9 +36,11 @@
   border-radius: 5px;
   border: 1px solid #ccc;
   background-color: rgba(255, 255, 255, 0.87);
+  color: black;
 }
 
 #listName {
+  color: black;
   width: 42%;
   margin: 5px;
   border-radius: 5px;
