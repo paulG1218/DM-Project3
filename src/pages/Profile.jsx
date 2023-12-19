@@ -104,7 +104,7 @@ const Profile = () => {
       <h1 className="profilePageHeader">Profile Page</h1>
 
       <form className="editingUser">
-        <div>
+        <div className="usernameRow">
           <label htmlFor="profilePageUsername">Username:</label>
           <input
             onChange={(e) =>
@@ -117,8 +117,8 @@ const Profile = () => {
           />
         </div>
 
-        <div>
-          <label htmlFor="profilePageEmail">Email:</label>
+        <div className="emailRow">
+          <label htmlFor="profilePageEmail" className="emailLabel">Email:</label>
           <input
             id="profilePageEmail"
             onChange={(e) => setUserInfo({ ...userInfo, email: e.target.value })}
@@ -128,7 +128,7 @@ const Profile = () => {
           />
         </div>
 
-        <div>
+        <div className="passwordRow">
           <label htmlFor="profilePagePassword">Password:</label>
           <input
             onChange={(e) => {
@@ -141,6 +141,7 @@ const Profile = () => {
             id="profilePagePassword"
           />
         </div>
+        <div className="profileBttn">
         {isEditing ? (
           <div className="profilePageEditModeBtns">
             <button 
@@ -169,7 +170,7 @@ const Profile = () => {
             Edit
           </button>
         )}
-      </form>
+      </div>
       
       <div className="profilePageDeleteBtnContainer">
         <button
@@ -181,6 +182,8 @@ const Profile = () => {
           Delete Account
         </button>
       </div>
+
+      </form>
 
       {isAdmin && (
         <form onSubmit={(e) => handleNewAdmin(e)} className="addAdminForm">

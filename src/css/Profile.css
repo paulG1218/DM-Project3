@@ -6,26 +6,37 @@
 }
 
 #profilePageUsername {
-    margin: 6px;
-    margin-right: 40px;
+    margin-top: 6px;
+    margin-bottom: 6px;
     background-color: rgba(255, 255, 255, 0.87);
     border-radius: 5px;
     border: 1px solid #ccc;
+    margin-left: 15px;
+    color: black;
 }
 
 #profilePageEmail {
-    margin: 6px;
+    margin-top: 6px;
+    margin-bottom: 6px;
     background-color: rgba(255, 255, 255, 0.87);
     border-radius: 5px;
     border: 1px solid #ccc;
+    margin-left: 30px;
+    color: black;
+}
+
+.emailLabel {
+    margin-left: 12px;
 }
 
 #profilePagePassword {
-    margin: 6px;
-    margin-right: 40px;
+    margin-left: 15px;
+    margin-top: 6px;
+    margin-bottom: 6px;
     background-color: rgba(255, 255, 255, 0.87);
     border-radius: 5px;
     border: 1px solid #ccc;
+    color: black;
 }
 
 .profilePageHeader {
@@ -42,7 +53,7 @@
     border-style: solid;
     color: rgba(255, 255, 255, 0.87);
     margin-top: 5px;
-    margin-right: 100px;
+   
 }
 
 .profilePageDeleteBtnContainer {
@@ -67,12 +78,11 @@
     justify-content: center;
     align-items: center;
     text-align: center;
-    margin-left: 18%;
+    margin-left: auto;
+    margin-right: auto;
 }
 
-.profilePageEditModeBtns {
-    margin-right: 12px;
-}
+
 
 .profilePageEditModeBtn {
     flex-direction: column;
@@ -87,7 +97,7 @@
 
 .addAdminForm {
     margin-top: 37px;
-    margin-right: 27px;
+    margin-right: auto;
 }
 
 #addAdmin {
@@ -96,6 +106,7 @@
     height: 32px;
     border: 1px solid #ccc;
     background-color: rgba(255, 255, 255, 0.87);
+    color: black;
 
 }
 
@@ -106,3 +117,5 @@
     border-style: solid;
     color: rgba(255, 255, 255, 0.87);
 }
+
+
