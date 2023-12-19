@@ -44,7 +44,8 @@ const List = ({ list, handleDeleteList }) => {
   const [showTaskForm, setShowTaskForm] = useState(false);
   const [isEditingList, setIsEditingList] = useState(false);
   const [completedIsActive, setCompletedIsActive] = useState(false);
-
+  const [loadingStory, setLoadingStory] = useState(false);
+  // const [showSpinner, setShowSpinner] = useState(true);
   const getRandomCatGif = async () => {
     try {
       const response = await axios.get(
@@ -65,14 +66,21 @@ const List = ({ list, handleDeleteList }) => {
   };
 
   const getRandomStory = async () => {
-    const res = await axios.get("https://shortstories-api.onrender.com/");
-    setStory(res.data.story);
-    setShowReward({ ...showReward, story: true });
+    try {
+      setLoadingStory(true);
+      const res = await axios.get("https://shortstories-api.onrender.com/");
+      setStory(res.data.story);
+      setShowReward({ ...showReward, story: true });
+      setLoadingStory(false);
 
-    const audio = new Audio(
-      "http://sfxcontent.s3.amazonaws.com/soundfx/SlideWhistle.mp3"
-    );
-    audio.play();
+      const audio = new Audio(
+        "http://sfxcontent.s3.amazonaws.com/soundfx/SlideWhistle.mp3"
+      );
+      audio.play();
+    } catch (error) {
+      console.error("Error fetching random story:", error);
+      setLoadingStory(false);
+    }
   };
 
   const getSnakeGame = () => {
@@ -213,6 +221,7 @@ const List = ({ list, handleDeleteList }) => {
         }
         story={story}
         showModal={showReward.story}
+        setStory={setStory}
       />
       <div className={`accordion-item ${isActive ? "active" : ""}`}>
         <AnimationEasy showAnimation={showAnimation.easy} />
