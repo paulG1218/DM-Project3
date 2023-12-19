@@ -1,14 +1,21 @@
 import React from 'react';
 import '../css/Reward.css';
+import { useState } from 'react';
+// import spinner from './public/spinner.svg'
+const StoryReward = ({handleModal, showModal, story, setStory}) => {
+  const [showSpinner, setShowSpinner] = useState(true)
 
-const StoryReward = ({handleModal, showModal, story}) => {
+  console.log(story)
+
+
   return (
     <div className='reward' style={{display: (showModal ? "block" : "none")}}>
       <div id="open-story-reward" className="reward-content">
               <button
                 className="reward-modal-close"
                 onClick={() => {
-                    handleModal()
+                  setStory('')
+                  handleModal()
                 }}
               >
                 Close
@@ -17,9 +24,13 @@ const StoryReward = ({handleModal, showModal, story}) => {
               <h1 className='modal-title'>A short story:</h1>
               <br />
               <div className="storyRewardDisplay">
-                {story}
+                {story ? (
+                  <div>{story}</div>
+                  ) : (
+                  <img src='Spinner3.svg'  />
+                )}
               </div>
-          </div>
+                </div>
     </div>
   )
 }
