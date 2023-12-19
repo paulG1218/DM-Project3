@@ -12,7 +12,7 @@ const Group = ({ group, score }) => {
   const { groupName, groupLists, groupId, userId } = group;
   const [groupListState, setGroupListState] = useState(groupLists);
 
-  const [groupScore, setGroupScore] = useState(score)
+  const [groupScore, setGroupScore] = useState(score ? score : 0)
 
   const currentUser = useSelector((state) => state.login.userId)
 
@@ -22,6 +22,10 @@ const Group = ({ group, score }) => {
   useEffect(() => {
     setErrorGroupMessage(false);
   }, [showGroupForm]);
+
+  useEffect(() => {
+    setGroupScore(score ? score : 0)
+  }, [score])
 
   const toggleGroupForm = (e) => {
     setShowGroupForm(!showGroupForm);
@@ -78,7 +82,7 @@ const Group = ({ group, score }) => {
       <div className="addGroupLBtn">
         <h1 className="groupHeading">
           <a href={`/groups/${groupId}`} className="groupName">
-            {groupName} ({groupScore ? groupScore : null})
+            {groupName} ({groupScore})
           </a>
           {currentUser === userId &&
           <button onClick={toggleGroupForm} className="addGroupListBtn">
