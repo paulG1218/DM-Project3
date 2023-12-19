@@ -39,6 +39,7 @@ a.groupName {
     color: rgba(255, 255, 255, 0.87);
     text-decoration: none;
     float: left;
+    margin-top: 10px;
     margin-left: 2em;
     flex: 5;
 }

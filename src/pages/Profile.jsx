@@ -40,6 +40,10 @@ const Profile = () => {
         setIsEditing(false);
         errorTxt.style.color = "green";
         errorTxt.innerText = "Saved!";
+
+        setTimeout(() => {
+          errorTxt.innerText = "";
+        }, 2000);
         break;
       case "name taken":
         errorTxt.style.color = "red";
@@ -52,7 +56,7 @@ const Profile = () => {
     }
   };
 
-  const handleDelete = async (e) => {
+  const handleDeleteAccount = async (e) => {
     e.preventDefault();
     // Prompt the user for confirmation
     const confirmation = window.confirm(
@@ -96,64 +100,67 @@ const Profile = () => {
   };
 
   return (
-    <div>
-      <h1 className="header">Profile Page</h1>
+    <div className="profile-page-information">
+      <h1 className="profilePageHeader">Profile Page</h1>
 
       <form className="editingUser">
-        <input
-          onChange={(e) =>
-            setUserInfo({ ...userInfo, username: e.target.value })
-          }
-          disabled={!isEditing}
-          readOnly={!isEditing}
-          value={userInfo.username}
-          className="username"
-        />
-        <br />
-        <input
-          className="email"
-          onChange={(e) => setUserInfo({ ...userInfo, email: e.target.value })}
-          disabled={!isEditing}
-          readOnly={!isEditing}
-          value={userInfo.email}
-        />
-        <br />
-        <input
-          onChange={(e) => {
-            setUserInfo({ ...userInfo, password: e.target.value });
-          }}
-          disabled={!isEditing}
-          readOnly={!isEditing}
-          type={isEditing ? "text" : "password"}
-          value={userInfo.password}
-          className="profilePassword"
-        />
-        <br />
+        <div>
+          <label htmlFor="profilePageUsername">Username:</label>
+          <input
+            onChange={(e) =>
+              setUserInfo({ ...userInfo, username: e.target.value })
+            }
+            disabled={!isEditing}
+            readOnly={!isEditing}
+            value={userInfo.username}
+            id="profilePageUsername"
+          />
+        </div>
+
+        <div>
+          <label htmlFor="profilePageEmail">Email:</label>
+          <input
+            id="profilePageEmail"
+            onChange={(e) => setUserInfo({ ...userInfo, email: e.target.value })}
+            disabled={!isEditing}
+            readOnly={!isEditing}
+            value={userInfo.email}
+          />
+        </div>
+
+        <div>
+          <label htmlFor="profilePagePassword">Password:</label>
+          <input
+            onChange={(e) => {
+              setUserInfo({ ...userInfo, password: e.target.value });
+            }}
+            disabled={!isEditing}
+            readOnly={!isEditing}
+            type={isEditing ? "text" : "password"}
+            value={userInfo.password}
+            id="profilePagePassword"
+          />
+        </div>
         {isEditing ? (
-          <>
-            <button onClick={(e) => handleSave(e)} className="save">
+          <div className="profilePageEditModeBtns">
+            <button 
+              onClick={(e) => handleSave(e)} 
+              className="profilePageEditModeBtn"
+            >
               Save
             </button>
             <button
-              className="delete"
-              onClick={(e) => {
-                handleDelete(e);
-              }}
-            >
-              Delete
-            </button>
-            <button
-              className="cancel"
+              className="profilePageEditModeBtn"
               onClick={() => {
-                isEditing(false), userInfo;
+                setIsEditing(false);
               }}
             >
               Cancel
             </button>
-          </>
+          </div>
         ) : (
           <button
-            className="save"
+            className="profilePageEditBtn"
             onClick={(e) => {
               e.preventDefault();
               setIsEditing(true);
@@ -163,21 +170,29 @@ const Profile = () => {
           </button>
         )}
       </form>
-      <br />
-      <br />
-      <br />
-      <br />
+      
+      <div className="profilePageDeleteBtnContainer">
+        <button
+          className="profilePageDeleteBtn"
+          onClick={(e) => {
+            handleDeleteAccount(e);
+          }}
+        >
+          Delete Account
+        </button>
+      </div>
 
       {isAdmin && (
-        <form onSubmit={(e) => handleNewAdmin(e)}>
-          <label className="addmin">Add an admin:</label>
-          <input
-            placeholder="Add an admin"
-            type="text"
-            value={newAdmin}
-            onChange={(e) => setNewAdmin(e.target.value)}
-          />
-          <button type="submit" className="save">
+        <form onSubmit={(e) => handleNewAdmin(e)} className="addAdminForm">
+            <label htmlFor="addAdmin">Add an admin:</label>
+            <input
+              id="addAdmin"
+              placeholder="Add an admin"
+              type="text"
+              value={newAdmin}
+              onChange={(e) => setNewAdmin(e.target.value)}
+            />
+          <button type="submit" className="addAdminBtn">
             Add
           </button>
         </form>

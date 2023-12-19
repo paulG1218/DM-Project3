@@ -28,15 +28,15 @@
   flex-direction: row;
   -ms-flex-align: center;
   position: absolute;
-  margin: 0px;
+  margin-top: 5px;
   left: 46%
 }
 
 .userScore {
   display: flex;
   float: right;
-  margin-right: 5%;
-  margin-top: 8px
+  margin-right: 3.2%;
+  margin-top: 10px
 }
 
 .sidebar {
