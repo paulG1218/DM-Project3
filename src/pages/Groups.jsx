@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "../css/Groups.css";
 import { useSelector } from "react-redux";
 import Group from "../components/Group.jsx";
@@ -13,8 +13,8 @@ const Groups = () => {
 
   const handleNewModal = () => setShowNewModal(!showNewModal)
 
-  const groups = useSelector((state) => state.login.groups);
   const isMemberOf = useSelector((state) => state.login.isMemberOf)
+  const groups = useSelector((state) => state.login.groups);
 
   const merge = (a, b, predicate = (a, b) => a === b) => {
     const c = [...a];
@@ -30,7 +30,7 @@ const isMemberMap = isMemberOf.map((groupMember) => {
   return <Group key={groupMember.groupId} group={groupMember.group} score={groupMember.score}/>;
 });
 
-  const groupDisplay = merge(groupMap, isMemberMap, (a, b) => a.props.groupId === b.props.groupId)
+  const groupDisplay = merge(groupMap, isMemberMap, (a, b) => a.props.group.groupId === b.props.group.groupId)
 
   return (
       <div>

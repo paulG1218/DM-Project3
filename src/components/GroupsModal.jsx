@@ -38,6 +38,7 @@ const GroupsModal = ({ show, handleModal }) => {
           pos6: { disabled: true, value: "" },
         });
         handleModal();
+        window.location.href = `/groups/${res.data.groupMember.groupId}`
         break;
       case "no group":
         errorTxt.innerText = "Group does not exist";
