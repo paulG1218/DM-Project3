@@ -18,12 +18,12 @@
     border-color: rgba(255, 255, 255, 0.87);
     border-radius: 9px;
     width: 40vw;
-    height: 88vh;
     border-width: 3px;
     border-color: #fc3571;
-    margin-left: 2vw;
+    margin-left: auto;
+    margin-right: auto;
     flex-direction: column;
-    height: 74vh;
+    height: 77vh;
     overflow-y: auto;
 }
 
@@ -31,6 +31,7 @@
     margin: 10px;
     justify-content: center;
     display: flex;
+    width: 100%;
 }
 
 .groupPageCodeDisplay {
@@ -57,12 +58,6 @@
     margin-top: 12px;
 }
 
-div.container-new {
-    position: absolute;
-    right: 1.6vw;
-    top: 50px
-}
-
 .groupListPageHeader {
     display: flex;
     justify-content: space-between;
@@ -80,8 +75,8 @@ div.container-new {
 .groupListsPageTitle-NonGroupOwner {
     margin: 0;
     padding: 0;
-    margin-bottom: 5%;
-    margin-top: 5%;
+    margin-bottom: 2vh;
+    margin-top: 2vh;
 }
 
 .addGroupListPageContainer {
@@ -101,5 +96,21 @@ div.container-new {
 
 .groupContainer {
     display: flex;
-    margin-right: 20%;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.groupsButtons {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-bottom: 3vh;
+}
+
+.create-group-interior {
+    width: fit-content;
+}
+
+.container-new{
+    width: fit-content;
 }

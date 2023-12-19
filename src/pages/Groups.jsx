@@ -27,7 +27,7 @@ const groupMap = groups.map((group) => {
 });
 
 const isMemberMap = isMemberOf.map((groupMember) => {
-  return <Group key={groupMember.groupId} group={groupMember.group} />;
+  return <Group key={groupMember.groupId} group={groupMember.group} score={groupMember.score}/>;
 });
 
   const groupDisplay = merge(groupMap, isMemberMap, (a, b) => a.props.groupId === b.props.groupId)
@@ -38,6 +38,8 @@ const isMemberMap = isMemberOf.map((groupMember) => {
           <h1 className="pageTitle">
             Your Groups
           </h1>
+        </div>
+        <div className="groupsButtons">
           <GroupsModal show={showJoinModal} handleModal={handleJoinModal} />
           <NewGroupModal className="newGroupModal" show={showNewModal} handleModal={handleNewModal}/>
         </div>

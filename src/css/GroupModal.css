@@ -119,11 +119,10 @@ a.btn {
 }
 
 .container {
-  display: flex;
-  float: left;
+  width: fit-content;
+  padding-right: 20px;
 }
 
 .groupsModal {
-  display: flex;
-  float: left;
+  width: fit-content;
 }
