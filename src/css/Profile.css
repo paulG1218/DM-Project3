@@ -1,36 +1,80 @@
-.editingUser{
-    flex-direction: column;
+.profile-page-information {
+    display: inline-block;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
 }
 
-.header{
+#profilePageUsername {
+    margin: 6px;
+    margin-right: 40px;
+    background-color: rgba(255, 255, 255, 0.87);
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+#profilePageEmail {
+    margin: 6px;
+    background-color: rgba(255, 255, 255, 0.87);
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+#profilePagePassword {
+    margin: 6px;
+    margin-right: 40px;
+    background-color: rgba(255, 255, 255, 0.87);
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.profilePageHeader {
     color: rgba(255, 255, 255, 0.87);
+    text-align: center;
+    margin-top: 12px;
+    margin-right: 7%;
 }
 
-.profilePassword{
-    margin: 0;
+.profilePageEditBtn {
+    background-color: #fc3571;
+    border-radius: 7px;
+    border-color: #fc3571;
+    border-style: solid;
+    color: rgba(255, 255, 255, 0.87);
     margin-top: 5px;
+    margin-right: 100px;
 }
 
-.delete {
+.profilePageDeleteBtnContainer {
+    margin-bottom: 10px;
+    margin-top: 30px;
+}
+
+.profilePageDeleteBtn {
     flex-direction: column;
     background-color: #fc3571;
     border-radius: 7px;
     border-color: #fc3571;
     border-style: solid;
     color: rgba(255, 255, 255, 0.87);
+    padding-bottom: 4px;
+    padding-top: 4px;
+    padding-left: 6px;
+    padding-right: 6px;
+    height: 40px;
+    width: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin-left: 18%;
 }
 
-.cancel {
-    flex-direction: column;
-    background-color: #fc3571;
-    border-radius: 7px;
-    border-color: #fc3571;
-    border-style: solid;
-    color: rgba(255, 255, 255, 0.87);
-    margin: 5px;
+.profilePageEditModeBtns {
+    margin-right: 12px;
 }
 
-.save {
+.profilePageEditModeBtn {
     flex-direction: column;
     background-color: #fc3571 !important;
     border-radius: 7px!important;
@@ -41,6 +85,24 @@
     margin: 5px;
 }
 
-.addmin{
-    size: 25px;
+.addAdminForm {
+    margin-top: 37px;
+    margin-right: 27px;
+}
+
+#addAdmin {
+    margin: 6px;
+    border-radius: 5px;
+    height: 32px;
+    border: 1px solid #ccc;
+    background-color: rgba(255, 255, 255, 0.87);
+
+}
+
+.addAdminBtn {
+    background-color: #fc3571;
+    border-radius: 7px;
+    border-color: #fc3571;
+    border-style: solid;
+    color: rgba(255, 255, 255, 0.87);
 }

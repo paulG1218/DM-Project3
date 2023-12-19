@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import "../css/Groups.css";
-
 import { useSelector } from "react-redux";
 import Group from "../components/Group.jsx";
 import GroupsModal from "../components/GroupsModal.jsx";

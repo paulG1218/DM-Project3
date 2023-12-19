@@ -95,7 +95,6 @@ const Group = ({ group }) => {
           />
         </div>
         }
-      <br />
       {listDisplay}
     </div>
   );

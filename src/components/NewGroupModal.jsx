@@ -31,7 +31,7 @@ const NewGroupModal = ({show, handleModal}) => {
     return (
         <div>
           <div className="container-new">
-            <div className="interior">
+            <div className="create-group-interior">
               <a
                 className="btn"
                 href="#open-new-modal"
@@ -41,7 +41,7 @@ const NewGroupModal = ({show, handleModal}) => {
                     focusFirst()
                 }}
               >
-                Create a group
+                Create New Group
               </a>
             </div>
           </div>
@@ -52,9 +52,8 @@ const NewGroupModal = ({show, handleModal}) => {
                 title="Close"
                 class="modal-close"
                 onClick={() => {
-                handleModal()
-            }
-                }
+                  handleModal()
+                }}
               >
                 Close
               </a>

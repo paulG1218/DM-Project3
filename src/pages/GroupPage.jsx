@@ -105,41 +105,16 @@ const GroupPage = () => {
   });
 
   return (
-    <div>
+    <div className="groupPageContainer">
       <h1 className="pageHeader">{groupState.groupName}</h1>
       <div>
         {ownerId === userId ? (
-          <>
-            <h4>Code: {groupState.code}</h4>
+          <div>
+            <h4 className="groupPageCodeDisplay">Code: {groupState.code}</h4>
 
-            {showGroupForm &&
-              <div className="addGroupList">
-                <CreateGroupListForm
-                  addGroupList={addGroupList}
-                  errorGroupMessage={errorGroupMessage}
-                  setShowGroupForm={setShowGroupForm}
-                  showGroupForm={showGroupForm}
-                  />
-              </div>
-              }
-          </>
-          ) : (
-            <div>
-              <div className="leave-group-btn-container">
-                <button className="leaveGroupBtn" onClick={handleLeaveGroupModal}>
-                 Leave Group
-                </button>
-              </div>
-
-              <LeaveGroupModal 
-                show={showLeaveGroupModal}
-                handleLeaveGroupModal={handleLeaveGroupModal} 
-                handleLeaveGroup={handleLeaveGroup}
-              />
-              </div>
-              )}
-            </div>
-                <div className="groupListDisplay">
+            <div className="groupContainer">
+              <div className="groupListDisplay">
+                <div className="groupListPageHeader">
                   <h1 className="groupListsPageTitle">Lists</h1>
                   
                   <div className="addGroupListPageContainer">
@@ -149,19 +124,63 @@ const GroupPage = () => {
                     </button>
                   </div>
 
-                  <hr className="homeLines" />
-                   {listDisplay}
+                  {showGroupForm &&
+                  <div className="addGroupList">
+                    <CreateGroupListForm
+                      addGroupList={addGroupList}
+                      errorGroupMessage={errorGroupMessage}
+                      setShowGroupForm={setShowGroupForm}
+                      showGroupForm={showGroupForm}
+                    />
+                  </div>
+                  }
                 </div>
 
-                <div className="groupInfo">
-                  <h1>Group Info</h1>
-                  <hr className="homeLines" />
-                  <h3>Members:</h3>
-                  <ul>{memberList}</ul>
-                </div>
+                <hr className="homeLines" />
+                  {listDisplay}
               </div>
-)}
 
+              <div className="groupInfo">
+                <h1>Group Info</h1>
+                <hr className="homeLines" />
+                <h3>Members:</h3>
+                <ul>{memberList}</ul>
+              </div>
+            </div>
+          </div>
+        ) : (
+          <div>
+            <div className="leave-group-btn-container">
+              <button className="leaveGroupBtn" onClick={handleLeaveGroupModal}>
+                Leave Group
+              </button>
+            </div>
 
+            <LeaveGroupModal 
+              show={showLeaveGroupModal}
+              handleLeaveGroupModal={handleLeaveGroupModal} 
+              handleLeaveGroup={handleLeaveGroup}
+            />
+
+            <div className="groupContainer">
+              <div className="groupListDisplay">
+                <h1 className="groupListsPageTitle-NonGroupOwner">Lists</h1>
+                <hr className="homeLines" />
+                  {listDisplay}
+              </div>
+
+              <div className="groupInfo">
+                <h1>Group Info</h1>
+                <hr className="homeLines" />
+                <h3>Members:</h3>
+                <ul>{memberList}</ul>
+              </div>
+            </div>
+          </div>
+        )}
+      </div>
+    </div>
+  )
+}
 
 export default GroupPage;

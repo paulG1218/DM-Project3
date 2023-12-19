@@ -22,8 +22,6 @@ const Home = () => {
   const [lists, setLists] = useState(sortedLists);
   const [showForm, setShowForm] = useState(false);
   const [errorMessage, setErrorMessage] = useState(false);
-  const [listName, setListName] = useState("");
-  const [dueDate, setDueDate] = useState("");
 
   useEffect(() => {
     setErrorMessage(false);
@@ -35,10 +33,6 @@ const Home = () => {
 
   const toggleForm = () => {
     setShowForm(!showForm);
-  };
-
-  const closeForm = () => {
-    setShowForm(false);
   };
 
   const addList = async (e, FormData) => {
