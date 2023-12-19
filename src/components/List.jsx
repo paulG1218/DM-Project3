@@ -13,7 +13,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import CatReward from "./CatReward.jsx";
 import StoryReward from "./StoryReward.jsx";
 
-const List = ({ list, handleDeleteList }) => {
+const List = ({ list, handleDeleteList, setGroupScore }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -87,16 +87,36 @@ const List = ({ list, handleDeleteList }) => {
     navigate("/GameBoard");
   };
 
-  const taskDisplay = tasks.map((task, index) => {
+  const taskDisplay = tasks.map((task) => {
+    const groupTask = (list.listName ? false : true)
     const handleCheck = async (taskId) => {
-      const res = await axios.put("/api/checkTask", { taskId: taskId });
+      const res = await axios.put("/api/checkTask", { taskId: taskId, groupTask: groupTask, groupId: list.groupId });
       if (res.data === "failed") {
         console.log("Failed to check task");
         return;
+      } else if (groupTask) {
+        task = res.data.task;
+        setTasks(tasks.filter((t) => t.taskId !== task.taskId))
+        switch (task.difficulty) {
+          case 1:
+            getRandomCatGif();
+            setShowReward({ ...showReward, cat: true });
+            setGroupScore(res.data.updatedUserScore)
+            break;
+          case 2:
+            getRandomStory();
+            setShowReward({ ...showReward, story: true });
+            setGroupScore(res.data.updatedUserScore)
+            break;
+          case 3:
+            getSnakeGame();
+            setShowReward({ ...showReward, game: true });
+            setGroupScore(res.data.updatedUserScore)
+            break;
+        }
       } else {
         task = res.data.task;
         setTasks(tasks.filter((t) => t.taskId !== task.taskId))
-
         switch (task.difficulty) {
           case 1:
             getRandomCatGif();

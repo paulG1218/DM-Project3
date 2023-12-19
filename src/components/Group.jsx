@@ -12,7 +12,7 @@ const Group = ({ group, score }) => {
   const { groupName, groupLists, groupId, userId } = group;
   const [groupListState, setGroupListState] = useState(groupLists);
 
-  console.log(score)
+  const [groupScore, setGroupScore] = useState(score)
 
   const currentUser = useSelector((state) => state.login.userId)
 
@@ -68,6 +68,7 @@ const Group = ({ group, score }) => {
         list={list}
         ownerId={userId}
         handleDeleteList={handleDeleteList}
+        setGroupScore={setGroupScore}
       />
     );
   });
@@ -77,7 +78,7 @@ const Group = ({ group, score }) => {
       <div className="addGroupLBtn">
         <h1 className="groupHeading">
           <a href={`/groups/${groupId}`} className="groupName">
-            {groupName} ({score ? score : null})
+            {groupName} ({groupScore ? groupScore : null})
           </a>
           {currentUser === userId &&
           <button onClick={toggleGroupForm} className="addGroupListBtn">
