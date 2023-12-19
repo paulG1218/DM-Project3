@@ -87,7 +87,7 @@ const GroupsModal = ({ show, handleModal }) => {
         }
         break;
       case "pos2":
-        console.log(Number.isInteger(+e.key));
+        
         if (e.key !== "" && Number.isInteger(+e.key)) {
           setJoinCodeState({
             ...joinCodeState,
