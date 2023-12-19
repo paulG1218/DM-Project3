@@ -113,8 +113,13 @@ const Home = () => {
   });
 
   const isMemberMap = isMemberOf.map((groupMember) => {
-    console.log(groupMember.score)
-    return <Group key={groupMember.groupId} group={groupMember.group} score={groupMember.score}/>;
+    return (
+      <Group
+        key={groupMember.groupId}
+        group={groupMember.group}
+        score={groupMember.score}
+      />
+    );
   });
 
   const groupDisplay = merge(
