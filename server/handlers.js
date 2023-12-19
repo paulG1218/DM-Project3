@@ -281,7 +281,7 @@
     },
   
     checkTask: async (req, res) => {
-      const { taskId } = req.body;
+      const { taskId, groupTask, groupId } = req.body;
   
       try {
         const task = await Task.findOne({
@@ -310,10 +310,10 @@
   
             switch (task.difficulty) {
               case 1:
-                pointsToAdd = 10;
+                pointsToAdd = 5;
                 break;
               case 2:
-                pointsToAdd = 15;
+                pointsToAdd = 10;
                 break;
               case 3:
                 pointsToAdd = 20;
@@ -322,6 +322,25 @@
   
               default:
               // Handle other difficulties if needed
+            }
+
+            if (groupTask) {
+              const member = await GroupMember.findOne({
+                where: {
+                  [Op.and]: [{ groupId: groupId }, { userId: user.userId }],
+                }
+              })
+              await member.update({
+                score: member.score + pointsToAdd
+              })
+
+              res.json({
+                message: "checked",
+                task: task,
+                pointsAdded: pointsToAdd,
+                updatedUserScore: member.score,
+              });
+              return
             }
   
             await user.update({

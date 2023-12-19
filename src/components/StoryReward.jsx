@@ -3,9 +3,6 @@ import '../css/Reward.css';
 import { useState } from 'react';
 // import spinner from './public/spinner.svg'
 const StoryReward = ({handleModal, showModal, story, setStory}) => {
-  const [showSpinner, setShowSpinner] = useState(true)
-
-  console.log(story)
 
 
   return (
