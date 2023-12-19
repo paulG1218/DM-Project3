@@ -8,9 +8,11 @@ import axios from "axios";
 import "../css/GroupComponent.css";
 import { useSelector } from "react-redux";
 
-const Group = ({ group }) => {
+const Group = ({ group, score }) => {
   const { groupName, groupLists, groupId, userId } = group;
   const [groupListState, setGroupListState] = useState(groupLists);
+
+  console.log(score)
 
   const currentUser = useSelector((state) => state.login.userId)
 
@@ -75,7 +77,7 @@ const Group = ({ group }) => {
       <div className="addGroupLBtn">
         <h1 className="groupHeading">
           <a href={`/groups/${groupId}`} className="groupName">
-            {groupName}
+            {groupName} ({score ? score : null})
           </a>
           {currentUser === userId &&
           <button onClick={toggleGroupForm} className="addGroupListBtn">

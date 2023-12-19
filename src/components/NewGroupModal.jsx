@@ -29,7 +29,7 @@ const NewGroupModal = ({show, handleModal}) => {
       }
 
     return (
-        <div>
+        <>
           <div className="container-new">
             <div className="create-group-interior">
               <a
@@ -81,7 +81,7 @@ const NewGroupModal = ({show, handleModal}) => {
               </div>
             </div>
           </div>) : null}
-        </div>
+        </>
         )
 }
 

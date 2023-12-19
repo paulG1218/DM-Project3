@@ -100,8 +100,8 @@ const GroupPage = () => {
     );
      });
 
-  const memberList = group.groupMembers.map((member) => {
-    return <li key={member.user.userId}>{member.user.username}</li>;
+  const memberList = group.groupMembers.sort((a, b) => b.score - a.score).map((member) => {
+    return <li key={member.user.userId}>{member.user.username} ({member.score})</li>;
   });
 
   return (
