@@ -30,7 +30,7 @@ const isMemberMap = isMemberOf.map((groupMember) => {
   return <Group key={groupMember.groupId} group={groupMember.group} score={groupMember.score}/>;
 });
 
-  const groupDisplay = merge(groupMap, isMemberMap, (a, b) => a.props.group.groupId === b.props.group.groupId)
+  const groupDisplay = merge(isMemberMap, groupMap, (a, b) => a.props.group.groupId === b.props.group.groupId)
 
   return (
       <div>
