@@ -1,69 +1,114 @@
 import React from "react";
 import "../css/About.css";
+import { useState } from "react";
 
 const About = () => {
+  const [isHovered, setHovered] = useState(false);
+
+  const handleMouseEnter = () => {
+    setHovered(true);
+  };
+
+  const handleMouseLeave = () => {
+    setHovered(false);
+  };
+
   return (
-    <div className="aboutPage">
-      <h1 className="aboutTitle">
-        Welcome to <div className="checkr">Checkr</div>!
-      </h1>
-      <br />
-      <h3>
-        We believe in seamlessly blending your personal and professional life
-        with an intuitive task management experience.
-      </h3>
-      <br />
-      <div className="instructions">
-        <h4>Getting Started Create Your Account:</h4>
-        <h5>
-          Begin your journey by registering on our user-friendly platform. Your
-          gateway to organized living awaits!
-        </h5>
-        <h6>
-          Home: The heart of Checkr is your home page, where you can view both
-          your personal, and group Lists that are filtered by the Due date. Stay
-          on top of both your individual goals and collaborative projects
-          effortlessly.
-        </h6>
+    <>
+      <div className="aboutPage">
+        <h1 className="aboutTitle">
+          Welcome to <div className="checkr">Checkr</div>!
+        </h1>
+        <div className="infoBox">
+          <div className="one">
+            <h4 id="numberedList">1. Start Your Journey</h4>
+            <h5 className="subHeader">
+              Sign Up:
+              <p className="points">
+                Begin by creating your account on our user-friendly platform.
+              </p>
+            </h5>
+          </div>
+          <div className="two">
+            <h4 id="numberedList">2. Home Page</h4>
+            <h5 className="subHeader">
+              Overview:
+              <p className="points">
+                Your home page displays personal and group lists by due date for
+                a comprehensive view.
+              </p>
+            </h5>
+          </div>
+          <div className="three">
+            <h4 id="numberedList">3. Task Rewards</h4>
+            <h5 className="subHeader">
+              Levels:
+              <div id="numbers">
+                <p className="points">
+                  1. (5 Points): Cat photos await for easy tasks.
+                </p>
+                <p className="points">
+                  2. (10 Points): Enjoy short stories for moderately challenging
+                  tasks.
+                </p>
+                <p className="points">
+                  3. (20 Points): Finish tough tasks to play the snake game.
+                </p>
+              </div>
+            </h5>
+          </div>
+          <div className="four">
+            <h4 id="numberedList">4. Group Dynamics</h4>
+            <h5 className="subHeader">
+              Create or Join a Group:
+              <p className="points">
+                Collaborate by forming a group or joining with a code.
+              </p>
+            </h5>
+            <h5 className="subHeader">
+              Editing Lists:
+              <p className="points">
+                Group owners manage lists to ensure coordination.
+              </p>
+            </h5>
+            <h5 className="subHeader">
+              Group Pages:
+              <p className="points">
+                Strategize tasks with group members on dedicated pages.
+              </p>
+            </h5>
+          </div>
+          <div className="five">
+            <h4 id="numberedList">5. Track Your Achievements</h4>
+            <h5 className="subHeader">
+              Completed Tasks:
+              <p className="points">
+                A dedicated list showcases your accomplishments.
+              </p>
+            </h5>
+            <h5 className="subHeader">
+              Scoreboard:
+              <p className="points">
+                Quantify your journey with points earned for each task.
+              </p>
+            </h5>
+          </div>
+        </div>
       </div>
-      <br />
-      <p className="rewards">
-        <div>
-          Task Rewards: A Dash of Motivation Complete tasks with varying
-          difficulties, and watch the magic unfold:
-        </div>
-        <div>
-          Difficulty 1 (5 Points): Enjoy a nice cat photo as a reward for
-          conquering the task.
-        </div>
-        <div>
-          Difficulty 2 (10 Points): Immerse yourself in a captivating short
-          story.
-        </div>
-        <div>
-          Difficulty 3 (20 Points): Play the snake game and see how far you can
-          get.
-        </div>
-      </p>
-      <br />
-      <div className="features">
-        <div>
-          Group Lists: Owners have the power to edit group lists, ensuring
-          seamless coordination and project management.
-        </div>
-        <div>
-          Group Pages: Dive into dedicated group pages where you can see your
-          group members and strategize tasks together.
-        </div>
-        <div>
-          Scoreboard: Your journey is quantified! Earn points based on task
-          difficulty and watch your worth rise.
-        </div>
-      </div>
-      <div className="contact">
-        Contact us... Or don't, we won't care either way.
-      </div>
-    </div>
+      <footer className="contact">
+        <a
+          className="contactLink"
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
+          style={{
+            cursor: isHovered ? "pointer" : "default",
+          }}
+        >
+          Contact us...
+        </a>{" "}
+        Or don't, we won't care either way.
+      </footer>
+    </>
   );
 };
 
