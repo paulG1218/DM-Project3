@@ -5,7 +5,7 @@ import "../css/List.css";
 import { useNavigate } from "react-router-dom";
 import { TiArrowSortedDown, TiArrowSortedUp } from "react-icons/ti";
 import { AnimationEasy, AnimationMedium, AnimationHard } from "./Animation.jsx";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import AddTaskForm from "./AddTaskForm.jsx";
 import { FaPencilAlt } from "react-icons/fa";
 import { MdDeleteForever } from "react-icons/md";
@@ -13,9 +13,11 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import CatReward from "./CatReward.jsx";
 import StoryReward from "./StoryReward.jsx";
 
-const List = ({ list, handleDeleteList, setGroupScore }) => {
+const List = ({ list, handleDeleteList, setGroupScore, ownerId }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
+  const userId = useSelector((state) => state.login.userId)
 
   const [tasks, setTasks] = useState(
     list.tasks.filter((task) => !task.checked)
@@ -309,22 +311,24 @@ const List = ({ list, handleDeleteList, setGroupScore }) => {
                     </button>
                   </>
                 ) : (
-                  <>
+                  ownerId === userId ? (
+                    <>
                     <button
-                      className="editButton"
-                      onClick={(e) => setIsEditingList(true)}
+                    className="editButton"
+                    onClick={(e) => setIsEditingList(true)}
                     >
-                      <FaPencilAlt />
+                    <FaPencilAlt />
                     </button>
                     <button
-                      className="addTaskButton"
-                      onClick={() => {
-                        setShowTaskForm(true);
-                      }}
+                    className="addTaskButton"
+                    onClick={() => {
+                      setShowTaskForm(true);
+                    }}
                     >
-                      Add
+                    Add
                     </button>
-                  </>
+                    </>
+                  ) : null
                 )}
               </>
             )}
