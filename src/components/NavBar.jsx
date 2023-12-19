@@ -58,6 +58,7 @@ const NavBar = () => {
   const handleMouseLeave = () => {
     setHovered(false);
   };
+
   return (
     <>
       <div className="topnav">
@@ -111,24 +112,27 @@ const NavBar = () => {
           </a>
         </div>
         {userId ? (
-          <a href={`/profile`}>{username}</a>
+          <>
+            <a href={`/profile`}>{username}</a>
+            <a href="/groups">Groups</a>
+            <a href="/about">About</a>
+            <a
+              onClick={() => handleLogout()}
+              className="logout"
+              onMouseEnter={handleMouseEnter}
+              onMouseLeave={handleMouseLeave}
+              style={{
+                cursor: isHovered ? "pointer" : "default",
+              }}
+            >
+              Logout
+            </a>
+          </>
         ) : (
-          <a href="/login">Login</a>
-        )}
-        <a href="/groups">Groups</a>
-        <a href="/about">About</a>
-        {userId && (
-          <a
-            onClick={() => handleLogout()}
-            className="logout"
-            onMouseEnter={handleMouseEnter}
-            onMouseLeave={handleMouseLeave}
-            style={{
-              cursor: isHovered ? "pointer" : "default",
-            }}
-          >
-            Logout
-          </a>
+          <>
+            <a href="/about">About</a>
+            <a href="/login">Login</a>
+          </>
         )}
       </div>
     </>
