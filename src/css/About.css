@@ -1,11 +1,33 @@
+.subHeader {
+    color: rgba(255, 255, 255, 0.63);
+    display: flex;
+    float: start;
+    margin-left: 5%;
+}
+
+.points {
+    color: rgba(255, 255, 255, 0.87);
+    padding-left: 3%;
+    display: inline-flex;
+    float: inline-start;
+}
+
 .aboutPage {
     color: rgba(255, 255, 255, 0.87);
+    border: 2px solid;
+    border-radius: 9px;
+    border-color: #fc3571;
+    width: 60.20vw;
+    margin-top: 10px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .aboutTitle {
     display: inline;
     color: rgba(255, 255, 255, 0.87);
-    padding: 5px;
+    padding-top: 15px;
+    padding-bottom: 15px;
 }
 
 .checkr {
@@ -14,36 +36,71 @@
     font-family: 'Nova Square';
 }
 
-.instructions {
+#numberedList {
+    color: #fc3571;
+    text-decoration: underline;
+    text-decoration-color: #fc3571;
+    display: block;
+    float: center;
+}
+
+#numbers {
+    float: inline-start;
+}
+
+.one {
     border: 2px solid;
-    border-radius: 9px;
+    border-radius: 2px;
     border-color: #fc3571;
-    width: 70vw;
-    margin-left: auto;
-    margin-right: auto;
+    width: 60vw;
     padding: 5px;
 }
 
-.rewards {
+.two {
     border: 2px solid;
-    border-radius: 9px;
+    border-radius: 2px;
     border-color: #fc3571;
-    width: 70vw;
-    margin-left: auto;
-    margin-right: auto;
+    width: 60vw;
     padding: 5px;
 }
 
-.features {
+.three {
     border: 2px solid;
-    border-radius: 9px;
+    border-radius: 2px;
     border-color: #fc3571;
-    width: 70vw;
-    margin-left: auto;
-    margin-right: auto;
+    width: 60vw;
     padding: 5px;
 }
 
-.contact {
+.four {
+    border: 2px solid;
+    border-radius: 2px;
+    border-color: #fc3571;
+    width: 60vw;
     padding: 5px;
+}
+
+.five {
+    border: 2px solid;
+    border-radius: 3px;
+    border-color: #fc3571;
+    width: 60vw;
+    padding: 5px;
+}
+
+.contact {    
+    padding: 5px;
+    color:  rgba(255, 255, 255, 0.87);
+}
+
+.contactLink {
+    font-family: 'Nova Square', sans-serif;
+    font-size: 20px;
+    color:  rgba(255, 255, 255, 0.87);
+    text-decoration: none;
+}
+
+.contactLink:hover {
+    color: #fc3571;
+    text-decoration: underline;
 }
