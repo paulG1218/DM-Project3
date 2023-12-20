@@ -133,8 +133,8 @@ const NavBar = () => {
           </>
         ) : (
           <>
-            <a href="/about">About</a>
             <a href="/login">Login</a>
+            <a href="/about">About</a>
           </>
         )}
         <footer className="contact">
