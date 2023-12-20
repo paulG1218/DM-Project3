@@ -1,8 +1,11 @@
 import React from "react";
 import "../css/About.css";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const About = () => {
+  const redirect = useNavigate();
+
   const [isHovered, setHovered] = useState(false);
 
   const handleMouseEnter = () => {
@@ -11,6 +14,10 @@ const About = () => {
 
   const handleMouseLeave = () => {
     setHovered(false);
+  };
+
+  const handleClick = () => {
+    redirect("/Kyle");
   };
 
   return (
@@ -97,6 +104,7 @@ const About = () => {
       </div>
       <footer className="contact">
         <a
+          onClick={handleClick}
           className="contactLink"
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
