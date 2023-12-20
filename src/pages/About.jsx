@@ -33,7 +33,7 @@ const About = () => {
             <h4 id="numberedList">2. Home Page</h4>
             <h5 className="subHeader">
               Overview:
-              <p className="points">
+              <p className="overviewPoints">
                 Your home page displays personal and group lists by due date for
                 a comprehensive view.
               </p>

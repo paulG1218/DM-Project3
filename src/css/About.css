@@ -8,6 +8,14 @@
 .points {
     color: rgba(255, 255, 255, 0.87);
     padding-left: 3%;
+    max-width: fit-content;
+    display: inline-flex;
+    float: inline-start;
+}
+
+.overviewPoints {
+    color: rgba(255, 255, 255, 0.87);
+    max-width: fit-content;
     display: inline-flex;
     float: inline-start;
 }
