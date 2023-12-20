@@ -19,6 +19,7 @@ import GroupPage from "./pages/GroupPage.jsx";
 import AddTask from "./pages/addTask";
 import Board from "../Games/ReactGames/Board";
 import About from "./pages/About.jsx";
+import Kyle from "./components/Kyle.jsx";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -30,6 +31,7 @@ const router = createBrowserRouter(
       <Route path="/AddTask" element={<AddTask />} />
       <Route path="/GameBoard" element={<Board />} />
       <Route path="/about" element={<About />} />
+      <Route path="/kyle" element={<Kyle />} />
       <Route
         path="/profile"
         element={<Profile />}
