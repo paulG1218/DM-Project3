@@ -31,22 +31,20 @@
 }
 
 #groupListName {
-    color: black;
+    color: rgba(255, 255, 255, 0.87);
     width: 42%;
     margin: 5px;
     border-radius: 5px;
-    border: 1px solid #ccc;
+    border: 1px solid rgba(255, 255, 255, 0.87);
     margin-right: 62px;
-    background-color: rgba(255, 255, 255, 0.87);
 }
 
 #groupListDueDate {
-    color: black;
+    color: rgba(255, 255, 255, 0.87);
     width: 42%;
     margin: 5px;
     border-radius: 5px;
-    border: 1px solid #ccc;
-    background-color: rgba(255, 255, 255, 0.87);
+    border: 1px solid rgba(255, 255, 255, 0.87);
 }
 
 .add-group-btn,
