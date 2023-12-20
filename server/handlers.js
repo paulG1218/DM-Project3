@@ -254,7 +254,7 @@
 
       const user = await User.findByPk(userId)
 
-      if (existingUser.userId !== user.userId) {
+      if (existingUser) {
         res.json({message: 'name taken'})
         return
       }
