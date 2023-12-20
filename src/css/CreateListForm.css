@@ -35,7 +35,8 @@
   width: 42%;
   margin: 5px;
   border-radius: 5px;
-  border: 1px solid rgba(255, 255, 255, 0.87);;
+  border: 1px solid rgba(255, 255, 255, 0.87);
+  background-color: #242424;
 }
 
 #listName {
@@ -45,6 +46,7 @@
   border-radius: 5px;
   border: 1px solid rgba(255, 255, 255, 0.87);;
   margin-right: 13px;
+  background-color: #242424;
 }
   
 .addBtn,

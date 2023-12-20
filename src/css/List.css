@@ -130,6 +130,9 @@ margin: 2px;
   width: 69%;
   height: 25%;
   margin: 2px;
+  background-color: #242424;
+  color: rgba(255, 255, 255, 0.87);
+  border: 1px solid; 
 }
 
 .listNameHeader:hover {

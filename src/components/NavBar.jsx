@@ -117,7 +117,10 @@ const NavBar = () => {
             <a href="/groups">Groups</a>
             <a href="/about">About</a>
             <a
-              onClick={() => handleLogout()}
+              onClick={() => {
+                closeNav();
+                handleLogout();
+              }}
               className="logout"
               onMouseEnter={handleMouseEnter}
               onMouseLeave={handleMouseLeave}
@@ -134,6 +137,22 @@ const NavBar = () => {
             <a href="/login">Login</a>
           </>
         )}
+        <footer className="contact">
+          <a
+            onClick={() => {
+              closeNav();
+              navigate("/Kyle");
+            }}
+            className="contactLink"
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
+            style={{
+              cursor: isHovered ? "pointer" : "default",
+            }}
+          >
+            Contact us
+          </a>
+        </footer>
       </div>
     </>
   );
