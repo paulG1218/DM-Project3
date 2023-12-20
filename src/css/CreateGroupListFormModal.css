@@ -37,6 +37,7 @@
     border-radius: 5px;
     border: 1px solid rgba(255, 255, 255, 0.87);
     margin-right: 62px;
+    background-color: #242424;
 }
 
 #groupListDueDate {
@@ -45,6 +46,7 @@
     margin: 5px;
     border-radius: 5px;
     border: 1px solid rgba(255, 255, 255, 0.87);
+    background-color: #242424;
 }
 
 .add-group-btn,

@@ -11,12 +11,20 @@
 
 #usernameOrEmail {
     margin: 5px;
+    border: 1px solid rgba(255, 255, 255, 0.87);
+  background-color: #242424;
+  color: rgba(255, 255, 255, 0.87);
+  border-radius: 5px;
 }
 
 #loginPassword {
     margin: 5px;
     margin-left: 20px;
     margin-bottom: 5px;
+    border: 1px solid rgba(255, 255, 255, 0.87);
+  background-color: #242424;
+  color: rgba(255, 255, 255, 0.87);
+  border-radius: 5px;
 }
 
 .loginBtn-div {
