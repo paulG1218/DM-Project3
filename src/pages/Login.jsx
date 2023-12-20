@@ -32,9 +32,9 @@ const Login = () => {
   };
 
   return (
-    <div>
+    <div className="login-content">
       <h1>Login</h1>
-      <div>
+      <div className="login-signUp-link">
         Not registered yet?{" "}
         <a href="/registerNewUser" className="loginLink">
           Sign Up

@@ -27,7 +27,7 @@ const RegisterNewUser = () => {
   };
 
   return (
-    <div>
+    <div className="registerPageContent">
       <h1>Register Here</h1>
       <div>
         Already registered?{" "}

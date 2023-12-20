@@ -63,9 +63,11 @@ const LoginForm = ({ onLogin }) => {
       </span>
       <p id="errorTxt"></p>
       <br />
+      <div className="loginBtn-div">
       <button type="submit" className="loginBtn">
         Login
       </button>
+      </div>
     </form>
   );
 };

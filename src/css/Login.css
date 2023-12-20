@@ -1,3 +1,14 @@
+.login-content {
+    display: inline-block;
+    justify-content: center;
+    align-items: center;
+    margin-right: 2%;
+}
+
+.login-signUp-link {
+    margin-bottom: 5px;
+}
+
 #usernameOrEmail {
     margin: 5px;
 }
@@ -5,6 +16,11 @@
 #loginPassword {
     margin: 5px;
     margin-left: 20px;
+    margin-bottom: 5px;
+}
+
+.loginBtn-div {
+    margin-top: -20px;
 }
 
 .loginBtn {
