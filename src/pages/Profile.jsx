@@ -101,8 +101,8 @@ const Profile = () => {
 
   return (
     <div className="profile-page-information">
-      <h1 className="profilePageHeader">Profile Page</h1>
-
+     <h1 className="profilePageHeader">Profile Page</h1>
+     <div className="profile-page-content">
       <form className="editingUser">
         <div className="usernameRow">
           <label htmlFor="profilePageUsername">Username:</label>
@@ -187,20 +187,24 @@ const Profile = () => {
 
       {isAdmin && (
         <form onSubmit={(e) => handleNewAdmin(e)} className="addAdminForm">
-            <label htmlFor="addAdmin">Add an admin:</label>
-            <input
-              id="addAdmin"
-              placeholder="Add an admin"
-              type="text"
-              value={newAdmin}
-              onChange={(e) => setNewAdmin(e.target.value)}
-            />
-          <button type="submit" className="addAdminBtn">
-            Add
-          </button>
+            <hr className="homeLines"/>
+            <div className="addAdminContent">
+              <label htmlFor="addAdmin">Add an admin:</label>
+              <input
+                id="addAdmin"
+                placeholder="Add an admin"
+                type="text"
+                value={newAdmin}
+                onChange={(e) => setNewAdmin(e.target.value)}
+              />
+              <button type="submit" className="addAdminBtn">
+                Add
+              </button>
+            </div>
         </form>
       )}
       <p id="errorText"></p>
+     </div>
     </div>
   );
 };

@@ -3,10 +3,21 @@
     justify-content: center;
     align-items: center;
     height: 100vh;
+    margin-top: 12px;
+    margin-bottom: 15px;
+    margin-left: -2%;
+}
+
+.profile-page-content {
+    border: solid #fc3571;
+    border-width: 2px;
+    border-radius: 7px;
+    width: 475px;
+    margin-top: 10px;
 }
 
 #profilePageUsername {
-    margin-top: 6px;
+    margin-top: 20px;
     margin-bottom: 6px;
     background-color: rgba(255, 255, 255, 0.87);
     border-radius: 5px;
@@ -96,8 +107,12 @@
 }
 
 .addAdminForm {
-    margin-top: 37px;
+    margin-top: 40px;
     margin-right: auto;
+}
+
+.addAdminContent {
+    margin-top: 12px;
 }
 
 #addAdmin {
@@ -107,7 +122,6 @@
     border: 1px solid #ccc;
     background-color: rgba(255, 255, 255, 0.87);
     color: black;
-
 }
 
 .addAdminBtn {
