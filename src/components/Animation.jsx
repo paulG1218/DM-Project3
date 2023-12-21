@@ -70,7 +70,7 @@ export const AnimationEasy = ({ showAnimation }) => {
   
     return (
       <div className={`animation-container ${animationVisible ? "pop-up" : ""}`}
-          style={{position: "absolute", top: "2%", right: "3%"}}
+          style={{position: "absolute", top: "2%", right: "1%"}}
       >
         +20
       </div>
